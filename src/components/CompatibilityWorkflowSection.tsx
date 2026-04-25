@@ -1,3 +1,5 @@
+'use client';
+
 import { Camera, Radio, Cpu, Users, FlaskConical, Factory } from 'lucide-react';
 import { workflowSteps } from '@/data/homepage';
 
@@ -9,50 +11,49 @@ export default function CompatibilityWorkflowSection() {
       <div className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8 py-16 lg:py-24">
         {/* Section label */}
         <div className="flex items-center gap-3 mb-4">
-          <div className="w-10 h-[2px] bg-[#FF6B00]" />
-          <span className="text-[11px] font-semibold tracking-[0.2em] uppercase text-[#FF6B00]" style={{ fontFamily: "var(--font-jetbrains-mono), monospace" }}>
+          <div className="w-8 h-[2px] bg-[#F59E0B]" />
+          <span className="text-[11px] font-semibold tracking-[0.2em] uppercase text-[#F59E0B]" style={{ fontFamily: "var(--font-jetbrains-mono), monospace" }}>
             Verification Process
           </span>
         </div>
 
-        <h2 className="text-3xl lg:text-4xl font-bold text-[#020C1B] mb-4 max-w-2xl" style={{ fontFamily: "var(--font-outfit), sans-serif" }}>
+        <h2 className="text-3xl lg:text-4xl font-bold text-[#0F172A] mb-4 max-w-2xl" style={{ fontFamily: "var(--font-outfit), sans-serif" }}>
           How Buyers Verify
           <br />
           Compatibility Before Ordering
         </h2>
-        <p className="text-[#475569] mb-14 max-w-xl">
+        <p className="text-[#64748B] mb-14 max-w-xl">
           A systematic 6-step process to ensure every compatible solution matches your system requirements.
         </p>
 
-        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
-          {workflowSteps.map((step, i) => {
-            const Icon = iconMap[i];
-            return (
-              <div key={step.step} className="relative group">
-                {/* Step number badge */}
-                <div className="flex items-start gap-4">
-                  <div className="flex-shrink-0">
-                    <div className="w-12 h-12 bg-[#020C1B] rounded-xl flex items-center justify-center group-hover:bg-[#FF6B00] transition-colors duration-300">
-                      <span className="text-white font-bold text-sm" style={{ fontFamily: "var(--font-jetbrains-mono), monospace" }}>
-                        {String(step.step).padStart(2, '0')}
+        {/* Horizontal timeline */}
+        <div className="relative">
+          {/* Connecting dotted line (desktop) */}
+          <div className="hidden lg:block absolute top-7 left-[8%] right-[8%] h-[2px] border-t-2 border-dashed border-[#E2E8F0]" />
+
+          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-6 lg:gap-4">
+            {workflowSteps.map((step, i) => {
+              const Icon = iconMap[i];
+              return (
+                <div key={step.step} className="text-center relative">
+                  {/* Numbered circle with icon */}
+                  <div className="relative z-10 mb-4">
+                    <div className="w-14 h-14 mx-auto bg-[#F8FAFC] rounded-full flex items-center justify-center border-2 border-[#E2E8F0] group-hover:border-[#F59E0B] transition-colors">
+                      <Icon className="w-6 h-6 text-[#F59E0B]" />
+                    </div>
+                    {/* Step number badge */}
+                    <div className="absolute -top-1 -right-1 w-6 h-6 bg-[#F59E0B] rounded-full flex items-center justify-center shadow-lg shadow-amber-500/20">
+                      <span className="text-white text-[10px] font-bold" style={{ fontFamily: "var(--font-jetbrains-mono), monospace" }}>
+                        {step.step}
                       </span>
                     </div>
                   </div>
-                  <div>
-                    <div className="flex items-center gap-2 mb-2">
-                      <Icon className="w-4 h-4 text-[#FF6B00]" />
-                      <h3 className="text-[14px] font-bold text-[#0F172A]" style={{ fontFamily: "var(--font-outfit), sans-serif" }}>{step.title}</h3>
-                    </div>
-                    <p className="text-[13px] text-[#475569] leading-relaxed">{step.description}</p>
-                  </div>
+                  <h3 className="text-[13px] font-bold text-[#0F172A] mb-1.5 leading-snug" style={{ fontFamily: "var(--font-outfit), sans-serif" }}>{step.title}</h3>
+                  <p className="text-[11px] text-[#64748B] leading-relaxed">{step.description}</p>
                 </div>
-                {/* Connection line (desktop only) */}
-                {i < workflowSteps.length - 1 && i % 3 !== 2 && (
-                  <div className="hidden lg:block absolute top-6 -right-4 w-8 border-t-2 border-dashed border-[#E2E8F0]" />
-                )}
-              </div>
-            );
-          })}
+              );
+            })}
+          </div>
         </div>
       </div>
     </section>

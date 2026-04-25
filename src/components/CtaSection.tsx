@@ -2,16 +2,16 @@ import Image from 'next/image';
 
 export default function CtaSection() {
   return (
-    <section className="bg-[#020C1B] relative overflow-hidden">
+    <section className="bg-[#0D1117] relative overflow-hidden">
       {/* Technical grid */}
       <div className="absolute inset-0 tech-grid" />
 
       {/* Glowing accent */}
-      <div className="absolute top-1/2 left-1/3 w-96 h-96 bg-[#FF6B00] rounded-full opacity-[0.04] blur-3xl" />
+      <div className="absolute top-1/2 left-1/3 w-[400px] h-[400px] bg-[#F59E0B] rounded-full opacity-[0.03] blur-[100px]" />
 
       {/* RF waveform decoration */}
       <svg className="absolute bottom-0 left-0 right-0 opacity-10" viewBox="0 0 1200 80" preserveAspectRatio="none" style={{ height: '80px' }}>
-        <path d="M0,40 Q150,10 300,40 T600,40 T900,40 T1200,40" fill="none" stroke="rgba(255,107,0,0.5)" strokeWidth="1.5" />
+        <path d="M0,40 Q150,10 300,40 T600,40 T900,40 T1200,40" fill="none" stroke="rgba(245,158,11,0.5)" strokeWidth="1.5" />
         <path d="M0,40 Q75,25 150,40 T300,40 T450,40 T600,40 T750,40 T900,40 T1050,40 T1200,40" fill="none" stroke="rgba(34,211,238,0.3)" strokeWidth="1" />
       </svg>
 
@@ -20,24 +20,24 @@ export default function CtaSection() {
           {/* Left */}
           <div>
             <div className="flex items-center gap-3 mb-6">
-              <div className="w-10 h-[2px] bg-[#FF6B00]" />
-              <span className="text-[11px] font-semibold tracking-[0.2em] uppercase text-[#FF6B00]" style={{ fontFamily: "var(--font-jetbrains-mono), monospace" }}>
+              <div className="w-8 h-[2px] bg-[#F59E0B]" />
+              <span className="text-[11px] font-semibold tracking-[0.2em] uppercase text-[#F59E0B]" style={{ fontFamily: "var(--font-jetbrains-mono), monospace" }}>
                 Get Started
               </span>
             </div>
 
-            <h2 className="text-3xl lg:text-4xl font-bold text-white mb-4" style={{ fontFamily: "var(--font-outfit), sans-serif" }}>
+            <h2 className="text-3xl lg:text-4xl font-bold text-[#F0F6FC] mb-4" style={{ fontFamily: "var(--font-outfit), sans-serif" }}>
               Need Help Matching
               <br />
               a Brand Remote
-              <span className="text-[#FF6B00]"> Safely?</span>
+              <span className="text-[#F59E0B]"> Safely?</span>
             </h2>
-            <p className="text-white/50 leading-relaxed mb-8 max-w-md">
+            <p className="text-[#8B949E] leading-relaxed mb-8 max-w-md">
               Send brand, model, frequency, PCB photo, or remote image. Our team will help verify compatibility.
             </p>
             <a
               href="#contact"
-              className="btn-glow inline-block bg-[#FF6B00] hover:bg-[#E55E00] text-white font-semibold px-10 py-4 rounded-xl transition-all hover:shadow-xl hover:shadow-orange-500/20 text-[14px]"
+              className="btn-glow inline-block bg-[#F59E0B] hover:bg-[#D97706] text-[#0D1117] font-bold px-10 py-4 rounded-xl transition-all hover:shadow-xl hover:shadow-amber-500/20 text-[14px]"
             >
               Get Compatibility Support
             </a>
@@ -45,7 +45,7 @@ export default function CtaSection() {
 
           {/* Right: Product image */}
           <div className="flex justify-center">
-            <div className="w-full max-w-md aspect-[4/3] bg-white/5 border border-white/10 rounded-2xl flex items-center justify-center relative overflow-hidden">
+            <div className="w-full max-w-md aspect-[4/3] bg-[#161B22] border border-[#21262D] rounded-2xl flex items-center justify-center relative overflow-hidden">
               <Image
                 src="/images/product-remotes.png"
                 alt="Compatible replacement remotes"

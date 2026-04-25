@@ -3,27 +3,27 @@ import { applications } from '@/data/homepage';
 
 export default function ApplicationScenariosSection() {
   return (
-    <section className="bg-[#F0F4F8]">
+    <section className="bg-[#F8FAFC]">
       <div className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8 py-16 lg:py-24">
         {/* Section label */}
         <div className="flex items-center gap-3 mb-4">
-          <div className="w-10 h-[2px] bg-[#FF6B00]" />
-          <span className="text-[11px] font-semibold tracking-[0.2em] uppercase text-[#FF6B00]" style={{ fontFamily: "var(--font-jetbrains-mono), monospace" }}>
+          <div className="w-8 h-[2px] bg-[#F59E0B]" />
+          <span className="text-[11px] font-semibold tracking-[0.2em] uppercase text-[#F59E0B]" style={{ fontFamily: "var(--font-jetbrains-mono), monospace" }}>
             Applications
           </span>
         </div>
 
-        <h2 className="text-3xl lg:text-4xl font-bold text-[#020C1B] mb-12" style={{ fontFamily: "var(--font-outfit), sans-serif" }}>
+        <h2 className="text-3xl lg:text-4xl font-bold text-[#0F172A] mb-12" style={{ fontFamily: "var(--font-outfit), sans-serif" }}>
           Built for Every Access
           <br />
           Environment
         </h2>
 
         <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
-          {applications.map((app, i) => (
+          {applications.map((app) => (
             <div
               key={app.name}
-              className="relative rounded-2xl overflow-hidden group card-hover"
+              className="relative rounded-2xl overflow-hidden group card-hover-light"
             >
               <div className="relative h-40">
                 <Image
@@ -35,8 +35,7 @@ export default function ApplicationScenariosSection() {
               </div>
               <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent" />
               <div className="absolute inset-0 flex flex-col justify-end p-5">
-                {/* Orange accent line */}
-                <div className="w-8 h-[2px] bg-[#FF6B00] mb-3 group-hover:w-12 transition-all duration-300" />
+                <div className="w-8 h-[2px] bg-[#F59E0B] mb-3 group-hover:w-12 transition-all duration-300" />
                 <span className="text-white font-bold text-[15px]" style={{ fontFamily: "var(--font-outfit), sans-serif" }}>{app.name}</span>
               </div>
             </div>

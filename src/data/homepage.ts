@@ -8,11 +8,11 @@ export const brands = [
 ];
 
 export const stats = [
-  { value: '8000+', label: 'SKUs Available' },
-  { value: '100+', label: 'Export Markets' },
-  { value: '24-48h', label: 'Sample Lead Time' },
-  { value: '500+', label: 'Compatible System Families' },
-  { value: '7x24h', label: 'Response Support' },
+  { value: '8000+', label: 'SKUs Available', icon: 'Package' },
+  { value: '100+', label: 'Export Markets', icon: 'Globe' },
+  { value: '24-48h', label: 'Sample Lead Time', icon: 'Clock' },
+  { value: '500+', label: 'Compatible System Families', icon: 'Box' },
+  { value: '7x24h', label: 'Response Support', icon: 'Headphones' },
 ];
 
 export const riskCards = [

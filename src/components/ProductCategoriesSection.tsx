@@ -6,57 +6,47 @@ import { products } from '@/data/homepage';
 
 export default function ProductCategoriesSection() {
   return (
-    <section id="products" className="bg-[#F0F4F8] relative">
+    <section id="products" className="bg-[#F8FAFC]">
       <div className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8 py-16 lg:py-24">
         {/* Section label */}
         <div className="flex items-center gap-3 mb-4">
-          <div className="w-10 h-[2px] bg-[#FF6B00]" />
-          <span className="text-[11px] font-semibold tracking-[0.2em] uppercase text-[#FF6B00]" style={{ fontFamily: "var(--font-jetbrains-mono), monospace" }}>
+          <div className="w-8 h-[2px] bg-[#F59E0B]" />
+          <span className="text-[11px] font-semibold tracking-[0.2em] uppercase text-[#F59E0B]" style={{ fontFamily: "var(--font-jetbrains-mono), monospace" }}>
             Products
           </span>
         </div>
 
-        <div className="flex items-end justify-between mb-12">
-          <div>
-            <h2 className="text-3xl lg:text-4xl font-bold text-[#020C1B]" style={{ fontFamily: "var(--font-outfit), sans-serif" }}>
-              Featured Product
-              <br />
-              Categories
-            </h2>
-          </div>
-        </div>
+        <h2 className="text-3xl lg:text-4xl font-bold text-[#0F172A] mb-12" style={{ fontFamily: "var(--font-outfit), sans-serif" }}>
+          Featured Product
+          <br />
+          Categories
+        </h2>
 
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
-          {products.map((product, i) => (
+          {products.map((product) => (
             <div
               key={product.title}
-              className="bg-white rounded-2xl border border-[#E2E8F0] overflow-hidden card-hover group"
+              className="bg-white rounded-2xl border border-[#E2E8F0] overflow-hidden card-hover-light group"
             >
               {/* Product image area */}
-              <div className="h-52 bg-gradient-to-br from-[#020C1B] to-[#0B2545] relative overflow-hidden">
-                <div className="absolute inset-0" style={{
-                  backgroundImage: `linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px)`,
-                  backgroundSize: '24px 24px',
-                }} />
-                <div className="absolute inset-0 flex items-center justify-center p-6">
-                  <div className="relative w-full h-full">
-                    <Image
-                      src={product.image}
-                      alt={product.title}
-                      fill
-                      className="object-contain"
-                    />
-                  </div>
-                </div>
-                <div className="absolute bottom-0 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-[#FF6B00]/50 to-transparent" />
+              <div className="h-52 bg-white relative overflow-hidden flex items-center justify-center p-6">
+                <Image
+                  src={product.image}
+                  alt={product.title}
+                  width={300}
+                  height={200}
+                  className="object-contain w-full h-full"
+                />
+                {/* Amber accent line */}
+                <div className="absolute bottom-0 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-[#F59E0B]/40 to-transparent" />
               </div>
               {/* Content */}
               <div className="p-6">
                 <h3 className="text-[15px] font-bold text-[#0F172A] mb-2" style={{ fontFamily: "var(--font-outfit), sans-serif" }}>{product.title}</h3>
-                <p className="text-[13px] text-[#475569] leading-relaxed mb-5">{product.description}</p>
+                <p className="text-[13px] text-[#64748B] leading-relaxed mb-5">{product.description}</p>
                 <a
                   href="#"
-                  className="inline-flex items-center gap-1.5 text-[12px] font-bold text-[#FF6B00] hover:text-[#E55E00] transition-colors group/link pointer-events-auto"
+                  className="inline-flex items-center gap-1.5 text-[12px] font-bold text-[#F59E0B] hover:text-[#D97706] transition-colors group/link pointer-events-auto"
                   style={{ fontFamily: "var(--font-jetbrains-mono), monospace" }}
                   onClick={(e) => e.preventDefault()}
                 >

@@ -10,19 +10,19 @@ export default function ResourcesSection() {
       <div className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8 py-16 lg:py-24">
         {/* Section label */}
         <div className="flex items-center gap-3 mb-4">
-          <div className="w-10 h-[2px] bg-[#FF6B00]" />
-          <span className="text-[11px] font-semibold tracking-[0.2em] uppercase text-[#FF6B00]" style={{ fontFamily: "var(--font-jetbrains-mono), monospace" }}>
+          <div className="w-8 h-[2px] bg-[#F59E0B]" />
+          <span className="text-[11px] font-semibold tracking-[0.2em] uppercase text-[#F59E0B]" style={{ fontFamily: "var(--font-jetbrains-mono), monospace" }}>
             Knowledge Base
           </span>
         </div>
 
         <div className="flex items-end justify-between mb-12">
-          <h2 className="text-3xl lg:text-4xl font-bold text-[#020C1B]" style={{ fontFamily: "var(--font-outfit), sans-serif" }}>
+          <h2 className="text-3xl lg:text-4xl font-bold text-[#0F172A]" style={{ fontFamily: "var(--font-outfit), sans-serif" }}>
             Resources &amp;
             <br />
             Helpful Articles
           </h2>
-          <a href="#" className="hidden sm:inline-flex items-center gap-1.5 text-[12px] font-bold text-[#FF6B00] hover:text-[#E55E00] transition-colors" style={{ fontFamily: "var(--font-jetbrains-mono), monospace" }} onClick={(e) => e.preventDefault()}>
+          <a href="#" className="hidden sm:inline-flex items-center gap-1.5 text-[12px] font-bold text-[#F59E0B] hover:text-[#D97706] transition-colors" style={{ fontFamily: "var(--font-jetbrains-mono), monospace" }} onClick={(e) => e.preventDefault()}>
             VIEW ALL <ArrowRight className="w-3.5 h-3.5" />
           </a>
         </div>
@@ -31,9 +31,9 @@ export default function ResourcesSection() {
           {resources.map((resource) => (
             <div
               key={resource.title}
-              className="bg-[#F0F4F8] rounded-2xl border border-[#E2E8F0] overflow-hidden card-hover group"
+              className="bg-[#F8FAFC] rounded-2xl border border-[#E2E8F0] overflow-hidden card-hover-light group"
             >
-              <div className="h-40 relative overflow-hidden bg-[#020C1B]">
+              <div className="h-40 relative overflow-hidden">
                 <Image
                   src={resource.image}
                   alt={resource.title}
@@ -43,10 +43,10 @@ export default function ResourcesSection() {
               </div>
               <div className="p-5">
                 <h3 className="text-[14px] font-bold text-[#0F172A] mb-2 leading-snug" style={{ fontFamily: "var(--font-outfit), sans-serif" }}>{resource.title}</h3>
-                <p className="text-[12px] text-[#475569] leading-relaxed mb-4">{resource.description}</p>
+                <p className="text-[12px] text-[#64748B] leading-relaxed mb-4">{resource.description}</p>
                 <a
                   href="#"
-                  className="inline-flex items-center gap-1.5 text-[11px] font-bold text-[#FF6B00] hover:text-[#E55E00] transition-colors group/link"
+                  className="inline-flex items-center gap-1.5 text-[11px] font-bold text-[#F59E0B] hover:text-[#D97706] transition-colors group/link"
                   style={{ fontFamily: "var(--font-jetbrains-mono), monospace" }}
                   onClick={(e) => e.preventDefault()}
                 >
