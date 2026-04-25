@@ -1,7 +1,4 @@
-import { Package, Globe, Clock, Box, Headphones } from 'lucide-react';
 import { stats } from '@/data/homepage';
-
-const iconMap: Record<string, typeof Package> = { Package, Globe, Clock, Box, Headphones };
 
 export default function StatsSection() {
   return (
@@ -12,7 +9,6 @@ export default function StatsSection() {
       <div className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8 py-14">
         <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-8">
           {stats.map((stat, i) => {
-            const Icon = iconMap[stat.icon];
             return (
               <div key={stat.label} className="text-center group animate-fade-in-up" style={{ animationDelay: `${i * 0.1}s` }}>
                 {/* Calibration tick marks */}

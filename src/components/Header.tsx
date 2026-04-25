@@ -1,5 +1,6 @@
 'use client';
 
+import Link from 'next/link';
 import { Menu, X } from 'lucide-react';
 import { useState } from 'react';
 
@@ -21,7 +22,7 @@ export default function Header() {
       <div className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-[64px]">
           {/* Logo */}
-          <a href="/" className="flex items-center gap-3 group">
+          <Link href="/" className="flex items-center gap-3 group">
             <div className="w-9 h-9 bg-[#F59E0B] rounded-lg flex items-center justify-center relative overflow-hidden group-hover:bg-[#D97706] transition-colors duration-300">
               <span className="text-[#0D1117] font-bold text-sm tracking-tight relative z-10" style={{ fontFamily: "var(--font-jetbrains-mono), monospace" }}>GR</span>
             </div>
@@ -35,7 +36,7 @@ export default function Header() {
                 OEM / ODM RF CONTROL SOLUTIONS
               </p>
             </div>
-          </a>
+          </Link>
 
           {/* Desktop Nav */}
           <nav className="hidden lg:flex items-center gap-1">

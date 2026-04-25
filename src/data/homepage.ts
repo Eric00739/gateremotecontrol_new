@@ -1,3 +1,5 @@
+export const basePath = '/gateremotecontrol_new';
+
 export const brands = [
   'LiftMaster', 'Chamberlain', 'FAAC', 'BFT', 'Nice', 'CAME',
   'BENINCA', 'Hormann', 'Marantec', 'Somfy', 'Sommer', 'DEA',
@@ -8,11 +10,11 @@ export const brands = [
 ];
 
 export const stats = [
-  { value: '8000+', label: 'SKUs Available', icon: 'Package' },
-  { value: '100+', label: 'Export Markets', icon: 'Globe' },
-  { value: '24-48h', label: 'Sample Lead Time', icon: 'Clock' },
-  { value: '500+', label: 'Compatible System Families', icon: 'Box' },
-  { value: '7x24h', label: 'Response Support', icon: 'Headphones' },
+  { value: '8000+', label: 'SKUs Available' },
+  { value: '100+', label: 'Export Markets' },
+  { value: '24-48h', label: 'Sample Lead Time' },
+  { value: '500+', label: 'Compatible System Families' },
+  { value: '7x24h', label: 'Response Support' },
 ];
 
 export const riskCards = [
@@ -46,32 +48,32 @@ export const products = [
   {
     title: 'Compatible Replacement Remotes',
     description: 'Wide range of remotes for rolling code, fixed code, and multi-frequency systems.',
-    image: '/images/product-remotes.png',
+    image: basePath + '/images/product-remotes.png',
   },
   {
     title: 'Universal Receivers',
     description: 'External and plug-in receivers for multi-brand compatibility and system upgrades.',
-    image: '/images/product-receiver.png',
+    image: basePath + '/images/product-receiver.png',
   },
   {
     title: 'Remote Duplicators',
     description: 'Copy and clone remotes for selected protocols and frequencies.',
-    image: '/images/product-duplicator.png',
+    image: basePath + '/images/product-duplicator.png',
   },
   {
     title: 'Garage Door Controllers',
     description: 'Control solutions for garage doors, roller shutters, and access control systems.',
-    image: '/images/product-controller.png',
+    image: basePath + '/images/product-controller.png',
   },
   {
     title: 'Accessories & Parts',
     description: 'Antennas, batteries, keypads, cables, and installation parts.',
-    image: '/images/product-accessories.png',
+    image: basePath + '/images/product-accessories.png',
   },
   {
     title: 'OEM Custom RF Solutions',
     description: 'Custom frequency, PCB design, shell design, and system integration support.',
-    image: '/images/product-oem.png',
+    image: basePath + '/images/product-oem.png',
   },
 ];
 
@@ -109,13 +111,13 @@ export const workflowSteps = [
 ];
 
 export const applications = [
-  { name: 'Sliding Gates', image: '/images/app-sliding-gate.jpg' },
-  { name: 'Swing Gates', image: '/images/app-swing-gate.jpg' },
-  { name: 'Garage Doors', image: '/images/app-garage-door.jpg' },
-  { name: 'Roller Shutters', image: '/images/app-roller-shutter.jpg' },
-  { name: 'Access Control', image: '/images/app-access-control.jpg' },
-  { name: 'Commercial Entrances', image: '/images/app-commercial.jpg' },
-  { name: 'Warehouses', image: '/images/app-warehouse.jpg' },
+  { name: 'Sliding Gates', image: basePath + '/images/app-sliding-gate.jpg' },
+  { name: 'Swing Gates', image: basePath + '/images/app-swing-gate.jpg' },
+  { name: 'Garage Doors', image: basePath + '/images/app-garage-door.jpg' },
+  { name: 'Roller Shutters', image: basePath + '/images/app-roller-shutter.jpg' },
+  { name: 'Access Control', image: basePath + '/images/app-access-control.jpg' },
+  { name: 'Commercial Entrances', image: basePath + '/images/app-commercial.jpg' },
+  { name: 'Warehouses', image: basePath + '/images/app-warehouse.jpg' },
 ];
 
 export const oemSteps = [
@@ -130,36 +132,36 @@ export const oemSteps = [
 ];
 
 export const factoryItems = [
-  { name: 'SMT Production Line', image: '/images/factory-smt.jpg' },
-  { name: 'Assembly Workshop', image: '/images/factory-assembly.jpg' },
-  { name: 'Functional Testing', image: '/images/factory-testing.jpg' },
-  { name: 'Aging Test Room', image: '/images/factory-aging.jpg' },
-  { name: 'Engineering R&D', image: '/images/factory-rd.jpg' },
-  { name: 'Packaging Inspection', image: '/images/factory-packaging.jpg' },
-  { name: 'Warehouse Stock', image: '/images/factory-warehouse.jpg' },
-  { name: 'Loading & Shipment', image: '/images/factory-loading.jpg' },
+  { name: 'SMT Production Line', image: basePath + '/images/factory-smt.jpg' },
+  { name: 'Assembly Workshop', image: basePath + '/images/factory-assembly.jpg' },
+  { name: 'Functional Testing', image: basePath + '/images/factory-testing.jpg' },
+  { name: 'Aging Test Room', image: basePath + '/images/factory-aging.jpg' },
+  { name: 'Engineering R&D', image: basePath + '/images/factory-rd.jpg' },
+  { name: 'Packaging Inspection', image: basePath + '/images/factory-packaging.jpg' },
+  { name: 'Warehouse Stock', image: basePath + '/images/factory-warehouse.jpg' },
+  { name: 'Loading & Shipment', image: basePath + '/images/factory-loading.jpg' },
 ];
 
 export const resources = [
   {
     title: 'How to Identify a Compatible Remote',
     description: 'Step-by-step guide to identify models, chips, and protocols.',
-    image: '/images/article-identify.jpg',
+    image: basePath + '/images/article-identify.jpg',
   },
   {
     title: 'Rolling Code vs Fixed Code',
     description: 'Understand the difference and how it affects compatibility.',
-    image: '/images/article-rolling-code.jpg',
+    image: basePath + '/images/article-rolling-code.jpg',
   },
   {
     title: 'What Buyers Should Send Before RF Matching',
     description: 'Checklist of information and photos for faster matching.',
-    image: '/images/article-checklist.jpg',
+    image: basePath + '/images/article-checklist.jpg',
   },
   {
     title: 'When OEM Development Is Needed',
     description: 'Situations that require custom development and engineering support.',
-    image: '/images/article-oem.jpg',
+    image: basePath + '/images/article-oem.jpg',
   },
 ];
 

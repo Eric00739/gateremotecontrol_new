@@ -1,5 +1,6 @@
 import { Shield, Zap, Package, Globe, Users } from 'lucide-react';
 import Image from 'next/image';
+import { basePath } from '@/data/homepage';
 
 const trustItems = [
   { icon: Shield, label: 'Independent Aftermarket Supplier' },
@@ -64,7 +65,7 @@ export default function HeroSection() {
           <div className="animate-slide-in-right delay-300">
             <div className="relative bg-[#161B22]/80 border border-[#21262D] rounded-2xl p-6 backdrop-blur-sm">
               <Image
-                src="/images/hero-products.png"
+                src={basePath + '/images/hero-products.png'}
                 alt="Compatible replacement remotes, receivers, duplicators, and controllers"
                 width={600}
                 height={300}

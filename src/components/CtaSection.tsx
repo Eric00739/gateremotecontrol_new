@@ -1,4 +1,5 @@
 import Image from 'next/image';
+import { basePath } from '@/data/homepage';
 
 export default function CtaSection() {
   return (
@@ -47,7 +48,7 @@ export default function CtaSection() {
           <div className="flex justify-center">
             <div className="w-full max-w-md aspect-[4/3] bg-[#161B22] border border-[#21262D] rounded-2xl flex items-center justify-center relative overflow-hidden">
               <Image
-                src="/images/product-remotes.png"
+                src={basePath + '/images/product-remotes.png'}
                 alt="Compatible replacement remotes"
                 fill
                 className="object-contain p-8"
