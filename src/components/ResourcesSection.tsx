@@ -1,3 +1,5 @@
+'use client';
+
 import { ArrowRight } from 'lucide-react';
 import Image from 'next/image';
 import { resources } from '@/data/homepage';
@@ -20,7 +22,7 @@ export default function ResourcesSection() {
             <br />
             Helpful Articles
           </h2>
-          <a href="#" className="hidden sm:inline-flex items-center gap-1.5 text-[12px] font-bold text-[#FF6B00] hover:text-[#E55E00] transition-colors" style={{ fontFamily: "'JetBrains Mono', monospace" }}>
+          <a href="#" className="hidden sm:inline-flex items-center gap-1.5 text-[12px] font-bold text-[#FF6B00] hover:text-[#E55E00] transition-colors" style={{ fontFamily: "'JetBrains Mono', monospace" }} onClick={(e) => e.preventDefault()}>
             VIEW ALL <ArrowRight className="w-3.5 h-3.5" />
           </a>
         </div>
@@ -46,6 +48,7 @@ export default function ResourcesSection() {
                   href="#"
                   className="inline-flex items-center gap-1.5 text-[11px] font-bold text-[#FF6B00] hover:text-[#E55E00] transition-colors group/link"
                   style={{ fontFamily: "'JetBrains Mono', monospace" }}
+                  onClick={(e) => e.preventDefault()}
                 >
                   READ MORE <ArrowRight className="w-3 h-3 group-hover/link:translate-x-1 transition-transform" />
                 </a>

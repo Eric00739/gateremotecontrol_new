@@ -1,3 +1,5 @@
+'use client';
+
 import { ArrowRight } from 'lucide-react';
 import Image from 'next/image';
 import { products } from '@/data/homepage';
@@ -54,8 +56,9 @@ export default function ProductCategoriesSection() {
                 <p className="text-[13px] text-[#475569] leading-relaxed mb-5">{product.description}</p>
                 <a
                   href="#"
-                  className="inline-flex items-center gap-1.5 text-[12px] font-bold text-[#FF6B00] hover:text-[#E55E00] transition-colors group/link"
+                  className="inline-flex items-center gap-1.5 text-[12px] font-bold text-[#FF6B00] hover:text-[#E55E00] transition-colors group/link pointer-events-auto"
                   style={{ fontFamily: "'JetBrains Mono', monospace" }}
+                  onClick={(e) => e.preventDefault()}
                 >
                   EXPLORE
                   <ArrowRight className="w-3.5 h-3.5 group-hover/link:translate-x-1 transition-transform" />

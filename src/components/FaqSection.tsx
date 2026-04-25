@@ -33,6 +33,7 @@ export default function FaqSection() {
               <button
                 className="w-full flex items-center justify-between p-6 text-left"
                 onClick={() => setOpenIndex(openIndex === i ? -1 : i)}
+                aria-expanded={openIndex === i}
               >
                 <span className="text-[14px] font-bold text-[#0F172A] pr-4" style={{ fontFamily: "'Outfit', sans-serif" }}>{faq.question}</span>
                 <div className={`w-8 h-8 bg-[#F0F4F8] rounded-lg flex items-center justify-center flex-shrink-0 transition-colors ${openIndex === i ? 'bg-[#FF6B00]/10' : ''}`}>

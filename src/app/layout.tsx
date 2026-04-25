@@ -1,10 +1,23 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Outfit, DM_Sans, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 
-const inter = Inter({
+const outfit = Outfit({
   subsets: ["latin"],
-  variable: "--font-inter",
+  variable: "--font-outfit",
+  display: "swap",
+});
+
+const dmSans = DM_Sans({
+  subsets: ["latin"],
+  variable: "--font-dm-sans",
+  display: "swap",
+});
+
+const jetBrainsMono = JetBrains_Mono({
+  subsets: ["latin"],
+  variable: "--font-jetbrains-mono",
+  display: "swap",
 });
 
 export const metadata: Metadata = {
@@ -18,7 +31,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${inter.variable} antialiased`}>
+    <html lang="en" className={`${outfit.variable} ${dmSans.variable} ${jetBrainsMono.variable} antialiased`}>
       <body className="min-h-screen flex flex-col bg-white">
         {children}
       </body>

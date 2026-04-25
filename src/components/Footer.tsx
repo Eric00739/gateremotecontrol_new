@@ -1,3 +1,5 @@
+'use client';
+
 const footerLinks = {
   products: [
     { label: 'Replacement Remotes', href: '#' },
@@ -143,7 +145,7 @@ export default function Footer() {
           {/* Newsletter */}
           <div>
             <h4 className="text-sm font-semibold text-white mb-3">Newsletter</h4>
-            <form className="flex gap-2">
+            <form className="flex gap-2" onSubmit={(e) => e.preventDefault()}>
               <input
                 type="email"
                 placeholder="Your email"
@@ -168,7 +170,7 @@ export default function Footer() {
           </p>
           <div className="flex flex-col sm:flex-row items-center justify-between gap-2">
             <p className="text-xs text-white/40">
-              &copy; 2024 GateRemoteSource. All rights reserved.
+              &copy; {new Date().getFullYear()} GateRemoteSource. All rights reserved.
             </p>
             <div className="flex gap-4 text-xs text-white/40">
               <a href="#" className="hover:text-white/70 transition-colors">Privacy Policy</a>
