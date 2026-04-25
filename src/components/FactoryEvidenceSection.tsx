@@ -1,29 +1,48 @@
+import Image from 'next/image';
 import { factoryItems } from '@/data/homepage';
 
 export default function FactoryEvidenceSection() {
   return (
-    <section id="factory" className="bg-[#F6F8FB]">
-      <div className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8 py-16 lg:py-20">
-        <div className="text-center max-w-2xl mx-auto mb-12">
-          <h2 className="text-2xl lg:text-3xl font-bold text-[#071C33] mb-4">
-            Factory Evidence, Not Just Claims
-          </h2>
-          <p className="text-[#64748B] leading-relaxed">
-            See how we control production, testing, packaging, and delivery.
-          </p>
+    <section id="factory" className="bg-[#F0F4F8]">
+      <div className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8 py-16 lg:py-24">
+        {/* Section label */}
+        <div className="flex items-center gap-3 mb-4">
+          <div className="w-10 h-[2px] bg-[#FF6B00]" />
+          <span className="text-[11px] font-semibold tracking-[0.2em] uppercase text-[#FF6B00]" style={{ fontFamily: "'JetBrains Mono', monospace" }}>
+            Facility
+          </span>
+        </div>
+
+        <div className="flex items-end justify-between mb-12">
+          <div>
+            <h2 className="text-3xl lg:text-4xl font-bold text-[#020C1B] mb-2" style={{ fontFamily: "'Outfit', sans-serif" }}>
+              Factory Evidence,
+              <br />
+              Not Just Claims
+            </h2>
+            <p className="text-[#475569]">
+              See how we control production, testing, packaging, and delivery.
+            </p>
+          </div>
         </div>
 
         <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
           {factoryItems.map((item) => (
             <div
               key={item.name}
-              className="rounded-2xl overflow-hidden bg-white border border-[#E2E8F0] hover:shadow-lg transition-shadow"
+              className="rounded-2xl overflow-hidden bg-white border border-[#E2E8F0] card-hover group"
             >
-              <div className="h-36 bg-gradient-to-br from-[#E2E8F0] to-[#CBD5E1] flex items-center justify-center">
-                <span className="text-[#64748B] text-xs">{item.name}</span>
+              <div className="h-40 relative overflow-hidden bg-[#020C1B]">
+                <Image
+                  src={item.image}
+                  alt={item.name}
+                  fill
+                  className="object-cover group-hover:scale-105 transition-transform duration-500"
+                />
+                <div className="absolute bottom-0 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-[#FF6B00]/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
               </div>
               <div className="p-3">
-                <p className="text-xs font-medium text-[#0F172A] text-center">{item.name}</p>
+                <p className="text-[12px] font-semibold text-[#0F172A] text-center" style={{ fontFamily: "'Outfit', sans-serif" }}>{item.name}</p>
               </div>
             </div>
           ))}
