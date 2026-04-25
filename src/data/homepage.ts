@@ -10,11 +10,46 @@ export const brands = [
 ];
 
 export const stats = [
-  { value: '8000+', label: 'SKUs Available' },
-  { value: '100+', label: 'Export Markets' },
+  { value: '~1,000', label: 'SKU Range' },
+  { value: 'Multi', label: 'Market Support' },
   { value: '24-48h', label: 'Sample Lead Time' },
-  { value: '500+', label: 'Compatible System Families' },
-  { value: '7x24h', label: 'Response Support' },
+  { value: 'Mainstream', label: 'Brand Systems' },
+  { value: 'OEM', label: 'Logo / Packaging' },
+];
+
+export const compatibilityRows = [
+  {
+    brand: 'FAAC',
+    model: 'XT2',
+    frequency: '433.92 MHz',
+    codeType: 'Rolling Code',
+    solution: 'Available',
+    sampleTest: 'Recommended',
+  },
+  {
+    brand: 'BFT',
+    model: 'MITTO 2',
+    frequency: '433.92 MHz',
+    codeType: 'Rolling Code',
+    solution: 'Available',
+    sampleTest: 'Yes',
+  },
+  {
+    brand: 'Nice',
+    model: 'FLO2R-S',
+    frequency: '433.92 MHz',
+    codeType: 'Rolling Code',
+    solution: 'Available',
+    sampleTest: 'Yes',
+  },
+  {
+    brand: 'LiftMaster',
+    model: '893MAX',
+    frequency: 'Security+ 2.0',
+    codeType: 'Rolling Code',
+    solution: 'To Confirm',
+    sampleTest: 'Yes',
+  },
 ];
 
 export const riskCards = [
@@ -49,31 +84,71 @@ export const products = [
     title: 'Compatible Replacement Remotes',
     description: 'Wide range of remotes for rolling code, fixed code, and multi-frequency systems.',
     image: basePath + '/images/product-remotes.png',
+    specs: [
+      { label: 'Frequency', value: '433.92 MHz / 868 MHz' },
+      { label: 'Code Type', value: 'Rolling / Fixed / Learning' },
+      { label: 'Battery', value: 'CR2032 / 12V 23A' },
+      { label: 'MOQ', value: '100 pcs' },
+      { label: 'OEM', value: 'Logo / Packaging' },
+    ],
   },
   {
     title: 'Universal Receivers',
     description: 'External and plug-in receivers for multi-brand compatibility and system upgrades.',
     image: basePath + '/images/product-receiver.png',
+    specs: [
+      { label: 'Frequency', value: '315 / 433.92 / 868 MHz' },
+      { label: 'Code Type', value: 'Learning Code' },
+      { label: 'Power', value: '12-24V options' },
+      { label: 'MOQ', value: '100 pcs' },
+      { label: 'OEM', value: 'Label / Packaging' },
+    ],
   },
   {
     title: 'Remote Duplicators',
     description: 'Copy and clone remotes for selected protocols and frequencies.',
     image: basePath + '/images/product-duplicator.png',
+    specs: [
+      { label: 'Frequency', value: 'Multi-frequency options' },
+      { label: 'Code Type', value: 'Fixed / Selected rolling' },
+      { label: 'Battery', value: 'CR2032 / 27A' },
+      { label: 'MOQ', value: '100 pcs' },
+      { label: 'OEM', value: 'Logo / Manual' },
+    ],
   },
   {
     title: 'Garage Door Controllers',
     description: 'Control solutions for garage doors, roller shutters, and access control systems.',
     image: basePath + '/images/product-controller.png',
+    specs: [
+      { label: 'Frequency', value: 'By receiver protocol' },
+      { label: 'Code Type', value: 'Learning / App control' },
+      { label: 'Power', value: '12-24V options' },
+      { label: 'MOQ', value: '100 pcs' },
+      { label: 'OEM', value: 'Firmware / Packaging' },
+    ],
   },
   {
     title: 'Accessories & Parts',
     description: 'Antennas, batteries, keypads, cables, and installation parts.',
     image: basePath + '/images/product-accessories.png',
+    specs: [
+      { label: 'Items', value: 'Antennas / Keypads / Batteries' },
+      { label: 'Fitment', value: 'Model dependent' },
+      { label: 'MOQ', value: 'By item' },
+      { label: 'OEM', value: 'Neutral packaging' },
+    ],
   },
   {
     title: 'OEM Custom RF Solutions',
     description: 'Custom frequency, PCB design, shell design, and system integration support.',
     image: basePath + '/images/product-oem.png',
+    specs: [
+      { label: 'Frequency', value: 'Custom target market' },
+      { label: 'Code Type', value: 'Protocol tuning' },
+      { label: 'MOQ', value: 'Project based' },
+      { label: 'OEM', value: 'Shell / PCB / Manual' },
+    ],
   },
 ];
 
@@ -108,6 +183,17 @@ export const workflowSteps = [
     title: 'Bulk Production & Private Label',
     description: 'Start mass production with custom branding, packaging, and quality control.',
   },
+];
+
+export const verificationFields = [
+  { field: 'Brand / Model', description: 'Remote, receiver, or gate operator model number.' },
+  { field: 'Frequency', description: 'For example 433.92 MHz, 868 MHz, or regional label information.' },
+  { field: 'Remote Photos', description: 'Front and back photos of the original remote.' },
+  { field: 'PCB Photo', description: 'PCB and IC/chip markings if available.' },
+  { field: 'Receiver / Motor', description: 'Receiver board, motor label, or control box information.' },
+  { field: 'Market Version', description: 'Country or market version to avoid regional mismatch.' },
+  { field: 'Sample Quantity', description: 'Quantity needed for compatibility testing.' },
+  { field: 'OEM Requirements', description: 'Logo, packaging, manual, label, or private-label needs.' },
 ];
 
 export const applications = [

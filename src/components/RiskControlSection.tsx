@@ -9,8 +9,8 @@ export default function RiskControlSection() {
       <div className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8 py-16 lg:py-24">
         {/* Section label */}
         <div className="flex items-center gap-3 mb-4">
-          <div className="w-8 h-[2px] bg-[#F59E0B]" />
-          <span className="text-[11px] font-semibold tracking-[0.2em] uppercase text-[#F59E0B]" style={{ fontFamily: "var(--font-jetbrains-mono), monospace" }}>
+          <div className="w-8 h-[2px] bg-[#FF8A1F]" />
+          <span className="text-[11px] font-semibold tracking-[0.2em] uppercase text-[#FF8A1F]" style={{ fontFamily: "var(--font-jetbrains-mono), monospace" }}>
             Risk Management
           </span>
         </div>
@@ -28,8 +28,8 @@ export default function RiskControlSection() {
             return (
               <div key={card.title} className="text-center group">
                 {/* Amber outlined circle icon */}
-                <div className="w-14 h-14 mx-auto mb-4 rounded-full border-2 border-[#F59E0B]/25 flex items-center justify-center group-hover:bg-[#F59E0B]/10 group-hover:border-[#F59E0B]/50 transition-all duration-300">
-                  <Icon className="w-5 h-5 text-[#F59E0B]" />
+                <div className="w-14 h-14 mx-auto mb-4 rounded-full border-2 border-[#FF8A1F]/25 flex items-center justify-center group-hover:bg-[#FF8A1F]/10 group-hover:border-[#FF8A1F]/50 transition-all duration-300">
+                  <Icon className="w-5 h-5 text-[#FF8A1F]" />
                 </div>
                 <h3 className="text-[12px] font-bold text-[#0F172A] mb-2 leading-snug" style={{ fontFamily: "var(--font-outfit), sans-serif" }}>{card.title}</h3>
                 <p className="text-[11px] text-[#64748B] leading-relaxed">{card.description}</p>
@@ -41,7 +41,7 @@ export default function RiskControlSection() {
         {/* Legal disclaimer */}
         <div className="bg-white rounded-xl p-5 border border-[#E2E8F0]">
           <div className="flex items-start gap-3">
-            <Info className="w-5 h-5 text-[#F59E0B] flex-shrink-0 mt-0.5" />
+            <Info className="w-5 h-5 text-[#FF8A1F] flex-shrink-0 mt-0.5" />
             <div>
               <p className="text-sm text-[#475569] leading-relaxed">
                 Brand names are used only to indicate compatibility. We are an independent aftermarket manufacturer and are not affiliated with, endorsed by, or sponsored by these brand owners. Compatibility should be confirmed by model, frequency, IC/chip, and coding protocol before order.

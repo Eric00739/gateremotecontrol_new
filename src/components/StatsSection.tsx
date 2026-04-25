@@ -4,7 +4,7 @@ export default function StatsSection() {
   return (
     <section className="bg-[#F8FAFC] border-b border-[#E2E8F0] relative">
       {/* Top accent line */}
-      <div className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-[#F59E0B]/40 to-transparent" />
+      <div className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-[#FF8A1F]/40 to-transparent" />
 
       <div className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8 py-14">
         <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-8">
@@ -16,7 +16,7 @@ export default function StatsSection() {
                   {[...Array(5)].map((_, j) => (
                     <div
                       key={j}
-                      className={`w-[1px] ${j % 2 === 0 ? 'h-3' : 'h-2'} ${j === 2 ? 'bg-[#F59E0B]' : 'bg-[#CBD5E1]'} group-hover:bg-[#F59E0B]/60 transition-colors`}
+                      className={`w-[1px] ${j % 2 === 0 ? 'h-3' : 'h-2'} ${j === 2 ? 'bg-[#FF8A1F]' : 'bg-[#CBD5E1]'} group-hover:bg-[#FF8A1F]/60 transition-colors`}
                     />
                   ))}
                 </div>

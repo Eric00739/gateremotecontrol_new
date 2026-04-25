@@ -1,7 +1,7 @@
 'use client';
 
 import { Camera, Radio, Cpu, Users, FlaskConical, Factory } from 'lucide-react';
-import { workflowSteps } from '@/data/homepage';
+import { verificationFields, workflowSteps } from '@/data/homepage';
 
 const iconMap = [Camera, Radio, Cpu, Users, FlaskConical, Factory];
 
@@ -11,8 +11,8 @@ export default function CompatibilityWorkflowSection() {
       <div className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8 py-16 lg:py-24">
         {/* Section label */}
         <div className="flex items-center gap-3 mb-4">
-          <div className="w-8 h-[2px] bg-[#F59E0B]" />
-          <span className="text-[11px] font-semibold tracking-[0.2em] uppercase text-[#F59E0B]" style={{ fontFamily: "var(--font-jetbrains-mono), monospace" }}>
+          <div className="w-8 h-[2px] bg-[#FF8A1F]" />
+          <span className="text-[11px] font-semibold tracking-[0.2em] uppercase text-[#FF8A1F]" style={{ fontFamily: "var(--font-jetbrains-mono), monospace" }}>
             Verification Process
           </span>
         </div>
@@ -23,7 +23,7 @@ export default function CompatibilityWorkflowSection() {
           Compatibility Before Ordering
         </h2>
         <p className="text-[#64748B] mb-14 max-w-xl">
-          A systematic 6-step process to ensure every compatible solution matches your system requirements.
+          Send clear product details first, then test samples when compatibility depends on rolling code, receiver version, or regional protocol.
         </p>
 
         {/* Horizontal timeline */}
@@ -38,11 +38,11 @@ export default function CompatibilityWorkflowSection() {
                 <div key={step.step} className="text-center relative">
                   {/* Numbered circle with icon */}
                   <div className="relative z-10 mb-4">
-                    <div className="w-14 h-14 mx-auto bg-[#F8FAFC] rounded-full flex items-center justify-center border-2 border-[#E2E8F0] group-hover:border-[#F59E0B] transition-colors">
-                      <Icon className="w-6 h-6 text-[#F59E0B]" />
+                    <div className="w-14 h-14 mx-auto bg-[#F8FAFC] rounded-full flex items-center justify-center border-2 border-[#E2E8F0] group-hover:border-[#FF8A1F] transition-colors">
+                      <Icon className="w-6 h-6 text-[#FF8A1F]" />
                     </div>
                     {/* Step number badge */}
-                    <div className="absolute -top-1 -right-1 w-6 h-6 bg-[#F59E0B] rounded-full flex items-center justify-center shadow-lg shadow-amber-500/20">
+                    <div className="absolute -top-1 -right-1 w-6 h-6 bg-[#FF8A1F] rounded-full flex items-center justify-center shadow-lg shadow-amber-500/20">
                       <span className="text-white text-[10px] font-bold" style={{ fontFamily: "var(--font-jetbrains-mono), monospace" }}>
                         {step.step}
                       </span>
@@ -53,6 +53,38 @@ export default function CompatibilityWorkflowSection() {
                 </div>
               );
             })}
+          </div>
+        </div>
+
+        <div className="mt-14 rounded-2xl border border-[#D8E4F0] bg-[#F8FAFC] p-5 lg:p-6">
+          <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-4 mb-5">
+            <div>
+              <h3 className="text-xl font-bold text-[#0F172A] mb-2" style={{ fontFamily: "var(--font-outfit), sans-serif" }}>
+                What Buyers Should Send
+              </h3>
+              <p className="text-sm text-[#64748B] max-w-2xl">
+                These fields help us check frequency, protocol, receiver version, and OEM requirements before sample testing.
+              </p>
+            </div>
+            <a
+              href="#contact"
+              className="inline-flex items-center justify-center rounded-lg bg-[#FF8A1F] px-5 py-2.5 text-sm font-bold text-white transition-colors hover:bg-[#F97316]"
+            >
+              Send Compatibility Request
+            </a>
+          </div>
+
+          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-3">
+            {verificationFields.map((item) => (
+              <div key={item.field} className="rounded-xl border border-[#E2E8F0] bg-white p-4">
+                <div className="text-[11px] font-bold uppercase tracking-[0.12em] text-[#FF8A1F] mb-2" style={{ fontFamily: "var(--font-jetbrains-mono), monospace" }}>
+                  {item.field}
+                </div>
+                <p className="text-[12px] leading-relaxed text-[#64748B]">
+                  {item.description}
+                </p>
+              </div>
+            ))}
           </div>
         </div>
       </div>

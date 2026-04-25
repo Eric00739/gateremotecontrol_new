@@ -9,8 +9,8 @@ export default function OemOdmSection() {
       <div className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8 py-16 lg:py-24">
         {/* Section label */}
         <div className="flex items-center gap-3 mb-4">
-          <div className="w-8 h-[2px] bg-[#F59E0B]" />
-          <span className="text-[11px] font-semibold tracking-[0.2em] uppercase text-[#F59E0B]" style={{ fontFamily: "var(--font-jetbrains-mono), monospace" }}>
+          <div className="w-8 h-[2px] bg-[#FF8A1F]" />
+          <span className="text-[11px] font-semibold tracking-[0.2em] uppercase text-[#FF8A1F]" style={{ fontFamily: "var(--font-jetbrains-mono), monospace" }}>
             OEM / ODM
           </span>
         </div>
@@ -30,10 +30,10 @@ export default function OemOdmSection() {
               <div key={step.step} className="text-center group">
                 {/* Numbered circle */}
                 <div className="relative inline-block mb-3">
-                  <div className="w-14 h-14 mx-auto bg-[#F8FAFC] rounded-full flex items-center justify-center border-2 border-[#E2E8F0] group-hover:bg-[#F59E0B] group-hover:border-[#F59E0B] transition-all duration-300">
+                  <div className="w-14 h-14 mx-auto bg-[#F8FAFC] rounded-full flex items-center justify-center border-2 border-[#E2E8F0] group-hover:bg-[#FF8A1F] group-hover:border-[#FF8A1F] transition-all duration-300">
                     <Icon className="w-6 h-6 text-[#0F172A] group-hover:text-white transition-colors" />
                   </div>
-                  <div className="absolute -top-1 -right-1 w-6 h-6 bg-[#F59E0B] rounded-full flex items-center justify-center shadow-lg shadow-amber-500/20">
+                  <div className="absolute -top-1 -right-1 w-6 h-6 bg-[#FF8A1F] rounded-full flex items-center justify-center shadow-lg shadow-amber-500/20">
                     <span className="text-white text-[10px] font-bold" style={{ fontFamily: "var(--font-jetbrains-mono), monospace" }}>
                       {step.step}
                     </span>

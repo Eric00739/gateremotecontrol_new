@@ -18,21 +18,21 @@ export default function Header() {
   const [mobileOpen, setMobileOpen] = useState(false);
 
   return (
-    <header className="sticky top-0 z-50 bg-[#0D1117]/95 backdrop-blur-xl border-b border-[#21262D]">
+    <header className="sticky top-0 z-50 bg-white/95 backdrop-blur-xl border-b border-[#D8E4F0] shadow-sm shadow-[#062748]/5">
       <div className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-[64px]">
           {/* Logo */}
           <Link href="/" className="flex items-center gap-3 group">
-            <div className="w-9 h-9 bg-[#F59E0B] rounded-lg flex items-center justify-center relative overflow-hidden group-hover:bg-[#D97706] transition-colors duration-300">
-              <span className="text-[#0D1117] font-bold text-sm tracking-tight relative z-10" style={{ fontFamily: "var(--font-jetbrains-mono), monospace" }}>GR</span>
+            <div className="w-9 h-9 bg-[#0B3A63] rounded-lg flex items-center justify-center relative overflow-hidden group-hover:bg-[#062748] transition-colors duration-300">
+              <span className="text-white font-bold text-sm tracking-tight relative z-10" style={{ fontFamily: "var(--font-jetbrains-mono), monospace" }}>GR</span>
             </div>
             <div className="hidden sm:block">
               <div className="leading-tight">
-                <span className="text-[#F0F6FC] font-extrabold text-lg tracking-tight" style={{ fontFamily: "var(--font-outfit), sans-serif" }}>Gate</span>
-                <span className="text-[#F59E0B] font-extrabold text-lg tracking-tight" style={{ fontFamily: "var(--font-outfit), sans-serif" }}>Remote</span>
-                <span className="text-[#F0F6FC] font-extrabold text-lg tracking-tight" style={{ fontFamily: "var(--font-outfit), sans-serif" }}>Source</span>
+                <span className="text-[#0B2745] font-extrabold text-lg tracking-tight" style={{ fontFamily: "var(--font-outfit), sans-serif" }}>Gate</span>
+                <span className="text-[#FF8A1F] font-extrabold text-lg tracking-tight" style={{ fontFamily: "var(--font-outfit), sans-serif" }}>Remote</span>
+                <span className="text-[#0B2745] font-extrabold text-lg tracking-tight" style={{ fontFamily: "var(--font-outfit), sans-serif" }}>Source</span>
               </div>
-              <p className="text-[8px] text-[#484F58] tracking-[0.2em] uppercase -mt-0.5" style={{ fontFamily: "var(--font-jetbrains-mono), monospace" }}>
+              <p className="text-[8px] text-[#6B7F96] tracking-[0.2em] uppercase -mt-0.5" style={{ fontFamily: "var(--font-jetbrains-mono), monospace" }}>
                 OEM / ODM RF CONTROL SOLUTIONS
               </p>
             </div>
@@ -44,7 +44,7 @@ export default function Header() {
               <a
                 key={item.label}
                 href={item.href}
-                className="text-[12px] text-[#8B949E] hover:text-[#F59E0B] transition-colors font-medium tracking-wide px-3 py-2 rounded-lg hover:bg-[#F59E0B]/5 relative group"
+                className="text-[12px] text-[#153A5C] hover:text-[#FF8A1F] transition-colors font-semibold tracking-wide px-3 py-2 rounded-lg hover:bg-[#FF8A1F]/8 relative group"
                 style={{ fontFamily: "var(--font-dm-sans), sans-serif" }}
               >
                 {item.label}
@@ -54,7 +54,7 @@ export default function Header() {
 
           {/* Right Actions */}
           <div className="flex items-center gap-3">
-            <span className="hidden md:inline text-[10px] text-[#484F58] border border-[#21262D] rounded-md px-2 py-1 font-medium" style={{ fontFamily: "var(--font-jetbrains-mono), monospace" }}>
+            <span className="hidden md:inline text-[10px] text-[#6B7F96] border border-[#D8E4F0] rounded-md px-2 py-1 font-medium" style={{ fontFamily: "var(--font-jetbrains-mono), monospace" }}>
               EN
             </span>
             <a
@@ -70,7 +70,7 @@ export default function Header() {
             </a>
             <a
               href="#contact"
-              className="bg-[#F59E0B] hover:bg-[#D97706] text-[#0D1117] text-[12px] font-bold px-5 py-2 rounded-lg transition-all btn-glow"
+              className="bg-[#FF8A1F] hover:bg-[#F97316] text-white text-[12px] font-bold px-5 py-2 rounded-lg transition-all btn-glow shadow-sm shadow-orange-500/20"
               style={{ fontFamily: "var(--font-dm-sans), sans-serif" }}
             >
               Get a Quote
@@ -78,7 +78,7 @@ export default function Header() {
 
             {/* Mobile menu button */}
             <button
-              className="lg:hidden p-2 text-[#8B949E]"
+              className="lg:hidden p-2 text-[#153A5C]"
               onClick={() => setMobileOpen(!mobileOpen)}
               aria-label="Toggle menu"
             >
@@ -89,13 +89,13 @@ export default function Header() {
 
         {/* Mobile Nav */}
         {mobileOpen && (
-          <nav className="lg:hidden py-4 border-t border-[#21262D]">
+          <nav className="lg:hidden py-4 border-t border-[#D8E4F0]">
             <div className="flex flex-col gap-2">
               {navItems.map((item) => (
                 <a
                   key={item.label}
                   href={item.href}
-                  className="text-sm text-[#8B949E] hover:text-[#F59E0B] font-medium py-2 px-3 rounded-lg hover:bg-[#F59E0B]/5"
+                  className="text-sm text-[#153A5C] hover:text-[#FF8A1F] font-semibold py-2 px-3 rounded-lg hover:bg-[#FF8A1F]/8"
                   onClick={() => setMobileOpen(false)}
                 >
                   {item.label}

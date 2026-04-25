@@ -2,27 +2,27 @@
 
 :root {
   /* Core palette - precision instrument dark + warm amber */
-  --bg-deep: #0D1117;
-  --bg-surface: #161B22;
-  --bg-card: #1C2333;
-  --bg-elevated: #222A3A;
+  --bg-deep: #062748;
+  --bg-surface: #08345F;
+  --bg-card: #0B3A63;
+  --bg-elevated: #0E4A78;
 
-  --accent-amber: #F59E0B;
-  --accent-amber-dim: #D97706;
-  --accent-amber-glow: rgba(245, 158, 11, 0.15);
-  --accent-amber-subtle: rgba(245, 158, 11, 0.08);
+  --accent-amber: #FF8A1F;
+  --accent-amber-dim: #F97316;
+  --accent-amber-glow: rgba(255, 138, 31, 0.15);
+  --accent-amber-subtle: rgba(255, 138, 31, 0.08);
 
-  --accent-cyan: #22D3EE;
-  --accent-cyan-dim: rgba(34, 211, 238, 0.1);
+  --accent-cyan: #60A5FA;
+  --accent-cyan-dim: rgba(96, 165, 250, 0.1);
 
-  --text-primary: #F0F6FC;
-  --text-secondary: #8B949E;
-  --text-muted: #484F58;
-  --text-dim: #30363D;
+  --text-primary: #F7FBFF;
+  --text-secondary: #C7D7E8;
+  --text-muted: #7F9AB7;
+  --text-dim: #2A587C;
 
-  --border: #21262D;
-  --border-light: #30363D;
-  --border-accent: rgba(245, 158, 11, 0.3);
+  --border: #123D63;
+  --border-light: #2A587C;
+  --border-accent: rgba(255, 138, 31, 0.3);
 
   /* Light section backgrounds */
   --bg-light: #F8FAFC;
@@ -57,8 +57,8 @@ h1, h2, h3, h4, h5, h6 {
 /* Fine grid for dark backgrounds */
 .tech-grid {
   background-image:
-    linear-gradient(rgba(245, 158, 11, 0.03) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(245, 158, 11, 0.03) 1px, transparent 1px);
+    linear-gradient(rgba(255, 138, 31, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 138, 31, 0.03) 1px, transparent 1px);
   background-size: 32px 32px;
 }
 
@@ -72,7 +72,7 @@ h1, h2, h3, h4, h5, h6 {
 
 /* Crosshair dot grid */
 .dot-grid {
-  background-image: radial-gradient(rgba(245, 158, 11, 0.12) 1px, transparent 1px);
+  background-image: radial-gradient(rgba(255, 138, 31, 0.12) 1px, transparent 1px);
   background-size: 24px 24px;
 }
 
@@ -89,7 +89,7 @@ h1, h2, h3, h4, h5, h6 {
   left: 0;
   width: 200%;
   height: 100%;
-  background: linear-gradient(90deg, transparent 0%, rgba(245, 158, 11, 0.04) 45%, rgba(245, 158, 11, 0.08) 50%, rgba(245, 158, 11, 0.04) 55%, transparent 100%);
+  background: linear-gradient(90deg, transparent 0%, rgba(255, 138, 31, 0.04) 45%, rgba(255, 138, 31, 0.08) 50%, rgba(255, 138, 31, 0.04) 55%, transparent 100%);
   animation: waveform-sweep 5s ease-in-out infinite;
 }
 
@@ -182,7 +182,7 @@ h1, h2, h3, h4, h5, h6 {
   background-color: var(--accent-amber);
   display: inline-block;
   animation: signal-pulse 2s ease-in-out infinite;
-  box-shadow: 0 0 8px rgba(245, 158, 11, 0.4);
+  box-shadow: 0 0 8px rgba(255, 138, 31, 0.4);
 }
 
 /* === BUTTON EFFECTS === */
@@ -274,7 +274,7 @@ h1, h2, h3, h4, h5, h6 {
 /* === SELECTION === */
 
 ::selection {
-  background-color: rgba(245, 158, 11, 0.2);
+  background-color: rgba(255, 138, 31, 0.2);
   color: var(--text-primary);
 }
 
@@ -304,11 +304,11 @@ h1, h2, h3, h4, h5, h6 {
 /* === GLOW EFFECTS === */
 
 .glow-amber {
-  box-shadow: 0 0 20px rgba(245, 158, 11, 0.15), 0 0 40px rgba(245, 158, 11, 0.05);
+  box-shadow: 0 0 20px rgba(255, 138, 31, 0.15), 0 0 40px rgba(255, 138, 31, 0.05);
 }
 
 .glow-amber-lg {
-  box-shadow: 0 0 30px rgba(245, 158, 11, 0.2), 0 0 60px rgba(245, 158, 11, 0.08);
+  box-shadow: 0 0 30px rgba(255, 138, 31, 0.2), 0 0 60px rgba(255, 138, 31, 0.08);
 }
 
 /* === IMAGE PLACEHOLDER GRADIENT === */

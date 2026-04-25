@@ -7,8 +7,8 @@ export default function ApplicationScenariosSection() {
       <div className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8 py-16 lg:py-24">
         {/* Section label */}
         <div className="flex items-center gap-3 mb-4">
-          <div className="w-8 h-[2px] bg-[#F59E0B]" />
-          <span className="text-[11px] font-semibold tracking-[0.2em] uppercase text-[#F59E0B]" style={{ fontFamily: "var(--font-jetbrains-mono), monospace" }}>
+          <div className="w-8 h-[2px] bg-[#FF8A1F]" />
+          <span className="text-[11px] font-semibold tracking-[0.2em] uppercase text-[#FF8A1F]" style={{ fontFamily: "var(--font-jetbrains-mono), monospace" }}>
             Applications
           </span>
         </div>
@@ -35,7 +35,7 @@ export default function ApplicationScenariosSection() {
               </div>
               <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent" />
               <div className="absolute inset-0 flex flex-col justify-end p-5">
-                <div className="w-8 h-[2px] bg-[#F59E0B] mb-3 group-hover:w-12 transition-all duration-300" />
+                <div className="w-8 h-[2px] bg-[#FF8A1F] mb-3 group-hover:w-12 transition-all duration-300" />
                 <span className="text-white font-bold text-[15px]" style={{ fontFamily: "var(--font-outfit), sans-serif" }}>{app.name}</span>
               </div>
             </div>

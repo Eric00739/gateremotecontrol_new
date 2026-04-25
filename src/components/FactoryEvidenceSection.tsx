@@ -7,8 +7,8 @@ export default function FactoryEvidenceSection() {
       <div className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8 py-16 lg:py-24">
         {/* Section label */}
         <div className="flex items-center gap-3 mb-4">
-          <div className="w-8 h-[2px] bg-[#F59E0B]" />
-          <span className="text-[11px] font-semibold tracking-[0.2em] uppercase text-[#F59E0B]" style={{ fontFamily: "var(--font-jetbrains-mono), monospace" }}>
+          <div className="w-8 h-[2px] bg-[#FF8A1F]" />
+          <span className="text-[11px] font-semibold tracking-[0.2em] uppercase text-[#FF8A1F]" style={{ fontFamily: "var(--font-jetbrains-mono), monospace" }}>
             Facility
           </span>
         </div>
@@ -39,7 +39,7 @@ export default function FactoryEvidenceSection() {
                   fill
                   className="object-cover group-hover:scale-105 transition-transform duration-500"
                 />
-                <div className="absolute bottom-0 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-[#F59E0B]/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
+                <div className="absolute bottom-0 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-[#FF8A1F]/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
               </div>
               <div className="p-3">
                 <p className="text-[12px] font-semibold text-[#0F172A] text-center" style={{ fontFamily: "var(--font-outfit), sans-serif" }}>{item.name}</p>

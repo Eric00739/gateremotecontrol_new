@@ -21,8 +21,8 @@ const jetBrainsMono = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "GateRemoteSource | OEM/ODM Compatible RF Remote Solutions",
-  description: "Independent aftermarket manufacturer of compatible replacement remotes, receivers, controllers, and RF solutions for gate, garage door, roller shutter, and access control systems. Wholesale, OEM, Private Label.",
+  title: "Remote Controls and Receivers for Gate Operators, Garage Doors and Roller Shutters",
+  description: "Find compatible remote controls and receivers for gate operators, garage doors, and roller shutters. Wholesale supply, sample testing, and OEM logo or packaging options available.",
 };
 
 export default function RootLayout({
@@ -32,7 +32,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={`${outfit.variable} ${dmSans.variable} ${jetBrainsMono.variable} antialiased`}>
-      <body className="min-h-screen flex flex-col bg-[#0D1117]">
+      <body className="min-h-screen flex flex-col bg-[#062748]">
         {children}
       </body>
     </html>

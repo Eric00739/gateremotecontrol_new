@@ -1,48 +1,111 @@
-import { brands } from '@/data/homepage';
+'use client';
+
+import { Search } from 'lucide-react';
+import { useMemo, useState } from 'react';
+import { brands, compatibilityRows } from '@/data/homepage';
 
 export default function BrandCompatibilitySection() {
+  const [query, setQuery] = useState('');
+  const normalizedQuery = query.trim().toLowerCase();
+  const filteredRows = useMemo(() => {
+    if (!normalizedQuery) return compatibilityRows;
+
+    return compatibilityRows.filter((row) =>
+      [row.brand, row.model, row.frequency, row.codeType, row.solution, row.sampleTest]
+        .join(' ')
+        .toLowerCase()
+        .includes(normalizedQuery)
+    );
+  }, [normalizedQuery]);
+
   return (
     <section id="compatibility" className="bg-white relative">
       <div className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8 py-16 lg:py-24">
         {/* Section label */}
         <div className="flex items-center gap-3 mb-4">
-          <div className="w-8 h-[2px] bg-[#F59E0B]" />
-          <span className="text-[11px] font-semibold tracking-[0.2em] uppercase text-[#F59E0B]" style={{ fontFamily: "var(--font-jetbrains-mono), monospace" }}>
+          <div className="w-8 h-[2px] bg-[#FF8A1F]" />
+          <span className="text-[11px] font-semibold tracking-[0.2em] uppercase text-[#FF8A1F]" style={{ fontFamily: "var(--font-jetbrains-mono), monospace" }}>
             Compatibility Matrix
           </span>
         </div>
 
-        <div className="max-w-2xl mb-12">
+        <div className="max-w-2xl mb-8">
           <h2 className="text-3xl lg:text-4xl font-bold text-[#0F172A] mb-4" style={{ fontFamily: "var(--font-outfit), sans-serif" }}>
-            Coverage Across Mainstream
+            Compatibility Search
             <br />
-            Gate &amp; Garage Door Systems
+            for Common Remote Models
           </h2>
           <p className="text-[#64748B] leading-relaxed">
-            We support compatible replacement solutions for many popular systems, subject to model and protocol verification.
+            Search by brand, model, frequency, or code type. Availability is model-specific and should be confirmed before bulk orders.
           </p>
         </div>
 
-        {/* Brand cards grid */}
-        <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-7 gap-2.5 mb-10">
-          {brands.map((brand, i) => (
-            <div
-              key={brand}
-              className="bg-[#F8FAFC] border border-[#E2E8F0] rounded-xl px-4 py-3.5 text-center hover:shadow-md hover:border-[#F59E0B]/40 hover:-translate-y-0.5 transition-all duration-300 cursor-default animate-fade-in-up group"
-              style={{ animationDelay: `${Math.min(i * 0.03, 1.2)}s` }}
-            >
-              <span className="text-[11px] sm:text-[13px] font-medium text-[#0F172A] group-hover:text-[#F59E0B] transition-colors truncate block">{brand}</span>
-            </div>
-          ))}
+        <div className="relative max-w-xl mb-6">
+          <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-[#94A3B8]" />
+          <input
+            type="search"
+            value={query}
+            onChange={(event) => setQuery(event.target.value)}
+            placeholder="Search brand, model, frequency, or code type"
+            className="w-full rounded-xl border border-[#D8E4F0] bg-[#F8FAFC] py-3 pl-11 pr-4 text-sm text-[#0F172A] placeholder:text-[#94A3B8] outline-none transition-colors focus:border-[#FF8A1F]/60 focus:bg-white"
+          />
         </div>
 
-        {/* Disclaimer */}
-        <div className="flex items-start gap-3 bg-[#F8FAFC] border border-[#E2E8F0] rounded-xl px-5 py-4 max-w-2xl">
-          <div className="w-5 h-5 rounded-full bg-[#F59E0B]/10 flex items-center justify-center flex-shrink-0 mt-0.5">
-            <span className="text-[#F59E0B] text-[10px] font-bold">i</span>
+        <div className="overflow-hidden rounded-2xl border border-[#D8E4F0] bg-white shadow-sm shadow-[#062748]/5 mb-6">
+          <div className="overflow-x-auto">
+            <table className="w-full min-w-[760px] text-left">
+              <thead className="bg-[#F8FAFC] text-[11px] uppercase tracking-[0.14em] text-[#64748B]" style={{ fontFamily: "var(--font-jetbrains-mono), monospace" }}>
+                <tr>
+                  <th className="px-5 py-4 font-semibold">Brand</th>
+                  <th className="px-5 py-4 font-semibold">Model</th>
+                  <th className="px-5 py-4 font-semibold">Frequency</th>
+                  <th className="px-5 py-4 font-semibold">Code Type</th>
+                  <th className="px-5 py-4 font-semibold">Available Solution</th>
+                  <th className="px-5 py-4 font-semibold">Need Sample Test</th>
+                </tr>
+              </thead>
+              <tbody className="divide-y divide-[#E2E8F0]">
+                {filteredRows.map((row) => (
+                  <tr key={`${row.brand}-${row.model}`} className="text-sm text-[#0F172A]">
+                    <td className="px-5 py-4 font-bold">{row.brand}</td>
+                    <td className="px-5 py-4">{row.model}</td>
+                    <td className="px-5 py-4 text-[#475569]">{row.frequency}</td>
+                    <td className="px-5 py-4 text-[#475569]">{row.codeType}</td>
+                    <td className="px-5 py-4">
+                      <span className={`rounded-full px-2.5 py-1 text-xs font-bold ${row.solution === 'Available' ? 'bg-[#FF8A1F]/10 text-[#C45A00]' : 'bg-[#EFF6FF] text-[#1D4ED8]'}`}>
+                        {row.solution}
+                      </span>
+                    </td>
+                    <td className="px-5 py-4 text-[#475569]">{row.sampleTest}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+          {filteredRows.length === 0 && (
+            <div className="px-5 py-8 text-center text-sm text-[#64748B]">
+              No sample row matched. Send brand, model, frequency, and photos for confirmation.
+            </div>
+          )}
+        </div>
+
+        <div className="flex flex-wrap gap-2.5 mb-6">
+          {brands.slice(0, 18).map((brand) => (
+            <span key={brand} className="rounded-lg border border-[#E2E8F0] bg-[#F8FAFC] px-3 py-2 text-[12px] font-semibold text-[#153A5C]">
+              {brand}
+            </span>
+          ))}
+          <span className="rounded-lg border border-[#FF8A1F]/25 bg-[#FF8A1F]/8 px-3 py-2 text-[12px] font-bold text-[#C45A00]">
+            And more...
+          </span>
+        </div>
+
+        <div className="flex items-start gap-3 bg-[#F8FAFC] border border-[#E2E8F0] rounded-xl px-5 py-4 max-w-3xl">
+          <div className="w-5 h-5 rounded-full bg-[#FF8A1F]/10 flex items-center justify-center flex-shrink-0 mt-0.5">
+            <span className="text-[#FF8A1F] text-[10px] font-bold">i</span>
           </div>
           <p className="text-xs text-[#64748B] leading-relaxed">
-            Availability differs by model, frequency, rolling/fixed code, chip type, and regional version.
+            The table is a sample compatibility reference. Final matching depends on model, frequency, chip type, PCB version, coding protocol, and regional version.
           </p>
         </div>
       </div>

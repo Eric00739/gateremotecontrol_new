@@ -3,12 +3,12 @@ import { basePath } from '@/data/homepage';
 
 export default function CtaSection() {
   return (
-    <section className="bg-[#0D1117] relative overflow-hidden">
+    <section className="bg-[#062748] relative overflow-hidden">
       {/* Technical grid */}
       <div className="absolute inset-0 tech-grid" />
 
       {/* Glowing accent */}
-      <div className="absolute top-1/2 left-1/3 w-[400px] h-[400px] bg-[#F59E0B] rounded-full opacity-[0.03] blur-[100px]" />
+      <div className="absolute top-1/2 left-1/3 w-[400px] h-[400px] bg-[#FF8A1F] rounded-full opacity-[0.03] blur-[100px]" />
 
       {/* RF waveform decoration */}
       <svg className="absolute bottom-0 left-0 right-0 opacity-10" viewBox="0 0 1200 80" preserveAspectRatio="none" style={{ height: '80px' }}>
@@ -21,24 +21,24 @@ export default function CtaSection() {
           {/* Left */}
           <div>
             <div className="flex items-center gap-3 mb-6">
-              <div className="w-8 h-[2px] bg-[#F59E0B]" />
-              <span className="text-[11px] font-semibold tracking-[0.2em] uppercase text-[#F59E0B]" style={{ fontFamily: "var(--font-jetbrains-mono), monospace" }}>
+              <div className="w-8 h-[2px] bg-[#FF8A1F]" />
+              <span className="text-[11px] font-semibold tracking-[0.2em] uppercase text-[#FF8A1F]" style={{ fontFamily: "var(--font-jetbrains-mono), monospace" }}>
                 Get Started
               </span>
             </div>
 
-            <h2 className="text-3xl lg:text-4xl font-bold text-[#F0F6FC] mb-4" style={{ fontFamily: "var(--font-outfit), sans-serif" }}>
+            <h2 className="text-3xl lg:text-4xl font-bold text-[#F7FBFF] mb-4" style={{ fontFamily: "var(--font-outfit), sans-serif" }}>
               Need Help Matching
               <br />
               a Brand Remote
-              <span className="text-[#F59E0B]"> Safely?</span>
+              <span className="text-[#FF8A1F]"> Safely?</span>
             </h2>
-            <p className="text-[#8B949E] leading-relaxed mb-8 max-w-md">
+            <p className="text-[#C7D7E8] leading-relaxed mb-8 max-w-md">
               Send brand, model, frequency, PCB photo, or remote image. Our team will help verify compatibility.
             </p>
             <a
               href="#contact"
-              className="btn-glow inline-block bg-[#F59E0B] hover:bg-[#D97706] text-[#0D1117] font-bold px-10 py-4 rounded-xl transition-all hover:shadow-xl hover:shadow-amber-500/20 text-[14px]"
+              className="btn-glow inline-block bg-[#FF8A1F] hover:bg-[#F97316] text-[#062748] font-bold px-10 py-4 rounded-xl transition-all hover:shadow-xl hover:shadow-amber-500/20 text-[14px]"
             >
               Get Compatibility Support
             </a>
@@ -46,7 +46,7 @@ export default function CtaSection() {
 
           {/* Right: Product image */}
           <div className="flex justify-center">
-            <div className="w-full max-w-md aspect-[4/3] bg-[#161B22] border border-[#21262D] rounded-2xl flex items-center justify-center relative overflow-hidden">
+            <div className="w-full max-w-md aspect-[4/3] bg-[#08345F] border border-[#123D63] rounded-2xl flex items-center justify-center relative overflow-hidden">
               <Image
                 src={basePath + '/images/product-remotes.png'}
                 alt="Compatible replacement remotes"
