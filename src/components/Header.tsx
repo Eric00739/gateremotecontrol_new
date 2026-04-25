@@ -23,15 +23,15 @@ export default function Header() {
           {/* Logo */}
           <a href="/" className="flex items-center gap-3 group">
             <div className="w-10 h-10 bg-[#020C1B] rounded-xl flex items-center justify-center relative overflow-hidden group-hover:bg-[#FF6B00] transition-colors duration-300">
-              <span className="text-white font-bold text-lg tracking-tight relative z-10" style={{ fontFamily: "'JetBrains Mono', monospace" }}>GR</span>
+              <span className="text-white font-bold text-lg tracking-tight relative z-10" style={{ fontFamily: "var(--font-jetbrains-mono), monospace" }}>GR</span>
             </div>
             <div className="hidden sm:block">
               <div className="leading-tight">
-                <span className="text-[#020C1B] font-extrabold text-xl tracking-tight" style={{ fontFamily: "'Outfit', sans-serif" }}>Gate</span>
-                <span className="text-[#FF6B00] font-extrabold text-xl tracking-tight" style={{ fontFamily: "'Outfit', sans-serif" }}>Remote</span>
-                <span className="text-[#020C1B] font-extrabold text-xl tracking-tight" style={{ fontFamily: "'Outfit', sans-serif" }}>Source</span>
+                <span className="text-[#020C1B] font-extrabold text-xl tracking-tight" style={{ fontFamily: "var(--font-outfit), sans-serif" }}>Gate</span>
+                <span className="text-[#FF6B00] font-extrabold text-xl tracking-tight" style={{ fontFamily: "var(--font-outfit), sans-serif" }}>Remote</span>
+                <span className="text-[#020C1B] font-extrabold text-xl tracking-tight" style={{ fontFamily: "var(--font-outfit), sans-serif" }}>Source</span>
               </div>
-              <p className="text-[9px] text-[#94A3B8] tracking-[0.2em] uppercase -mt-0.5" style={{ fontFamily: "'JetBrains Mono', monospace" }}>
+              <p className="text-[9px] text-[#94A3B8] tracking-[0.2em] uppercase -mt-0.5" style={{ fontFamily: "var(--font-jetbrains-mono), monospace" }}>
                 OEM / ODM RF CONTROL SOLUTIONS
               </p>
             </div>
@@ -44,7 +44,7 @@ export default function Header() {
                 key={item.label}
                 href={item.href}
                 className="text-[13px] text-[#0F172A] hover:text-[#FF6B00] transition-colors font-semibold tracking-wide relative group"
-                style={{ fontFamily: "'DM Sans', sans-serif" }}
+                style={{ fontFamily: "var(--font-dm-sans), sans-serif" }}
               >
                 {item.label}
                 <span className="absolute -bottom-1 left-0 w-0 h-[2px] bg-[#FF6B00] transition-all duration-300 group-hover:w-full" />
@@ -54,7 +54,7 @@ export default function Header() {
 
           {/* Right Actions */}
           <div className="flex items-center gap-3">
-            <span className="hidden md:inline text-[11px] text-[#64748B] border border-[#E2E8F0] rounded-md px-2.5 py-1.5 font-medium" style={{ fontFamily: "'JetBrains Mono', monospace" }}>
+            <span className="hidden md:inline text-[11px] text-[#64748B] border border-[#E2E8F0] rounded-md px-2.5 py-1.5 font-medium" style={{ fontFamily: "var(--font-jetbrains-mono), monospace" }}>
               EN
             </span>
             <a
@@ -71,7 +71,7 @@ export default function Header() {
             <a
               href="#contact"
               className="bg-[#FF6B00] hover:bg-[#E55E00] text-white text-[13px] font-semibold px-5 py-2.5 rounded-lg transition-all btn-glow hover:shadow-lg hover:shadow-orange-500/20"
-              style={{ fontFamily: "'DM Sans', sans-serif" }}
+              style={{ fontFamily: "var(--font-dm-sans), sans-serif" }}
             >
               Get a Quote
             </a>

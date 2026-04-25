@@ -21,12 +21,12 @@ export default function CtaSection() {
           <div>
             <div className="flex items-center gap-3 mb-6">
               <div className="w-10 h-[2px] bg-[#FF6B00]" />
-              <span className="text-[11px] font-semibold tracking-[0.2em] uppercase text-[#FF6B00]" style={{ fontFamily: "'JetBrains Mono', monospace" }}>
+              <span className="text-[11px] font-semibold tracking-[0.2em] uppercase text-[#FF6B00]" style={{ fontFamily: "var(--font-jetbrains-mono), monospace" }}>
                 Get Started
               </span>
             </div>
 
-            <h2 className="text-3xl lg:text-4xl font-bold text-white mb-4" style={{ fontFamily: "'Outfit', sans-serif" }}>
+            <h2 className="text-3xl lg:text-4xl font-bold text-white mb-4" style={{ fontFamily: "var(--font-outfit), sans-serif" }}>
               Need Help Matching
               <br />
               a Brand Remote

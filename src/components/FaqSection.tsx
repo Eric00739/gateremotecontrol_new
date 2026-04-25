@@ -13,12 +13,12 @@ export default function FaqSection() {
         {/* Section label */}
         <div className="flex items-center gap-3 mb-4">
           <div className="w-10 h-[2px] bg-[#FF6B00]" />
-          <span className="text-[11px] font-semibold tracking-[0.2em] uppercase text-[#FF6B00]" style={{ fontFamily: "'JetBrains Mono', monospace" }}>
+          <span className="text-[11px] font-semibold tracking-[0.2em] uppercase text-[#FF6B00]" style={{ fontFamily: "var(--font-jetbrains-mono), monospace" }}>
             Support
           </span>
         </div>
 
-        <h2 className="text-3xl lg:text-4xl font-bold text-[#020C1B] mb-12" style={{ fontFamily: "'Outfit', sans-serif" }}>
+        <h2 className="text-3xl lg:text-4xl font-bold text-[#020C1B] mb-12" style={{ fontFamily: "var(--font-outfit), sans-serif" }}>
           Frequently Asked
           <br />
           Questions
@@ -35,7 +35,7 @@ export default function FaqSection() {
                 onClick={() => setOpenIndex(openIndex === i ? -1 : i)}
                 aria-expanded={openIndex === i}
               >
-                <span className="text-[14px] font-bold text-[#0F172A] pr-4" style={{ fontFamily: "'Outfit', sans-serif" }}>{faq.question}</span>
+                <span className="text-[14px] font-bold text-[#0F172A] pr-4" style={{ fontFamily: "var(--font-outfit), sans-serif" }}>{faq.question}</span>
                 <div className={`w-8 h-8 bg-[#F0F4F8] rounded-lg flex items-center justify-center flex-shrink-0 transition-colors ${openIndex === i ? 'bg-[#FF6B00]/10' : ''}`}>
                   {openIndex === i ? (
                     <ChevronUp className="w-4 h-4 text-[#FF6B00]" />

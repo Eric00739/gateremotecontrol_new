@@ -27,12 +27,12 @@ export default function QualitySection() {
             {/* Section label */}
             <div className="flex items-center gap-3 mb-4">
               <div className="w-10 h-[2px] bg-[#FF6B00]" />
-              <span className="text-[11px] font-semibold tracking-[0.2em] uppercase text-[#FF6B00]" style={{ fontFamily: "'JetBrains Mono', monospace" }}>
+              <span className="text-[11px] font-semibold tracking-[0.2em] uppercase text-[#FF6B00]" style={{ fontFamily: "var(--font-jetbrains-mono), monospace" }}>
                 Quality & Compliance
               </span>
             </div>
 
-            <h2 className="text-3xl lg:text-4xl font-bold text-white mb-8" style={{ fontFamily: "'Outfit', sans-serif" }}>
+            <h2 className="text-3xl lg:text-4xl font-bold text-white mb-8" style={{ fontFamily: "var(--font-outfit), sans-serif" }}>
               Compliance &amp; Quality
               <br />
               You Can Trust
@@ -44,7 +44,7 @@ export default function QualitySection() {
                 <span
                   key={cert}
                   className="bg-white/5 border border-white/15 rounded-xl px-5 py-2.5 text-sm font-bold text-white hover:bg-white/10 hover:border-[#FF6B00]/30 transition-all cursor-default"
-                  style={{ fontFamily: "'JetBrains Mono', monospace" }}
+                  style={{ fontFamily: "var(--font-jetbrains-mono), monospace" }}
                 >
                   {cert}
                 </span>

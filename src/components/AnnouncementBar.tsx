@@ -9,13 +9,13 @@ export default function AnnouncementBar() {
         }} />
       </div>
       <div className="relative max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between h-9">
-        <p className="text-[11px] text-white/70 font-medium tracking-wide" style={{ fontFamily: "'JetBrains Mono', monospace" }}>
+        <p className="text-[11px] text-white/70 font-medium tracking-wide" style={{ fontFamily: "var(--font-jetbrains-mono), monospace" }}>
           COMPATIBLE REPLACEMENT REMOTES FOR MAJOR GATE &amp; GARAGE SYSTEMS&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;OEM / ODM / WHOLESALE
         </p>
         <a
           href="#contact"
           className="text-[11px] text-[#FF6B00] hover:text-[#FF8A33] transition-colors font-semibold tracking-wide flex items-center gap-1.5"
-          style={{ fontFamily: "'JetBrains Mono', monospace" }}
+          style={{ fontFamily: "var(--font-jetbrains-mono), monospace" }}
         >
           <span className="signal-dot" />
           TALK TO AN ENGINEER

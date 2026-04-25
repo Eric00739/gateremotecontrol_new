@@ -42,32 +42,33 @@ const socialLinks = [
 
 export default function Footer() {
   return (
-    <footer id="contact" className="bg-[#071C33] text-white">
-      <div className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8 py-16">
+    <footer id="contact" className="bg-[#020C1B] text-white">
+      <div className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8 py-14 lg:py-16">
         <div className="grid sm:grid-cols-2 lg:grid-cols-6 gap-10">
           {/* Brand column */}
           <div className="lg:col-span-2">
             <div className="flex items-center gap-3 mb-4">
               <div className="w-10 h-10 bg-white/10 rounded-lg flex items-center justify-center">
-                <span className="text-white font-bold text-lg">GR</span>
+                <span className="text-white font-bold text-lg" style={{ fontFamily: 'var(--font-jetbrains-mono), monospace' }}>GR</span>
               </div>
               <div>
                 <div className="leading-tight">
-                  <span className="text-white font-bold text-lg">Gate</span>
-                  <span className="text-[#FF7A1A] font-bold text-lg">Remote</span>
-                  <span className="text-white font-bold text-lg">Source</span>
+                  <span className="text-white font-bold text-lg" style={{ fontFamily: 'var(--font-outfit), sans-serif' }}>Gate</span>
+                  <span className="text-[#FF6B00] font-bold text-lg" style={{ fontFamily: 'var(--font-outfit), sans-serif' }}>Remote</span>
+                  <span className="text-white font-bold text-lg" style={{ fontFamily: 'var(--font-outfit), sans-serif' }}>Source</span>
                 </div>
               </div>
             </div>
             <p className="text-sm text-white/60 leading-relaxed mb-6">
               Independent aftermarket manufacturer of compatible replacement remotes, receivers, controllers, and RF solutions for gate, garage door, roller shutter, and access control systems.
             </p>
-            <div className="flex gap-4">
+            <div className="flex flex-wrap gap-x-5 gap-y-2">
               {socialLinks.map((link) => (
                 <a
                   key={link.label}
                   href={link.href}
-                  className="text-white/50 hover:text-[#FF7A1A] text-xs font-medium transition-colors"
+                  className="text-white/50 hover:text-[#FF6B00] text-xs font-medium transition-colors"
+                  style={{ fontFamily: 'var(--font-dm-sans), sans-serif' }}
                 >
                   {link.label}
                 </a>
@@ -77,7 +78,7 @@ export default function Footer() {
 
           {/* Link columns */}
           <div>
-            <h4 className="text-sm font-semibold text-white mb-4">Products</h4>
+            <h4 className="text-sm font-semibold text-white mb-4" style={{ fontFamily: 'var(--font-outfit), sans-serif' }}>Products</h4>
             <ul className="space-y-2.5">
               {footerLinks.products.map((link) => (
                 <li key={link.label}>
@@ -90,7 +91,7 @@ export default function Footer() {
           </div>
 
           <div>
-            <h4 className="text-sm font-semibold text-white mb-4">Compatibility</h4>
+            <h4 className="text-sm font-semibold text-white mb-4" style={{ fontFamily: 'var(--font-outfit), sans-serif' }}>Compatibility</h4>
             <ul className="space-y-2.5">
               {footerLinks.compatibility.map((link) => (
                 <li key={link.label}>
@@ -103,7 +104,7 @@ export default function Footer() {
           </div>
 
           <div>
-            <h4 className="text-sm font-semibold text-white mb-4">Resources</h4>
+            <h4 className="text-sm font-semibold text-white mb-4" style={{ fontFamily: 'var(--font-outfit), sans-serif' }}>Resources</h4>
             <ul className="space-y-2.5">
               {footerLinks.resources.map((link) => (
                 <li key={link.label}>
@@ -116,7 +117,7 @@ export default function Footer() {
           </div>
 
           <div>
-            <h4 className="text-sm font-semibold text-white mb-4">Company</h4>
+            <h4 className="text-sm font-semibold text-white mb-4" style={{ fontFamily: 'var(--font-outfit), sans-serif' }}>Company</h4>
             <ul className="space-y-2.5">
               {footerLinks.company.map((link) => (
                 <li key={link.label}>
@@ -133,7 +134,7 @@ export default function Footer() {
         <div className="mt-12 pt-8 border-t border-white/10 grid sm:grid-cols-2 gap-8">
           {/* Contact info */}
           <div>
-            <h4 className="text-sm font-semibold text-white mb-3">Contact Us</h4>
+            <h4 className="text-sm font-semibold text-white mb-3" style={{ fontFamily: 'var(--font-outfit), sans-serif' }}>Contact Us</h4>
             <div className="space-y-1.5 text-sm text-white/60">
               <p>sales@gateremotesource.com</p>
               <p>+86 755 1234 5678</p>
@@ -144,16 +145,18 @@ export default function Footer() {
 
           {/* Newsletter */}
           <div>
-            <h4 className="text-sm font-semibold text-white mb-3">Newsletter</h4>
-            <form className="flex gap-2" onSubmit={(e) => e.preventDefault()}>
+            <h4 className="text-sm font-semibold text-white mb-3" style={{ fontFamily: 'var(--font-outfit), sans-serif' }}>Newsletter</h4>
+            <form className="flex gap-2 flex-col sm:flex-row" onSubmit={(e) => e.preventDefault()}>
               <input
                 type="email"
                 placeholder="Your email"
-                className="flex-1 bg-white/10 border border-white/20 rounded-lg px-4 py-2.5 text-sm text-white placeholder-white/40 focus:outline-none focus:border-[#FF7A1A]"
+                className="flex-1 bg-white/10 border border-white/20 rounded-lg px-4 py-2.5 text-sm text-white placeholder-white/40 focus:outline-none focus:border-[#FF6B00]"
+                style={{ fontFamily: 'var(--font-dm-sans), sans-serif' }}
               />
               <button
                 type="submit"
-                className="bg-[#FF7A1A] hover:bg-[#E86A0E] text-white text-sm font-semibold px-5 py-2.5 rounded-lg transition-colors"
+                className="bg-[#FF6B00] hover:bg-[#E55E00] text-white text-sm font-semibold px-5 py-2.5 rounded-lg transition-colors btn-glow"
+                style={{ fontFamily: 'var(--font-dm-sans), sans-serif' }}
               >
                 Subscribe
               </button>

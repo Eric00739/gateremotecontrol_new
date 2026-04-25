@@ -11,18 +11,18 @@ export default function ResourcesSection() {
         {/* Section label */}
         <div className="flex items-center gap-3 mb-4">
           <div className="w-10 h-[2px] bg-[#FF6B00]" />
-          <span className="text-[11px] font-semibold tracking-[0.2em] uppercase text-[#FF6B00]" style={{ fontFamily: "'JetBrains Mono', monospace" }}>
+          <span className="text-[11px] font-semibold tracking-[0.2em] uppercase text-[#FF6B00]" style={{ fontFamily: "var(--font-jetbrains-mono), monospace" }}>
             Knowledge Base
           </span>
         </div>
 
         <div className="flex items-end justify-between mb-12">
-          <h2 className="text-3xl lg:text-4xl font-bold text-[#020C1B]" style={{ fontFamily: "'Outfit', sans-serif" }}>
+          <h2 className="text-3xl lg:text-4xl font-bold text-[#020C1B]" style={{ fontFamily: "var(--font-outfit), sans-serif" }}>
             Resources &amp;
             <br />
             Helpful Articles
           </h2>
-          <a href="#" className="hidden sm:inline-flex items-center gap-1.5 text-[12px] font-bold text-[#FF6B00] hover:text-[#E55E00] transition-colors" style={{ fontFamily: "'JetBrains Mono', monospace" }} onClick={(e) => e.preventDefault()}>
+          <a href="#" className="hidden sm:inline-flex items-center gap-1.5 text-[12px] font-bold text-[#FF6B00] hover:text-[#E55E00] transition-colors" style={{ fontFamily: "var(--font-jetbrains-mono), monospace" }} onClick={(e) => e.preventDefault()}>
             VIEW ALL <ArrowRight className="w-3.5 h-3.5" />
           </a>
         </div>
@@ -42,12 +42,12 @@ export default function ResourcesSection() {
                 />
               </div>
               <div className="p-5">
-                <h3 className="text-[14px] font-bold text-[#0F172A] mb-2 leading-snug" style={{ fontFamily: "'Outfit', sans-serif" }}>{resource.title}</h3>
+                <h3 className="text-[14px] font-bold text-[#0F172A] mb-2 leading-snug" style={{ fontFamily: "var(--font-outfit), sans-serif" }}>{resource.title}</h3>
                 <p className="text-[12px] text-[#475569] leading-relaxed mb-4">{resource.description}</p>
                 <a
                   href="#"
                   className="inline-flex items-center gap-1.5 text-[11px] font-bold text-[#FF6B00] hover:text-[#E55E00] transition-colors group/link"
-                  style={{ fontFamily: "'JetBrains Mono', monospace" }}
+                  style={{ fontFamily: "var(--font-jetbrains-mono), monospace" }}
                   onClick={(e) => e.preventDefault()}
                 >
                   READ MORE <ArrowRight className="w-3 h-3 group-hover/link:translate-x-1 transition-transform" />

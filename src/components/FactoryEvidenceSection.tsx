@@ -8,14 +8,14 @@ export default function FactoryEvidenceSection() {
         {/* Section label */}
         <div className="flex items-center gap-3 mb-4">
           <div className="w-10 h-[2px] bg-[#FF6B00]" />
-          <span className="text-[11px] font-semibold tracking-[0.2em] uppercase text-[#FF6B00]" style={{ fontFamily: "'JetBrains Mono', monospace" }}>
+          <span className="text-[11px] font-semibold tracking-[0.2em] uppercase text-[#FF6B00]" style={{ fontFamily: "var(--font-jetbrains-mono), monospace" }}>
             Facility
           </span>
         </div>
 
         <div className="flex items-end justify-between mb-12">
           <div>
-            <h2 className="text-3xl lg:text-4xl font-bold text-[#020C1B] mb-2" style={{ fontFamily: "'Outfit', sans-serif" }}>
+            <h2 className="text-3xl lg:text-4xl font-bold text-[#020C1B] mb-2" style={{ fontFamily: "var(--font-outfit), sans-serif" }}>
               Factory Evidence,
               <br />
               Not Just Claims
@@ -42,7 +42,7 @@ export default function FactoryEvidenceSection() {
                 <div className="absolute bottom-0 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-[#FF6B00]/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
               </div>
               <div className="p-3">
-                <p className="text-[12px] font-semibold text-[#0F172A] text-center" style={{ fontFamily: "'Outfit', sans-serif" }}>{item.name}</p>
+                <p className="text-[12px] font-semibold text-[#0F172A] text-center" style={{ fontFamily: "var(--font-outfit), sans-serif" }}>{item.name}</p>
               </div>
             </div>
           ))}

@@ -10,12 +10,12 @@ export default function CompatibilityWorkflowSection() {
         {/* Section label */}
         <div className="flex items-center gap-3 mb-4">
           <div className="w-10 h-[2px] bg-[#FF6B00]" />
-          <span className="text-[11px] font-semibold tracking-[0.2em] uppercase text-[#FF6B00]" style={{ fontFamily: "'JetBrains Mono', monospace" }}>
+          <span className="text-[11px] font-semibold tracking-[0.2em] uppercase text-[#FF6B00]" style={{ fontFamily: "var(--font-jetbrains-mono), monospace" }}>
             Verification Process
           </span>
         </div>
 
-        <h2 className="text-3xl lg:text-4xl font-bold text-[#020C1B] mb-4 max-w-2xl" style={{ fontFamily: "'Outfit', sans-serif" }}>
+        <h2 className="text-3xl lg:text-4xl font-bold text-[#020C1B] mb-4 max-w-2xl" style={{ fontFamily: "var(--font-outfit), sans-serif" }}>
           How Buyers Verify
           <br />
           Compatibility Before Ordering
@@ -33,7 +33,7 @@ export default function CompatibilityWorkflowSection() {
                 <div className="flex items-start gap-4">
                   <div className="flex-shrink-0">
                     <div className="w-12 h-12 bg-[#020C1B] rounded-xl flex items-center justify-center group-hover:bg-[#FF6B00] transition-colors duration-300">
-                      <span className="text-white font-bold text-sm" style={{ fontFamily: "'JetBrains Mono', monospace" }}>
+                      <span className="text-white font-bold text-sm" style={{ fontFamily: "var(--font-jetbrains-mono), monospace" }}>
                         {String(step.step).padStart(2, '0')}
                       </span>
                     </div>
@@ -41,7 +41,7 @@ export default function CompatibilityWorkflowSection() {
                   <div>
                     <div className="flex items-center gap-2 mb-2">
                       <Icon className="w-4 h-4 text-[#FF6B00]" />
-                      <h3 className="text-[14px] font-bold text-[#0F172A]" style={{ fontFamily: "'Outfit', sans-serif" }}>{step.title}</h3>
+                      <h3 className="text-[14px] font-bold text-[#0F172A]" style={{ fontFamily: "var(--font-outfit), sans-serif" }}>{step.title}</h3>
                     </div>
                     <p className="text-[13px] text-[#475569] leading-relaxed">{step.description}</p>
                   </div>

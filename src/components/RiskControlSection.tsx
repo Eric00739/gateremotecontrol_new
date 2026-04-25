@@ -10,12 +10,12 @@ export default function RiskControlSection() {
         {/* Section label */}
         <div className="flex items-center gap-3 mb-4">
           <div className="w-10 h-[2px] bg-[#FF6B00]" />
-          <span className="text-[11px] font-semibold tracking-[0.2em] uppercase text-[#FF6B00]" style={{ fontFamily: "'JetBrains Mono', monospace" }}>
+          <span className="text-[11px] font-semibold tracking-[0.2em] uppercase text-[#FF6B00]" style={{ fontFamily: "var(--font-jetbrains-mono), monospace" }}>
             Risk Management
           </span>
         </div>
 
-        <h2 className="text-3xl lg:text-4xl font-bold text-[#020C1B] mb-12 max-w-2xl" style={{ fontFamily: "'Outfit', sans-serif" }}>
+        <h2 className="text-3xl lg:text-4xl font-bold text-[#020C1B] mb-12 max-w-2xl" style={{ fontFamily: "var(--font-outfit), sans-serif" }}>
           How We Reduce Legal &amp;
           <br />
           Compatibility Risk
@@ -30,13 +30,13 @@ export default function RiskControlSection() {
                 className="bg-[#F0F4F8] rounded-2xl p-6 border border-[#E2E8F0] card-hover group"
               >
                 {/* Step number */}
-                <div className="text-[10px] font-bold text-[#FF6B00] mb-3" style={{ fontFamily: "'JetBrains Mono', monospace" }}>
+                <div className="text-[10px] font-bold text-[#FF6B00] mb-3" style={{ fontFamily: "var(--font-jetbrains-mono), monospace" }}>
                   {String(i + 1).padStart(2, '0')}
                 </div>
                 <div className="w-11 h-11 bg-[#020C1B] rounded-xl flex items-center justify-center mb-5 group-hover:bg-[#FF6B00] transition-colors duration-300">
                   <Icon className="w-5 h-5 text-white" />
                 </div>
-                <h3 className="text-[15px] font-bold text-[#0F172A] mb-2" style={{ fontFamily: "'Outfit', sans-serif" }}>{card.title}</h3>
+                <h3 className="text-[15px] font-bold text-[#0F172A] mb-2" style={{ fontFamily: "var(--font-outfit), sans-serif" }}>{card.title}</h3>
                 <p className="text-[13px] text-[#475569] leading-relaxed">{card.description}</p>
               </div>
             );
@@ -56,7 +56,7 @@ export default function RiskControlSection() {
                 <p className="text-sm text-white/80 leading-relaxed mb-4">
                   Brand names are used only to indicate compatibility. We are an independent aftermarket manufacturer and are not affiliated with, endorsed by, or sponsored by these brand owners. Compatibility should be confirmed by model, frequency, IC/chip, and coding protocol before order.
                 </p>
-                <p className="text-[11px] text-white/40" style={{ fontFamily: "'JetBrains Mono', monospace" }}>
+                <p className="text-[11px] text-white/40" style={{ fontFamily: "var(--font-jetbrains-mono), monospace" }}>
                   Note: Some brands/models may require verification, sample testing, or custom development.
                 </p>
               </div>

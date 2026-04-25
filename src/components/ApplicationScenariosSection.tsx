@@ -8,12 +8,12 @@ export default function ApplicationScenariosSection() {
         {/* Section label */}
         <div className="flex items-center gap-3 mb-4">
           <div className="w-10 h-[2px] bg-[#FF6B00]" />
-          <span className="text-[11px] font-semibold tracking-[0.2em] uppercase text-[#FF6B00]" style={{ fontFamily: "'JetBrains Mono', monospace" }}>
+          <span className="text-[11px] font-semibold tracking-[0.2em] uppercase text-[#FF6B00]" style={{ fontFamily: "var(--font-jetbrains-mono), monospace" }}>
             Applications
           </span>
         </div>
 
-        <h2 className="text-3xl lg:text-4xl font-bold text-[#020C1B] mb-12" style={{ fontFamily: "'Outfit', sans-serif" }}>
+        <h2 className="text-3xl lg:text-4xl font-bold text-[#020C1B] mb-12" style={{ fontFamily: "var(--font-outfit), sans-serif" }}>
           Built for Every Access
           <br />
           Environment
@@ -37,7 +37,7 @@ export default function ApplicationScenariosSection() {
               <div className="absolute inset-0 flex flex-col justify-end p-5">
                 {/* Orange accent line */}
                 <div className="w-8 h-[2px] bg-[#FF6B00] mb-3 group-hover:w-12 transition-all duration-300" />
-                <span className="text-white font-bold text-[15px]" style={{ fontFamily: "'Outfit', sans-serif" }}>{app.name}</span>
+                <span className="text-white font-bold text-[15px]" style={{ fontFamily: "var(--font-outfit), sans-serif" }}>{app.name}</span>
               </div>
             </div>
           ))}

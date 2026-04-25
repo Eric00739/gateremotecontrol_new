@@ -49,12 +49,12 @@ export default function HeroSection() {
             {/* Badge */}
             <div className="animate-fade-in-up delay-100 inline-flex items-center gap-2 bg-white/5 border border-white/10 rounded-full px-4 py-2 mb-6 backdrop-blur-sm">
               <span className="signal-dot" />
-              <span className="text-[11px] text-white/80 font-semibold tracking-widest uppercase" style={{ fontFamily: "'JetBrains Mono', monospace" }}>
+              <span className="text-[11px] text-white/80 font-semibold tracking-widest uppercase" style={{ fontFamily: 'var(--font-jetbrains-mono), monospace' }}>
                 Wholesale | OEM | Private Label
               </span>
             </div>
 
-            <h1 className="animate-fade-in-up delay-200 text-4xl sm:text-5xl lg:text-[3.5rem] font-bold text-white leading-[1.1] mb-6">
+            <h1 className="animate-fade-in-up delay-200 text-3xl sm:text-4xl lg:text-[3.5rem] font-bold text-white leading-[1.1] mb-6">
               Compatible Replacement
               <br />
               <span className="text-[#FF6B00]">Remotes</span> for Major
@@ -91,10 +91,10 @@ export default function HeroSection() {
                   src="/images/hero-products.png"
                   alt="Compatible replacement remotes, receivers, duplicators, and controllers"
                   fill
-                  className="object-cover"
+                  className="object-contain"
                 />
               </div>
-              <p className="text-white/50 text-[11px] tracking-wide" style={{ fontFamily: "'JetBrains Mono', monospace" }}>
+              <p className="text-white/50 text-[11px] tracking-wide" style={{ fontFamily: 'var(--font-jetbrains-mono), monospace' }}>
                 COMPATIBLE REMOTES / RECEIVERS / DUPLICATORS / CONTROLLERS
               </p>
             </div>

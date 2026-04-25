@@ -19,10 +19,10 @@ export default function StatsSection() {
                   />
                 ))}
               </div>
-              <div className="text-3xl lg:text-4xl font-bold text-[#020C1B] mb-1" style={{ fontFamily: "'Outfit', sans-serif" }}>
+              <div className="text-3xl lg:text-4xl font-bold text-[#020C1B] mb-1" style={{ fontFamily: "var(--font-outfit), sans-serif" }}>
                 {stat.value}
               </div>
-              <p className="text-[11px] text-[#64748B] tracking-wider uppercase font-medium" style={{ fontFamily: "'JetBrains Mono', monospace" }}>
+              <p className="text-[11px] text-[#64748B] tracking-wider uppercase font-medium" style={{ fontFamily: "var(--font-jetbrains-mono), monospace" }}>
                 {stat.label}
               </p>
             </div>
