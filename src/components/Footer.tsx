@@ -36,7 +36,7 @@ const socialLinks = [
   { label: 'LinkedIn', href: '#' },
   { label: 'Facebook', href: '#' },
   { label: 'YouTube', href: '#' },
-  { label: 'WhatsApp', href: '#' },
+  { label: 'WhatsApp', href: 'https://wa.me/8615899648898' },
   { label: 'Email', href: 'mailto:sales@gateremotesource.com' },
 ];
 
@@ -137,9 +137,8 @@ export default function Footer() {
             <h4 className="text-sm font-semibold text-white mb-3" style={{ fontFamily: 'var(--font-outfit), sans-serif' }}>Contact Us</h4>
             <div className="space-y-1.5 text-sm text-white/60">
               <p>sales@gateremotesource.com</p>
-              <p>+86 755 1234 5678</p>
-              <p>WhatsApp: +86 181 2365 4321</p>
-              <p>Shenzhen, China</p>
+              <p>WhatsApp: +86 158 9964 8898</p>
+              <p className="text-xs text-white/40 leading-relaxed">Room 102, Building 1, Jufu Garden,<br />No. 45 Changma Road, Changping Town,<br />Dongguan City, Guangdong Province, China</p>
             </div>
           </div>
 

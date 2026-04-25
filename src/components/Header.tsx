@@ -58,7 +58,7 @@ export default function Header() {
               EN
             </span>
             <a
-              href="https://wa.me/8618123654321"
+              href="https://wa.me/8615899648898"
               target="_blank"
               rel="noopener noreferrer"
               className="text-green-600 hover:text-green-700 transition-colors"
