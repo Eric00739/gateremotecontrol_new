@@ -5,7 +5,7 @@ import LeadModalTrigger from './LeadModalTrigger';
 
 const exploreLinks = [
   { label: 'Products', href: '/#products' },
-  { label: 'Compatibility', href: '/#compatibility' },
+  { label: 'Compatibility', href: '/compatibility' },
   { label: 'OEM/ODM', href: '/#oem-odm' },
   { label: 'Factory', href: '/#factory' },
   { label: 'Blog', href: '/blog' },

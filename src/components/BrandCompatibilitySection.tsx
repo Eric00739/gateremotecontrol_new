@@ -1,6 +1,7 @@
 'use client';
 
-import { Search } from 'lucide-react';
+import Link from 'next/link';
+import { ArrowRight, Search } from 'lucide-react';
 import { useMemo, useState } from 'react';
 import { brands, compatibilityRows } from '@/data/homepage';
 
@@ -104,9 +105,14 @@ export default function BrandCompatibilitySection() {
           <div className="w-5 h-5 rounded-full bg-[#FF8A1F]/10 flex items-center justify-center flex-shrink-0 mt-0.5">
             <span className="text-[#FF8A1F] text-[10px] font-bold">i</span>
           </div>
-          <p className="text-xs text-[#64748B] leading-relaxed">
-            The table is a sample compatibility reference. Final matching depends on model, frequency, chip type, PCB version, coding protocol, and regional version.
-          </p>
+          <div className="space-y-3">
+            <p className="text-xs text-[#64748B] leading-relaxed">
+              The table is a sample compatibility reference. Final matching depends on model, frequency, chip type, PCB version, coding protocol, and regional version.
+            </p>
+            <Link href="/compatibility" className="inline-flex items-center gap-1.5 text-xs font-bold text-[#FF8A1F] transition-colors hover:text-[#F97316]">
+              View full brand compatibility guides <ArrowRight className="h-3.5 w-3.5" />
+            </Link>
+          </div>
         </div>
       </div>
     </section>
