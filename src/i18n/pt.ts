@@ -70,6 +70,7 @@ export default {
     sampleTestHeader: 'Teste de Amostra',
     noMatch: 'Nenhuma linha de amostra correspondeu à sua busca.',
     viewAll: 'Ver todas as referências de compatibilidade',
+    disclaimer: 'A tabela é uma referência de compatibilidade de exemplo. A correspondência final depende de modelo, frequência, tipo de chip, versão PCB, protocolo de codificação e versão regional.',
   },
   brandPage: {
     backLink: 'Voltar para compatibilidade',

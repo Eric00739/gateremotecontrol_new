@@ -7,11 +7,11 @@ import LeadModalTrigger from './LeadModalTrigger';
 import { useDict } from '@/i18n';
 
 const trustItems = [
-  { icon: Shield, labelKey: 'independentAftermarket' },
-  { icon: Zap, labelKey: 'multiFrequency' },
-  { icon: Package, labelKey: 'oemPrivateLabel' },
-  { icon: Globe, labelKey: 'globalShipping' },
-  { icon: Users, labelKey: 'engineeringVerification' },
+  { icon: Shield },
+  { icon: Zap },
+  { icon: Package },
+  { icon: Globe },
+  { icon: Users },
 ];
 
 export default function HeroSection() {
@@ -83,7 +83,7 @@ export default function HeroSection() {
             {trustItems.map((item, i) => {
               const Icon = item.icon;
               return (
-                <div key={item.labelKey} className="flex items-center gap-3 animate-fade-in-up" style={{ animationDelay: `${0.5 + i * 0.1}s` }}>
+                <div key={i} className="flex items-center gap-3 animate-fade-in-up" style={{ animationDelay: `${0.5 + i * 0.1}s` }}>
                   <div className="w-8 h-8 bg-[#FF8A1F]/8 rounded-lg flex items-center justify-center flex-shrink-0 border border-[#FF8A1F]/20">
                     <Icon className="w-3.5 h-3.5 text-[#FF8A1F]" />
                   </div>

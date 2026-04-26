@@ -70,6 +70,7 @@ export default {
     sampleTestHeader: 'Test Campione',
     noMatch: 'Nessuna riga corrisponde alla tua ricerca.',
     viewAll: 'Visualizza tutti i riferimenti di compatibilit\u00e0',
+    disclaimer: 'La tabella è un riferimento di compatibilità campione. La corrispondenza finale dipende da modello, frequenza, tipo di chip, versione PCB, protocollo di codifica e versione regionale.',
   },
   brandPage: {
     backLink: 'Torna alla compatibilit\u00e0',

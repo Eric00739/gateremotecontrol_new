@@ -150,7 +150,7 @@ export default function BrandCompatibilitySection() {
           </div>
           <div className="space-y-3">
             <p className="text-xs text-[#64748B] leading-relaxed">
-              {dict.compatibility.verificationItems[0] ? 'The table is a sample compatibility reference. Final matching depends on model, frequency, chip type, PCB version, coding protocol, and regional version.' : ''}
+              {dict.compatibilityTable.disclaimer}
             </p>
             <Link href="/compatibility" className="inline-flex items-center gap-1.5 text-xs font-bold text-[#FF8A1F] transition-colors hover:text-[#F97316]">
               {dict.compatibilityTable.viewAll} <ArrowRight className="h-3.5 w-3.5" />
