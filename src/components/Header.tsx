@@ -11,7 +11,6 @@ const navItems = [
   { label: 'OEM/ODM', href: '/#oem-odm' },
   { label: 'Factory', href: '/#factory' },
   { label: 'Blog', href: '/blog' },
-  { label: 'Contact', href: '/#contact' },
 ];
 
 export default function Header() {
@@ -50,6 +49,13 @@ export default function Header() {
                 {item.label}
               </Link>
             ))}
+            <LeadModalTrigger
+              prefillType="support"
+              className="text-[12px] text-[#153A5C] hover:text-[#FF8A1F] transition-colors font-semibold tracking-wide px-3 py-2 rounded-lg hover:bg-[#FF8A1F]/8 cursor-pointer"
+              style={{ fontFamily: "var(--font-dm-sans), sans-serif" }}
+            >
+              Contact
+            </LeadModalTrigger>
           </nav>
 
           {/* Right Actions */}
@@ -101,6 +107,13 @@ export default function Header() {
                   {item.label}
                 </Link>
               ))}
+              <LeadModalTrigger
+                prefillType="support"
+                className="text-sm text-[#153A5C] hover:text-[#FF8A1F] font-semibold py-2 px-3 rounded-lg hover:bg-[#FF8A1F]/8 cursor-pointer"
+                onClick={() => setMobileOpen(false)}
+              >
+                Contact
+              </LeadModalTrigger>
               <LeadModalTrigger
                 prefillType="quote"
                 className="bg-[#FF8A1F] hover:bg-[#F97316] text-white text-sm font-bold py-2.5 px-5 rounded-lg text-center mt-1"

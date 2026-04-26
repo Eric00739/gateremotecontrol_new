@@ -6,11 +6,13 @@ export default function LeadModalTrigger({
   prefillType,
   className,
   style,
+  onClick,
   children,
 }: {
   prefillType: PrefillType;
   className?: string;
   style?: React.CSSProperties;
+  onClick?: () => void;
   children: React.ReactNode;
 }) {
   const { openModal } = useLeadModal();
@@ -20,7 +22,7 @@ export default function LeadModalTrigger({
       type="button"
       className={className}
       style={style}
-      onClick={() => openModal(prefillType)}
+      onClick={() => { openModal(prefillType); onClick?.(); }}
     >
       {children}
     </button>
