@@ -6,7 +6,8 @@ import { blogPosts, blogCategories } from '@/data/blog';
 import { notFound } from 'next/navigation';
 import LeadModalProvider from '@/components/LeadModalProvider';
 import LeadModalTrigger from '@/components/LeadModalTrigger';
-import { getDictSync, type Locale, locales } from '@/i18n';
+import { type Locale, locales } from '@/i18n';
+import { getDictSync } from '@/i18n/dictionaries';
 import { siteName } from '@/data/site';
 
 export async function generateStaticParams() {
@@ -17,7 +18,6 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   return (async () => {
     const { slug, locale: rawLocale } = await params;
     const locale = locales.includes(rawLocale as Locale) ? rawLocale as Locale : 'en';
-    const dict = getDictSync(locale);
     const post = blogPosts.find(p => p.slug === slug);
     if (!post) return { title: 'Article Not Found' };
     const title = `${post.title} | GateRemoteSource`;
@@ -56,7 +56,7 @@ export default async function BlogPostPage({
       {/* Back link */}
       <div className="bg-white border-b border-[#E2E8F0]">
         <div className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8 py-4">
-          <Link href="/blog" className="inline-flex items-center gap-2 text-sm text-[#64748B] hover:text-[#FF8A1F] transition-colors font-medium">
+          <Link href={`/${locale}/blog`} className="inline-flex items-center gap-2 text-sm text-[#64748B] hover:text-[#FF8A1F] transition-colors font-medium">
             <ArrowLeft className="w-4 h-4" /> {dict.blogPost.backLink}
           </Link>
         </div>
@@ -66,7 +66,7 @@ export default async function BlogPostPage({
       <section className="bg-[#062748] relative overflow-hidden">
         <div className="absolute inset-0 tech-grid" />
         <div className="relative max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8 py-16 lg:py-24">
-          <Link href="/blog" className="inline-block mb-6">
+          <Link href={`/${locale}/blog`} className="inline-block mb-6">
             <span className="rounded-md bg-[#FF8A1F]/10 text-[#FF8A1F] text-[11px] font-bold px-3 py-1.5 hover:bg-[#FF8A1F]/20 transition-colors">
               {blogCategories.find(c => c.key === post.category)?.label || post.category}
             </span>
@@ -106,7 +106,7 @@ export default async function BlogPostPage({
               {dict.blogPost.matchingNotes}
             </h3>
             <p className="text-[#64748B] text-sm leading-relaxed">
-              {dict.blogPost.matchingNotesSubtitle.replace('\\', '')}
+              {dict.blogPost.matchingNotesSubtitle}
             </p>
             <ul className="mt-4 grid gap-2 text-sm text-[#475569] sm:grid-cols-2">
               {(dict.blogPost.checklistItems as string[]).map((item) => (
@@ -124,7 +124,7 @@ export default async function BlogPostPage({
                 {dict.blogPost.needHelp}
               </h4>
               <p className="text-[#C7D7E8] text-sm mb-4">
-                {dict.blogPost.needHelpSubtitle.replace('\\', '')}
+                {dict.blogPost.needHelpSubtitle}
               </p>
               <LeadModalTrigger
                 prefillType="support"
