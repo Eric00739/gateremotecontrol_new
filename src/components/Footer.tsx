@@ -1,34 +1,34 @@
 'use client';
 
+import Link from 'next/link';
+
 const footerLinks = {
   products: [
-    { label: 'Replacement Remotes', href: '#' },
-    { label: 'Universal Receivers', href: '#' },
-    { label: 'Remote Duplicators', href: '#' },
-    { label: 'Garage Door Controllers', href: '#' },
-    { label: 'Accessories & Parts', href: '#' },
-    { label: 'OEM Custom Solutions', href: '#' },
+    { label: 'Replacement Remotes', href: '/#products' },
+    { label: 'Universal Receivers', href: '/#products' },
+    { label: 'Remote Duplicators', href: '/#products' },
+    { label: 'Garage Door Controllers', href: '/#products' },
+    { label: 'Accessories & Parts', href: '/#products' },
+    { label: 'OEM Custom Solutions', href: '/#oem-odm' },
   ],
   compatibility: [
-    { label: 'Brand Compatibility', href: '#' },
-    { label: 'Frequency Guide', href: '#' },
-    { label: 'Rolling Code vs Fixed Code', href: '#' },
-    { label: 'IC / Chip Reference', href: '#' },
-    { label: 'Verification Guide', href: '#' },
+    { label: 'Brand Compatibility', href: '/#compatibility' },
+    { label: 'Frequency Guide', href: '/#compatibility' },
+    { label: 'Rolling Code vs Fixed Code', href: '/blog/rolling-code-vs-fixed-code-remotes' },
+    { label: 'IC / Chip Reference', href: '/#compatibility' },
+    { label: 'Verification Guide', href: '/blog/what-buyers-should-send-before-rf-matching' },
   ],
   resources: [
-    { label: 'Articles', href: '#' },
-    { label: 'Downloads', href: '#' },
-    { label: 'FAQ', href: '#' },
-    { label: 'Videos', href: '#' },
-    { label: 'Glossary', href: '#' },
+    { label: 'Articles', href: '/blog' },
+    { label: 'FAQ', href: '/#faq' },
+    { label: 'Identify a Compatible Remote', href: '/blog/how-to-identify-a-compatible-gate-remote' },
+    { label: 'Buyer Checklist', href: '/blog/what-buyers-should-send-before-rf-matching' },
   ],
   company: [
-    { label: 'About Us', href: '#' },
-    { label: 'Factory', href: '#' },
-    { label: 'Quality Control', href: '#' },
-    { label: 'Certifications', href: '#' },
-    { label: 'Careers', href: '#' },
+    { label: 'About Us', href: '/#contact' },
+    { label: 'Factory', href: '/#factory' },
+    { label: 'Quality Control', href: '/#contact' },
+    { label: 'Contact', href: '/#contact' },
   ],
 };
 
@@ -82,9 +82,9 @@ export default function Footer() {
             <ul className="space-y-2.5">
               {footerLinks.products.map((link) => (
                 <li key={link.label}>
-                  <a href={link.href} className="text-sm text-[#C7D7E8] hover:text-[#FF8A1F] transition-colors">
+                  <Link href={link.href} className="text-sm text-[#C7D7E8] hover:text-[#FF8A1F] transition-colors">
                     {link.label}
-                  </a>
+                  </Link>
                 </li>
               ))}
             </ul>
@@ -95,9 +95,9 @@ export default function Footer() {
             <ul className="space-y-2.5">
               {footerLinks.compatibility.map((link) => (
                 <li key={link.label}>
-                  <a href={link.href} className="text-sm text-[#C7D7E8] hover:text-[#FF8A1F] transition-colors">
+                  <Link href={link.href} className="text-sm text-[#C7D7E8] hover:text-[#FF8A1F] transition-colors">
                     {link.label}
-                  </a>
+                  </Link>
                 </li>
               ))}
             </ul>
@@ -108,9 +108,9 @@ export default function Footer() {
             <ul className="space-y-2.5">
               {footerLinks.resources.map((link) => (
                 <li key={link.label}>
-                  <a href={link.href} className="text-sm text-[#C7D7E8] hover:text-[#FF8A1F] transition-colors">
+                  <Link href={link.href} className="text-sm text-[#C7D7E8] hover:text-[#FF8A1F] transition-colors">
                     {link.label}
-                  </a>
+                  </Link>
                 </li>
               ))}
             </ul>
@@ -121,9 +121,9 @@ export default function Footer() {
             <ul className="space-y-2.5">
               {footerLinks.company.map((link) => (
                 <li key={link.label}>
-                  <a href={link.href} className="text-sm text-[#C7D7E8] hover:text-[#FF8A1F] transition-colors">
+                  <Link href={link.href} className="text-sm text-[#C7D7E8] hover:text-[#FF8A1F] transition-colors">
                     {link.label}
-                  </a>
+                  </Link>
                 </li>
               ))}
             </ul>
@@ -177,7 +177,6 @@ export default function Footer() {
             <div className="flex gap-4 text-xs text-[#7F9AB7]">
               <a href="#" className="hover:text-[#C7D7E8] transition-colors">Privacy Policy</a>
               <a href="#" className="hover:text-[#C7D7E8] transition-colors">Terms of Use</a>
-              <a href="#" className="hover:text-[#C7D7E8] transition-colors">Sitemap</a>
             </div>
           </div>
         </div>

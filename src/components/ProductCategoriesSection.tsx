@@ -3,6 +3,7 @@
 import { ArrowRight } from 'lucide-react';
 import Image from 'next/image';
 import { products } from '@/data/homepage';
+import LeadModalTrigger from './LeadModalTrigger';
 
 export default function ProductCategoriesSection() {
   return (
@@ -63,14 +64,14 @@ export default function ProductCategoriesSection() {
                   ))}
                 </div>
 
-                <a
-                  href="#contact"
+                <LeadModalTrigger
+                  prefillType="quote"
                   className="inline-flex items-center gap-1.5 text-[12px] font-bold text-[#FF8A1F] hover:text-[#F97316] transition-colors group/link pointer-events-auto"
                   style={{ fontFamily: "var(--font-jetbrains-mono), monospace" }}
                 >
                   SEND INQUIRY
                   <ArrowRight className="w-3.5 h-3.5 group-hover/link:translate-x-1 transition-transform" />
-                </a>
+                </LeadModalTrigger>
               </div>
             </div>
           ))}

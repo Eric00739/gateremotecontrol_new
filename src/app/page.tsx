@@ -1,3 +1,4 @@
+import LeadModalProvider from '@/components/LeadModalProvider';
 import AnnouncementBar from '@/components/AnnouncementBar';
 import Header from '@/components/Header';
 import HeroSection from '@/components/HeroSection';
@@ -17,7 +18,7 @@ import Footer from '@/components/Footer';
 
 export default function Home() {
   return (
-    <>
+    <LeadModalProvider>
       <AnnouncementBar />
       <Header />
       <main className="flex-1">
@@ -36,6 +37,6 @@ export default function Home() {
         <CtaSection />
       </main>
       <Footer />
-    </>
+    </LeadModalProvider>
   );
 }

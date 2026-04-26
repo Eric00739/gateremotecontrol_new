@@ -1,5 +1,6 @@
 import Image from 'next/image';
 import { basePath } from '@/data/homepage';
+import LeadModalTrigger from './LeadModalTrigger';
 
 export default function CtaSection() {
   return (
@@ -36,12 +37,12 @@ export default function CtaSection() {
             <p className="text-[#C7D7E8] leading-relaxed mb-8 max-w-md">
               Send brand, model, frequency, PCB photo, or remote image. Our team will help verify compatibility.
             </p>
-            <a
-              href="#contact"
-              className="btn-glow inline-block bg-[#FF8A1F] hover:bg-[#F97316] text-[#062748] font-bold px-10 py-4 rounded-xl transition-all hover:shadow-xl hover:shadow-amber-500/20 text-[14px]"
+            <LeadModalTrigger
+              prefillType="support"
+              className="btn-glow inline-block bg-[#FF8A1F] hover:bg-[#F97316] text-[#062748] font-bold px-10 py-4 rounded-xl transition-all hover:shadow-xl hover:shadow-amber-500/20 text-[14px] cursor-pointer"
             >
               Get Compatibility Support
-            </a>
+            </LeadModalTrigger>
           </div>
 
           {/* Right: Product image */}

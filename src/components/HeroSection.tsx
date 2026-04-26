@@ -1,6 +1,7 @@
 import { Shield, Zap, Package, Globe, Users } from 'lucide-react';
 import Image from 'next/image';
 import { basePath } from '@/data/homepage';
+import LeadModalTrigger from './LeadModalTrigger';
 
 const trustItems = [
   { icon: Shield, label: 'Independent Aftermarket Supplier' },
@@ -51,13 +52,13 @@ export default function HeroSection() {
               >
                 Browse Products
               </a>
-              <a
-                href="#contact"
-                className="group border border-[#2A587C] hover:border-[#FF8A1F]/40 text-[#C7D7E8] hover:text-[#F7FBFF] font-medium px-8 py-3.5 rounded-xl transition-all text-[14px] flex items-center gap-2"
+              <LeadModalTrigger
+                prefillType="compatibility"
+                className="group border border-[#2A587C] hover:border-[#FF8A1F]/40 text-[#C7D7E8] hover:text-[#F7FBFF] font-medium px-8 py-3.5 rounded-xl transition-all text-[14px] flex items-center gap-2 cursor-pointer"
               >
                 Send Compatibility List
                 <span className="text-[#FF8A1F] group-hover:translate-x-1 transition-transform">&rarr;</span>
-              </a>
+              </LeadModalTrigger>
             </div>
           </div>
 
@@ -69,6 +70,7 @@ export default function HeroSection() {
                 alt="Compatible replacement remotes, receivers, duplicators, and controllers"
                 width={600}
                 height={300}
+                loading="eager"
                 className="w-full object-contain"
               />
               <p className="text-[#7F9AB7] text-[10px] tracking-widest mt-4 text-center" style={{ fontFamily: 'var(--font-jetbrains-mono), monospace' }}>

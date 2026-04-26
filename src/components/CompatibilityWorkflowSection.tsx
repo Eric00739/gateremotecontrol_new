@@ -2,6 +2,7 @@
 
 import { Camera, Radio, Cpu, Users, FlaskConical, Factory } from 'lucide-react';
 import { verificationFields, workflowSteps } from '@/data/homepage';
+import LeadModalTrigger from './LeadModalTrigger';
 
 const iconMap = [Camera, Radio, Cpu, Users, FlaskConical, Factory];
 
@@ -66,12 +67,12 @@ export default function CompatibilityWorkflowSection() {
                 These fields help us check frequency, protocol, receiver version, and OEM requirements before sample testing.
               </p>
             </div>
-            <a
-              href="#contact"
+            <LeadModalTrigger
+              prefillType="compatibility"
               className="inline-flex items-center justify-center rounded-lg bg-[#FF8A1F] px-5 py-2.5 text-sm font-bold text-white transition-colors hover:bg-[#F97316]"
             >
               Send Compatibility Request
-            </a>
+            </LeadModalTrigger>
           </div>
 
           <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-3">
