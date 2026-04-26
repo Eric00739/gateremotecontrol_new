@@ -1,4 +1,4 @@
-export const basePath = '/gateremotecontrol_new';
+export const basePath = '';
 
 export const brands = [
   'LiftMaster', 'Chamberlain', 'FAAC', 'BFT', 'Nice', 'CAME',
