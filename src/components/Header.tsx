@@ -3,7 +3,7 @@
 import Link from 'next/link';
 import { Menu, X, Globe } from 'lucide-react';
 import { useState } from 'react';
-import { usePathname } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
 import LeadModalTrigger from './LeadModalTrigger';
 import { useDict, useLocale, locales, localeNames, type Locale } from '@/i18n';
 
@@ -13,18 +13,21 @@ export default function Header() {
   const dict = useDict();
   const currentLocale = useLocale();
   const pathname = usePathname();
+  const router = useRouter();
 
   const navItems = [
-    { label: dict.header.products, href: '/#products' },
-    { label: dict.header.compatibility, href: '/compatibility' },
-    { label: dict.header.oemOdm, href: '/#oem-odm' },
-    { label: dict.header.factory, href: '/#factory' },
-    { label: dict.header.blog, href: '/blog' },
+    { label: dict.header.products, href: `/${currentLocale}#products` },
+    { label: dict.header.compatibility, href: `/${currentLocale}/compatibility` },
+    { label: dict.header.oemOdm, href: `/${currentLocale}#oem-odm` },
+    { label: dict.header.factory, href: `/${currentLocale}#factory` },
+    { label: dict.header.blog, href: `/${currentLocale}/blog` },
   ];
 
   const switchLocale = (locale: Locale) => {
-    const newPath = pathname.replace(/^\/[a-z]{2}/, `/${locale}`);
-    window.location.href = newPath;
+    const localePattern = /^\/[a-z]{2}(?=\/|$)/;
+    const pathWithoutLocale = pathname.replace(localePattern, '') || '/';
+    const nextPath = pathWithoutLocale === '/' ? `/${locale}` : `/${locale}${pathWithoutLocale}`;
+    router.push(nextPath);
   };
 
   return (
@@ -32,7 +35,7 @@ export default function Header() {
       <div className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-[64px]">
           {/* Logo */}
-          <Link href="/" className="flex items-center gap-3 group">
+          <Link href={`/${currentLocale}`} className="flex items-center gap-3 group">
             <div className="w-9 h-9 bg-[#0B3A63] rounded-md flex items-center justify-center relative overflow-hidden group-hover:bg-[#062748] transition-colors duration-300">
               <span className="text-white font-bold text-sm tracking-tight relative z-10" style={{ fontFamily: "var(--font-jetbrains-mono), monospace" }}>GR</span>
             </div>
