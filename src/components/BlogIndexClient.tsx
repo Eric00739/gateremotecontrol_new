@@ -29,7 +29,6 @@ export default function BlogIndexClient() {
   const [searchQuery, setSearchQuery] = useState('');
   const [currentPage, setCurrentPage] = useState(1);
   const [showMobileFilters, setShowMobileFilters] = useState(false);
-  const [selectedBrand, setSelectedBrand] = useState<string | null>(null);
 
   // Count articles per category
   const articleCounts: Record<string, number> = {};
@@ -489,7 +488,7 @@ export default function BlogIndexClient() {
                 <p className="text-sm text-[#64748B] mt-1">
                   {activeCategory !== 'all' && <span className="font-medium text-[#0F172A]">{categoryLabels[activeCategory]}</span>}
                   {activeCategory !== 'all' && searchQuery && <span> &middot; </span>}
-                  {searchQuery && <span className="font-medium text-[#0F172A]">"{searchQuery}"</span>}
+                  {searchQuery && <span className="font-medium text-[#0F172A]">&ldquo;{searchQuery}&rdquo;</span>}
                   <span className="text-[#94A3B8] ml-1">— {totalResults} {dict.blog.latest.resultsCount}</span>
                 </p>
               ) : null}

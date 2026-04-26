@@ -253,6 +253,13 @@ export default {
     sendWhatsApp: 'Enviar por WhatsApp',
     sendEmail: 'Enviar por correo electrnico',
     rememberAttach: 'Recuerde adjuntar',
+    closeLabel: 'Cerrar',
+    messageNameLabel: 'Nombre',
+    messageEmailLabel: 'Correo electrónico',
+    messageRequestLabel: 'Solicitud',
+    messageLocaleLabel: 'Idioma de la página',
+    messageSubjectPrefix: 'Consulta',
+    messageFallbackType: 'General',
     requestTypes: {
       quote: 'Presupuesto',
       compatibility: 'Verificacin de compatibilidad',

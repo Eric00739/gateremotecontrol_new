@@ -4,7 +4,7 @@ import { createPortal } from 'react-dom';
 import { useEffect, useRef, useState } from 'react';
 import { Paperclip, X } from 'lucide-react';
 import { useLeadModal } from './LeadModalProvider';
-import { useDict } from '@/i18n';
+import { localeNames, useDict, useLocale } from '@/i18n';
 
 const WHATSAPP_NUMBER = '8615899648898';
 const EMAIL = 'sales@gateremotesource.com';
@@ -20,6 +20,7 @@ const prefillTypeToRequestType: Record<string, string> = {
 function LeadModalContent() {
   const { open, prefillType, closeModal } = useLeadModal();
   const dict = useDict();
+  const locale = useLocale();
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [requestType, setRequestType] = useState(prefillTypeToRequestType[prefillType] || 'quote');
@@ -58,7 +59,13 @@ function LeadModalContent() {
 
   const buildMessage = (): string => {
     const label = requestTypeOptions.find(o => o.value === requestType)?.label || requestType;
-    return [`Name: ${name}`, `Email: ${email}`, `Request: ${label}`, message].filter(Boolean).join('\n');
+    return [
+      `${dict.leadModal.messageNameLabel}: ${name}`,
+      `${dict.leadModal.messageEmailLabel}: ${email}`,
+      `${dict.leadModal.messageRequestLabel}: ${label}`,
+      `${dict.leadModal.messageLocaleLabel}: ${localeNames[locale]}`,
+      message,
+    ].filter(Boolean).join('\n');
   };
 
   const handleSubmit = (action: () => void) => {
@@ -93,7 +100,7 @@ function LeadModalContent() {
           <button
             type="button"
             onClick={closeModal}
-            aria-label="Close"
+            aria-label={dict.leadModal.closeLabel}
             className="w-7 h-7 rounded-lg flex items-center justify-center text-[#94A3B8] hover:text-[#0F172A] hover:bg-[#F1F5F9] transition-colors"
           >
             <X className="w-4 h-4" />
@@ -174,9 +181,9 @@ function LeadModalContent() {
             disabled={!name.trim() || !email.trim()}
             onClick={() => {
               const text = buildMessage();
-              const label = requestTypeOptions.find(o => o.value === requestType)?.label || 'General';
+              const label = requestTypeOptions.find(o => o.value === requestType)?.label || dict.leadModal.messageFallbackType;
               handleSubmit(() => {
-                const subject = encodeURIComponent(`Inquiry: ${label}`);
+                const subject = encodeURIComponent(`${dict.leadModal.messageSubjectPrefix}: ${label}`);
                 const body = encodeURIComponent(text);
                 window.location.href = `mailto:${EMAIL}?subject=${subject}&body=${body}`;
               });

@@ -253,6 +253,13 @@ export default {
     sendWhatsApp: 'Send via WhatsApp',
     sendEmail: 'Send by Email',
     rememberAttach: 'Remember to attach',
+    closeLabel: 'Close',
+    messageNameLabel: 'Name',
+    messageEmailLabel: 'Email',
+    messageRequestLabel: 'Request',
+    messageLocaleLabel: 'Page language',
+    messageSubjectPrefix: 'Inquiry',
+    messageFallbackType: 'General',
     requestTypes: {
       quote: 'Quote',
       compatibility: 'Compatibility Check',

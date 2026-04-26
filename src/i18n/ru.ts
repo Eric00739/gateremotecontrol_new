@@ -253,6 +253,13 @@ export default {
     sendWhatsApp: 'Отправить через WhatsApp',
     sendEmail: 'Отправить по электронной почте',
     rememberAttach: 'Не забудьте прикрепить',
+    closeLabel: 'Закрыть',
+    messageNameLabel: 'Имя',
+    messageEmailLabel: 'Электронная почта',
+    messageRequestLabel: 'Запрос',
+    messageLocaleLabel: 'Язык страницы',
+    messageSubjectPrefix: 'Запрос',
+    messageFallbackType: 'Общий',
     requestTypes: {
       quote: 'Запрос цены',
       compatibility: 'Проверка совместимости',

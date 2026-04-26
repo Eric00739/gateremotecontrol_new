@@ -253,6 +253,13 @@ export default {
     sendWhatsApp: "Envoyer via WhatsApp",
     sendEmail: "Envoyer par e-mail",
     rememberAttach: "N'oubliez pas de joindre",
+    closeLabel: "Fermer",
+    messageNameLabel: "Nom",
+    messageEmailLabel: "E-mail",
+    messageRequestLabel: "Demande",
+    messageLocaleLabel: "Langue de la page",
+    messageSubjectPrefix: "Demande",
+    messageFallbackType: "Général",
     requestTypes: {
       quote: "Devis",
       compatibility: "Vérification de compatibilité",
