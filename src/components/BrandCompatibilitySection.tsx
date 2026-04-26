@@ -48,11 +48,11 @@ export default function BrandCompatibilitySection() {
             value={query}
             onChange={(event) => setQuery(event.target.value)}
             placeholder="Search brand, model, frequency, or code type"
-            className="w-full rounded-xl border border-[#D8E4F0] bg-[#F8FAFC] py-3 pl-11 pr-4 text-sm text-[#0F172A] placeholder:text-[#94A3B8] outline-none transition-colors focus:border-[#FF8A1F]/60 focus:bg-white"
+            className="w-full rounded-lg border border-[#D8E4F0] bg-[#F8FAFC] py-3 pl-11 pr-4 text-sm text-[#0F172A] placeholder:text-[#94A3B8] outline-none transition-colors focus:border-[#FF8A1F]/60 focus:bg-white"
           />
         </div>
 
-        <div className="overflow-hidden rounded-2xl border border-[#D8E4F0] bg-white shadow-sm shadow-[#062748]/5 mb-6">
+        <div className="overflow-hidden rounded-lg border border-[#D8E4F0] bg-white shadow-sm shadow-[#062748]/5 mb-6">
           <div className="overflow-x-auto">
             <table className="w-full min-w-[760px] text-left">
               <thead className="bg-[#F8FAFC] text-[11px] uppercase tracking-[0.14em] text-[#64748B]" style={{ fontFamily: "var(--font-jetbrains-mono), monospace" }}>
@@ -101,7 +101,7 @@ export default function BrandCompatibilitySection() {
           </span>
         </div>
 
-        <div className="flex items-start gap-3 bg-[#F8FAFC] border border-[#E2E8F0] rounded-xl px-5 py-4 max-w-3xl">
+        <div className="flex items-start gap-3 bg-[#F8FAFC] border border-[#E2E8F0] rounded-lg px-5 py-4 max-w-3xl">
           <div className="w-5 h-5 rounded-full bg-[#FF8A1F]/10 flex items-center justify-center flex-shrink-0 mt-0.5">
             <span className="text-[#FF8A1F] text-[10px] font-bold">i</span>
           </div>

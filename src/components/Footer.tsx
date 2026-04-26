@@ -11,7 +11,14 @@ const exploreLinks = [
   { label: 'Blog', href: '/blog' },
 ];
 
-const compatibilityBrands = ['FAAC', 'Nice', 'BFT', 'DoorHan', 'CAME', 'LiftMaster', 'more'];
+const compatibilityLinks = [
+  { label: 'FAAC', href: '/compatibility/faac' },
+  { label: 'Nice', href: '/compatibility/nice' },
+  { label: 'BFT', href: '/compatibility/bft' },
+  { label: 'DoorHan', href: '/compatibility/doorhan' },
+  { label: 'CAME', href: '/compatibility/came' },
+  { label: 'LiftMaster', href: '/compatibility/liftmaster' },
+];
 
 export default function Footer() {
   return (
@@ -47,9 +54,13 @@ export default function Footer() {
               <p className="text-[10px] font-semibold uppercase tracking-[0.18em] text-[#FF8A1F]" style={{ fontFamily: 'var(--font-jetbrains-mono), monospace' }}>
                 Compatibility references
               </p>
-              <p className="mt-2 text-xs leading-relaxed text-[#7F9AB7]">
-                {compatibilityBrands.join(' / ')}
-              </p>
+              <div className="mt-2 flex flex-wrap gap-2">
+                {compatibilityLinks.map((brand) => (
+                  <Link key={brand.href} href={brand.href} className="rounded-md border border-[#123D63] px-2.5 py-1 text-xs text-[#C7D7E8] transition-colors hover:border-[#FF8A1F]/50 hover:text-[#FF8A1F]">
+                    {brand.label}
+                  </Link>
+                ))}
+              </div>
             </div>
           </div>
 

@@ -22,7 +22,7 @@ export default function Header() {
         <div className="flex items-center justify-between h-[64px]">
           {/* Logo */}
           <Link href="/" className="flex items-center gap-3 group">
-            <div className="w-9 h-9 bg-[#0B3A63] rounded-lg flex items-center justify-center relative overflow-hidden group-hover:bg-[#062748] transition-colors duration-300">
+            <div className="w-9 h-9 bg-[#0B3A63] rounded-md flex items-center justify-center relative overflow-hidden group-hover:bg-[#062748] transition-colors duration-300">
               <span className="text-white font-bold text-sm tracking-tight relative z-10" style={{ fontFamily: "var(--font-jetbrains-mono), monospace" }}>GR</span>
             </div>
             <div className="hidden sm:block">
@@ -76,7 +76,7 @@ export default function Header() {
             </a>
             <LeadModalTrigger
               prefillType="quote"
-              className="bg-[#FF8A1F] hover:bg-[#F97316] text-white text-[12px] font-bold px-5 py-2 rounded-lg transition-all btn-glow shadow-sm shadow-orange-500/20"
+              className="bg-[#FF8A1F] hover:bg-[#F97316] text-[#062748] text-[12px] font-bold px-5 py-2 rounded-lg transition-all btn-glow shadow-sm shadow-orange-500/20"
               style={{ fontFamily: "var(--font-dm-sans), sans-serif" }}
             >
               Get a Quote
@@ -95,7 +95,7 @@ export default function Header() {
 
         {/* Mobile Nav */}
         {mobileOpen && (
-          <nav className="lg:hidden py-4 border-t border-[#D8E4F0]">
+          <nav className="lg:hidden py-4 border-t border-[#D8E4F0] bg-white">
             <div className="flex flex-col gap-2">
               {navItems.map((item) => (
                 <Link
@@ -116,7 +116,8 @@ export default function Header() {
               </LeadModalTrigger>
               <LeadModalTrigger
                 prefillType="quote"
-                className="bg-[#FF8A1F] hover:bg-[#F97316] text-white text-sm font-bold py-2.5 px-5 rounded-lg text-center mt-1"
+                className="bg-[#FF8A1F] hover:bg-[#F97316] text-[#062748] text-sm font-bold py-2.5 px-5 rounded-lg text-center mt-1"
+                onClick={() => setMobileOpen(false)}
               >
                 Get a Quote
               </LeadModalTrigger>

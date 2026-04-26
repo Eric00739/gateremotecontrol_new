@@ -39,7 +39,7 @@ export default function RiskControlSection() {
         </div>
 
         {/* Legal disclaimer */}
-        <div className="bg-white rounded-xl p-5 border border-[#E2E8F0]">
+        <div className="bg-white rounded-lg p-5 border border-[#E2E8F0]">
           <div className="flex items-start gap-3">
             <Info className="w-5 h-5 text-[#FF8A1F] flex-shrink-0 mt-0.5" />
             <div>

@@ -30,7 +30,7 @@ export default function FactoryEvidenceSection() {
           {factoryItems.map((item) => (
             <div
               key={item.name}
-              className="rounded-2xl overflow-hidden bg-white border border-[#E2E8F0] card-hover-light group"
+              className="rounded-lg overflow-hidden bg-white border border-[#E2E8F0] card-hover-light group"
             >
               <div className="h-40 relative overflow-hidden">
                 <Image

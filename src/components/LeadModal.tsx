@@ -94,7 +94,7 @@ function LeadModalContent() {
       className="fixed inset-0 z-[100] flex items-center justify-center bg-black/50 p-4"
       onClick={(e) => { if (e.target === overlayRef.current) closeModal(); }}
     >
-      <div className="w-full max-w-md max-h-[90vh] overflow-y-auto bg-white rounded-2xl shadow-2xl">
+      <div className="w-full max-w-md max-h-[90vh] overflow-y-auto bg-white rounded-lg shadow-2xl">
         {/* Header */}
         <div className="sticky top-0 bg-white border-b border-[#E2E8F0] px-5 py-3.5 flex items-center justify-between rounded-t-2xl z-10">
           <h2 className="text-base font-bold text-[#0F172A]" style={{ fontFamily: 'var(--font-outfit), sans-serif' }}>
@@ -169,7 +169,7 @@ function LeadModalContent() {
             type="button"
             disabled={!name.trim() || !email.trim()}
             onClick={() => handleSubmit(() => sendWhatsApp(name, email, requestType, message))}
-            className="flex-1 bg-[#22C55E] hover:bg-[#16A34A] disabled:opacity-40 disabled:cursor-not-allowed text-white font-bold py-2.5 rounded-xl transition-colors text-sm flex items-center justify-center gap-2"
+            className="flex-1 bg-[#22C55E] hover:bg-[#16A34A] disabled:opacity-40 disabled:cursor-not-allowed text-white font-bold py-2.5 rounded-lg transition-colors text-sm flex items-center justify-center gap-2"
           >
             Send via WhatsApp
           </button>
@@ -177,7 +177,7 @@ function LeadModalContent() {
             type="button"
             disabled={!name.trim() || !email.trim()}
             onClick={() => handleSubmit(() => sendEmail(name, email, requestType, message))}
-            className="flex-1 bg-[#0B3A63] hover:bg-[#062748] disabled:opacity-40 disabled:cursor-not-allowed text-white font-bold py-2.5 rounded-xl transition-colors text-sm flex items-center justify-center gap-2"
+            className="flex-1 bg-[#0B3A63] hover:bg-[#062748] disabled:opacity-40 disabled:cursor-not-allowed text-white font-bold py-2.5 rounded-lg transition-colors text-sm flex items-center justify-center gap-2"
           >
             Send by Email
           </button>

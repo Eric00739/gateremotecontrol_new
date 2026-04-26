@@ -32,7 +32,7 @@ export default function ProductCategoriesSection() {
           {products.map((product) => (
             <div
               key={product.title}
-              className="bg-white rounded-2xl border border-[#E2E8F0] overflow-hidden card-hover-light group"
+              className="bg-white rounded-lg border border-[#E2E8F0] overflow-hidden card-hover-light group"
             >
               {/* Product image area */}
               <div className="h-52 bg-white relative overflow-hidden flex items-center justify-center p-6">

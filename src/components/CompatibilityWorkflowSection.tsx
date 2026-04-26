@@ -57,7 +57,7 @@ export default function CompatibilityWorkflowSection() {
           </div>
         </div>
 
-        <div className="mt-14 rounded-2xl border border-[#D8E4F0] bg-[#F8FAFC] p-5 lg:p-6">
+        <div className="mt-14 rounded-lg border border-[#D8E4F0] bg-[#F8FAFC] p-5 lg:p-6">
           <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-4 mb-5">
             <div>
               <h3 className="text-xl font-bold text-[#0F172A] mb-2" style={{ fontFamily: "var(--font-outfit), sans-serif" }}>
@@ -77,7 +77,7 @@ export default function CompatibilityWorkflowSection() {
 
           <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-3">
             {verificationFields.map((item) => (
-              <div key={item.field} className="rounded-xl border border-[#E2E8F0] bg-white p-4">
+              <div key={item.field} className="rounded-lg border border-[#E2E8F0] bg-white p-4">
                 <div className="text-[11px] font-bold uppercase tracking-[0.12em] text-[#FF8A1F] mb-2" style={{ fontFamily: "var(--font-jetbrains-mono), monospace" }}>
                   {item.field}
                 </div>

@@ -23,7 +23,7 @@ export default function ApplicationScenariosSection() {
           {applications.map((app) => (
             <div
               key={app.name}
-              className="relative rounded-2xl overflow-hidden group card-hover-light"
+              className="relative rounded-lg overflow-hidden group card-hover-light"
             >
               <div className="relative h-40">
                 <Image

@@ -16,10 +16,6 @@ export default function QualitySection() {
       {/* Technical grid */}
       <div className="absolute inset-0 tech-grid" />
 
-      {/* Glowing accents */}
-      <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-[#FF8A1F] rounded-full opacity-[0.03] blur-[100px]" />
-      <div className="absolute bottom-0 left-0 w-[300px] h-[300px] bg-[#60A5FA] rounded-full opacity-[0.02] blur-[80px]" />
-
       <div className="relative max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8 py-16 lg:py-24">
         <div className="grid lg:grid-cols-2 gap-16 items-center">
           {/* Left */}
@@ -41,7 +37,7 @@ export default function QualitySection() {
             {/* Certification badges */}
             <div className="flex flex-wrap gap-3 mb-8">
               {certifications.map((cert) => (
-                <div key={cert} className="bg-[#08345F] border border-[#123D63] rounded-xl px-5 py-3 text-center hover:bg-[#FF8A1F]/10 hover:border-[#FF8A1F]/30 transition-all cursor-default">
+                <div key={cert} className="bg-[#08345F] border border-[#123D63] rounded-lg px-5 py-3 text-center hover:bg-[#FF8A1F]/10 hover:border-[#FF8A1F]/30 transition-all cursor-default">
                   <span className="text-sm font-bold text-[#F7FBFF] block" style={{ fontFamily: "var(--font-jetbrains-mono), monospace" }}>
                     {cert}
                   </span>

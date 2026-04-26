@@ -8,9 +8,6 @@ export default function CtaSection() {
       {/* Technical grid */}
       <div className="absolute inset-0 tech-grid" />
 
-      {/* Glowing accent */}
-      <div className="absolute top-1/2 left-1/3 w-[400px] h-[400px] bg-[#FF8A1F] rounded-full opacity-[0.03] blur-[100px]" />
-
       {/* RF waveform decoration */}
       <svg className="absolute bottom-0 left-0 right-0 opacity-10" viewBox="0 0 1200 80" preserveAspectRatio="none" style={{ height: '80px' }}>
         <path d="M0,40 Q150,10 300,40 T600,40 T900,40 T1200,40" fill="none" stroke="rgba(245,158,11,0.5)" strokeWidth="1.5" />
@@ -39,7 +36,7 @@ export default function CtaSection() {
             </p>
             <LeadModalTrigger
               prefillType="support"
-              className="btn-glow inline-block bg-[#FF8A1F] hover:bg-[#F97316] text-[#062748] font-bold px-10 py-4 rounded-xl transition-all hover:shadow-xl hover:shadow-amber-500/20 text-[14px] cursor-pointer"
+              className="btn-glow inline-block bg-[#FF8A1F] hover:bg-[#F97316] text-[#062748] font-bold px-10 py-4 rounded-lg transition-all hover:shadow-xl hover:shadow-amber-500/20 text-[14px] cursor-pointer"
             >
               Get Compatibility Support
             </LeadModalTrigger>
@@ -47,7 +44,7 @@ export default function CtaSection() {
 
           {/* Right: Product image */}
           <div className="flex justify-center">
-            <div className="w-full max-w-md aspect-[4/3] bg-[#08345F] border border-[#123D63] rounded-2xl flex items-center justify-center relative overflow-hidden">
+            <div className="w-full max-w-md aspect-[4/3] bg-[#08345F] border border-[#123D63] rounded-lg flex items-center justify-center relative overflow-hidden">
               <Image
                 src={basePath + '/images/product-remotes.png'}
                 alt="Compatible replacement remotes"

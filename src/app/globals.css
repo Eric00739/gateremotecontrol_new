@@ -44,12 +44,30 @@ body {
   background-color: var(--bg-deep);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  letter-spacing: -0.01em;
+  letter-spacing: 0;
 }
 
 h1, h2, h3, h4, h5, h6 {
   font-family: var(--font-outfit), sans-serif;
-  letter-spacing: -0.02em;
+  letter-spacing: 0;
+  text-wrap: pretty;
+}
+
+p, li, blockquote {
+  text-wrap: pretty;
+}
+
+a, button, input, textarea, select {
+  outline-offset: 3px;
+}
+
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+textarea:focus-visible,
+select:focus-visible {
+  outline: 2px solid var(--accent-amber);
+  outline-offset: 3px;
 }
 
 /* === TECHNICAL GRID PATTERNS === */
@@ -220,9 +238,24 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 /* Light section card hover */
+.card-hover-light {
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.35s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
 .card-hover-light:hover {
   transform: translateY(-3px);
   box-shadow: 0 16px 48px -12px rgba(0, 0, 0, 0.1);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+  }
 }
 
 /* === CALIBRATION TICK MARKS === */

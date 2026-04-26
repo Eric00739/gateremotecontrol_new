@@ -48,6 +48,20 @@ export default async function BrandCompatibilityPage({
   if (!brand) notFound();
 
   const relatedBrands = compatibilityBrands.filter((item) => item.slug !== brand.slug).slice(0, 5);
+  const faqItems = [
+    {
+      question: `Are ${brand.name} compatible replacement remotes guaranteed to work?`,
+      answer: `Compatibility is not confirmed by brand name alone. ${brand.name} matching should be checked by model, frequency, receiver version, chip, coding protocol, and regional version before sample or bulk order confirmation.`,
+    },
+    {
+      question: `What should buyers send for ${brand.name} remote matching?`,
+      answer: `Send front and back photos of the original remote, the model or frequency label, receiver or opener label, button count, and target country or market version.`,
+    },
+    {
+      question: `Can ${brand.name} replacement remotes be supplied with OEM packaging?`,
+      answer: 'OEM logo, private-label shell options, and packaging support can be discussed after the matching reference and sample requirements are confirmed.',
+    },
+  ];
 
   const breadcrumbJsonLd = {
     '@context': 'https://schema.org',
@@ -74,11 +88,28 @@ export default async function BrandCompatibilityPage({
     ],
   };
 
+  const faqJsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: faqItems.map((item) => ({
+      '@type': 'Question',
+      name: item.question,
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: item.answer,
+      },
+    })),
+  };
+
   return (
     <div className="bg-[#F8FAFC] text-[#0F172A]">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
       />
 
       <div className="bg-white border-b border-[#E2E8F0]">
@@ -105,11 +136,11 @@ export default async function BrandCompatibilityPage({
             <div className="mt-8 flex flex-wrap gap-3">
               <LeadModalTrigger
                 prefillType="compatibility"
-                className="btn-glow inline-flex items-center justify-center rounded-xl bg-[#FF8A1F] px-6 py-3 text-sm font-bold text-[#062748] transition-colors hover:bg-[#F97316]"
+                className="btn-glow inline-flex items-center justify-center rounded-lg bg-[#FF8A1F] px-6 py-3 text-sm font-bold text-[#062748] transition-colors hover:bg-[#F97316]"
               >
                 Send {brand.name} Request
               </LeadModalTrigger>
-              <Link href="/blog/what-buyers-should-send-before-rf-matching" className="inline-flex items-center gap-2 rounded-xl border border-[#2A587C] px-6 py-3 text-sm font-semibold text-[#C7D7E8] transition-colors hover:border-[#FF8A1F]/50 hover:text-[#F7FBFF]">
+              <Link href="/blog/what-buyers-should-send-before-rf-matching" className="inline-flex items-center gap-2 rounded-lg border border-[#2A587C] px-6 py-3 text-sm font-semibold text-[#C7D7E8] transition-colors hover:border-[#FF8A1F]/50 hover:text-[#F7FBFF]">
                 What to send <ArrowRight className="w-4 h-4 text-[#FF8A1F]" />
               </Link>
             </div>
@@ -129,7 +160,7 @@ export default async function BrandCompatibilityPage({
               </h2>
             </div>
 
-            <div className="overflow-hidden rounded-2xl border border-[#E2E8F0] bg-white">
+            <div className="overflow-hidden rounded-lg border border-[#E2E8F0] bg-white">
               <div className="hidden bg-[#F1F5F9] px-5 py-3 text-[11px] font-bold uppercase tracking-[0.12em] text-[#64748B] sm:grid sm:grid-cols-[1fr_0.85fr_0.9fr_1.3fr] sm:gap-4" style={{ fontFamily: 'var(--font-jetbrains-mono), monospace' }}>
                 <span>Model Reference</span>
                 <span>Frequency</span>
@@ -156,7 +187,7 @@ export default async function BrandCompatibilityPage({
             </div>
           </div>
 
-          <aside className="rounded-2xl border border-[#E2E8F0] bg-white p-6">
+          <aside className="rounded-lg border border-[#E2E8F0] bg-white p-6">
             <p className="text-[11px] font-bold uppercase tracking-[0.18em] text-[#FF8A1F]" style={{ fontFamily: 'var(--font-jetbrains-mono), monospace' }}>
               Verification Checklist
             </p>
@@ -173,7 +204,7 @@ export default async function BrandCompatibilityPage({
             </div>
             <LeadModalTrigger
               prefillType="compatibility"
-              className="btn-glow mt-6 inline-flex w-full items-center justify-center rounded-xl bg-[#FF8A1F] px-5 py-3 text-sm font-bold text-[#062748] transition-colors hover:bg-[#F97316]"
+              className="btn-glow mt-6 inline-flex w-full items-center justify-center rounded-lg bg-[#FF8A1F] px-5 py-3 text-sm font-bold text-[#062748] transition-colors hover:bg-[#F97316]"
             >
               Check {brand.name} Compatibility
             </LeadModalTrigger>
@@ -194,11 +225,34 @@ export default async function BrandCompatibilityPage({
             </div>
             <div className="grid sm:grid-cols-2 gap-4">
               {['Sample testing before bulk order', 'OEM logo and packaging options', 'Receiver and frequency confirmation', 'Wholesale sourcing support'].map((item) => (
-                <div key={item} className="rounded-xl border border-[#E2E8F0] bg-[#F8FAFC] p-4">
+                <div key={item} className="rounded-lg border border-[#E2E8F0] bg-[#F8FAFC] p-4">
                   <p className="text-sm font-semibold text-[#153A5C]">{item}</p>
                 </div>
               ))}
             </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        <div className="grid gap-8 lg:grid-cols-[0.85fr_1.15fr] lg:items-start">
+          <div>
+            <p className="text-[11px] font-bold uppercase tracking-[0.18em] text-[#FF8A1F]" style={{ fontFamily: 'var(--font-jetbrains-mono), monospace' }}>
+              Buyer Questions
+            </p>
+            <h2 className="mt-3 text-2xl font-bold" style={{ fontFamily: 'var(--font-outfit), sans-serif' }}>
+              {brand.name} Matching FAQ
+            </h2>
+          </div>
+          <div className="divide-y divide-[#E2E8F0] rounded-lg border border-[#E2E8F0] bg-white">
+            {faqItems.map((item) => (
+              <div key={item.question} className="p-5">
+                <h3 className="text-sm font-bold text-[#0F172A]" style={{ fontFamily: 'var(--font-outfit), sans-serif' }}>
+                  {item.question}
+                </h3>
+                <p className="mt-2 text-sm leading-relaxed text-[#64748B]">{item.answer}</p>
+              </div>
+            ))}
           </div>
         </div>
       </section>

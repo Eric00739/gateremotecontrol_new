@@ -20,10 +20,6 @@ export default function HeroSection() {
       {/* Technical grid */}
       <div className="absolute inset-0 tech-grid" />
 
-      {/* Radial glow */}
-      <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-[#FF8A1F] rounded-full opacity-[0.03] blur-[120px]" />
-      <div className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-[#60A5FA] rounded-full opacity-[0.02] blur-[100px]" />
-
       <div className="relative max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8 py-24 lg:py-32">
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
           {/* Left: Content */}
@@ -48,13 +44,13 @@ export default function HeroSection() {
             <div className="animate-fade-in-up delay-400 flex flex-wrap gap-4">
               <a
                 href="#products"
-                className="btn-glow bg-[#FF8A1F] hover:bg-[#F97316] text-[#062748] font-bold px-8 py-3.5 rounded-xl transition-all hover:shadow-xl hover:shadow-amber-500/20 text-[14px]"
+                className="btn-glow bg-[#FF8A1F] hover:bg-[#F97316] text-[#062748] font-bold px-8 py-3.5 rounded-lg transition-all hover:shadow-xl hover:shadow-amber-500/20 text-[14px]"
               >
                 Browse Products
               </a>
               <LeadModalTrigger
                 prefillType="compatibility"
-                className="group border border-[#2A587C] hover:border-[#FF8A1F]/40 text-[#C7D7E8] hover:text-[#F7FBFF] font-medium px-8 py-3.5 rounded-xl transition-all text-[14px] flex items-center gap-2 cursor-pointer"
+                className="group border border-[#2A587C] hover:border-[#FF8A1F]/40 text-[#C7D7E8] hover:text-[#F7FBFF] font-medium px-8 py-3.5 rounded-lg transition-all text-[14px] flex items-center gap-2 cursor-pointer"
               >
                 Send Compatibility List
                 <span className="text-[#FF8A1F] group-hover:translate-x-1 transition-transform">&rarr;</span>
@@ -64,7 +60,7 @@ export default function HeroSection() {
 
           {/* Right: Product showcase */}
           <div className="animate-slide-in-right delay-300">
-            <div className="relative bg-[#08345F]/80 border border-[#123D63] rounded-2xl p-6 backdrop-blur-sm">
+            <div className="relative bg-[#08345F]/80 border border-[#123D63] rounded-lg p-6 backdrop-blur-sm">
               <Image
                 src={basePath + '/images/hero-products.png'}
                 alt="Compatible replacement remotes, receivers, duplicators, and controllers"

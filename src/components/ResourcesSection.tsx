@@ -35,7 +35,7 @@ export default function ResourcesSection() {
             <Link
               key={post.slug}
               href={`/blog/${post.slug}`}
-              className="bg-[#F8FAFC] rounded-2xl border border-[#E2E8F0] overflow-hidden card-hover-light group block"
+              className="bg-[#F8FAFC] rounded-lg border border-[#E2E8F0] overflow-hidden card-hover-light group block"
             >
               <div className="h-40 relative overflow-hidden">
                 <Image

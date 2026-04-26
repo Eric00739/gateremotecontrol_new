@@ -28,7 +28,7 @@ export default function FaqSection() {
           {faqs.map((faq, i) => (
             <div
               key={faq.question}
-              className="bg-white rounded-2xl border border-[#E2E8F0] overflow-hidden card-hover-light"
+              className="bg-white rounded-lg border border-[#E2E8F0] overflow-hidden card-hover-light"
             >
               <button
                 className="w-full flex items-center justify-between p-6 text-left"
