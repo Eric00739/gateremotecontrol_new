@@ -1,7 +1,8 @@
 import type { Metadata } from 'next';
 import BlogIndexClient from '@/components/BlogIndexClient';
 import LeadModalProvider from '@/components/LeadModalProvider';
-import { getDictSync, type Locale, locales } from '@/i18n';
+import { type Locale, locales } from '@/i18n';
+import { getDictSync } from '@/i18n/dictionaries';
 import { siteName } from '@/data/site';
 
 export function generateStaticParams() {

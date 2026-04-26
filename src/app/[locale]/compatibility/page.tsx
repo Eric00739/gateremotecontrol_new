@@ -4,7 +4,8 @@ import { ArrowRight, Camera, Cpu, Radio, ShieldCheck } from 'lucide-react';
 import LeadModalProvider from '@/components/LeadModalProvider';
 import LeadModalTrigger from '@/components/LeadModalTrigger';
 import { compatibilityBrands } from '@/data/compatibility';
-import { getDictSync, type Locale, locales } from '@/i18n';
+import { type Locale, locales } from '@/i18n';
+import { getDictSync } from '@/i18n/dictionaries';
 import { siteName } from '@/data/site';
 
 export function generateStaticParams() {
@@ -33,13 +34,6 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
     };
   })();
 }
-
-const verificationIcons = {
-  photos: Camera,
-  frequency: Radio,
-  chip: Cpu,
-  receiver: ShieldCheck,
-};
 
 const splitBuyerIntent = (intent: string) => intent.split(',').map((item) => item.trim()).filter(Boolean);
 

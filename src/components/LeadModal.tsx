@@ -23,11 +23,6 @@ function LeadModalContent() {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [requestType, setRequestType] = useState(prefillTypeToRequestType[prefillType] || 'quote');
-
-  // Sync request type when prefillType changes (e.g. modal reopened with different context)
-  useEffect(() => {
-    setRequestType(prefillTypeToRequestType[prefillType] || 'quote');
-  }, [prefillType]);
   const [message, setMessage] = useState('');
   const [files, setFiles] = useState<string[]>([]);
   const fileInputRef = useRef<HTMLInputElement>(null);

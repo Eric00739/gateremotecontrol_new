@@ -28,16 +28,3 @@ export async function getDict(locale: Locale): Promise<Dict> {
     default: return import('./en').then(m => m.default);
   }
 }
-
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-export function getDictSync(locale: Locale): Record<string, any> {
-  switch (locale) {
-    case 'en': return (require('./en') as { default: Record<string, unknown> }).default;
-    case 'it': return (require('./it') as { default: Record<string, unknown> }).default;
-    case 'pt': return (require('./pt') as { default: Record<string, unknown> }).default;
-    case 'es': return (require('./es') as { default: Record<string, unknown> }).default;
-    case 'ru': return (require('./ru') as { default: Record<string, unknown> }).default;
-    case 'fr': return (require('./fr') as { default: Record<string, unknown> }).default;
-    default: return (require('./en') as { default: Record<string, unknown> }).default;
-  }
-}

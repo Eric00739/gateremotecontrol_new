@@ -5,7 +5,8 @@ import { notFound } from 'next/navigation';
 import LeadModalProvider from '@/components/LeadModalProvider';
 import LeadModalTrigger from '@/components/LeadModalTrigger';
 import { compatibilityBrands, getCompatibilityBrand } from '@/data/compatibility';
-import { getDictSync, type Locale, locales } from '@/i18n';
+import { type Locale, locales } from '@/i18n';
+import { getDictSync } from '@/i18n/dictionaries';
 import { siteName, siteUrl } from '@/data/site';
 
 export async function generateStaticParams() {
