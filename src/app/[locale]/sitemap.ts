@@ -12,6 +12,14 @@ export function generateStaticParams() {
   return locales.map((locale) => ({ locale }));
 }
 
+function alternatesFor(path: string) {
+  return {
+    languages: Object.fromEntries(
+      locales.map((loc) => [loc, absoluteUrl(`/${loc}${path}`)])
+    ),
+  };
+}
+
 export default function sitemap(): MetadataRoute.Sitemap {
   const lastModified = new Date();
 
@@ -23,6 +31,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
       lastModified,
       changeFrequency: 'monthly',
       priority: 1,
+      alternates: alternatesFor(''),
     });
 
     entries.push({
@@ -30,6 +39,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
       lastModified,
       changeFrequency: 'weekly',
       priority: 0.9,
+      alternates: alternatesFor('/compatibility'),
     });
 
     for (const brand of compatibilityBrands) {
@@ -38,6 +48,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
         lastModified,
         changeFrequency: 'weekly',
         priority: 0.85,
+        alternates: alternatesFor(`/compatibility/${brand.slug}`),
       });
     }
 
@@ -46,6 +57,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
       lastModified,
       changeFrequency: 'weekly',
       priority: 0.8,
+      alternates: alternatesFor('/blog'),
     });
 
     for (const post of blogPosts) {
@@ -54,6 +66,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
         lastModified,
         changeFrequency: 'monthly',
         priority: 0.7,
+        alternates: alternatesFor(`/blog/${post.slug}`),
       });
     }
   }

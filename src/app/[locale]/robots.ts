@@ -1,10 +1,11 @@
 import type { MetadataRoute } from 'next';
 import { siteUrl } from '@/data/site';
+import { locales } from '@/i18n';
 
 export const dynamic = 'force-static';
 
 export function generateStaticParams() {
-  return ['en'].map((locale) => ({ locale }));
+  return locales.map((locale) => ({ locale }));
 }
 
 export default function robots(): MetadataRoute.Robots {
@@ -13,6 +14,8 @@ export default function robots(): MetadataRoute.Robots {
       userAgent: '*',
       allow: '/',
     },
-    sitemap: new URL('/en/sitemap.xml', siteUrl).toString(),
+    sitemap: locales.map((locale) =>
+      new URL(`/${locale}/sitemap.xml`, siteUrl).toString()
+    ),
   };
 }
