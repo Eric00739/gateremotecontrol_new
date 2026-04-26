@@ -1,14 +1,17 @@
 'use client';
 
 import LeadModalTrigger from './LeadModalTrigger';
+import { useDict } from '@/i18n';
 
 export default function AnnouncementBar() {
+  const dict = useDict();
+
   return (
     <div className="bg-[#062748] relative overflow-hidden border-b border-[#123D63]">
       <div className="waveform-sweep" />
       <div className="relative max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between h-8 gap-4">
         <p className="min-w-0 truncate text-[10px] text-[#C7D7E8] font-medium tracking-wider" style={{ fontFamily: "var(--font-jetbrains-mono), monospace" }}>
-          COMPATIBLE REPLACEMENT REMOTES FOR MAJOR GATE &amp; GARAGE SYSTEMS&nbsp;&nbsp;|&nbsp;&nbsp;OEM / ODM / WHOLESALE
+          {dict.announcement.text}
         </p>
         <LeadModalTrigger
           prefillType="support"
@@ -16,7 +19,7 @@ export default function AnnouncementBar() {
           style={{ fontFamily: "var(--font-jetbrains-mono), monospace" }}
         >
           <span className="signal-dot" />
-          TALK TO AN ENGINEER
+          {dict.announcement.cta}
         </LeadModalTrigger>
       </div>
     </div>

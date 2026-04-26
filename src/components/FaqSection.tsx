@@ -3,8 +3,10 @@
 import { useState } from 'react';
 import { ChevronDown, ChevronUp } from 'lucide-react';
 import { faqs } from '@/data/homepage';
+import { useDict } from '@/i18n';
 
 export default function FaqSection() {
+  const dict = useDict();
   const [openIndex, setOpenIndex] = useState(0);
 
   return (
@@ -14,14 +16,12 @@ export default function FaqSection() {
         <div className="flex items-center gap-3 mb-4">
           <div className="w-8 h-[2px] bg-[#FF8A1F]" />
           <span className="text-[11px] font-semibold tracking-[0.2em] uppercase text-[#FF8A1F]" style={{ fontFamily: "var(--font-jetbrains-mono), monospace" }}>
-            Support
+            {dict.faq.sectionLabel}
           </span>
         </div>
 
         <h2 className="text-3xl lg:text-4xl font-bold text-[#0F172A] mb-12" style={{ fontFamily: "var(--font-outfit), sans-serif" }}>
-          Frequently Asked
-          <br />
-          Questions
+          {dict.faq.title}
         </h2>
 
         <div className="grid md:grid-cols-2 gap-4 max-w-5xl mx-auto">

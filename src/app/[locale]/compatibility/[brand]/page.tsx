@@ -2,47 +2,55 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 import { ArrowLeft, ArrowRight, CheckCircle2 } from 'lucide-react';
 import { notFound } from 'next/navigation';
+import LeadModalProvider from '@/components/LeadModalProvider';
 import LeadModalTrigger from '@/components/LeadModalTrigger';
 import { compatibilityBrands, getCompatibilityBrand } from '@/data/compatibility';
+import { getDictSync, type Locale, locales } from '@/i18n';
 import { siteName, siteUrl } from '@/data/site';
 
 export async function generateStaticParams() {
   return compatibilityBrands.map((brand) => ({ brand: brand.slug }));
 }
 
-export async function generateMetadata({ params }: { params: Promise<{ brand: string }> }): Promise<Metadata> {
-  const { brand: slug } = await params;
-  const brand = getCompatibilityBrand(slug);
+export async function generateMetadata({ params }: { params: Promise<{ brand: string; locale: string }> }): Promise<Metadata> {
+  return (async () => {
+    const { brand: slug, locale: rawLocale } = await params;
+    const locale = locales.includes(rawLocale as Locale) ? rawLocale as Locale : 'en';
+    const dict = getDictSync(locale);
+    const brand = getCompatibilityBrand(slug);
 
-  if (!brand) {
-    return { title: 'Compatibility Page Not Found' };
-  }
+    if (!brand) {
+      return { title: 'Compatibility Page Not Found' };
+    }
 
-  const title = `${brand.name} Compatible Replacement Remotes | GateRemoteSource`;
-  const description = `${brand.shortDescription} Wholesale matching, sample verification, and OEM packaging support. Final compatibility depends on model, frequency, chip, and receiver version.`;
+    const title = `${brand.name} ${dict.brandPage.referenceTitle} | GateRemoteSource`;
+    const description = `${brand.shortDescription} Wholesale matching, sample verification, and OEM packaging support.`;
 
-  return {
-    title,
-    description,
-    alternates: {
-      canonical: `/compatibility/${brand.slug}`,
-    },
-    openGraph: {
-      type: 'article',
-      siteName,
-      url: `/compatibility/${brand.slug}`,
+    return {
       title,
       description,
-    },
-  };
+      alternates: {
+        canonical: `/${locale}/compatibility/${brand.slug}`,
+      },
+      openGraph: {
+        type: 'article',
+        siteName,
+        url: `/${locale}/compatibility/${brand.slug}`,
+        title,
+        description,
+      },
+    };
+  })();
 }
 
 export default async function BrandCompatibilityPage({
   params,
 }: {
-  params: Promise<{ brand: string }>;
+  params: Promise<{ brand: string; locale: string }>;
 }) {
-  const { brand: slug } = await params;
+  const { brand: slug, locale: rawLocale } = await params;
+  const locale = locales.includes(rawLocale as Locale) ? rawLocale as Locale : 'en';
+  const dict = getDictSync(locale);
   const brand = getCompatibilityBrand(slug);
 
   if (!brand) notFound();
@@ -50,15 +58,15 @@ export default async function BrandCompatibilityPage({
   const relatedBrands = compatibilityBrands.filter((item) => item.slug !== brand.slug).slice(0, 5);
   const faqItems = [
     {
-      question: `Are ${brand.name} compatible replacement remotes guaranteed to work?`,
-      answer: `Compatibility is not confirmed by brand name alone. ${brand.name} matching should be checked by model, frequency, receiver version, chip, coding protocol, and regional version before sample or bulk order confirmation.`,
+      question: `${dict.brandPage.faqTitle} ${brand.name}?`,
+      answer: `Compatibility is not confirmed by brand name alone. ${brand.name} matching should be checked by model, frequency, receiver version, chip, coding protocol, and regional version.`,
     },
     {
-      question: `What should buyers send for ${brand.name} remote matching?`,
+      question: `${dict.brandPage.sendDetails} ${brand.name}?`,
       answer: `Send front and back photos of the original remote, the model or frequency label, receiver or opener label, button count, and target country or market version.`,
     },
     {
-      question: `Can ${brand.name} replacement remotes be supplied with OEM packaging?`,
+      question: `${brand.name} OEM packaging?`,
       answer: 'OEM logo, private-label shell options, and packaging support can be discussed after the matching reference and sample requirements are confirmed.',
     },
   ];
@@ -67,24 +75,9 @@ export default async function BrandCompatibilityPage({
     '@context': 'https://schema.org',
     '@type': 'BreadcrumbList',
     itemListElement: [
-      {
-        '@type': 'ListItem',
-        position: 1,
-        name: 'Home',
-        item: siteUrl,
-      },
-      {
-        '@type': 'ListItem',
-        position: 2,
-        name: 'Compatibility',
-        item: `${siteUrl}/compatibility`,
-      },
-      {
-        '@type': 'ListItem',
-        position: 3,
-        name: brand.name,
-        item: `${siteUrl}/compatibility/${brand.slug}`,
-      },
+      { '@type': 'ListItem', position: 1, name: dict.brandPage.breadcrumb.home, item: siteUrl },
+      { '@type': 'ListItem', position: 2, name: dict.brandPage.breadcrumb.compatibility, item: `${siteUrl}/${locale}/compatibility` },
+      { '@type': 'ListItem', position: 3, name: brand.name, item: `${siteUrl}/${locale}/compatibility/${brand.slug}` },
     ],
   };
 
@@ -94,28 +87,20 @@ export default async function BrandCompatibilityPage({
     mainEntity: faqItems.map((item) => ({
       '@type': 'Question',
       name: item.question,
-      acceptedAnswer: {
-        '@type': 'Answer',
-        text: item.answer,
-      },
+      acceptedAnswer: { '@type': 'Answer', text: item.answer },
     })),
   };
 
   return (
-    <div className="bg-[#F8FAFC] text-[#0F172A]">
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
-      />
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
-      />
+    <LeadModalProvider>
+      <div className="bg-[#F8FAFC] text-[#0F172A]">
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }} />
 
       <div className="bg-white border-b border-[#E2E8F0]">
         <div className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8 py-4">
           <Link href="/compatibility" className="inline-flex items-center gap-2 text-sm font-medium text-[#64748B] transition-colors hover:text-[#FF8A1F]">
-            <ArrowLeft className="w-4 h-4" /> Back to compatibility
+            <ArrowLeft className="w-4 h-4" /> {dict.brandPage.backLink}
           </Link>
         </div>
       </div>
@@ -125,10 +110,10 @@ export default async function BrandCompatibilityPage({
         <div className="relative max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8 py-16 lg:py-24">
           <div className="max-w-3xl">
             <p className="text-[11px] font-bold uppercase tracking-[0.2em] text-[#FF8A1F]" style={{ fontFamily: 'var(--font-jetbrains-mono), monospace' }}>
-              Brand Compatibility Reference
+              {dict.brandPage.title}
             </p>
             <h1 className="mt-4 text-3xl lg:text-5xl font-bold leading-tight text-[#F7FBFF]" style={{ fontFamily: 'var(--font-outfit), sans-serif' }}>
-              {brand.name} Compatible Replacement Remotes
+              {brand.name} {dict.brandPage.referenceTitle}
             </h1>
             <p className="mt-5 max-w-2xl text-[#C7D7E8] leading-relaxed">
               {brand.description}
@@ -138,10 +123,10 @@ export default async function BrandCompatibilityPage({
                 prefillType="compatibility"
                 className="btn-glow inline-flex items-center justify-center rounded-lg bg-[#FF8A1F] px-6 py-3 text-sm font-bold text-[#062748] transition-colors hover:bg-[#F97316]"
               >
-                Send {brand.name} Request
+                {dict.compatibility.cta} {brand.name}
               </LeadModalTrigger>
               <Link href="/blog/what-buyers-should-send-before-rf-matching" className="inline-flex items-center gap-2 rounded-lg border border-[#2A587C] px-6 py-3 text-sm font-semibold text-[#C7D7E8] transition-colors hover:border-[#FF8A1F]/50 hover:text-[#F7FBFF]">
-                What to send <ArrowRight className="w-4 h-4 text-[#FF8A1F]" />
+                {dict.compatibility.checklistLabel} <ArrowRight className="w-4 h-4 text-[#FF8A1F]" />
               </Link>
             </div>
           </div>
@@ -153,32 +138,32 @@ export default async function BrandCompatibilityPage({
           <div>
             <div className="mb-6">
               <p className="text-[11px] font-bold uppercase tracking-[0.18em] text-[#FF8A1F]" style={{ fontFamily: 'var(--font-jetbrains-mono), monospace' }}>
-                Matching References
+                {dict.brandPage.referenceTitle}
               </p>
               <h2 className="mt-3 text-2xl lg:text-3xl font-bold" style={{ fontFamily: 'var(--font-outfit), sans-serif' }}>
-                Common Buyer Requests
+                {dict.brandPage.buyerRequests}
               </h2>
             </div>
 
             <div className="overflow-hidden rounded-lg border border-[#E2E8F0] bg-white">
               <div className="hidden bg-[#F1F5F9] px-5 py-3 text-[11px] font-bold uppercase tracking-[0.12em] text-[#64748B] sm:grid sm:grid-cols-[1fr_0.85fr_0.9fr_1.3fr] sm:gap-4" style={{ fontFamily: 'var(--font-jetbrains-mono), monospace' }}>
-                <span>Model Reference</span>
-                <span>Frequency</span>
-                <span>Code Type</span>
-                <span>Matching Note</span>
+                <span>{dict.brandPage.modelRef}</span>
+                <span>{dict.brandPage.frequencyRef}</span>
+                <span>{dict.brandPage.codeTypeRef}</span>
+                <span>{dict.brandPage.matchingNote}</span>
               </div>
               {brand.models.map((model) => (
                 <div key={model.model} className="grid gap-3 border-t border-[#E2E8F0] px-5 py-4 text-sm sm:grid-cols-[1fr_0.85fr_0.9fr_1.3fr] sm:gap-4 sm:first:border-t-0">
                   <div>
-                    <p className="text-[10px] font-bold uppercase tracking-[0.12em] text-[#94A3B8] sm:hidden" style={{ fontFamily: 'var(--font-jetbrains-mono), monospace' }}>Model</p>
+                    <p className="text-[10px] font-bold uppercase tracking-[0.12em] text-[#94A3B8] sm:hidden" style={{ fontFamily: 'var(--font-jetbrains-mono), monospace' }}>{dict.brandPage.modelRef}</p>
                     <p className="font-bold text-[#0F172A]">{model.model}</p>
                   </div>
                   <div>
-                    <p className="text-[10px] font-bold uppercase tracking-[0.12em] text-[#94A3B8] sm:hidden" style={{ fontFamily: 'var(--font-jetbrains-mono), monospace' }}>Frequency</p>
+                    <p className="text-[10px] font-bold uppercase tracking-[0.12em] text-[#94A3B8] sm:hidden" style={{ fontFamily: 'var(--font-jetbrains-mono), monospace' }}>{dict.brandPage.frequencyRef}</p>
                     <p className="text-[#153A5C]">{model.frequency}</p>
                   </div>
                   <div>
-                    <p className="text-[10px] font-bold uppercase tracking-[0.12em] text-[#94A3B8] sm:hidden" style={{ fontFamily: 'var(--font-jetbrains-mono), monospace' }}>Code</p>
+                    <p className="text-[10px] font-bold uppercase tracking-[0.12em] text-[#94A3B8] sm:hidden" style={{ fontFamily: 'var(--font-jetbrains-mono), monospace' }}>{dict.brandPage.codeTypeRef}</p>
                     <p className="text-[#153A5C]">{model.codeType}</p>
                   </div>
                   <p className="text-[#64748B]">{model.note}</p>
@@ -189,10 +174,10 @@ export default async function BrandCompatibilityPage({
 
           <aside className="rounded-lg border border-[#E2E8F0] bg-white p-6">
             <p className="text-[11px] font-bold uppercase tracking-[0.18em] text-[#FF8A1F]" style={{ fontFamily: 'var(--font-jetbrains-mono), monospace' }}>
-              Verification Checklist
+              {dict.brandPage.checklist}
             </p>
             <h2 className="mt-3 text-xl font-bold" style={{ fontFamily: 'var(--font-outfit), sans-serif' }}>
-              Send These Details
+              {dict.brandPage.sendDetails}
             </h2>
             <div className="mt-5 space-y-3">
               {brand.checks.map((check) => (
@@ -206,7 +191,7 @@ export default async function BrandCompatibilityPage({
               prefillType="compatibility"
               className="btn-glow mt-6 inline-flex w-full items-center justify-center rounded-lg bg-[#FF8A1F] px-5 py-3 text-sm font-bold text-[#062748] transition-colors hover:bg-[#F97316]"
             >
-              Check {brand.name} Compatibility
+              {dict.brandPage.checklist} {brand.name}
             </LeadModalTrigger>
           </aside>
         </div>
@@ -217,10 +202,10 @@ export default async function BrandCompatibilityPage({
           <div className="grid gap-8 lg:grid-cols-[0.9fr_1.1fr]">
             <div>
               <h2 className="text-2xl font-bold" style={{ fontFamily: 'var(--font-outfit), sans-serif' }}>
-                Important Compatibility Note
+                {dict.brandPage.importantNote}
               </h2>
               <p className="mt-4 text-sm leading-relaxed text-[#64748B]">
-                {brand.name} brand names are used only as compatibility references. We are an independent aftermarket supplier and are not affiliated with, endorsed by, or sponsored by the brand owner.
+                {brand.name} {dict.brandPage.importantNote}
               </p>
             </div>
             <div className="grid sm:grid-cols-2 gap-4">
@@ -238,10 +223,10 @@ export default async function BrandCompatibilityPage({
         <div className="grid gap-8 lg:grid-cols-[0.85fr_1.15fr] lg:items-start">
           <div>
             <p className="text-[11px] font-bold uppercase tracking-[0.18em] text-[#FF8A1F]" style={{ fontFamily: 'var(--font-jetbrains-mono), monospace' }}>
-              Buyer Questions
+              {dict.brandPage.faqTitle}
             </p>
             <h2 className="mt-3 text-2xl font-bold" style={{ fontFamily: 'var(--font-outfit), sans-serif' }}>
-              {brand.name} Matching FAQ
+              {brand.name} {dict.brandPage.faqHeading}
             </h2>
           </div>
           <div className="divide-y divide-[#E2E8F0] rounded-lg border border-[#E2E8F0] bg-white">
@@ -261,7 +246,7 @@ export default async function BrandCompatibilityPage({
         <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
           <div>
             <p className="text-[11px] font-bold uppercase tracking-[0.18em] text-[#FF8A1F]" style={{ fontFamily: 'var(--font-jetbrains-mono), monospace' }}>
-              More Brand Pages
+              {dict.brandPage.morePages}
             </p>
             <div className="mt-3 flex flex-wrap gap-2">
               {relatedBrands.map((item) => (
@@ -272,10 +257,11 @@ export default async function BrandCompatibilityPage({
             </div>
           </div>
           <Link href="/compatibility" className="inline-flex items-center gap-2 text-sm font-bold text-[#FF8A1F] transition-colors hover:text-[#F97316]">
-            View all compatibility references <ArrowRight className="h-4 w-4" />
+            {dict.compatibilityTable.viewAll} <ArrowRight className="h-4 w-4" />
           </Link>
         </div>
       </section>
     </div>
+    </LeadModalProvider>
   );
 }

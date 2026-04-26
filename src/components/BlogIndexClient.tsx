@@ -6,8 +6,10 @@ import Image from 'next/image';
 import { ArrowRight, Clock } from 'lucide-react';
 import { blogPosts, blogCategories } from '@/data/blog';
 import LeadModalTrigger from '@/components/LeadModalTrigger';
+import { useDict } from '@/i18n';
 
 export default function BlogIndexClient() {
+  const dict = useDict();
   const [activeCategory, setActiveCategory] = useState('all');
 
   const filteredPosts = activeCategory === 'all'
@@ -19,6 +21,15 @@ export default function BlogIndexClient() {
     ? blogPosts.filter(p => !p.featured)
     : filteredPosts;
 
+  const categoryLabels: Record<string, string> = {
+    all: dict.blog.categories.all,
+    compatibility: dict.blog.categories.compatibility,
+    'rolling-code': dict.blog.categories.rollingCode,
+    'oem-odm': dict.blog.categories.oemOdm,
+    'buyer-checklist': dict.blog.categories.buyerChecklist,
+    troubleshooting: dict.blog.categories.troubleshooting,
+  };
+
   return (
     <div className="min-h-screen flex flex-col bg-[#F8FAFC]">
       <section className="bg-[#062748] relative overflow-hidden">
@@ -27,14 +38,14 @@ export default function BlogIndexClient() {
           <div className="flex items-center gap-3 mb-4">
             <div className="w-8 h-[2px] bg-[#FF8A1F]" />
             <span className="text-[11px] font-semibold tracking-[0.16em] uppercase text-[#FF8A1F]" style={{ fontFamily: 'var(--font-jetbrains-mono), monospace' }}>
-              Knowledge Base
+              {dict.blog.sectionLabel}
             </span>
           </div>
           <h1 className="text-3xl lg:text-5xl font-bold text-[#F7FBFF] mb-4" style={{ fontFamily: 'var(--font-outfit), sans-serif' }}>
-            Blog &amp; Compatibility Guides
+            {dict.blog.title}
           </h1>
           <p className="text-[#C7D7E8] max-w-2xl leading-relaxed">
-            Practical guides on frequency matching, rolling code protocols, OEM development, and what buyers need before requesting RF compatibility checks.
+            {dict.blog.subtitle}
           </p>
         </div>
       </section>
@@ -53,7 +64,7 @@ export default function BlogIndexClient() {
                     : 'bg-[#F8FAFC] text-[#64748B] hover:bg-[#EFF6FF] hover:text-[#0F172A]'
                 }`}
               >
-                {cat.label}
+                {categoryLabels[cat.key]}
               </button>
             ))}
           </div>
@@ -64,7 +75,7 @@ export default function BlogIndexClient() {
         {featuredPost && (
           <div className="mb-12">
             <span className="text-[11px] font-semibold tracking-[0.16em] uppercase text-[#FF8A1F] mb-4 block" style={{ fontFamily: 'var(--font-jetbrains-mono), monospace' }}>
-              Featured Article
+              {dict.blog.featured}
             </span>
             <Link href={`/blog/${featuredPost.slug}`} className="group block bg-white rounded-lg border border-[#E2E8F0] overflow-hidden card-hover-light">
               <div className="grid lg:grid-cols-[0.9fr_1.1fr] gap-0">
@@ -79,7 +90,7 @@ export default function BlogIndexClient() {
                 </div>
                 <div className="p-7 lg:p-9 flex flex-col justify-center">
                   <span className="inline-block self-start rounded-md bg-[#FF8A1F]/10 text-[#C45A00] text-[11px] font-bold px-3 py-1 mb-4">
-                    {blogCategories.find(c => c.key === featuredPost.category)?.label || featuredPost.category}
+                    {categoryLabels[featuredPost.category]}
                   </span>
                   <h2 className="text-xl lg:text-3xl font-bold text-[#0F172A] mb-3 leading-tight" style={{ fontFamily: 'var(--font-outfit), sans-serif' }}>
                     {featuredPost.title}
@@ -90,7 +101,7 @@ export default function BlogIndexClient() {
                       {featuredPost.readTime}
                     </span>
                     <span className="inline-flex items-center gap-1 text-[12px] font-bold text-[#FF8A1F] group-hover:gap-2 transition-all">
-                      Read More <ArrowRight className="w-3.5 h-3.5" />
+                      {dict.blog.readMore} <ArrowRight className="w-3.5 h-3.5" />
                     </span>
                   </div>
                 </div>
@@ -113,7 +124,7 @@ export default function BlogIndexClient() {
                 </div>
                 <div className="p-5">
                   <span className="inline-block rounded-md bg-[#FF8A1F]/10 text-[#C45A00] text-[11px] font-bold px-3 py-1 mb-3">
-                    {blogCategories.find(c => c.key === post.category)?.label || post.category}
+                    {categoryLabels[post.category]}
                   </span>
                   <h3 className="text-base font-bold text-[#0F172A] mb-2 leading-snug" style={{ fontFamily: 'var(--font-outfit), sans-serif' }}>
                     {post.title}
@@ -124,7 +135,7 @@ export default function BlogIndexClient() {
                       <Clock className="w-3 h-3" /> {post.readTime}
                     </span>
                     <span className="text-[11px] font-bold text-[#FF8A1F] group-hover:translate-x-1 transition-transform inline-flex items-center gap-1">
-                      Read More <ArrowRight className="w-3 h-3" />
+                      {dict.blog.readMore} <ArrowRight className="w-3 h-3" />
                     </span>
                   </div>
                 </div>
@@ -133,13 +144,13 @@ export default function BlogIndexClient() {
           </div>
         ) : (
           <div className="text-center py-16">
-            <p className="text-[#64748B] text-sm">No articles found in this category.</p>
+            <p className="text-[#64748B] text-sm">{dict.blog.noArticles}</p>
             <button
               type="button"
               onClick={() => setActiveCategory('all')}
               className="text-[#FF8A1F] text-sm font-bold mt-2 block mx-auto"
             >
-              View all articles
+              {dict.blog.viewAll}
             </button>
           </div>
         )}
@@ -148,17 +159,17 @@ export default function BlogIndexClient() {
           <div className="flex flex-col gap-5 lg:flex-row lg:items-center lg:justify-between">
             <div>
               <h3 className="text-xl font-bold text-[#F7FBFF] mb-3" style={{ fontFamily: 'var(--font-outfit), sans-serif' }}>
-                Need help with a compatibility question?
+                {dict.blog.helpTitle}
               </h3>
               <p className="text-[#C7D7E8] text-sm max-w-lg">
-                Send us brand, model, frequency, or photos. Our team will help verify compatibility.
+                {dict.blog.helpSubtitle}
               </p>
             </div>
             <LeadModalTrigger
               prefillType="support"
               className="inline-flex items-center justify-center gap-2 bg-[#FF8A1F] hover:bg-[#F97316] text-[#062748] font-bold px-6 py-3 rounded-lg transition-all text-sm btn-glow"
             >
-              Get Compatibility Support <ArrowRight className="w-4 h-4" />
+              {dict.blog.helpCta} <ArrowRight className="w-4 h-4" />
             </LeadModalTrigger>
           </div>
         </div>

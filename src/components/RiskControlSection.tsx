@@ -1,9 +1,14 @@
+'use client';
+
 import { Shield, AlertTriangle, FileSearch, FlaskConical, Package, FileCheck, Info } from 'lucide-react';
 import { riskCards } from '@/data/homepage';
+import { useDict } from '@/i18n';
 
 const iconMap = [Shield, AlertTriangle, FileSearch, FlaskConical, Package, FileCheck];
 
 export default function RiskControlSection() {
+  const dict = useDict();
+
   return (
     <section className="bg-[#F8FAFC]">
       <div className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8 py-16 lg:py-24">
@@ -11,14 +16,12 @@ export default function RiskControlSection() {
         <div className="flex items-center gap-3 mb-4">
           <div className="w-8 h-[2px] bg-[#FF8A1F]" />
           <span className="text-[11px] font-semibold tracking-[0.2em] uppercase text-[#FF8A1F]" style={{ fontFamily: "var(--font-jetbrains-mono), monospace" }}>
-            Risk Management
+            {dict.risk.sectionLabel}
           </span>
         </div>
 
         <h2 className="text-3xl lg:text-4xl font-bold text-[#0F172A] mb-12 max-w-2xl" style={{ fontFamily: "var(--font-outfit), sans-serif" }}>
-          How We Reduce Legal &amp;
-          <br />
-          Compatibility Risk
+          {dict.risk.title}
         </h2>
 
         {/* 6-column single row */}

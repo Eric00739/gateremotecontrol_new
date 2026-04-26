@@ -2,16 +2,9 @@
 
 import Link from 'next/link';
 import LeadModalTrigger from './LeadModalTrigger';
+import { useDict } from '@/i18n';
 
-const exploreLinks = [
-  { label: 'Products', href: '/#products' },
-  { label: 'Compatibility', href: '/compatibility' },
-  { label: 'OEM/ODM', href: '/#oem-odm' },
-  { label: 'Factory', href: '/#factory' },
-  { label: 'Blog', href: '/blog' },
-];
-
-const compatibilityLinks = [
+const compatibilityBrands = [
   { label: 'FAAC', href: '/compatibility/faac' },
   { label: 'Nice', href: '/compatibility/nice' },
   { label: 'BFT', href: '/compatibility/bft' },
@@ -21,6 +14,16 @@ const compatibilityLinks = [
 ];
 
 export default function Footer() {
+  const dict = useDict();
+
+  const exploreLinks = [
+    { label: dict.footer.products, href: '/#products' },
+    { label: dict.footer.compatibility, href: '/compatibility' },
+    { label: dict.header.oemOdm, href: '/#oem-odm' },
+    { label: dict.header.factory, href: '/#factory' },
+    { label: dict.footer.resources, href: '/blog' },
+  ];
+
   return (
     <footer id="contact" className="bg-[#062748] text-[#F7FBFF] border-t border-[#123D63]">
       <div className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8 py-10 lg:py-12">
@@ -47,15 +50,15 @@ export default function Footer() {
             </div>
 
             <p className="text-sm leading-relaxed text-[#C7D7E8] max-w-md">
-              Aftermarket remote controls for gate and garage door systems. Wholesale supply, model matching, and OEM customization.
+              {dict.footer.description}
             </p>
 
             <div className="mt-5">
               <p className="text-[10px] font-semibold uppercase tracking-[0.18em] text-[#FF8A1F]" style={{ fontFamily: 'var(--font-jetbrains-mono), monospace' }}>
-                Compatibility references
+                {dict.footer.compatibilityReferences}
               </p>
               <div className="mt-2 flex flex-wrap gap-2">
-                {compatibilityLinks.map((brand) => (
+                {compatibilityBrands.map((brand) => (
                   <Link key={brand.href} href={brand.href} className="rounded-md border border-[#123D63] px-2.5 py-1 text-xs text-[#C7D7E8] transition-colors hover:border-[#FF8A1F]/50 hover:text-[#FF8A1F]">
                     {brand.label}
                   </Link>
@@ -67,7 +70,7 @@ export default function Footer() {
           {/* Explore */}
           <div>
             <h4 className="text-sm font-semibold text-[#F7FBFF] mb-4" style={{ fontFamily: 'var(--font-outfit), sans-serif' }}>
-              Explore
+              {dict.footer.company}
             </h4>
             <nav className="grid grid-cols-2 gap-x-6 gap-y-2 lg:grid-cols-1">
               {exploreLinks.map((link) => (
@@ -81,7 +84,7 @@ export default function Footer() {
           {/* Contact */}
           <div>
             <h4 className="text-sm font-semibold text-[#F7FBFF] mb-4" style={{ fontFamily: 'var(--font-outfit), sans-serif' }}>
-              Send your model list
+              {dict.footer.sendModelList}
             </h4>
             <div className="space-y-2 text-sm text-[#C7D7E8]">
               <a href="mailto:sales@gateremotesource.com" className="block hover:text-[#FF8A1F] transition-colors">
@@ -98,17 +101,17 @@ export default function Footer() {
               prefillType="quote"
               className="mt-5 inline-flex items-center justify-center rounded-lg bg-[#FF8A1F] px-5 py-2.5 text-sm font-bold text-[#062748] transition-colors hover:bg-[#F97316] btn-glow"
             >
-              Send Inquiry
+              {dict.leadModal.title}
             </LeadModalTrigger>
           </div>
         </div>
 
         <div className="mt-9 border-t border-[#123D63] pt-5 flex flex-col gap-3 text-xs text-[#7F9AB7] sm:flex-row sm:items-center sm:justify-between">
           <p className="max-w-3xl leading-relaxed">
-            Brand names are used for compatibility reference only. All trademarks belong to their respective owners.
+            {dict.footer.disclaimer}
           </p>
           <p className="shrink-0">
-            &copy; {new Date().getFullYear()} GateRemoteSource
+            &copy; {new Date().getFullYear()} GateRemoteSource. {dict.footer.copyright}
           </p>
         </div>
       </div>

@@ -4,8 +4,10 @@ import Link from 'next/link';
 import { ArrowRight, Search } from 'lucide-react';
 import { useMemo, useState } from 'react';
 import { brands, compatibilityRows } from '@/data/homepage';
+import { useDict } from '@/i18n';
 
 export default function BrandCompatibilitySection() {
+  const dict = useDict();
   const [query, setQuery] = useState('');
   const normalizedQuery = query.trim().toLowerCase();
   const filteredRows = useMemo(() => {
@@ -26,18 +28,16 @@ export default function BrandCompatibilitySection() {
         <div className="flex items-center gap-3 mb-4">
           <div className="w-8 h-[2px] bg-[#FF8A1F]" />
           <span className="text-[11px] font-semibold tracking-[0.2em] uppercase text-[#FF8A1F]" style={{ fontFamily: "var(--font-jetbrains-mono), monospace" }}>
-            Compatibility Matrix
+            {dict.compatibilityTable.title}
           </span>
         </div>
 
         <div className="max-w-2xl mb-8">
           <h2 className="text-3xl lg:text-4xl font-bold text-[#0F172A] mb-4" style={{ fontFamily: "var(--font-outfit), sans-serif" }}>
-            Compatibility Search
-            <br />
-            for Common Remote Models
+            {dict.compatibilityTable.title}
           </h2>
           <p className="text-[#64748B] leading-relaxed">
-            Search by brand, model, frequency, or code type. Availability is model-specific and should be confirmed before bulk orders.
+            {dict.compatibilityTable.subtitle}
           </p>
         </div>
 
@@ -47,22 +47,65 @@ export default function BrandCompatibilitySection() {
             type="search"
             value={query}
             onChange={(event) => setQuery(event.target.value)}
-            placeholder="Search brand, model, frequency, or code type"
+            placeholder={dict.compatibilityTable.searchPlaceholder}
             className="w-full rounded-lg border border-[#D8E4F0] bg-[#F8FAFC] py-3 pl-11 pr-4 text-sm text-[#0F172A] placeholder:text-[#94A3B8] outline-none transition-colors focus:border-[#FF8A1F]/60 focus:bg-white"
           />
         </div>
 
-        <div className="overflow-hidden rounded-lg border border-[#D8E4F0] bg-white shadow-sm shadow-[#062748]/5 mb-6">
+        <div className="lg:hidden space-y-3 mb-6">
+          {filteredRows.map((row) => (
+            <div key={`${row.brand}-${row.model}`} className="rounded-lg border border-[#D8E4F0] bg-white p-4 shadow-sm shadow-[#062748]/5">
+              <div className="flex items-start justify-between gap-4">
+                <div>
+                  <p className="text-[10px] uppercase tracking-[0.14em] text-[#94A3B8]" style={{ fontFamily: "var(--font-jetbrains-mono), monospace" }}>
+                    {dict.compatibilityTable.brandHeader}
+                  </p>
+                  <h3 className="mt-1 text-base font-bold text-[#0F172A]" style={{ fontFamily: "var(--font-outfit), sans-serif" }}>
+                    {row.brand}
+                  </h3>
+                </div>
+                <span className={`rounded-md px-2.5 py-1 text-xs font-bold ${row.solution === 'Available' ? 'bg-[#FF8A1F]/10 text-[#C45A00]' : 'bg-[#EFF6FF] text-[#1D4ED8]'}`}>
+                  {row.solution}
+                </span>
+              </div>
+              <div className="mt-4 grid grid-cols-2 gap-3 text-sm">
+                <div>
+                  <p className="text-[10px] uppercase tracking-[0.12em] text-[#94A3B8]" style={{ fontFamily: "var(--font-jetbrains-mono), monospace" }}>{dict.compatibilityTable.modelHeader}</p>
+                  <p className="mt-1 font-semibold text-[#153A5C]">{row.model}</p>
+                </div>
+                <div>
+                  <p className="text-[10px] uppercase tracking-[0.12em] text-[#94A3B8]" style={{ fontFamily: "var(--font-jetbrains-mono), monospace" }}>{dict.compatibilityTable.frequencyHeader}</p>
+                  <p className="mt-1 font-semibold text-[#153A5C]">{row.frequency}</p>
+                </div>
+                <div>
+                  <p className="text-[10px] uppercase tracking-[0.12em] text-[#94A3B8]" style={{ fontFamily: "var(--font-jetbrains-mono), monospace" }}>{dict.compatibilityTable.codeTypeHeader}</p>
+                  <p className="mt-1 text-[#64748B]">{row.codeType}</p>
+                </div>
+                <div>
+                  <p className="text-[10px] uppercase tracking-[0.12em] text-[#94A3B8]" style={{ fontFamily: "var(--font-jetbrains-mono), monospace" }}>{dict.compatibilityTable.sampleTestHeader}</p>
+                  <p className="mt-1 text-[#64748B]">{row.sampleTest}</p>
+                </div>
+              </div>
+            </div>
+          ))}
+          {filteredRows.length === 0 && (
+            <div className="rounded-lg border border-[#D8E4F0] bg-white px-5 py-8 text-center text-sm text-[#64748B]">
+              {dict.compatibilityTable.noMatch}
+            </div>
+          )}
+        </div>
+
+        <div className="hidden lg:block overflow-hidden rounded-lg border border-[#D8E4F0] bg-white shadow-sm shadow-[#062748]/5 mb-6">
           <div className="overflow-x-auto">
             <table className="w-full min-w-[760px] text-left">
               <thead className="bg-[#F8FAFC] text-[11px] uppercase tracking-[0.14em] text-[#64748B]" style={{ fontFamily: "var(--font-jetbrains-mono), monospace" }}>
                 <tr>
-                  <th className="px-5 py-4 font-semibold">Brand</th>
-                  <th className="px-5 py-4 font-semibold">Model</th>
-                  <th className="px-5 py-4 font-semibold">Frequency</th>
-                  <th className="px-5 py-4 font-semibold">Code Type</th>
-                  <th className="px-5 py-4 font-semibold">Available Solution</th>
-                  <th className="px-5 py-4 font-semibold">Need Sample Test</th>
+                  <th className="px-5 py-4 font-semibold">{dict.compatibilityTable.brandHeader}</th>
+                  <th className="px-5 py-4 font-semibold">{dict.compatibilityTable.modelHeader}</th>
+                  <th className="px-5 py-4 font-semibold">{dict.compatibilityTable.frequencyHeader}</th>
+                  <th className="px-5 py-4 font-semibold">{dict.compatibilityTable.codeTypeHeader}</th>
+                  <th className="px-5 py-4 font-semibold">{dict.compatibilityTable.solutionHeader}</th>
+                  <th className="px-5 py-4 font-semibold">{dict.compatibilityTable.sampleTestHeader}</th>
                 </tr>
               </thead>
               <tbody className="divide-y divide-[#E2E8F0]">
@@ -85,7 +128,7 @@ export default function BrandCompatibilitySection() {
           </div>
           {filteredRows.length === 0 && (
             <div className="px-5 py-8 text-center text-sm text-[#64748B]">
-              No sample row matched. Send brand, model, frequency, and photos for confirmation.
+              {dict.compatibilityTable.noMatch}
             </div>
           )}
         </div>
@@ -107,10 +150,10 @@ export default function BrandCompatibilitySection() {
           </div>
           <div className="space-y-3">
             <p className="text-xs text-[#64748B] leading-relaxed">
-              The table is a sample compatibility reference. Final matching depends on model, frequency, chip type, PCB version, coding protocol, and regional version.
+              {dict.compatibility.verificationItems[0] ? 'The table is a sample compatibility reference. Final matching depends on model, frequency, chip type, PCB version, coding protocol, and regional version.' : ''}
             </p>
             <Link href="/compatibility" className="inline-flex items-center gap-1.5 text-xs font-bold text-[#FF8A1F] transition-colors hover:text-[#F97316]">
-              View full brand compatibility guides <ArrowRight className="h-3.5 w-3.5" />
+              {dict.compatibilityTable.viewAll} <ArrowRight className="h-3.5 w-3.5" />
             </Link>
           </div>
         </div>

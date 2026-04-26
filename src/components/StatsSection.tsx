@@ -1,6 +1,13 @@
+'use client';
+
 import { stats } from '@/data/homepage';
+import { useDict } from '@/i18n';
 
 export default function StatsSection() {
+  const dict = useDict();
+
+  const labelKeys = ['skuRange', 'marketSupport', 'sampleLeadTime', 'brandSystems', 'logoPackaging'];
+
   return (
     <section className="bg-[#F8FAFC] border-b border-[#E2E8F0] relative">
       {/* Top accent line */}
@@ -24,7 +31,7 @@ export default function StatsSection() {
                   {stat.value}
                 </div>
                 <p className="text-[11px] text-[#64748B] tracking-wider uppercase font-medium" style={{ fontFamily: "var(--font-jetbrains-mono), monospace" }}>
-                  {stat.label}
+                  {dict.stats[labelKeys[i]]}
                 </p>
               </div>
             );

@@ -1,9 +1,14 @@
+'use client';
+
 import { Palette, Radio, Box, LayoutGrid, Settings, Package, FileText, Factory } from 'lucide-react';
 import { oemSteps } from '@/data/homepage';
+import { useDict } from '@/i18n';
 
 const iconMap = [Palette, Radio, Box, LayoutGrid, Settings, Package, FileText, Factory];
 
 export default function OemOdmSection() {
+  const dict = useDict();
+
   return (
     <section id="oem-odm" className="bg-white">
       <div className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8 py-16 lg:py-24">
@@ -11,15 +16,15 @@ export default function OemOdmSection() {
         <div className="flex items-center gap-3 mb-4">
           <div className="w-8 h-[2px] bg-[#FF8A1F]" />
           <span className="text-[11px] font-semibold tracking-[0.2em] uppercase text-[#FF8A1F]" style={{ fontFamily: "var(--font-jetbrains-mono), monospace" }}>
-            OEM / ODM
+            {dict.oem.sectionLabel}
           </span>
         </div>
 
         <h2 className="text-3xl lg:text-4xl font-bold text-[#0F172A] mb-4" style={{ fontFamily: "var(--font-outfit), sans-serif" }}>
-          Customization Process
+          {dict.oem.title}
         </h2>
         <p className="text-[#64748B] mb-14 max-w-xl">
-          From concept to mass production, we handle every step of your custom RF solution.
+          {dict.oem.subtitle || 'From concept to mass production, we handle every step of your custom RF solution.'}
         </p>
 
         {/* Horizontal flow grid */}

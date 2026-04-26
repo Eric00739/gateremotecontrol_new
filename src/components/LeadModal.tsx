@@ -4,45 +4,14 @@ import { createPortal } from 'react-dom';
 import { useEffect, useRef, useState } from 'react';
 import { Paperclip, X } from 'lucide-react';
 import { useLeadModal } from './LeadModalProvider';
+import { useDict } from '@/i18n';
 
 const WHATSAPP_NUMBER = '8615899648898';
 const EMAIL = 'sales@gateremotesource.com';
 
-const requestTypeOptions = [
-  { value: 'quote', label: 'Quote' },
-  { value: 'compatibility', label: 'Compatibility Check' },
-  { value: 'oem', label: 'OEM / ODM' },
-  { value: 'sample', label: 'Sample Request' },
-  { value: 'support', label: 'Support' },
-];
-
-const prefillTypeToRequestType: Record<string, string> = {
-  quote: 'quote',
-  compatibility: 'compatibility',
-  oem: 'oem',
-  sample: 'sample',
-  support: 'compatibility',
-};
-
-function buildMessage(name: string, email: string, requestType: string, message: string): string {
-  const label = requestTypeOptions.find(o => o.value === requestType)?.label || requestType;
-  return [`Name: ${name}`, `Email: ${email}`, `Request: ${label}`, message].filter(Boolean).join('\n');
-}
-
-function sendWhatsApp(name: string, email: string, requestType: string, message: string) {
-  const text = buildMessage(name, email, requestType, message);
-  window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(text)}`, '_blank');
-}
-
-function sendEmail(name: string, email: string, requestType: string, message: string) {
-  const label = requestTypeOptions.find(o => o.value === requestType)?.label || 'General';
-  const subject = encodeURIComponent(`Inquiry: ${label}`);
-  const body = encodeURIComponent(buildMessage(name, email, requestType, message));
-  window.location.href = `mailto:${EMAIL}?subject=${subject}&body=${body}`;
-}
-
 function LeadModalContent() {
   const { open, prefillType, closeModal } = useLeadModal();
+  const dict = useDict();
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [requestType, setRequestType] = useState(prefillTypeToRequestType[prefillType] || 'quote');
@@ -66,16 +35,29 @@ function LeadModalContent() {
 
   if (!open) return null;
 
+  const requestTypeOptions = [
+    { value: 'quote', label: dict.leadModal.requestTypes.quote },
+    { value: 'compatibility', label: dict.leadModal.requestTypes.compatibility },
+    { value: 'oem', label: dict.leadModal.requestTypes.oem },
+    { value: 'sample', label: dict.leadModal.requestTypes.sample },
+    { value: 'support', label: dict.leadModal.requestTypes.support },
+  ];
+
   const handleFiles = (e: React.ChangeEvent<HTMLInputElement>) => {
     const selected = Array.from(e.target.files || []).map(f => f.name);
     setFiles(prev => [...prev, ...selected]);
+  };
+
+  const buildMessage = (): string => {
+    const label = requestTypeOptions.find(o => o.value === requestType)?.label || requestType;
+    return [`Name: ${name}`, `Email: ${email}`, `Request: ${label}`, message].filter(Boolean).join('\n');
   };
 
   const handleSubmit = (action: () => void) => {
     if (!name.trim() || !email.trim()) return;
     action();
     if (files.length > 0) {
-      alert(`Remember to attach: ${files.join(', ')}`);
+      alert(`${dict.leadModal.rememberAttach}: ${files.join(', ')}`);
     }
     closeModal();
     setName('');
@@ -98,7 +80,7 @@ function LeadModalContent() {
         {/* Header */}
         <div className="sticky top-0 bg-white border-b border-[#E2E8F0] px-5 py-3.5 flex items-center justify-between rounded-t-2xl z-10">
           <h2 className="text-base font-bold text-[#0F172A]" style={{ fontFamily: 'var(--font-outfit), sans-serif' }}>
-            Send Inquiry
+            {dict.leadModal.title}
           </h2>
           <button
             type="button"
@@ -112,17 +94,17 @@ function LeadModalContent() {
         {/* Form */}
         <div className="px-5 py-4 space-y-3.5">
           <div>
-            <label className={labelClass}>Name *</label>
-            <input type="text" required value={name} onChange={e => setName(e.target.value)} placeholder="Your name" className={inputClass} />
+            <label className={labelClass}>{dict.leadModal.nameLabel}</label>
+            <input type="text" required value={name} onChange={e => setName(e.target.value)} placeholder={dict.leadModal.namePlaceholder} className={inputClass} />
           </div>
 
           <div>
-            <label className={labelClass}>Email *</label>
-            <input type="email" required value={email} onChange={e => setEmail(e.target.value)} placeholder="you@company.com" className={inputClass} />
+            <label className={labelClass}>{dict.leadModal.emailLabel}</label>
+            <input type="email" required value={email} onChange={e => setEmail(e.target.value)} placeholder={dict.leadModal.emailPlaceholder} className={inputClass} />
           </div>
 
           <div>
-            <label className={labelClass}>Request Type</label>
+            <label className={labelClass}>{dict.leadModal.requestTypeLabel}</label>
             <select value={requestType} onChange={e => setRequestType(e.target.value)} className={inputClass}>
               {requestTypeOptions.map(opt => (
                 <option key={opt.value} value={opt.value}>{opt.label}</option>
@@ -131,13 +113,13 @@ function LeadModalContent() {
           </div>
 
           <div>
-            <label className={labelClass}>Message</label>
-            <textarea value={message} onChange={e => setMessage(e.target.value)} placeholder="e.g. FAAC XT2, 433.92MHz, Rolling Code — or any details" rows={4} className={`${inputClass} resize-none`} />
+            <label className={labelClass}>{dict.leadModal.detailsLabel}</label>
+            <textarea value={message} onChange={e => setMessage(e.target.value)} placeholder={dict.leadModal.detailsPlaceholder} rows={4} className={`${inputClass} resize-none`} />
           </div>
 
           {/* Attachments */}
           <div>
-            <label className={labelClass}>Attachments</label>
+            <label className={labelClass}>{dict.leadModal.attachmentsLabel}</label>
             <input type="file" multiple ref={fileInputRef} onChange={handleFiles} className="hidden" accept="image/*,.pdf,.doc,.docx" />
             <button
               type="button"
@@ -145,7 +127,7 @@ function LeadModalContent() {
               className="w-full flex items-center gap-2 rounded-lg border border-dashed border-[#CBD5E1] bg-[#F8FAFC] px-3 py-2.5 text-sm text-[#64748B] hover:border-[#FF8A1F]/50 hover:text-[#FF8A1F] transition-colors cursor-pointer"
             >
               <Paperclip className="w-4 h-4" />
-              Add photos or files
+              {dict.leadModal.addFiles}
             </button>
             {files.length > 0 && (
               <div className="mt-2 space-y-1">
@@ -159,7 +141,7 @@ function LeadModalContent() {
                 ))}
               </div>
             )}
-            <p className="text-[10px] text-[#94A3B8] mt-1.5">Files will be listed in the message. Attach them manually after opening WhatsApp or Email.</p>
+            <p className="text-[10px] text-[#94A3B8] mt-1.5">{dict.leadModal.attachmentNote}</p>
           </div>
         </div>
 
@@ -168,18 +150,31 @@ function LeadModalContent() {
           <button
             type="button"
             disabled={!name.trim() || !email.trim()}
-            onClick={() => handleSubmit(() => sendWhatsApp(name, email, requestType, message))}
+            onClick={() => {
+              const text = buildMessage();
+              handleSubmit(() => {
+                window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(text)}`, '_blank');
+              });
+            }}
             className="flex-1 bg-[#22C55E] hover:bg-[#16A34A] disabled:opacity-40 disabled:cursor-not-allowed text-white font-bold py-2.5 rounded-lg transition-colors text-sm flex items-center justify-center gap-2"
           >
-            Send via WhatsApp
+            {dict.leadModal.sendWhatsApp}
           </button>
           <button
             type="button"
             disabled={!name.trim() || !email.trim()}
-            onClick={() => handleSubmit(() => sendEmail(name, email, requestType, message))}
+            onClick={() => {
+              const text = buildMessage();
+              const label = requestTypeOptions.find(o => o.value === requestType)?.label || 'General';
+              handleSubmit(() => {
+                const subject = encodeURIComponent(`Inquiry: ${label}`);
+                const body = encodeURIComponent(text);
+                window.location.href = `mailto:${EMAIL}?subject=${subject}&body=${body}`;
+              });
+            }}
             className="flex-1 bg-[#0B3A63] hover:bg-[#062748] disabled:opacity-40 disabled:cursor-not-allowed text-white font-bold py-2.5 rounded-lg transition-colors text-sm flex items-center justify-center gap-2"
           >
-            Send by Email
+            {dict.leadModal.sendEmail}
           </button>
         </div>
       </div>
@@ -187,5 +182,13 @@ function LeadModalContent() {
     document.body
   );
 }
+
+const prefillTypeToRequestType: Record<string, string> = {
+  quote: 'quote',
+  compatibility: 'compatibility',
+  oem: 'oem',
+  sample: 'sample',
+  support: 'compatibility',
+};
 
 export default LeadModalContent;

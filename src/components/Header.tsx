@@ -1,20 +1,31 @@
 'use client';
 
 import Link from 'next/link';
-import { Menu, X } from 'lucide-react';
+import { Menu, X, Globe } from 'lucide-react';
 import { useState } from 'react';
+import { usePathname } from 'next/navigation';
 import LeadModalTrigger from './LeadModalTrigger';
-
-const navItems = [
-  { label: 'Products', href: '/#products' },
-  { label: 'Compatibility', href: '/compatibility' },
-  { label: 'OEM/ODM', href: '/#oem-odm' },
-  { label: 'Factory', href: '/#factory' },
-  { label: 'Blog', href: '/blog' },
-];
+import { useDict, useLocale, locales, localeNames, type Locale } from '@/i18n';
 
 export default function Header() {
   const [mobileOpen, setMobileOpen] = useState(false);
+  const [langOpen, setLangOpen] = useState(false);
+  const dict = useDict();
+  const currentLocale = useLocale();
+  const pathname = usePathname();
+
+  const navItems = [
+    { label: dict.header.products, href: '/#products' },
+    { label: dict.header.compatibility, href: '/compatibility' },
+    { label: dict.header.oemOdm, href: '/#oem-odm' },
+    { label: dict.header.factory, href: '/#factory' },
+    { label: dict.header.blog, href: '/blog' },
+  ];
+
+  const switchLocale = (locale: Locale) => {
+    const newPath = pathname.replace(/^\/[a-z]{2}/, `/${locale}`);
+    window.location.href = newPath;
+  };
 
   return (
     <header className="sticky top-0 z-50 bg-white/95 backdrop-blur-xl border-b border-[#D8E4F0] shadow-sm shadow-[#062748]/5">
@@ -32,7 +43,7 @@ export default function Header() {
                 <span className="text-[#0B2745] font-extrabold text-lg tracking-tight" style={{ fontFamily: "var(--font-outfit), sans-serif" }}>Source</span>
               </div>
               <p className="text-[8px] text-[#6B7F96] tracking-[0.2em] uppercase -mt-0.5" style={{ fontFamily: "var(--font-jetbrains-mono), monospace" }}>
-                OEM / ODM RF CONTROL SOLUTIONS
+                {dict.header.tagline}
               </p>
             </div>
           </Link>
@@ -54,15 +65,44 @@ export default function Header() {
               className="text-[12px] text-[#153A5C] hover:text-[#FF8A1F] transition-colors font-semibold tracking-wide px-3 py-2 rounded-lg hover:bg-[#FF8A1F]/8 cursor-pointer"
               style={{ fontFamily: "var(--font-dm-sans), sans-serif" }}
             >
-              Contact
+              {dict.header.contact}
             </LeadModalTrigger>
           </nav>
 
           {/* Right Actions */}
           <div className="flex items-center gap-3">
-            <span className="hidden md:inline text-[10px] text-[#6B7F96] border border-[#D8E4F0] rounded-md px-2 py-1 font-medium" style={{ fontFamily: "var(--font-jetbrains-mono), monospace" }}>
-              EN
-            </span>
+            {/* Language Switcher */}
+            <div className="relative">
+              <button
+                type="button"
+                onClick={() => setLangOpen(!langOpen)}
+                className="flex items-center gap-1 text-[10px] text-[#6B7F96] border border-[#D8E4F0] rounded-md px-2 py-1 font-medium hover:border-[#FF8A1F]/50 hover:text-[#FF8A1F] transition-colors"
+                style={{ fontFamily: "var(--font-jetbrains-mono), monospace" }}
+              >
+                <Globe className="w-3 h-3" />
+                {localeNames[currentLocale]}
+              </button>
+              {langOpen && (
+                <div className="absolute right-0 top-full mt-1 bg-white border border-[#E2E8F0] rounded-lg shadow-lg py-1 z-50 min-w-[80px]">
+                  {locales.map((locale) => (
+                    <button
+                      key={locale}
+                      type="button"
+                      onClick={() => { switchLocale(locale); setLangOpen(false); }}
+                      className={`w-full text-left px-3 py-1.5 text-xs font-medium transition-colors ${
+                        locale === currentLocale
+                          ? 'bg-[#FF8A1F]/10 text-[#FF8A1F]'
+                          : 'text-[#64748B] hover:bg-[#F8FAFC]'
+                      }`}
+                      style={{ fontFamily: "var(--font-jetbrains-mono), monospace" }}
+                    >
+                      {localeNames[locale]}
+                    </button>
+                  ))}
+                </div>
+              )}
+            </div>
+
             <a
               href="https://wa.me/8615899648898"
               target="_blank"
@@ -79,7 +119,7 @@ export default function Header() {
               className="bg-[#FF8A1F] hover:bg-[#F97316] text-[#062748] text-[12px] font-bold px-5 py-2 rounded-lg transition-all btn-glow shadow-sm shadow-orange-500/20"
               style={{ fontFamily: "var(--font-dm-sans), sans-serif" }}
             >
-              Get a Quote
+              {dict.header.quote}
             </LeadModalTrigger>
 
             {/* Mobile menu button */}
@@ -112,14 +152,32 @@ export default function Header() {
                 className="text-sm text-[#153A5C] hover:text-[#FF8A1F] font-semibold py-2 px-3 rounded-lg hover:bg-[#FF8A1F]/8 cursor-pointer"
                 onClick={() => setMobileOpen(false)}
               >
-                Contact
+                {dict.header.contact}
               </LeadModalTrigger>
+              {/* Mobile Language Switcher */}
+              <div className="flex flex-wrap gap-1 px-3 py-1">
+                {locales.map((locale) => (
+                  <button
+                    key={locale}
+                    type="button"
+                    onClick={() => { switchLocale(locale); setMobileOpen(false); }}
+                    className={`rounded-md px-3 py-1 text-xs font-medium transition-colors ${
+                      locale === currentLocale
+                        ? 'bg-[#FF8A1F] text-[#062748]'
+                        : 'bg-[#F8FAFC] text-[#64748B] hover:bg-[#EFF6FF]'
+                    }`}
+                    style={{ fontFamily: "var(--font-jetbrains-mono), monospace" }}
+                  >
+                    {localeNames[locale]}
+                  </button>
+                ))}
+              </div>
               <LeadModalTrigger
                 prefillType="quote"
                 className="bg-[#FF8A1F] hover:bg-[#F97316] text-[#062748] text-sm font-bold py-2.5 px-5 rounded-lg text-center mt-1"
                 onClick={() => setMobileOpen(false)}
               >
-                Get a Quote
+                {dict.header.quote}
               </LeadModalTrigger>
             </div>
           </nav>

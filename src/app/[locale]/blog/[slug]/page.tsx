@@ -4,16 +4,20 @@ import Image from 'next/image';
 import { ArrowLeft, ArrowRight, Clock } from 'lucide-react';
 import { blogPosts, blogCategories } from '@/data/blog';
 import { notFound } from 'next/navigation';
+import LeadModalProvider from '@/components/LeadModalProvider';
 import LeadModalTrigger from '@/components/LeadModalTrigger';
+import { getDictSync, type Locale, locales } from '@/i18n';
 import { siteName } from '@/data/site';
 
 export async function generateStaticParams() {
   return blogPosts.map(post => ({ slug: post.slug }));
 }
 
-export function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
+export async function generateMetadata({ params }: { params: Promise<{ slug: string; locale: string }> }): Promise<Metadata> {
   return (async () => {
-    const { slug } = await params;
+    const { slug, locale: rawLocale } = await params;
+    const locale = locales.includes(rawLocale as Locale) ? rawLocale as Locale : 'en';
+    const dict = getDictSync(locale);
     const post = blogPosts.find(p => p.slug === slug);
     if (!post) return { title: 'Article Not Found' };
     const title = `${post.title} | GateRemoteSource`;
@@ -21,12 +25,12 @@ export function generateMetadata({ params }: { params: Promise<{ slug: string }>
       title,
       description: post.excerpt,
       alternates: {
-        canonical: `/blog/${post.slug}`,
+        canonical: `/${locale}/blog/${post.slug}`,
       },
       openGraph: {
         type: 'article',
         siteName,
-        url: `/blog/${post.slug}`,
+        url: `/${locale}/blog/${post.slug}`,
         title,
         description: post.excerpt,
         images: [post.image],
@@ -38,19 +42,22 @@ export function generateMetadata({ params }: { params: Promise<{ slug: string }>
 export default async function BlogPostPage({
   params,
 }: {
-  params: Promise<{ slug: string }>;
+  params: Promise<{ slug: string; locale: string }>;
 }) {
-  const { slug } = await params;
+  const { slug, locale: rawLocale } = await params;
+  const locale = locales.includes(rawLocale as Locale) ? rawLocale as Locale : 'en';
+  const dict = getDictSync(locale);
   const post = blogPosts.find(p => p.slug === slug);
   if (!post) notFound();
 
   return (
-    <div className="min-h-screen flex flex-col bg-[#F8FAFC]">
+    <LeadModalProvider>
+      <div className="min-h-screen flex flex-col bg-[#F8FAFC]">
       {/* Back link */}
       <div className="bg-white border-b border-[#E2E8F0]">
         <div className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8 py-4">
           <Link href="/blog" className="inline-flex items-center gap-2 text-sm text-[#64748B] hover:text-[#FF8A1F] transition-colors font-medium">
-            <ArrowLeft className="w-4 h-4" /> Back to Blog
+            <ArrowLeft className="w-4 h-4" /> {dict.blogPost.backLink}
           </Link>
         </div>
       </div>
@@ -96,13 +103,13 @@ export default async function BlogPostPage({
 
           <div className="bg-white border border-[#E2E8F0] rounded-lg p-6">
             <h3 className="text-[#C45A00] font-bold mb-2" style={{ fontFamily: 'var(--font-outfit), sans-serif' }}>
-              Practical matching notes
+              {dict.blogPost.matchingNotes}
             </h3>
             <p className="text-[#64748B] text-sm leading-relaxed">
-              Use this guide as a starting point before sample confirmation. For remote compatibility, brand name is only one signal; exact matching should also check model, frequency, chip or PCB version, receiver label, and regional protocol.
+              {dict.blogPost.matchingNotesSubtitle.replace('\\', '')}
             </p>
             <ul className="mt-4 grid gap-2 text-sm text-[#475569] sm:grid-cols-2">
-              {['Original remote photos', 'Frequency or model label', 'Receiver or opener details', 'Target market and quantity'].map((item) => (
+              {(dict.blogPost.checklistItems as string[]).map((item) => (
                 <li key={item} className="flex items-center gap-2">
                   <span className="h-1.5 w-1.5 rounded-full bg-[#FF8A1F]" />
                   {item}
@@ -114,21 +121,22 @@ export default async function BlogPostPage({
           <div className="mt-10 bg-[#062748] rounded-lg p-6">
             <div>
               <h4 className="text-lg font-bold text-[#F7FBFF] mb-2" style={{ fontFamily: 'var(--font-outfit), sans-serif' }}>
-                Need help now?
+                {dict.blogPost.needHelp}
               </h4>
               <p className="text-[#C7D7E8] text-sm mb-4">
-                Send us your compatibility question and we&apos;ll respond directly.
+                {dict.blogPost.needHelpSubtitle.replace('\\', '')}
               </p>
               <LeadModalTrigger
                 prefillType="support"
                 className="inline-flex items-center gap-2 bg-[#FF8A1F] hover:bg-[#F97316] text-[#062748] font-bold px-5 py-2.5 rounded-lg transition-all text-sm btn-glow"
               >
-                Contact Us <ArrowRight className="w-4 h-4" />
+                {dict.blogPost.contactUs} <ArrowRight className="w-4 h-4" />
               </LeadModalTrigger>
             </div>
           </div>
         </div>
       </div>
     </div>
+    </LeadModalProvider>
   );
 }

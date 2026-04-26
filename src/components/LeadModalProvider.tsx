@@ -12,12 +12,17 @@ interface LeadModalContextValue {
   closeModal: () => void;
 }
 
-const LeadModalContext = createContext<LeadModalContextValue | null>(null);
+const defaultValue: LeadModalContextValue = {
+  open: false,
+  prefillType: 'quote',
+  openModal: () => {},
+  closeModal: () => {},
+};
+
+const LeadModalContext = createContext<LeadModalContextValue>(defaultValue);
 
 export function useLeadModal() {
-  const ctx = useContext(LeadModalContext);
-  if (!ctx) throw new Error('useLeadModal must be used within LeadModalProvider');
-  return ctx;
+  return useContext(LeadModalContext);
 }
 
 export default function LeadModalProvider({ children }: { children: ReactNode }) {

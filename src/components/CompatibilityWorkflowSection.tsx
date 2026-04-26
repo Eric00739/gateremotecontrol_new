@@ -3,10 +3,13 @@
 import { Camera, Radio, Cpu, Users, FlaskConical, Factory } from 'lucide-react';
 import { verificationFields, workflowSteps } from '@/data/homepage';
 import LeadModalTrigger from './LeadModalTrigger';
+import { useDict } from '@/i18n';
 
 const iconMap = [Camera, Radio, Cpu, Users, FlaskConical, Factory];
 
 export default function CompatibilityWorkflowSection() {
+  const dict = useDict();
+
   return (
     <section className="bg-white">
       <div className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8 py-16 lg:py-24">
@@ -14,17 +17,15 @@ export default function CompatibilityWorkflowSection() {
         <div className="flex items-center gap-3 mb-4">
           <div className="w-8 h-[2px] bg-[#FF8A1F]" />
           <span className="text-[11px] font-semibold tracking-[0.2em] uppercase text-[#FF8A1F]" style={{ fontFamily: "var(--font-jetbrains-mono), monospace" }}>
-            Verification Process
+            {dict.workflow.sectionLabel}
           </span>
         </div>
 
         <h2 className="text-3xl lg:text-4xl font-bold text-[#0F172A] mb-4 max-w-2xl" style={{ fontFamily: "var(--font-outfit), sans-serif" }}>
-          How Buyers Verify
-          <br />
-          Compatibility Before Ordering
+          {dict.workflow.title}
         </h2>
         <p className="text-[#64748B] mb-14 max-w-xl">
-          Send clear product details first, then test samples when compatibility depends on rolling code, receiver version, or regional protocol.
+          {dict.workflow.subtitle}
         </p>
 
         {/* Horizontal timeline */}
@@ -61,17 +62,17 @@ export default function CompatibilityWorkflowSection() {
           <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-4 mb-5">
             <div>
               <h3 className="text-xl font-bold text-[#0F172A] mb-2" style={{ fontFamily: "var(--font-outfit), sans-serif" }}>
-                What Buyers Should Send
+                {dict.workflow.sendTitle}
               </h3>
               <p className="text-sm text-[#64748B] max-w-2xl">
-                These fields help us check frequency, protocol, receiver version, and OEM requirements before sample testing.
+                {dict.workflow.sendSubtitle}
               </p>
             </div>
             <LeadModalTrigger
               prefillType="compatibility"
               className="inline-flex items-center justify-center rounded-lg bg-[#FF8A1F] px-5 py-2.5 text-sm font-bold text-white transition-colors hover:bg-[#F97316]"
             >
-              Send Compatibility Request
+              {dict.workflow.requestCta}
             </LeadModalTrigger>
           </div>
 

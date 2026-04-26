@@ -1,8 +1,13 @@
+'use client';
+
 import Image from 'next/image';
 import { basePath } from '@/data/homepage';
 import LeadModalTrigger from './LeadModalTrigger';
+import { useDict } from '@/i18n';
 
 export default function CtaSection() {
+  const dict = useDict();
+
   return (
     <section className="bg-[#062748] relative overflow-hidden">
       {/* Technical grid */}
@@ -21,24 +26,21 @@ export default function CtaSection() {
             <div className="flex items-center gap-3 mb-6">
               <div className="w-8 h-[2px] bg-[#FF8A1F]" />
               <span className="text-[11px] font-semibold tracking-[0.2em] uppercase text-[#FF8A1F]" style={{ fontFamily: "var(--font-jetbrains-mono), monospace" }}>
-                Get Started
+                {dict.cta.sectionLabel}
               </span>
             </div>
 
             <h2 className="text-3xl lg:text-4xl font-bold text-[#F7FBFF] mb-4" style={{ fontFamily: "var(--font-outfit), sans-serif" }}>
-              Need Help Matching
-              <br />
-              a Brand Remote
-              <span className="text-[#FF8A1F]"> Safely?</span>
+              {dict.cta.title}
             </h2>
             <p className="text-[#C7D7E8] leading-relaxed mb-8 max-w-md">
-              Send brand, model, frequency, PCB photo, or remote image. Our team will help verify compatibility.
+              {dict.cta.subtitle}
             </p>
             <LeadModalTrigger
               prefillType="support"
               className="btn-glow inline-block bg-[#FF8A1F] hover:bg-[#F97316] text-[#062748] font-bold px-10 py-4 rounded-lg transition-all hover:shadow-xl hover:shadow-amber-500/20 text-[14px] cursor-pointer"
             >
-              Get Compatibility Support
+              {dict.cta.button}
             </LeadModalTrigger>
           </div>
 
