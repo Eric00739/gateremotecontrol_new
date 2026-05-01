@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 import Image from 'next/image';
 import Link from 'next/link';
-import { ArrowLeft, ArrowRight, CalendarDays, Clock, ListChecks, MessageSquare } from 'lucide-react';
+import { ArrowLeft, ArrowRight, CalendarDays, ChevronDown, Clock, ListChecks, MessageSquare } from 'lucide-react';
 import { blogCategories, blogPosts, type BlogPostContentBlock } from '@/data/blog';
 import { notFound } from 'next/navigation';
 import LeadModalTrigger from '@/components/LeadModalTrigger';
@@ -45,7 +45,28 @@ function slugifyHeading(text: string) {
 type ArticleSection = {
   title: string;
   id: string;
+  blockIndex: number;
 };
+
+function buildArticleSections(content: BlogPostContentBlock[]) {
+  const slugCounts = new Map<string, number>();
+
+  return content.reduce<ArticleSection[]>((sections, block, blockIndex) => {
+    if (block.type !== 'heading') return sections;
+
+    const baseSlug = slugifyHeading(block.text) || `section-${blockIndex + 1}`;
+    const count = slugCounts.get(baseSlug) || 0;
+    slugCounts.set(baseSlug, count + 1);
+
+    sections.push({
+      title: block.text,
+      id: count === 0 ? baseSlug : `${baseSlug}-${count + 1}`,
+      blockIndex,
+    });
+
+    return sections;
+  }, []);
+}
 
 function ArticleSectionsNav({
   sections,
@@ -59,12 +80,13 @@ function ArticleSectionsNav({
   if (sections.length === 0) return null;
 
   const maxSections = variant === 'desktop' ? 9 : 12;
+  const hiddenSections = Math.max(sections.length - maxSections, 0);
   const sectionCountLabel = `${sections.length} ${sections.length === 1 ? 'section' : 'sections'}`;
 
   if (variant === 'mobile') {
     return (
-      <details className="mb-8 rounded-lg border border-[#D7E2EE] bg-[#F8FAFC] shadow-sm lg:hidden">
-        <summary className="flex cursor-pointer list-none items-center justify-between gap-4 px-4 py-4">
+      <details className="group mb-8 rounded-lg border border-[#D7E2EE] bg-[#F8FAFC] shadow-sm lg:hidden">
+        <summary className="flex cursor-pointer list-none items-center justify-between gap-4 px-4 py-4 [&::-webkit-details-marker]:hidden">
           <span>
             <span
               className="flex items-center gap-2 text-[10px] font-semibold uppercase tracking-[0.18em] text-[#C45A00]"
@@ -80,11 +102,14 @@ function ArticleSectionsNav({
               Article sections
             </span>
           </span>
-          <span className="shrink-0 rounded-full border border-[#F7C88B] bg-white px-3 py-1 text-[11px] font-bold text-[#C45A00]">
-            {sectionCountLabel}
+          <span className="flex shrink-0 items-center gap-2">
+            <span className="rounded-full border border-[#F7C88B] bg-white px-3 py-1 text-[11px] font-bold text-[#C45A00]">
+              {sectionCountLabel}
+            </span>
+            <ChevronDown className="h-4 w-4 text-[#C45A00] transition-transform group-open:rotate-180" />
           </span>
         </summary>
-        <nav className="grid gap-1 border-t border-[#E2E8F0] px-3 py-3">
+        <nav aria-label="Article sections" className="grid gap-1 border-t border-[#E2E8F0] px-3 py-3">
           {sections.slice(0, maxSections).map((section, index) => (
             <a
               key={section.id}
@@ -97,6 +122,11 @@ function ArticleSectionsNav({
               <span className="min-w-0 break-words">{section.title}</span>
             </a>
           ))}
+          {hiddenSections > 0 && (
+            <p className="px-2 py-2 text-xs leading-5 text-[#64748B]">
+              +{hiddenSections} more sections in the article body
+            </p>
+          )}
         </nav>
       </details>
     );
@@ -125,7 +155,7 @@ function ArticleSectionsNav({
         </div>
         {readTime && <p className="mt-1 text-xs text-[#64748B]">{readTime}</p>}
       </div>
-      <nav className="grid gap-1 p-3">
+      <nav aria-label="Article sections" className="grid max-h-[46vh] gap-1 overflow-y-auto p-3 pr-2">
         {sections.slice(0, maxSections).map((section, index) => (
           <a
             key={section.id}
@@ -140,6 +170,11 @@ function ArticleSectionsNav({
             </span>
           </a>
         ))}
+        {hiddenSections > 0 && (
+          <p className="px-2 py-2 text-xs leading-5 text-[#64748B]">
+            +{hiddenSections} more sections in the article body
+          </p>
+        )}
       </nav>
       <div className="border-t border-[#E2E8F0] p-4">
         <a
@@ -153,13 +188,13 @@ function ArticleSectionsNav({
   );
 }
 
-function renderBlock(block: BlogPostContentBlock, index: number) {
+function renderBlock(block: BlogPostContentBlock, index: number, headingId?: string) {
   switch (block.type) {
     case 'heading':
       return (
         <h2
           key={`${block.type}-${index}`}
-          id={slugifyHeading(block.text)}
+          id={headingId || slugifyHeading(block.text) || `section-${index + 1}`}
           className="mt-9 break-words border-l-2 border-[#FF8A1F] pl-4 text-xl font-bold leading-snug text-[#0F172A]"
           style={{ fontFamily: 'var(--font-outfit), sans-serif' }}
         >
@@ -290,9 +325,8 @@ export default async function BlogPostPage({
     blogCategories.find((category) => category.key === post.category)?.label ||
     post.category;
   const dateLabel = formatDate(post.publishedAt);
-  const articleSections = post.content
-    .filter((block): block is Extract<BlogPostContentBlock, { type: 'heading' }> => block.type === 'heading')
-    .map((block) => ({ title: block.text, id: slugifyHeading(block.text) }));
+  const articleSections = buildArticleSections(post.content);
+  const headingIdsByIndex = new Map(articleSections.map((section) => [section.blockIndex, section.id]));
 
   return (
     <div className="min-h-screen bg-white">
@@ -348,7 +382,7 @@ export default async function BlogPostPage({
             {post.excerpt}
           </p>
           <ArticleSectionsNav sections={articleSections} readTime={post.readTime} variant="mobile" />
-          <div>{post.content.map(renderBlock)}</div>
+          <div>{post.content.map((block, index) => renderBlock(block, index, headingIdsByIndex.get(index)))}</div>
           <BlogCommentBox articleTitle={post.title} />
           <AuthorBio />
 
@@ -395,12 +429,6 @@ export default async function BlogPostPage({
               >
                 {dict.blog.helpCta}
               </LeadModalTrigger>
-              <a
-                href="#comments"
-                className="mt-2 inline-flex w-full items-center justify-center rounded-lg border border-[#E2E8F0] px-4 py-2.5 text-xs font-bold text-[#64748B] transition-colors hover:border-[#FF8A1F]/50 hover:text-[#FF8A1F]"
-              >
-                Comments
-              </a>
             </div>
 
             <Link
