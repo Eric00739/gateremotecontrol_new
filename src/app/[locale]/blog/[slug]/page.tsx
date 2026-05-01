@@ -1,42 +1,117 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
-import Image from 'next/image';
-import { ArrowLeft, ArrowRight, Clock } from 'lucide-react';
-import { blogPosts, blogCategories } from '@/data/blog';
+import { ArrowLeft, ArrowRight, CalendarDays, Clock } from 'lucide-react';
+import { blogCategories, blogPosts, type BlogPostContentBlock } from '@/data/blog';
 import { notFound } from 'next/navigation';
-import LeadModalProvider from '@/components/LeadModalProvider';
 import LeadModalTrigger from '@/components/LeadModalTrigger';
 import { type Locale, locales } from '@/i18n';
 import { getDictSync } from '@/i18n/dictionaries';
 import { siteName } from '@/data/site';
 
+const emptyBlogSlug = '__no-articles__';
+
+export const dynamicParams = false;
+
 export async function generateStaticParams() {
-  return blogPosts.map(post => ({ slug: post.slug }));
+  if (blogPosts.length === 0) {
+    return [{ slug: emptyBlogSlug }];
+  }
+
+  return blogPosts.map((post) => ({ slug: post.slug }));
 }
 
-export async function generateMetadata({ params }: { params: Promise<{ slug: string; locale: string }> }): Promise<Metadata> {
-  return (async () => {
-    const { slug, locale: rawLocale } = await params;
-    const locale = locales.includes(rawLocale as Locale) ? rawLocale as Locale : 'en';
-    const post = blogPosts.find(p => p.slug === slug);
-    if (!post) return { title: 'Article Not Found' };
-    const title = `${post.title} | GateRemoteSource`;
-    return {
-      title,
-      description: post.excerpt,
-      alternates: {
-        canonical: `/${locale}/blog/${post.slug}`,
-      },
-      openGraph: {
-        type: 'article',
-        siteName,
-        url: `/${locale}/blog/${post.slug}`,
-        title,
-        description: post.excerpt,
-        images: [post.image],
-      },
-    };
-  })();
+function formatDate(date?: string) {
+  if (!date) return null;
+  const parsed = new Date(date);
+  if (Number.isNaN(parsed.getTime())) return date;
+
+  return new Intl.DateTimeFormat('en', {
+    year: 'numeric',
+    month: 'long',
+    day: '2-digit',
+  }).format(parsed);
+}
+
+function renderBlock(block: BlogPostContentBlock, index: number) {
+  switch (block.type) {
+    case 'heading':
+      return (
+        <h2
+          key={`${block.type}-${index}`}
+          className="mt-10 border-l-2 border-[#FF8A1F] pl-4 text-xl font-bold leading-snug text-[#0F172A]"
+          style={{ fontFamily: 'var(--font-outfit), sans-serif' }}
+        >
+          {block.text}
+        </h2>
+      );
+    case 'paragraph':
+      return (
+        <p key={`${block.type}-${index}`} className="mt-5 text-[15px] leading-8 text-[#334155]">
+          {block.text}
+        </p>
+      );
+    case 'list':
+      return (
+        <ul key={`${block.type}-${index}`} className="mt-5 space-y-3 text-[15px] leading-7 text-[#334155]">
+          {block.items.map((item) => (
+            <li key={item} className="flex gap-3">
+              <span className="mt-3 h-1.5 w-1.5 shrink-0 rounded-full bg-[#FF8A1F]" />
+              <span>{item}</span>
+            </li>
+          ))}
+        </ul>
+      );
+    case 'callout':
+      return (
+        <aside
+          key={`${block.type}-${index}`}
+          className="mt-8 rounded-lg border border-[#F7C88B] bg-[#FFF7ED] p-5 text-[#334155]"
+        >
+          {block.title && (
+            <h3
+              className="mb-2 text-sm font-bold text-[#C45A00]"
+              style={{ fontFamily: 'var(--font-outfit), sans-serif' }}
+            >
+              {block.title}
+            </h3>
+          )}
+          <p className="text-sm leading-7">{block.text}</p>
+        </aside>
+      );
+  }
+}
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ slug: string; locale: string }>;
+}): Promise<Metadata> {
+  const { slug, locale: rawLocale } = await params;
+  const locale = locales.includes(rawLocale as Locale) ? (rawLocale as Locale) : 'en';
+  const post = blogPosts.find((item) => item.slug === slug);
+  if (!post) return { title: 'Article Not Found' };
+
+  const title = `${post.title} | GateRemoteSource`;
+  const openGraph: Metadata['openGraph'] = {
+    type: 'article',
+    siteName,
+    url: `/${locale}/blog/${post.slug}`,
+    title,
+    description: post.excerpt,
+  };
+
+  if (post.image) {
+    openGraph.images = [post.image];
+  }
+
+  return {
+    title,
+    description: post.excerpt,
+    alternates: {
+      canonical: `/${locale}/blog/${post.slug}`,
+    },
+    openGraph,
+  };
 }
 
 export default async function BlogPostPage({
@@ -45,98 +120,128 @@ export default async function BlogPostPage({
   params: Promise<{ slug: string; locale: string }>;
 }) {
   const { slug, locale: rawLocale } = await params;
-  const locale = locales.includes(rawLocale as Locale) ? rawLocale as Locale : 'en';
+  const locale = locales.includes(rawLocale as Locale) ? (rawLocale as Locale) : 'en';
   const dict = getDictSync(locale);
-  const post = blogPosts.find(p => p.slug === slug);
+  const post = blogPosts.find((item) => item.slug === slug);
   if (!post) notFound();
 
+  const categoryLabels: Record<string, string> = {
+    all: dict.blog.categories.all,
+    compatibility: dict.blog.categories.compatibility,
+    'rolling-code': dict.blog.categories.rollingCode,
+    'oem-odm': dict.blog.categories.oemOdm,
+    'buyer-checklist': dict.blog.categories.buyerChecklist,
+    troubleshooting: dict.blog.categories.troubleshooting,
+  };
+  const categoryLabel =
+    categoryLabels[post.category] ||
+    blogCategories.find((category) => category.key === post.category)?.label ||
+    post.category;
+  const dateLabel = formatDate(post.publishedAt);
+
   return (
-    <LeadModalProvider>
-      <div className="min-h-screen flex flex-col bg-[#F8FAFC]">
-      {/* Back link */}
-      <div className="bg-white border-b border-[#E2E8F0]">
-        <div className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8 py-4">
-          <Link href={`/${locale}/blog`} className="inline-flex items-center gap-2 text-sm text-[#64748B] hover:text-[#FF8A1F] transition-colors font-medium">
-            <ArrowLeft className="w-4 h-4" /> {dict.blogPost.backLink}
+    <div className="min-h-screen bg-white">
+      <div className="border-b border-[#E2E8F0] bg-white">
+        <div className="mx-auto max-w-[1280px] px-4 py-4 sm:px-6 lg:px-8">
+          <Link
+            href={`/${locale}/blog`}
+            className="inline-flex items-center gap-2 text-sm font-medium text-[#64748B] transition-colors hover:text-[#FF8A1F]"
+          >
+            <ArrowLeft className="h-4 w-4" /> {dict.blogPost.backLink}
           </Link>
         </div>
       </div>
 
-      {/* Article Header */}
-      <section className="bg-[#062748] relative overflow-hidden">
+      <section className="relative overflow-hidden bg-[#062748]">
         <div className="absolute inset-0 tech-grid" />
-        <div className="relative max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8 py-16 lg:py-24">
-          <Link href={`/${locale}/blog`} className="inline-block mb-6">
-            <span className="rounded-md bg-[#FF8A1F]/10 text-[#FF8A1F] text-[11px] font-bold px-3 py-1.5 hover:bg-[#FF8A1F]/20 transition-colors">
-              {blogCategories.find(c => c.key === post.category)?.label || post.category}
-            </span>
-          </Link>
-          <h1 className="text-3xl lg:text-4xl font-bold text-[#F7FBFF] mb-4 leading-tight" style={{ fontFamily: 'var(--font-outfit), sans-serif' }}>
-            {post.title}
-          </h1>
-          <div className="flex items-center gap-4 text-[#7F9AB7] text-sm">
-            <span className="inline-flex items-center gap-1.5" style={{ fontFamily: 'var(--font-jetbrains-mono), monospace' }}>
-              <Clock className="w-4 h-4" /> {post.readTime}
-            </span>
+        <div className="relative mx-auto max-w-[1280px] px-4 py-14 sm:px-6 lg:px-8 lg:py-20">
+          <div className="max-w-3xl">
+            <p
+              className="mb-4 inline-flex rounded-full bg-[#FF8A1F]/10 px-4 py-1.5 text-[11px] font-semibold uppercase tracking-[0.18em] text-[#FF8A1F]"
+              style={{ fontFamily: 'var(--font-jetbrains-mono), monospace' }}
+            >
+              {categoryLabel}
+            </p>
+            <h1
+              className="text-4xl font-extrabold leading-tight text-[#F7FBFF] sm:text-5xl"
+              style={{ fontFamily: 'var(--font-outfit), sans-serif' }}
+            >
+              {post.title}
+            </h1>
+            <div className="mt-6 flex flex-wrap items-center gap-x-5 gap-y-2 text-sm text-[#9FB4CC]">
+              {post.author && <span>{post.author}</span>}
+              {dateLabel && (
+                <span className="inline-flex items-center gap-1.5">
+                  <CalendarDays className="h-4 w-4" />
+                  {dateLabel}
+                </span>
+              )}
+              {post.readTime && (
+                <span className="inline-flex items-center gap-1.5">
+                  <Clock className="h-4 w-4" />
+                  {post.readTime}
+                </span>
+              )}
+            </div>
           </div>
         </div>
       </section>
 
-      {/* Featured Image */}
-      <div className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8 -mt-8 relative z-10">
-        <div className="relative h-72 sm:h-96 rounded-lg overflow-hidden border border-[#E2E8F0] shadow-lg">
-          <Image
-            src={post.image}
-            alt={post.title}
-            fill
-            loading="eager"
-            className="object-cover"
-          />
-        </div>
-      </div>
+      <main className="mx-auto grid max-w-[1120px] gap-10 px-4 py-12 sm:px-6 lg:grid-cols-[minmax(0,1fr)_280px] lg:px-8 lg:py-16">
+        <article className="min-w-0">
+          <p className="border-b border-[#FF8A1F] pb-5 text-lg leading-8 text-[#1E293B]">
+            {post.excerpt}
+          </p>
+          <div>{post.content.map(renderBlock)}</div>
 
-      {/* Article Content */}
-      <div className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8 py-12 lg:py-16">
-        <div className="max-w-3xl">
-          {/* Summary */}
-          <p className="text-lg text-[#475569] leading-relaxed mb-8">{post.excerpt}</p>
-
-          <div className="bg-white border border-[#E2E8F0] rounded-lg p-6">
-            <h3 className="text-[#C45A00] font-bold mb-2" style={{ fontFamily: 'var(--font-outfit), sans-serif' }}>
-              {dict.blogPost.matchingNotes}
-            </h3>
-            <p className="text-[#64748B] text-sm leading-relaxed">
-              {dict.blogPost.matchingNotesSubtitle}
+          <div className="mt-12 rounded-lg bg-[#062748] p-6">
+            <h2
+              className="text-lg font-bold text-[#F7FBFF]"
+              style={{ fontFamily: 'var(--font-outfit), sans-serif' }}
+            >
+              {dict.blogPost.needHelp}
+            </h2>
+            <p className="mt-2 text-sm leading-7 text-[#C7D7E8]">
+              {dict.blogPost.needHelpSubtitle}
             </p>
-            <ul className="mt-4 grid gap-2 text-sm text-[#475569] sm:grid-cols-2">
-              {(dict.blogPost.checklistItems as string[]).map((item) => (
-                <li key={item} className="flex items-center gap-2">
-                  <span className="h-1.5 w-1.5 rounded-full bg-[#FF8A1F]" />
-                  {item}
-                </li>
-              ))}
-            </ul>
+            <LeadModalTrigger
+              prefillType="support"
+              className="mt-4 inline-flex items-center gap-2 rounded-lg bg-[#FF8A1F] px-5 py-2.5 text-sm font-bold text-[#062748] transition-colors hover:bg-[#F97316]"
+            >
+              {dict.blogPost.contactUs} <ArrowRight className="h-4 w-4" />
+            </LeadModalTrigger>
           </div>
+        </article>
 
-          <div className="mt-10 bg-[#062748] rounded-lg p-6">
-            <div>
-              <h4 className="text-lg font-bold text-[#F7FBFF] mb-2" style={{ fontFamily: 'var(--font-outfit), sans-serif' }}>
-                {dict.blogPost.needHelp}
-              </h4>
-              <p className="text-[#C7D7E8] text-sm mb-4">
-                {dict.blogPost.needHelpSubtitle}
+        <aside className="hidden lg:block">
+          <div className="sticky top-24 space-y-5">
+            <div className="rounded-lg border border-[#E2E8F0] bg-white p-5 shadow-sm">
+              <h2
+                className="text-sm font-bold text-[#0F172A]"
+                style={{ fontFamily: 'var(--font-outfit), sans-serif' }}
+              >
+                {dict.blog.helpTitle}
+              </h2>
+              <p className="mt-2 text-xs leading-6 text-[#64748B]">
+                {dict.blog.helpSubtitle}
               </p>
               <LeadModalTrigger
                 prefillType="support"
-                className="inline-flex items-center gap-2 bg-[#FF8A1F] hover:bg-[#F97316] text-[#062748] font-bold px-5 py-2.5 rounded-lg transition-all text-sm btn-glow"
+                className="mt-4 inline-flex w-full items-center justify-center rounded-lg bg-[#FF8A1F] px-4 py-2.5 text-xs font-bold text-[#062748] transition-colors hover:bg-[#F97316]"
               >
-                {dict.blogPost.contactUs} <ArrowRight className="w-4 h-4" />
+                {dict.blog.helpCta}
               </LeadModalTrigger>
             </div>
+
+            <Link
+              href={`/${locale}/blog`}
+              className="inline-flex items-center gap-2 text-sm font-semibold text-[#FF8A1F] transition-colors hover:text-[#F97316]"
+            >
+              {dict.blogPost.backLink} <ArrowRight className="h-4 w-4" />
+            </Link>
           </div>
-        </div>
-      </div>
+        </aside>
+      </main>
     </div>
-    </LeadModalProvider>
   );
 }

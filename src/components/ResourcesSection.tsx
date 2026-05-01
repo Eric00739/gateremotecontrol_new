@@ -1,14 +1,16 @@
 'use client';
 
 import { ArrowRight } from 'lucide-react';
-import Image from 'next/image';
 import Link from 'next/link';
 import { blogPosts } from '@/data/blog';
-import { useDict } from '@/i18n';
+import { useDict, useLocale } from '@/i18n';
 
 export default function ResourcesSection() {
   const dict = useDict();
+  const locale = useLocale();
   const displayPosts = blogPosts.slice(0, 4);
+
+  if (displayPosts.length === 0) return null;
 
   return (
     <section id="resources" className="bg-white">
@@ -34,24 +36,14 @@ export default function ResourcesSection() {
           {displayPosts.map((post) => (
             <Link
               key={post.slug}
-              href={`/blog/${post.slug}`}
-              className="bg-[#F8FAFC] rounded-lg border border-[#E2E8F0] overflow-hidden card-hover-light group block"
+              href={`/${locale}/blog/${post.slug}`}
+              className="group block rounded-lg border border-[#E2E8F0] bg-[#F8FAFC] p-5 transition-all hover:border-[#FF8A1F]/40 hover:shadow-sm"
             >
-              <div className="h-40 relative overflow-hidden">
-                <Image
-                  src={post.image}
-                  alt={post.title}
-                  fill
-                  className="object-cover group-hover:scale-105 transition-transform duration-500"
-                />
-              </div>
-              <div className="p-5">
-                <h3 className="text-[14px] font-bold text-[#0F172A] mb-2 leading-snug" style={{ fontFamily: "var(--font-outfit), sans-serif" }}>{post.title}</h3>
-                <p className="text-[12px] text-[#64748B] leading-relaxed mb-4">{post.excerpt}</p>
-                <span className="inline-flex items-center gap-1.5 text-[11px] font-bold text-[#FF8A1F] group-hover:gap-2 transition-all" style={{ fontFamily: "var(--font-jetbrains-mono), monospace" }}>
-                  {dict.resources.readMore} <ArrowRight className="w-3 h-3" />
-                </span>
-              </div>
+              <h3 className="mb-2 text-[14px] font-bold leading-snug text-[#0F172A]" style={{ fontFamily: "var(--font-outfit), sans-serif" }}>{post.title}</h3>
+              <p className="mb-4 text-[12px] leading-relaxed text-[#64748B]">{post.excerpt}</p>
+              <span className="inline-flex items-center gap-1.5 text-[11px] font-bold text-[#FF8A1F] transition-all group-hover:gap-2" style={{ fontFamily: "var(--font-jetbrains-mono), monospace" }}>
+                {dict.resources.readMore} <ArrowRight className="w-3 h-3" />
+              </span>
             </Link>
           ))}
         </div>

@@ -3,7 +3,15 @@ import LegacyEnglishShell from '@/components/LegacyEnglishShell';
 import BlogPostPage from '@/app/[locale]/blog/[slug]/page';
 import { blogPosts } from '@/data/blog';
 
+const emptyBlogSlug = '__no-articles__';
+
+export const dynamicParams = false;
+
 export function generateStaticParams() {
+  if (blogPosts.length === 0) {
+    return [{ slug: emptyBlogSlug }];
+  }
+
   return blogPosts.map((post) => ({ slug: post.slug }));
 }
 
