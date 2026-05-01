@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 import Image from 'next/image';
 import Link from 'next/link';
-import { ArrowLeft, ArrowRight, CalendarDays, Clock } from 'lucide-react';
+import { ArrowLeft, ArrowRight, CalendarDays, Clock, ListChecks, MessageSquare } from 'lucide-react';
 import { blogCategories, blogPosts, type BlogPostContentBlock } from '@/data/blog';
 import { notFound } from 'next/navigation';
 import LeadModalTrigger from '@/components/LeadModalTrigger';
@@ -40,6 +40,117 @@ function slugifyHeading(text: string) {
     .toLowerCase()
     .replace(/[^a-z0-9]+/g, '-')
     .replace(/^-+|-+$/g, '');
+}
+
+type ArticleSection = {
+  title: string;
+  id: string;
+};
+
+function ArticleSectionsNav({
+  sections,
+  readTime,
+  variant = 'desktop',
+}: {
+  sections: ArticleSection[];
+  readTime?: string;
+  variant?: 'desktop' | 'mobile';
+}) {
+  if (sections.length === 0) return null;
+
+  const maxSections = variant === 'desktop' ? 9 : 12;
+  const sectionCountLabel = `${sections.length} ${sections.length === 1 ? 'section' : 'sections'}`;
+
+  if (variant === 'mobile') {
+    return (
+      <details className="mb-8 rounded-lg border border-[#D7E2EE] bg-[#F8FAFC] shadow-sm lg:hidden">
+        <summary className="flex cursor-pointer list-none items-center justify-between gap-4 px-4 py-4">
+          <span>
+            <span
+              className="flex items-center gap-2 text-[10px] font-semibold uppercase tracking-[0.18em] text-[#C45A00]"
+              style={{ fontFamily: 'var(--font-jetbrains-mono), monospace' }}
+            >
+              <ListChecks className="h-4 w-4" />
+              Reading map
+            </span>
+            <span
+              className="mt-1 block text-base font-bold text-[#0F172A]"
+              style={{ fontFamily: 'var(--font-outfit), sans-serif' }}
+            >
+              Article sections
+            </span>
+          </span>
+          <span className="shrink-0 rounded-full border border-[#F7C88B] bg-white px-3 py-1 text-[11px] font-bold text-[#C45A00]">
+            {sectionCountLabel}
+          </span>
+        </summary>
+        <nav className="grid gap-1 border-t border-[#E2E8F0] px-3 py-3">
+          {sections.slice(0, maxSections).map((section, index) => (
+            <a
+              key={section.id}
+              href={`#${section.id}`}
+              className="grid grid-cols-[28px_1fr] gap-3 rounded-md px-2 py-2 text-sm leading-6 text-[#475569] transition-colors hover:bg-white hover:text-[#0F172A]"
+            >
+              <span className="flex h-6 w-6 items-center justify-center rounded-full bg-[#FFE8CC] text-[11px] font-bold text-[#C45A00]">
+                {String(index + 1).padStart(2, '0')}
+              </span>
+              <span className="min-w-0 break-words">{section.title}</span>
+            </a>
+          ))}
+        </nav>
+      </details>
+    );
+  }
+
+  return (
+    <section className="overflow-hidden rounded-lg border border-[#D7E2EE] bg-white shadow-sm shadow-[#0F172A]/5">
+      <div className="border-b border-[#E2E8F0] bg-[#F8FAFC] px-5 py-4">
+        <p
+          className="flex items-center gap-2 text-[10px] font-semibold uppercase tracking-[0.18em] text-[#C45A00]"
+          style={{ fontFamily: 'var(--font-jetbrains-mono), monospace' }}
+        >
+          <ListChecks className="h-4 w-4" />
+          Reading map
+        </p>
+        <div className="mt-2 flex items-end justify-between gap-3">
+          <h2
+            className="text-base font-bold text-[#0F172A]"
+            style={{ fontFamily: 'var(--font-outfit), sans-serif' }}
+          >
+            Article sections
+          </h2>
+          <span className="shrink-0 rounded-full border border-[#F7C88B] bg-white px-2.5 py-1 text-[11px] font-bold text-[#C45A00]">
+            {sectionCountLabel}
+          </span>
+        </div>
+        {readTime && <p className="mt-1 text-xs text-[#64748B]">{readTime}</p>}
+      </div>
+      <nav className="grid gap-1 p-3">
+        {sections.slice(0, maxSections).map((section, index) => (
+          <a
+            key={section.id}
+            href={`#${section.id}`}
+            className="group grid grid-cols-[28px_1fr] gap-3 rounded-md px-2 py-2.5 transition-colors hover:bg-[#FFF7ED]"
+          >
+            <span className="mt-0.5 flex h-6 w-6 items-center justify-center rounded-full bg-[#EEF4FA] text-[11px] font-bold text-[#64748B] transition-colors group-hover:bg-[#FF8A1F] group-hover:text-[#062748]">
+              {String(index + 1).padStart(2, '0')}
+            </span>
+            <span className="min-w-0 break-words text-xs font-semibold leading-5 text-[#475569] transition-colors group-hover:text-[#0F172A]">
+              {section.title}
+            </span>
+          </a>
+        ))}
+      </nav>
+      <div className="border-t border-[#E2E8F0] p-4">
+        <a
+          href="#comments"
+          className="inline-flex w-full items-center justify-center gap-2 rounded-lg border border-[#F7C88B] bg-[#FFF7ED] px-4 py-2.5 text-xs font-bold text-[#C45A00] transition-colors hover:border-[#FF8A1F] hover:bg-[#FFE8CC]"
+        >
+          Comments <MessageSquare className="h-4 w-4" />
+        </a>
+      </div>
+    </section>
+  );
 }
 
 function renderBlock(block: BlogPostContentBlock, index: number) {
@@ -236,6 +347,7 @@ export default async function BlogPostPage({
           <p className="break-words border-b border-[#FF8A1F] pb-4 text-base leading-8 text-[#1E293B] sm:text-lg">
             {post.excerpt}
           </p>
+          <ArticleSectionsNav sections={articleSections} readTime={post.readTime} variant="mobile" />
           <div>{post.content.map(renderBlock)}</div>
           <BlogCommentBox articleTitle={post.title} />
           <AuthorBio />
@@ -261,27 +373,7 @@ export default async function BlogPostPage({
 
         <aside className="hidden lg:block">
           <div className="sticky top-24 space-y-5">
-            {articleSections.length > 0 && (
-              <div className="rounded-lg border border-[#E2E8F0] bg-white p-5 shadow-sm">
-                <h2
-                  className="text-sm font-bold text-[#0F172A]"
-                  style={{ fontFamily: 'var(--font-outfit), sans-serif' }}
-                >
-                  Article sections
-                </h2>
-                <nav className="mt-3 grid gap-2">
-                  {articleSections.slice(0, 8).map((section) => (
-                    <a
-                      key={section.id}
-                      href={`#${section.id}`}
-                      className="text-xs leading-5 text-[#64748B] transition-colors hover:text-[#FF8A1F]"
-                    >
-                      {section.title}
-                    </a>
-                  ))}
-                </nav>
-              </div>
-            )}
+            <ArticleSectionsNav sections={articleSections} readTime={post.readTime} />
 
             <div className="rounded-lg border border-[#E2E8F0] bg-[#F8FAFC] p-5 shadow-sm">
               <AuthorBio variant="compact" />
