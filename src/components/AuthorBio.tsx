@@ -56,19 +56,19 @@ export default function AuthorBio({ variant = 'article', className = '' }: Autho
   }
 
   return (
-    <section className={`mt-12 border-t border-[#E2E8F0] pt-8 ${className}`} aria-labelledby="about-author">
-      <div className="rounded-lg border border-[#E2E8F0] bg-[#F8FAFC] p-6 shadow-sm shadow-[#0F172A]/5 sm:p-7">
-        <div className="flex flex-col gap-5 sm:flex-row sm:items-start">
+    <section className={`mt-10 border-t border-[#E2E8F0] pt-6 ${className}`} aria-labelledby="about-author">
+      <div className="rounded-lg border border-[#E2E8F0] bg-[#F8FAFC] p-5 shadow-sm shadow-[#0F172A]/5 sm:p-6">
+        <div className="flex flex-col gap-4 sm:flex-row sm:items-start">
           <Image
             src={authorProfile.avatar}
             alt={authorProfile.name}
-            width={88}
-            height={88}
-            className="h-[88px] w-[88px] rounded-full border-2 border-white object-cover shadow-md shadow-[#0F172A]/10"
+            width={72}
+            height={72}
+            className="h-[72px] w-[72px] rounded-full border-2 border-white object-cover shadow-md shadow-[#0F172A]/10"
           />
           <div className="min-w-0">
             <p
-              className="mb-2 text-[11px] font-semibold uppercase tracking-[0.2em] text-[#C45A00]"
+              className="mb-1.5 text-[10px] font-semibold uppercase tracking-[0.18em] text-[#C45A00]"
               style={{ fontFamily: 'var(--font-jetbrains-mono), monospace' }}
             >
               About the Author
@@ -83,15 +83,15 @@ export default function AuthorBio({ variant = 'article', className = '' }: Autho
             <p className="mt-1 text-sm font-semibold text-[#475569]">
               {authorProfile.title}
             </p>
-            <p className="mt-4 text-sm leading-7 text-[#334155]">
+            <p className="mt-3 text-sm leading-6 text-[#334155]">
               {authorProfile.bio}
             </p>
-            <p className="mt-3 text-sm leading-7 text-[#334155]">
+            <p className="mt-2 text-sm leading-6 text-[#334155]">
               {authorProfile.closing}
             </p>
             <LeadModalTrigger
               prefillType="support"
-              className="mt-5 inline-flex items-center gap-2 rounded-lg bg-[#FF8A1F] px-5 py-2.5 text-sm font-bold text-[#062748] transition-colors hover:bg-[#F97316]"
+              className="mt-4 inline-flex items-center gap-2 rounded-lg bg-[#FF8A1F] px-4 py-2 text-sm font-bold text-[#062748] transition-colors hover:bg-[#F97316]"
             >
               Ask Eric a question <ArrowRight className="h-4 w-4" />
             </LeadModalTrigger>

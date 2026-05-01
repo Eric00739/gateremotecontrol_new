@@ -49,7 +49,7 @@ function renderBlock(block: BlogPostContentBlock, index: number) {
         <h2
           key={`${block.type}-${index}`}
           id={slugifyHeading(block.text)}
-          className="mt-10 border-l-2 border-[#FF8A1F] pl-4 text-xl font-bold leading-snug text-[#0F172A]"
+          className="mt-9 break-words border-l-2 border-[#FF8A1F] pl-4 text-xl font-bold leading-snug text-[#0F172A]"
           style={{ fontFamily: 'var(--font-outfit), sans-serif' }}
         >
           {block.text}
@@ -186,7 +186,7 @@ export default async function BlogPostPage({
   return (
     <div className="min-h-screen bg-white">
       <div className="border-b border-[#E2E8F0] bg-white">
-        <div className="mx-auto max-w-[1280px] px-4 py-4 sm:px-6 lg:px-8">
+        <div className="mx-auto max-w-[1280px] px-4 py-3 sm:px-6 lg:px-8">
           <Link
             href={`/${locale}/blog`}
             className="inline-flex items-center gap-2 text-sm font-medium text-[#64748B] transition-colors hover:text-[#FF8A1F]"
@@ -198,21 +198,21 @@ export default async function BlogPostPage({
 
       <section className="relative overflow-hidden bg-[#062748]">
         <div className="absolute inset-0 tech-grid" />
-        <div className="relative mx-auto max-w-[1280px] px-4 py-14 sm:px-6 lg:px-8 lg:py-20">
+        <div className="relative mx-auto max-w-[1280px] px-4 py-9 sm:px-6 sm:py-10 lg:px-8 lg:py-12">
           <div className="max-w-3xl">
             <p
-              className="mb-4 inline-flex rounded-full bg-[#FF8A1F]/10 px-4 py-1.5 text-[11px] font-semibold uppercase tracking-[0.18em] text-[#FF8A1F]"
+              className="mb-3 inline-flex rounded-full bg-[#FF8A1F]/10 px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.16em] text-[#FF8A1F]"
               style={{ fontFamily: 'var(--font-jetbrains-mono), monospace' }}
             >
               {categoryLabel}
             </p>
             <h1
-              className="text-4xl font-extrabold leading-tight text-[#F7FBFF] sm:text-5xl"
+              className="break-words text-3xl font-extrabold leading-tight text-[#F7FBFF] [text-wrap:balance] sm:text-4xl lg:text-[44px]"
               style={{ fontFamily: 'var(--font-outfit), sans-serif' }}
             >
               {post.title}
             </h1>
-            <div className="mt-6 flex flex-wrap items-center gap-x-5 gap-y-2 text-sm text-[#9FB4CC]">
+            <div className="mt-4 flex flex-wrap items-center gap-x-4 gap-y-2 text-xs text-[#9FB4CC] sm:text-sm">
               {post.author && <span>{post.author}</span>}
               {dateLabel && (
                 <span className="inline-flex items-center gap-1.5">
@@ -231,14 +231,14 @@ export default async function BlogPostPage({
         </div>
       </section>
 
-      <main className="mx-auto grid max-w-[1120px] gap-10 px-4 py-12 sm:px-6 lg:grid-cols-[minmax(0,1fr)_280px] lg:px-8 lg:py-16">
+      <main className="mx-auto grid w-full max-w-[1120px] gap-10 px-4 py-10 sm:px-6 lg:grid-cols-[minmax(0,1fr)_280px] lg:px-8 lg:py-12">
         <article className="min-w-0">
-          <p className="border-b border-[#FF8A1F] pb-5 text-lg leading-8 text-[#1E293B]">
+          <p className="break-words border-b border-[#FF8A1F] pb-4 text-base leading-8 text-[#1E293B] sm:text-lg">
             {post.excerpt}
           </p>
           <div>{post.content.map(renderBlock)}</div>
-          <AuthorBio />
           <BlogCommentBox articleTitle={post.title} />
+          <AuthorBio />
 
           <div className="mt-12 rounded-lg bg-[#062748] p-6">
             <h2
@@ -307,7 +307,7 @@ export default async function BlogPostPage({
                 href="#comments"
                 className="mt-2 inline-flex w-full items-center justify-center rounded-lg border border-[#E2E8F0] px-4 py-2.5 text-xs font-bold text-[#64748B] transition-colors hover:border-[#FF8A1F]/50 hover:text-[#FF8A1F]"
               >
-                Leave a message
+                Comments
               </a>
             </div>
 
