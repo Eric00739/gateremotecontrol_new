@@ -1,8 +1,11 @@
 'use client';
 
+import { useMemo, useState } from 'react';
+import Image from 'next/image';
 import Link from 'next/link';
-import { ArrowRight, CalendarDays, Clock, FileText } from 'lucide-react';
-import { blogCategories, blogPosts } from '@/data/blog';
+import { ArrowRight, CalendarDays, Clock, FileText, MessageSquare, Radio, Search, UserRound } from 'lucide-react';
+import { authorProfile } from '@/data/author';
+import { blogCategories, blogPosts, popularGuides, type BlogPost } from '@/data/blog';
 import LeadModalTrigger from '@/components/LeadModalTrigger';
 import { useDict, useLocale } from '@/i18n';
 
@@ -18,9 +21,32 @@ function formatDate(date?: string) {
   }).format(parsed);
 }
 
+function ArticleMeta({ post }: { post: BlogPost }) {
+  const dateLabel = formatDate(post.publishedAt);
+
+  return (
+    <div className="flex flex-wrap items-center gap-x-4 gap-y-2 text-[12px] text-[#64748B]">
+      {post.author && <span>{post.author}</span>}
+      {dateLabel && (
+        <span className="inline-flex items-center gap-1.5">
+          <CalendarDays className="h-3.5 w-3.5" />
+          {dateLabel}
+        </span>
+      )}
+      {post.readTime && (
+        <span className="inline-flex items-center gap-1.5">
+          <Clock className="h-3.5 w-3.5" />
+          {post.readTime}
+        </span>
+      )}
+    </div>
+  );
+}
+
 export default function BlogIndexClient() {
   const dict = useDict();
   const locale = useLocale();
+  const [selectedCategory, setSelectedCategory] = useState('all');
 
   const categoryLabels: Record<string, string> = {
     all: dict.blog.categories.all,
@@ -32,81 +58,337 @@ export default function BlogIndexClient() {
     troubleshooting: dict.blog.categories.troubleshooting,
   };
 
+  const topicDescriptions: Record<string, string> = {
+    'rf-engineering': 'Circuit stability, range, tuning, filtering, and real product reliability.',
+    compatibility: 'Frequency, chip, brand, receiver, and replacement matching references.',
+    'rolling-code': 'Fixed code, rolling code, security, and protocol decisions.',
+    'oem-odm': 'Product control, factory choice, certification, and long-term supply chain strategy.',
+    'buyer-checklist': 'What to prepare before samples, quotations, or compatibility checks.',
+    troubleshooting: 'Practical causes behind unstable range, pairing failure, and batch variation.',
+  };
+
+  const filteredPosts = useMemo(() => {
+    if (selectedCategory === 'all') return blogPosts;
+    return blogPosts.filter((post) => post.category === selectedCategory);
+  }, [selectedCategory]);
+
+  const featuredPost = filteredPosts.find((post) => post.featured) || filteredPosts[0];
+  const articleList = featuredPost
+    ? filteredPosts.filter((post) => post.slug !== featuredPost.slug)
+    : [];
+  const popularPosts = popularGuides
+    .map((slug) => blogPosts.find((post) => post.slug === slug))
+    .filter((post): post is BlogPost => Boolean(post));
+  const startHerePosts = blogPosts.slice(0, 3);
+  const activeCategoryLabel = categoryLabels[selectedCategory] || selectedCategory;
+
+  const renderCategoryButton = (category: { key: string; label: string }, compact = false) => {
+    const isActive = selectedCategory === category.key;
+    const count = category.key === 'all'
+      ? blogPosts.length
+      : blogPosts.filter((post) => post.category === category.key).length;
+
+    return (
+      <button
+        key={category.key}
+        type="button"
+        onClick={() => setSelectedCategory(category.key)}
+        className={`inline-flex shrink-0 items-center justify-between gap-3 rounded-lg border px-3 py-2 text-xs font-bold transition-colors ${
+          isActive
+            ? 'border-[#FF8A1F] bg-[#FFF7ED] text-[#C45A00]'
+            : 'border-[#D7E2EE] bg-white text-[#475569] hover:border-[#FF8A1F]/60 hover:text-[#0F172A]'
+        } ${compact ? 'w-full' : ''}`}
+        style={{ fontFamily: 'var(--font-jetbrains-mono), monospace' }}
+      >
+        <span className="truncate uppercase tracking-[0.12em]">
+          {categoryLabels[category.key] || category.label}
+        </span>
+        <span className="shrink-0 text-[11px]">{count}</span>
+      </button>
+    );
+  };
+
   return (
-    <div className="min-h-screen bg-white">
+    <div className="min-h-screen bg-[#F8FAFC]">
       <section className="bg-[#F8FAFC]">
-        <div className="mx-auto max-w-[1280px] px-4 py-20 sm:px-6 lg:px-8 lg:py-28">
+        <div className="mx-auto grid max-w-[1280px] gap-8 px-4 py-12 sm:px-6 lg:grid-cols-[minmax(0,1fr)_340px] lg:px-8 lg:py-16">
           <div className="max-w-3xl">
             <p
-              className="mb-5 text-[11px] font-semibold uppercase tracking-[0.28em] text-[#6B7F96]"
+              className="mb-4 text-[11px] font-semibold uppercase tracking-[0.28em] text-[#6B7F96]"
               style={{ fontFamily: 'var(--font-jetbrains-mono), monospace' }}
             >
               Editorial
             </p>
             <h1
-              className="text-4xl font-extrabold leading-[0.98] text-[#0F172A] sm:text-5xl lg:text-6xl"
+              className="text-4xl font-extrabold leading-[0.98] text-[#0F172A] sm:text-5xl lg:text-[56px]"
               style={{ fontFamily: 'var(--font-outfit), sans-serif' }}
             >
               {dict.blog.title}
             </h1>
-            <p className="mt-6 max-w-2xl text-base leading-8 text-[#475569]">
+            <p className="mt-5 max-w-2xl text-base leading-8 text-[#475569]">
               {dict.blog.subtitle}
             </p>
+          </div>
+          <div className="grid gap-3 self-end sm:grid-cols-3 lg:grid-cols-1">
+            <div className="rounded-lg border border-[#D7E2EE] bg-white px-4 py-3 shadow-sm shadow-[#0F172A]/5">
+              <p className="text-[11px] font-semibold uppercase tracking-[0.16em] text-[#64748B]" style={{ fontFamily: 'var(--font-jetbrains-mono), monospace' }}>
+                Articles
+              </p>
+              <p className="mt-1 text-2xl font-extrabold text-[#0F172A]" style={{ fontFamily: 'var(--font-outfit), sans-serif' }}>
+                {blogPosts.length}
+              </p>
+            </div>
+            <div className="rounded-lg border border-[#D7E2EE] bg-white px-4 py-3 shadow-sm shadow-[#0F172A]/5">
+              <p className="text-[11px] font-semibold uppercase tracking-[0.16em] text-[#64748B]" style={{ fontFamily: 'var(--font-jetbrains-mono), monospace' }}>
+                Topics
+              </p>
+              <p className="mt-1 text-2xl font-extrabold text-[#0F172A]" style={{ fontFamily: 'var(--font-outfit), sans-serif' }}>
+                {blogCategories.length - 1}
+              </p>
+            </div>
+            <div className="rounded-lg border border-[#D7E2EE] bg-white px-4 py-3 shadow-sm shadow-[#0F172A]/5">
+              <p className="text-[11px] font-semibold uppercase tracking-[0.16em] text-[#64748B]" style={{ fontFamily: 'var(--font-jetbrains-mono), monospace' }}>
+                Current view
+              </p>
+              <p className="mt-1 truncate text-sm font-bold text-[#0F172A]" style={{ fontFamily: 'var(--font-outfit), sans-serif' }}>
+                {activeCategoryLabel}
+              </p>
+            </div>
           </div>
         </div>
       </section>
 
       <section className="bg-white">
-        <div className="mx-auto max-w-[1280px] px-4 py-14 sm:px-6 lg:px-8 lg:py-20">
+        <div className="mx-auto grid max-w-[1280px] gap-10 px-4 py-10 sm:px-6 lg:grid-cols-[minmax(0,1fr)_340px] lg:px-8 lg:py-14">
           {blogPosts.length > 0 ? (
-            <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
-              {blogPosts.map((post) => {
-                const dateLabel = formatDate(post.publishedAt);
-                const categoryLabel = categoryLabels[post.category] || post.category;
+            <>
+              <main className="min-w-0">
+                <div className="flex flex-col gap-4 border-b border-[#E2E8F0] pb-5 sm:flex-row sm:items-end sm:justify-between">
+                  <div>
+                    <p className="inline-flex items-center gap-2 text-[11px] font-semibold uppercase tracking-[0.18em] text-[#C45A00]" style={{ fontFamily: 'var(--font-jetbrains-mono), monospace' }}>
+                      <Search className="h-4 w-4" />
+                      Library
+                    </p>
+                    <h2 className="mt-2 text-2xl font-extrabold text-[#0F172A]" style={{ fontFamily: 'var(--font-outfit), sans-serif' }}>
+                      {activeCategoryLabel} articles
+                    </h2>
+                  </div>
+                  <p className="text-sm text-[#64748B]">
+                    {filteredPosts.length} {filteredPosts.length === 1 ? 'article' : 'articles'}
+                  </p>
+                </div>
 
-                return (
+                <div className="mt-5 flex gap-2 overflow-x-auto pb-2">
+                  {blogCategories.map((category) => renderCategoryButton(category))}
+                </div>
+
+                {featuredPost ? (
                   <Link
-                    key={post.slug}
-                    href={`/${locale}/blog/${post.slug}`}
-                    className="group flex min-h-[300px] flex-col rounded-lg border border-[#E2E8F0] bg-white p-7 shadow-sm shadow-[#0F172A]/5 transition-all hover:-translate-y-0.5 hover:border-[#FF8A1F]/50 hover:shadow-md"
+                    href={`/${locale}/blog/${featuredPost.slug}`}
+                    className="group mt-6 grid overflow-hidden rounded-lg border border-[#D7E2EE] bg-[#F8FAFC] shadow-sm shadow-[#0F172A]/5 transition-all hover:-translate-y-0.5 hover:border-[#FF8A1F]/60 hover:shadow-md md:grid-cols-[minmax(0,1fr)_280px]"
                   >
-                    <span
-                      className="mb-6 inline-flex max-w-full self-start rounded-full border border-[#FF8A1F]/25 bg-[#FFF7ED] px-4 py-1.5 text-[11px] font-semibold uppercase tracking-[0.18em] text-[#C45A00]"
-                      style={{ fontFamily: 'var(--font-jetbrains-mono), monospace' }}
-                    >
-                      {categoryLabel}
-                    </span>
+                    <div className="p-5 sm:p-6">
+                      <span
+                        className="inline-flex rounded-full border border-[#FF8A1F]/25 bg-[#FFF7ED] px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.16em] text-[#C45A00]"
+                        style={{ fontFamily: 'var(--font-jetbrains-mono), monospace' }}
+                      >
+                        Featured guide
+                      </span>
+                      <h3
+                        className="mt-4 text-2xl font-extrabold leading-tight text-[#0F172A] sm:text-3xl"
+                        style={{ fontFamily: 'var(--font-outfit), sans-serif' }}
+                      >
+                        {featuredPost.title}
+                      </h3>
+                      <p className="mt-4 text-sm leading-7 text-[#475569]">
+                        {featuredPost.excerpt}
+                      </p>
+                      <div className="mt-5">
+                        <ArticleMeta post={featuredPost} />
+                      </div>
+                      <span className="mt-6 inline-flex items-center gap-2 text-sm font-bold text-[#FF8A1F] transition-all group-hover:gap-3">
+                        {dict.blog.readMore} <ArrowRight className="h-4 w-4" />
+                      </span>
+                    </div>
+                    {featuredPost.image && (
+                      <div className="relative min-h-[220px] border-t border-[#D7E2EE] bg-[#062748] md:border-l md:border-t-0">
+                        <Image
+                          src={featuredPost.image}
+                          alt={featuredPost.title}
+                          fill
+                          sizes="(max-width: 768px) 100vw, 280px"
+                          className="object-cover"
+                        />
+                      </div>
+                    )}
+                  </Link>
+                ) : (
+                  <div className="mt-6 rounded-lg border border-dashed border-[#CBD5E1] bg-[#F8FAFC] px-6 py-10 text-center">
+                    <p className="text-sm text-[#64748B]">No articles in this topic yet.</p>
+                  </div>
+                )}
+
+                {articleList.length > 0 && (
+                  <div className="mt-6 grid gap-4 xl:grid-cols-2">
+                    {articleList.map((post) => {
+                      const categoryLabel = categoryLabels[post.category] || post.category;
+
+                      return (
+                        <Link
+                          key={post.slug}
+                          href={`/${locale}/blog/${post.slug}`}
+                          className="group flex min-h-[250px] flex-col rounded-lg border border-[#E2E8F0] bg-white p-5 shadow-sm shadow-[#0F172A]/5 transition-all hover:-translate-y-0.5 hover:border-[#FF8A1F]/50 hover:shadow-md"
+                        >
+                          <span
+                            className="mb-4 inline-flex max-w-full self-start rounded-full border border-[#FF8A1F]/25 bg-[#FFF7ED] px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.16em] text-[#C45A00]"
+                            style={{ fontFamily: 'var(--font-jetbrains-mono), monospace' }}
+                          >
+                            {categoryLabel}
+                          </span>
+                          <h3
+                            className="text-xl font-bold leading-tight text-[#0F172A]"
+                            style={{ fontFamily: 'var(--font-outfit), sans-serif' }}
+                          >
+                            {post.title}
+                          </h3>
+                          <p className="mt-3 flex-1 text-sm leading-7 text-[#475569]">
+                            {post.excerpt}
+                          </p>
+                          <div className="mt-5">
+                            <ArticleMeta post={post} />
+                          </div>
+                          <span className="mt-5 inline-flex items-center gap-2 text-sm font-bold text-[#FF8A1F] transition-all group-hover:gap-3">
+                            {dict.blog.readMore} <ArrowRight className="h-4 w-4" />
+                          </span>
+                        </Link>
+                      );
+                    })}
+                  </div>
+                )}
+              </main>
+
+              <aside className="min-w-0 lg:sticky lg:top-24 lg:self-start">
+                <div className="space-y-5">
+                  <section className="rounded-lg border border-[#D7E2EE] bg-white p-5 shadow-sm shadow-[#0F172A]/5">
                     <h2
-                      className="text-2xl font-bold leading-tight text-[#0F172A]"
+                      className="flex items-center gap-2 text-sm font-bold text-[#0F172A]"
                       style={{ fontFamily: 'var(--font-outfit), sans-serif' }}
                     >
-                      {post.title}
+                      <Radio className="h-4 w-4 text-[#FF8A1F]" />
+                      Topic map
                     </h2>
-                    <p className="mt-5 flex-1 text-sm leading-7 text-[#475569]">
-                      {post.excerpt}
-                    </p>
-                    <div className="mt-7 flex flex-wrap items-center gap-x-4 gap-y-2 text-[12px] text-[#64748B]">
-                      {post.author && <span>{post.author}</span>}
-                      {dateLabel && (
-                        <span className="inline-flex items-center gap-1.5">
-                          <CalendarDays className="h-3.5 w-3.5" />
-                          {dateLabel}
-                        </span>
-                      )}
-                      {post.readTime && (
-                        <span className="inline-flex items-center gap-1.5">
-                          <Clock className="h-3.5 w-3.5" />
-                          {post.readTime}
-                        </span>
-                      )}
+                    <div className="mt-4 space-y-4">
+                      {blogCategories
+                        .filter((category) => category.key !== 'all')
+                        .map((category) => {
+                          const count = blogPosts.filter((post) => post.category === category.key).length;
+
+                          return (
+                            <button
+                              key={category.key}
+                              type="button"
+                              onClick={() => setSelectedCategory(category.key)}
+                              className="group w-full border-b border-[#E2E8F0] pb-4 text-left last:border-b-0 last:pb-0"
+                            >
+                              <span className="flex items-center justify-between gap-3">
+                                <span className="text-sm font-bold text-[#0F172A]" style={{ fontFamily: 'var(--font-outfit), sans-serif' }}>
+                                  {categoryLabels[category.key] || category.label}
+                                </span>
+                                <span className="rounded-full bg-[#EEF4FA] px-2 py-1 text-[11px] font-bold text-[#64748B]">
+                                  {count}
+                                </span>
+                              </span>
+                              <span className="mt-1 block text-xs leading-5 text-[#64748B] group-hover:text-[#475569]">
+                                {topicDescriptions[category.key]}
+                              </span>
+                            </button>
+                          );
+                        })}
                     </div>
-                    <span className="mt-7 inline-flex items-center gap-2 text-sm font-bold text-[#FF8A1F] transition-all group-hover:gap-3">
-                      {dict.blog.readMore} <ArrowRight className="h-4 w-4" />
-                    </span>
-                  </Link>
-                );
-              })}
-            </div>
+                  </section>
+
+                  <section className="rounded-lg border border-[#D7E2EE] bg-white p-5 shadow-sm shadow-[#0F172A]/5">
+                    <h2
+                      className="text-sm font-bold text-[#0F172A]"
+                      style={{ fontFamily: 'var(--font-outfit), sans-serif' }}
+                    >
+                      Start here
+                    </h2>
+                    <div className="mt-4 grid gap-3">
+                      {startHerePosts.map((post, index) => (
+                        <Link
+                          key={post.slug}
+                          href={`/${locale}/blog/${post.slug}`}
+                          className="group grid grid-cols-[28px_1fr] gap-3 rounded-md p-2 transition-colors hover:bg-[#F8FAFC]"
+                        >
+                          <span className="flex h-7 w-7 items-center justify-center rounded-full bg-[#FFF7ED] text-[11px] font-bold text-[#C45A00]">
+                            {String(index + 1).padStart(2, '0')}
+                          </span>
+                          <span className="min-w-0 text-sm font-bold leading-5 text-[#0F172A] group-hover:text-[#C45A00]" style={{ fontFamily: 'var(--font-outfit), sans-serif' }}>
+                            {post.title}
+                          </span>
+                        </Link>
+                      ))}
+                    </div>
+                  </section>
+
+                  {popularPosts.length > 0 && (
+                    <section className="rounded-lg border border-[#D7E2EE] bg-white p-5 shadow-sm shadow-[#0F172A]/5">
+                      <h2
+                        className="text-sm font-bold text-[#0F172A]"
+                        style={{ fontFamily: 'var(--font-outfit), sans-serif' }}
+                      >
+                        Popular guides
+                      </h2>
+                      <div className="mt-4 grid gap-3">
+                        {popularPosts.map((post) => (
+                          <Link
+                            key={post.slug}
+                            href={`/${locale}/blog/${post.slug}`}
+                            className="group flex items-start justify-between gap-3 rounded-md p-2 transition-colors hover:bg-[#F8FAFC]"
+                          >
+                            <span className="min-w-0 text-sm font-bold leading-5 text-[#0F172A] group-hover:text-[#C45A00]" style={{ fontFamily: 'var(--font-outfit), sans-serif' }}>
+                              {post.title}
+                            </span>
+                            <ArrowRight className="mt-1 h-4 w-4 shrink-0 text-[#FF8A1F]" />
+                          </Link>
+                        ))}
+                      </div>
+                    </section>
+                  )}
+
+                  <section className="rounded-lg border border-[#D7E2EE] bg-[#062748] p-5 shadow-sm shadow-[#0F172A]/10">
+                    <div className="flex items-center gap-3">
+                      <Image
+                        src={authorProfile.avatar}
+                        alt={authorProfile.name}
+                        width={48}
+                        height={48}
+                        className="h-12 w-12 rounded-full border border-[#FF8A1F]/60 object-cover"
+                      />
+                      <div className="min-w-0">
+                        <p className="flex items-center gap-2 text-[11px] font-semibold uppercase tracking-[0.16em] text-[#FFB15A]" style={{ fontFamily: 'var(--font-jetbrains-mono), monospace' }}>
+                          <UserRound className="h-3.5 w-3.5" />
+                          Ask Eric
+                        </p>
+                        <h2 className="mt-1 text-sm font-bold text-[#F7FBFF]" style={{ fontFamily: 'var(--font-outfit), sans-serif' }}>
+                          RF sourcing question?
+                        </h2>
+                      </div>
+                    </div>
+                    <p className="mt-4 text-xs leading-6 text-[#C7D7E8]">
+                      Send the model, frequency, chip photo, or project target. Eric can help check the right technical path before sampling.
+                    </p>
+                    <LeadModalTrigger
+                      prefillType="support"
+                      className="mt-4 inline-flex w-full items-center justify-center gap-2 rounded-lg bg-[#FF8A1F] px-4 py-2.5 text-sm font-bold text-[#062748] transition-colors hover:bg-[#F97316]"
+                    >
+                      Ask a question <MessageSquare className="h-4 w-4" />
+                    </LeadModalTrigger>
+                  </section>
+                </div>
+              </aside>
+            </>
           ) : (
             <div className="mx-auto max-w-2xl rounded-lg border border-dashed border-[#CBD5E1] bg-[#F8FAFC] px-6 py-12 text-center">
               <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-lg bg-white text-[#FF8A1F] shadow-sm">
