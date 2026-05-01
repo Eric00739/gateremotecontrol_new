@@ -24,6 +24,7 @@ export default function BlogIndexClient() {
 
   const categoryLabels: Record<string, string> = {
     all: dict.blog.categories.all,
+    'rf-engineering': 'RF Engineering',
     compatibility: dict.blog.categories.compatibility,
     'rolling-code': dict.blog.categories.rollingCode,
     'oem-odm': dict.blog.categories.oemOdm,

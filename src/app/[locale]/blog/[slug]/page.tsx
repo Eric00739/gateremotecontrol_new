@@ -1,9 +1,12 @@
 import type { Metadata } from 'next';
+import Image from 'next/image';
 import Link from 'next/link';
 import { ArrowLeft, ArrowRight, CalendarDays, Clock } from 'lucide-react';
 import { blogCategories, blogPosts, type BlogPostContentBlock } from '@/data/blog';
 import { notFound } from 'next/navigation';
 import LeadModalTrigger from '@/components/LeadModalTrigger';
+import AuthorBio from '@/components/AuthorBio';
+import BlogCommentBox from '@/components/BlogCommentBox';
 import { type Locale, locales } from '@/i18n';
 import { getDictSync } from '@/i18n/dictionaries';
 import { siteName } from '@/data/site';
@@ -32,12 +35,20 @@ function formatDate(date?: string) {
   }).format(parsed);
 }
 
+function slugifyHeading(text: string) {
+  return text
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, '-')
+    .replace(/^-+|-+$/g, '');
+}
+
 function renderBlock(block: BlogPostContentBlock, index: number) {
   switch (block.type) {
     case 'heading':
       return (
         <h2
           key={`${block.type}-${index}`}
+          id={slugifyHeading(block.text)}
           className="mt-10 border-l-2 border-[#FF8A1F] pl-4 text-xl font-bold leading-snug text-[#0F172A]"
           style={{ fontFamily: 'var(--font-outfit), sans-serif' }}
         >
@@ -77,6 +88,35 @@ function renderBlock(block: BlogPostContentBlock, index: number) {
           )}
           <p className="text-sm leading-7">{block.text}</p>
         </aside>
+      );
+    case 'quote':
+      return (
+        <blockquote
+          key={`${block.type}-${index}`}
+          className="mt-8 border-y border-[#E2E8F0] py-5 text-xl font-bold leading-snug text-[#062748]"
+          style={{ fontFamily: 'var(--font-outfit), sans-serif' }}
+        >
+          {block.text}
+        </blockquote>
+      );
+    case 'image':
+      return (
+        <figure key={`${block.type}-${index}`} className="mt-9">
+          <div className="relative aspect-[16/9] overflow-hidden rounded-lg border border-[#E2E8F0] bg-[#F8FAFC] shadow-sm">
+            <Image
+              src={block.src}
+              alt={block.alt}
+              fill
+              sizes="(max-width: 1024px) 100vw, 760px"
+              className="object-cover"
+            />
+          </div>
+          {block.caption && (
+            <figcaption className="mt-3 text-[13px] leading-6 text-[#64748B]">
+              {block.caption}
+            </figcaption>
+          )}
+        </figure>
       );
   }
 }
@@ -127,6 +167,7 @@ export default async function BlogPostPage({
 
   const categoryLabels: Record<string, string> = {
     all: dict.blog.categories.all,
+    'rf-engineering': 'RF Engineering',
     compatibility: dict.blog.categories.compatibility,
     'rolling-code': dict.blog.categories.rollingCode,
     'oem-odm': dict.blog.categories.oemOdm,
@@ -138,6 +179,9 @@ export default async function BlogPostPage({
     blogCategories.find((category) => category.key === post.category)?.label ||
     post.category;
   const dateLabel = formatDate(post.publishedAt);
+  const articleSections = post.content
+    .filter((block): block is Extract<BlogPostContentBlock, { type: 'heading' }> => block.type === 'heading')
+    .map((block) => ({ title: block.text, id: slugifyHeading(block.text) }));
 
   return (
     <div className="min-h-screen bg-white">
@@ -193,6 +237,8 @@ export default async function BlogPostPage({
             {post.excerpt}
           </p>
           <div>{post.content.map(renderBlock)}</div>
+          <AuthorBio />
+          <BlogCommentBox articleTitle={post.title} />
 
           <div className="mt-12 rounded-lg bg-[#062748] p-6">
             <h2
@@ -215,6 +261,32 @@ export default async function BlogPostPage({
 
         <aside className="hidden lg:block">
           <div className="sticky top-24 space-y-5">
+            {articleSections.length > 0 && (
+              <div className="rounded-lg border border-[#E2E8F0] bg-white p-5 shadow-sm">
+                <h2
+                  className="text-sm font-bold text-[#0F172A]"
+                  style={{ fontFamily: 'var(--font-outfit), sans-serif' }}
+                >
+                  Article sections
+                </h2>
+                <nav className="mt-3 grid gap-2">
+                  {articleSections.slice(0, 8).map((section) => (
+                    <a
+                      key={section.id}
+                      href={`#${section.id}`}
+                      className="text-xs leading-5 text-[#64748B] transition-colors hover:text-[#FF8A1F]"
+                    >
+                      {section.title}
+                    </a>
+                  ))}
+                </nav>
+              </div>
+            )}
+
+            <div className="rounded-lg border border-[#E2E8F0] bg-[#F8FAFC] p-5 shadow-sm">
+              <AuthorBio variant="compact" />
+            </div>
+
             <div className="rounded-lg border border-[#E2E8F0] bg-white p-5 shadow-sm">
               <h2
                 className="text-sm font-bold text-[#0F172A]"
@@ -231,6 +303,12 @@ export default async function BlogPostPage({
               >
                 {dict.blog.helpCta}
               </LeadModalTrigger>
+              <a
+                href="#comments"
+                className="mt-2 inline-flex w-full items-center justify-center rounded-lg border border-[#E2E8F0] px-4 py-2.5 text-xs font-bold text-[#64748B] transition-colors hover:border-[#FF8A1F]/50 hover:text-[#FF8A1F]"
+              >
+                Leave a message
+              </a>
             </div>
 
             <Link
