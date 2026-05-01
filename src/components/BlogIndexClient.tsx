@@ -71,22 +71,36 @@ export default function BlogIndexClient() {
     if (selectedCategory === 'all') return blogPosts;
     return blogPosts.filter((post) => post.category === selectedCategory);
   }, [selectedCategory]);
+  const categoryCounts = useMemo(() => {
+    return blogCategories.reduce<Record<string, number>>((counts, category) => {
+      counts[category.key] = category.key === 'all'
+        ? blogPosts.length
+        : blogPosts.filter((post) => post.category === category.key).length;
+      return counts;
+    }, {});
+  }, []);
+  const activeCategories = blogCategories.filter(
+    (category) => category.key === 'all' || categoryCounts[category.key] > 0,
+  );
+  const emptyCategoryCount = blogCategories.filter(
+    (category) => category.key !== 'all' && categoryCounts[category.key] === 0,
+  ).length;
 
   const featuredPost = filteredPosts.find((post) => post.featured) || filteredPosts[0];
   const articleList = featuredPost
     ? filteredPosts.filter((post) => post.slug !== featuredPost.slug)
     : [];
+  const startHerePosts = blogPosts.slice(0, 2);
+  const startHereSlugs = new Set(startHerePosts.map((post) => post.slug));
   const popularPosts = popularGuides
     .map((slug) => blogPosts.find((post) => post.slug === slug))
-    .filter((post): post is BlogPost => Boolean(post));
-  const startHerePosts = blogPosts.slice(0, 3);
+    .filter((post): post is BlogPost => Boolean(post))
+    .filter((post) => !startHereSlugs.has(post.slug));
   const activeCategoryLabel = categoryLabels[selectedCategory] || selectedCategory;
 
-  const renderCategoryButton = (category: { key: string; label: string }, compact = false) => {
+  const renderCategoryButton = (category: { key: string; label: string }) => {
     const isActive = selectedCategory === category.key;
-    const count = category.key === 'all'
-      ? blogPosts.length
-      : blogPosts.filter((post) => post.category === category.key).length;
+    const count = categoryCounts[category.key] || 0;
 
     return (
       <button
@@ -97,7 +111,7 @@ export default function BlogIndexClient() {
           isActive
             ? 'border-[#FF8A1F] bg-[#FFF7ED] text-[#C45A00]'
             : 'border-[#D7E2EE] bg-white text-[#475569] hover:border-[#FF8A1F]/60 hover:text-[#0F172A]'
-        } ${compact ? 'w-full' : ''}`}
+        }`}
         style={{ fontFamily: 'var(--font-jetbrains-mono), monospace' }}
       >
         <span className="truncate uppercase tracking-[0.12em]">
@@ -143,7 +157,7 @@ export default function BlogIndexClient() {
                 Topics
               </p>
               <p className="mt-1 text-2xl font-extrabold text-[#0F172A]" style={{ fontFamily: 'var(--font-outfit), sans-serif' }}>
-                {blogCategories.length - 1}
+                {activeCategories.length - 1}
               </p>
             </div>
             <div className="rounded-lg border border-[#D7E2EE] bg-white px-4 py-3 shadow-sm shadow-[#0F172A]/5">
@@ -179,7 +193,7 @@ export default function BlogIndexClient() {
                 </div>
 
                 <div className="mt-5 flex gap-2 overflow-x-auto pb-2">
-                  {blogCategories.map((category) => renderCategoryButton(category))}
+                  {activeCategories.map((category) => renderCategoryButton(category))}
                 </div>
 
                 {featuredPost ? (
@@ -279,9 +293,9 @@ export default function BlogIndexClient() {
                     </h2>
                     <div className="mt-4 space-y-4">
                       {blogCategories
-                        .filter((category) => category.key !== 'all')
+                        .filter((category) => category.key !== 'all' && categoryCounts[category.key] > 0)
                         .map((category) => {
-                          const count = blogPosts.filter((post) => post.category === category.key).length;
+                          const count = categoryCounts[category.key] || 0;
 
                           return (
                             <button
@@ -304,6 +318,11 @@ export default function BlogIndexClient() {
                             </button>
                           );
                         })}
+                      {emptyCategoryCount > 0 && (
+                        <p className="rounded-md bg-[#F8FAFC] px-3 py-2 text-xs leading-5 text-[#64748B]">
+                          {emptyCategoryCount} more topics are being prepared.
+                        </p>
+                      )}
                     </div>
                   </section>
 
@@ -424,7 +443,7 @@ export default function BlogIndexClient() {
             </div>
             <div className="flex flex-wrap gap-2">
               {blogCategories
-                .filter((category) => category.key !== 'all')
+                .filter((category) => category.key !== 'all' && categoryCounts[category.key] > 0)
                 .slice(0, 4)
                 .map((category) => (
                   <span

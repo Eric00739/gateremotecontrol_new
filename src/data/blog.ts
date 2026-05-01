@@ -1,6 +1,11 @@
+export type BlogInlineLink = {
+  text: string;
+  href: string;
+};
+
 export type BlogPostContentBlock =
   | { type: 'heading'; text: string }
-  | { type: 'paragraph'; text: string }
+  | { type: 'paragraph'; text: string; links?: BlogInlineLink[] }
   | { type: 'list'; items: string[] }
   | { type: 'callout'; title?: string; text: string }
   | { type: 'quote'; text: string }
@@ -8,6 +13,7 @@ export type BlogPostContentBlock =
 
 export type BlogPost = {
   title: string;
+  seoTitle?: string;
   category: string;
   excerpt: string;
   slug: string;
@@ -17,6 +23,7 @@ export type BlogPost = {
   featured?: boolean;
   readTime?: string;
   image?: string;
+  relatedSlugs?: string[];
   content: BlogPostContentBlock[];
 };
 
@@ -91,11 +98,15 @@ export const compatibilityBrands = [
 ];
 
 /** Popular / evergreen guide slugs */
-export const popularGuides = ['circuits-dont-act-good-enough-transmitter-modules'];
+export const popularGuides = [
+  'circuits-dont-act-good-enough-transmitter-modules',
+  'rf-remote-control-concurrency-anti-collision',
+];
 
 export const blogPosts: BlogPost[] = [
   {
     title: 'Circuits Don\'t Act: Why I Hate "Good Enough" Transmitter Modules More and More',
+    seoTitle: 'Why Cheap RF Transmitter Modules Fail in Gate Opener Systems',
     category: 'rf-engineering',
     excerpt:
       'A transmitter module is not reliable just because it can send a signal. Real quality depends on stability, clean output, tuning margin, and repeatable mass production.',
@@ -105,6 +116,7 @@ export const blogPosts: BlogPost[] = [
     readTime: '14 min read',
     featured: true,
     image: '/images/blog/circuits-dont-act/circuits-dont-act-cover.webp',
+    relatedSlugs: ['rf-remote-control-concurrency-anti-collision', 'oem-odm-hardware-future'],
     content: [
       {
         type: 'image',
@@ -136,6 +148,9 @@ export const blogPosts: BlogPost[] = [
         type: 'paragraph',
         text:
           'This article is not meant to explain RF circuits like a textbook. I want to talk about something more practical: why a good transmitter module is not just about whether it can transmit a signal, but whether it has the confidence to stay stable for a long time.',
+        links: [
+          { text: 'good transmitter module', href: '/#products' },
+        ],
       },
       {
         type: 'quote',
@@ -500,11 +515,15 @@ export const blogPosts: BlogPost[] = [
         type: 'paragraph',
         text:
           'During product export, remote control sourcing, or transmitter module mass production, what is the most difficult unstable problem you have ever met? Was the sample good but the mass production bad? Was the range unstable? Did the performance drop after changing the case? Or was the customer\'s installation environment too complicated?',
+        links: [
+          { text: 'remote control sourcing', href: '/#oem-odm' },
+        ],
       },
     ],
   },
   {
     title: 'OEM or ODM? You Think You\'re Choosing a Production Method, But You\'re Actually Choosing Your Future',
+    seoTitle: 'OEM vs ODM RF Remote Control Manufacturing: Which Path Should Hardware Buyers Choose?',
     category: 'oem-odm',
     excerpt:
       'For hardware startups, OEM and ODM are not just production labels. They decide who controls the product, the certification path, and the future leverage in the supply chain.',
@@ -513,6 +532,7 @@ export const blogPosts: BlogPost[] = [
     publishedAt: '2026-05-01',
     readTime: '7 min read',
     image: '/images/blog/oem-odm-hardware-future/oem-vs-odm-path.webp',
+    relatedSlugs: ['circuits-dont-act-good-enough-transmitter-modules', 'rf-remote-control-concurrency-anti-collision'],
     content: [
       {
         type: 'quote',
@@ -523,6 +543,11 @@ export const blogPosts: BlogPost[] = [
         type: 'paragraph',
         text:
           'A friend of mine was recently confused by three different factories while working on a smart home project. He needed an RF remote control, but each factory gave him a different suggestion. One offered OEM, another offered ODM, and another said it could do ODM customization.',
+        links: [
+          { text: 'RF remote control', href: '/#products' },
+          { text: 'OEM', href: '/#oem-odm' },
+          { text: 'ODM', href: '/#oem-odm' },
+        ],
       },
       {
         type: 'paragraph',
@@ -598,6 +623,9 @@ export const blogPosts: BlogPost[] = [
         type: 'paragraph',
         text:
           'RF remotes are more complicated than many ordinary hardware products because they are wireless devices. A remote for a door, curtain, industrial controller, toy, or access system may need different certifications in different markets.',
+        links: [
+          { text: 'RF remotes', href: '/compatibility' },
+        ],
       },
       {
         type: 'list',
@@ -635,6 +663,9 @@ export const blogPosts: BlogPost[] = [
         type: 'paragraph',
         text:
           'One core technical choice in RF remotes is fixed code versus rolling code. This is not only an engineering detail. It affects security, market positioning, and whether the product is suitable for the application.',
+        links: [
+          { text: 'fixed code versus rolling code', href: '/compatibility' },
+        ],
       },
       {
         type: 'list',
@@ -721,6 +752,199 @@ export const blogPosts: BlogPost[] = [
         type: 'paragraph',
         text:
           'Feel free to share your thoughts in the comments. These real cases are often more useful than textbook definitions.',
+      },
+    ],
+  },
+  {
+    title: 'RF Remote Control Concurrency and Anti-Collision: From Physical Layer to Protocol Layer',
+    seoTitle: 'RF Remote Control Anti-Collision: Concurrency from Physical Layer to Protocol Layer',
+    category: 'rf-engineering',
+    excerpt:
+      'When many RF remotes share the same channel, reliability depends on how the system handles collisions, interference, timing, and recovery.',
+    slug: 'rf-remote-control-concurrency-anti-collision',
+    author: 'Eric Huang',
+    publishedAt: '2026-05-01',
+    readTime: '9 min read',
+    image: '/images/blog/rf-remote-control-concurrency-anti-collision/collision-scenarios.webp',
+    relatedSlugs: ['circuits-dont-act-good-enough-transmitter-modules', 'oem-odm-hardware-future'],
+    content: [
+      {
+        type: 'quote',
+        text:
+          'Anti-collision is not one magic protocol. It is a way to create order in a shared wireless environment.',
+      },
+      {
+        type: 'paragraph',
+        text:
+          'In a smart home showroom, dozens of RF remote controls may work at the same time. Some adjust lights, some close curtains, some control air conditioning, and some operate a garage door. On the surface, everything looks orderly.',
+        links: [
+          { text: 'RF remote controls', href: '/#products' },
+        ],
+      },
+      {
+        type: 'paragraph',
+        text:
+          'But in the invisible radio spectrum, multiple devices may be competing for the same channel. This is one of the most basic problems in RF systems: wireless links are shared. Once a channel is shared, competition and collision become part of the design problem.',
+      },
+      {
+        type: 'paragraph',
+        text:
+          'RF remotes are widely used in consumer electronics, industrial control, access control, automotive electronics, and other specialized remote applications because they are low cost, power efficient, easy to deploy, and do not require line of sight. But when several devices share the same band, the channel is no longer just about who transmits and who receives. It becomes a resource competition system.',
+      },
+      {
+        type: 'callout',
+        title: 'The practical meaning',
+        text:
+          'From an engineering standpoint, anti-collision means building a coexistence mechanism that is reliable enough under limited spectrum, limited power, and limited cost.',
+      },
+      { type: 'heading', text: 'What a Collision Really Means' },
+      {
+        type: 'paragraph',
+        text:
+          'Wireless communication is not a single beam of signal flying through the air. Many electromagnetic waves can propagate and overlap in the same space at the same time. What the receiver receives is the combined result of the target signal, other transmissions, and environmental noise.',
+      },
+      {
+        type: 'paragraph',
+        text:
+          'If the target signal power is S, the interference power is I, and the noise power is N, the reception quality is often described by SINR: S divided by I plus N. When interference is strong enough, or when signals overlap in both time and frequency, the SINR can fall below the receiver threshold.',
+      },
+      {
+        type: 'paragraph',
+        text:
+          'At that moment, the receiver may misread data, lose a frame, or fail to recover the packet at all. In the final product, this may look like a remote that sometimes works and sometimes does not.',
+      },
+      {
+        type: 'image',
+        src: '/images/blog/rf-remote-control-concurrency-anti-collision/collision-scenarios.webp',
+        alt: 'Three typical RF collision scenarios including same-frequency collision adjacent-channel interference and hidden-terminal collision',
+        caption:
+          'The most common collision problems are same-frequency same-time transmission, adjacent-channel interference, and hidden-terminal collision.',
+      },
+      {
+        type: 'list',
+        items: [
+          'Same-frequency, same-time collision: two devices transmit almost at the same time on the same carrier frequency.',
+          'Adjacent-channel interference or out-of-band leakage: two devices use nearby channels, but imperfect filtering or spectral overlap still creates interference.',
+          'Hidden-terminal collision: devices A and B cannot hear each other, but both transmit to receiver C and collide at the receiver.',
+        ],
+      },
+      { type: 'heading', text: 'Consumer Remotes and Industrial Remotes Do Not Tolerate Collisions the Same Way' },
+      {
+        type: 'paragraph',
+        text:
+          'Even when both products are called remote controls, their tolerance for collision can be very different. In a consumer setting, if a 433 MHz remote does not work the first time, the user often presses the button again. The problem is mostly user experience.',
+        links: [
+          { text: '433 MHz remote', href: '/compatibility' },
+        ],
+      },
+      {
+        type: 'paragraph',
+        text:
+          'In industrial control, the consequences can be much more serious. For cranes, hoists, mining equipment, large doors, or heavy machinery, losing a critical control signal is not just an inconvenience. It can create delay, synchronization problems, or safety risk.',
+      },
+      {
+        type: 'paragraph',
+        text:
+          'That is why low-cost consumer RF systems often prioritize cost, battery life, and acceptable success rate, while industrial systems need stronger acknowledgment, retransmission, timeout, and fail-safe logic.',
+      },
+      { type: 'heading', text: 'Anti-Collision Methods Are All About Dividing Resources' },
+      {
+        type: 'paragraph',
+        text:
+          'Anti-collision techniques look different, but they answer the same question: how do we prevent several devices from stepping on the same resource at the same time?',
+      },
+      {
+        type: 'list',
+        items: [
+          'FDMA divides by frequency. Different devices use different channels, which is simple and stable but limited by available spectrum.',
+          'TDMA divides by time. Devices share one frequency but transmit in assigned time slots, which is predictable but requires synchronization.',
+          'FHSS keeps changing channels. A bad channel becomes a short event instead of a long failure, but transmitter and receiver must stay synchronized.',
+          'DSSS spreads the signal across wider bandwidth with a pseudo-random code, improving robustness but increasing implementation complexity and bandwidth use.',
+          'CSMA/CA listens before transmitting. It is flexible for changing networks, but it performs worse under heavy traffic and cannot fully solve hidden-terminal problems.',
+        ],
+      },
+      {
+        type: 'paragraph',
+        text:
+          'There is no free answer here. FDMA is easy to understand but does not scale forever. TDMA gives order but needs time alignment. FHSS and DSSS improve coexistence but raise design complexity. CSMA/CA is flexible, but collision risk still exists when the channel becomes crowded.',
+      },
+      { type: 'heading', text: 'The Real Engineering Work Is the Trade-Off' },
+      {
+        type: 'paragraph',
+        text:
+          'In RF system design, the hard part is not memorizing the protocol names. The hard part is choosing the right trade-off for the real product.',
+      },
+      {
+        type: 'paragraph',
+        text:
+          'If low latency and deterministic behavior are critical, scheduled methods such as TDMA may be better. If devices enter and leave the network dynamically, contention-based methods such as CSMA/CA can be more practical.',
+      },
+      {
+        type: 'paragraph',
+        text:
+          'As the number of devices grows and the environment becomes more crowded, the system may need frequency hopping, acknowledgment, retransmission, shorter packets, adaptive timing, or a combination of several methods.',
+      },
+      {
+        type: 'paragraph',
+        text:
+          'Battery-powered devices make the problem harder. They do not want to stay awake all the time, but many anti-collision mechanisms work better when devices can listen, synchronize, or wait for beacons. Power consumption and reliability must be balanced together.',
+      },
+      { type: 'heading', text: 'From 433 MHz to 2.4 GHz' },
+      {
+        type: 'paragraph',
+        text:
+          'Early 433 MHz systems were simple. Their main goal was to transmit a signal and let the receiver recognize it. They often used basic encoding and address recognition, but had very limited concurrency control. When several remotes were pressed at the same time, the system often depended on re-pressing or random success.',
+      },
+      {
+        type: 'paragraph',
+        text:
+          'Later, rolling code improved security, but it did not automatically solve collision. Security and concurrency are two different problems. A rolling-code system can still suffer from packet collision if the channel access design is weak.',
+        links: [
+          { text: 'rolling code', href: '/compatibility' },
+        ],
+      },
+      {
+        type: 'image',
+        src: '/images/blog/rf-remote-control-concurrency-anti-collision/rf-system-evolution.webp',
+        alt: 'Evolution of RF remote control systems from 433 MHz to rolling code and 2.4 GHz systems',
+        caption:
+          'RF remote systems evolved from simple one-way 433 MHz links to rolling-code security and more capable 2.4 GHz protocol designs.',
+      },
+      {
+        type: 'paragraph',
+        text:
+          'The move toward 2.4 GHz systems brought more protocol capability: multiple channels, automatic acknowledgment, automatic retransmission, shorter packet time, and better recovery behavior. These features reduce collision windows and help the system recover when conflict happens.',
+      },
+      {
+        type: 'paragraph',
+        text:
+          'In the future, anti-collision may move further from passive recovery to active sensing. A system may sense spectrum conditions, adjust parameters dynamically, and avoid interference before it becomes a real failure.',
+      },
+      { type: 'heading', text: 'Anti-Collision Is Creating Order from Shared Spectrum' },
+      {
+        type: 'paragraph',
+        text:
+          'RF remote control concurrency and anti-collision are really about creating order inside an open, shared, and unpredictable electromagnetic environment.',
+      },
+      {
+        type: 'paragraph',
+        text:
+          'Frequency division, time division, frequency hopping, spread spectrum, and listen-before-talk all solve part of the problem. Each method is an engineering decision under constraints of cost, power, spectrum, reliability, and latency.',
+      },
+      {
+        type: 'paragraph',
+        text:
+          'A mature RF system does not depend on only one layer. It coordinates the physical layer, link layer, and application layer: channel planning, packet size, acknowledgment, retransmission, collision recovery, power control, latency, and security all need to work together.',
+      },
+      {
+        type: 'paragraph',
+        text:
+          'This is the real underlying logic of RF anti-collision. It is not just a communication trick. It is a complete method for managing shared resources.',
+      },
+      {
+        type: 'paragraph',
+        text:
+          'During RF remote control sourcing or product development, have you met problems where several remotes worked individually but became unstable together? Was it same-frequency collision, adjacent-channel interference, a hidden-terminal situation, or simply a protocol that did not leave enough recovery margin?',
       },
     ],
   },

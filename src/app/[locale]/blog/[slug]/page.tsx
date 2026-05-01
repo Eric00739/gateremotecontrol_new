@@ -1,8 +1,9 @@
 import type { Metadata } from 'next';
+import type { ReactNode } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { ArrowLeft, ArrowRight, CalendarDays, ChevronDown, Clock, ListChecks, MessageSquare } from 'lucide-react';
-import { blogCategories, blogPosts, type BlogPostContentBlock } from '@/data/blog';
+import { blogCategories, blogPosts, type BlogInlineLink, type BlogPost, type BlogPostContentBlock } from '@/data/blog';
 import { notFound } from 'next/navigation';
 import LeadModalTrigger from '@/components/LeadModalTrigger';
 import AuthorBio from '@/components/AuthorBio';
@@ -66,6 +67,133 @@ function buildArticleSections(content: BlogPostContentBlock[]) {
 
     return sections;
   }, []);
+}
+
+function resolveInternalHref(href: string, locale: Locale) {
+  if (href.startsWith('http') || href.startsWith('mailto:') || href.startsWith('tel:')) return href;
+  if (href.startsWith(`/${locale}/`) || href === `/${locale}` || href.startsWith(`/${locale}#`)) return href;
+  if (href.startsWith('/')) return `/${locale}${href}`;
+  if (href.startsWith('#')) return href;
+  return href;
+}
+
+function renderLinkedText(text: string, links: BlogInlineLink[] | undefined, locale: Locale) {
+  if (!links || links.length === 0) return text;
+
+  const pieces: ReactNode[] = [];
+  let cursor = 0;
+
+  for (const link of links) {
+    const start = text.indexOf(link.text, cursor);
+    if (start < 0) continue;
+
+    if (start > cursor) {
+      pieces.push(text.slice(cursor, start));
+    }
+
+    pieces.push(
+      <Link
+        key={`${link.href}-${start}`}
+        href={resolveInternalHref(link.href, locale)}
+        className="font-semibold text-[#C45A00] underline decoration-[#F7C88B] decoration-1 underline-offset-4 transition-colors hover:text-[#FF8A1F]"
+      >
+        {link.text}
+      </Link>,
+    );
+    cursor = start + link.text.length;
+  }
+
+  if (cursor < text.length) {
+    pieces.push(text.slice(cursor));
+  }
+
+  return pieces.length > 0 ? pieces : text;
+}
+
+function getRelatedPosts(post: BlogPost) {
+  const relatedBySlug = (post.relatedSlugs || [])
+    .map((slug) => blogPosts.find((item) => item.slug === slug))
+    .filter((item): item is BlogPost => Boolean(item))
+    .filter((item) => item.slug !== post.slug);
+
+  const relatedSlugs = new Set(relatedBySlug.map((item) => item.slug));
+  const sameCategory = blogPosts.filter(
+    (item) => item.slug !== post.slug && item.category === post.category && !relatedSlugs.has(item.slug),
+  );
+  const fallback = blogPosts.filter(
+    (item) => item.slug !== post.slug && !relatedSlugs.has(item.slug) && !sameCategory.some((same) => same.slug === item.slug),
+  );
+
+  return [...relatedBySlug, ...sameCategory, ...fallback].slice(0, 3);
+}
+
+function RelatedArticles({
+  currentPost,
+  locale,
+  categoryLabels,
+}: {
+  currentPost: BlogPost;
+  locale: Locale;
+  categoryLabels: Record<string, string>;
+}) {
+  const relatedPosts = getRelatedPosts(currentPost);
+  if (relatedPosts.length === 0) return null;
+
+  return (
+    <section className="mt-10 border-t border-[#E2E8F0] pt-8" aria-labelledby="related-articles">
+      <div className="flex flex-col gap-2 sm:flex-row sm:items-end sm:justify-between">
+        <div>
+          <p
+            className="text-[10px] font-semibold uppercase tracking-[0.18em] text-[#C45A00]"
+            style={{ fontFamily: 'var(--font-jetbrains-mono), monospace' }}
+          >
+            Keep reading
+          </p>
+          <h2
+            id="related-articles"
+            className="mt-2 text-xl font-bold text-[#0F172A]"
+            style={{ fontFamily: 'var(--font-outfit), sans-serif' }}
+          >
+            Related articles
+          </h2>
+        </div>
+        <Link
+          href={`/${locale}/blog`}
+          className="inline-flex items-center gap-2 text-sm font-bold text-[#FF8A1F] transition-colors hover:text-[#F97316]"
+        >
+          View library <ArrowRight className="h-4 w-4" />
+        </Link>
+      </div>
+      <div className="mt-5 grid gap-4 sm:grid-cols-2">
+        {relatedPosts.map((relatedPost) => (
+          <Link
+            key={relatedPost.slug}
+            href={`/${locale}/blog/${relatedPost.slug}`}
+            className="group rounded-lg border border-[#E2E8F0] bg-[#F8FAFC] p-5 transition-all hover:-translate-y-0.5 hover:border-[#FF8A1F]/50 hover:bg-white hover:shadow-sm"
+          >
+            <span
+              className="inline-flex rounded-full border border-[#FF8A1F]/25 bg-[#FFF7ED] px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.14em] text-[#C45A00]"
+              style={{ fontFamily: 'var(--font-jetbrains-mono), monospace' }}
+            >
+              {categoryLabels[relatedPost.category] || relatedPost.category}
+            </span>
+            <h3
+              className="mt-4 text-lg font-bold leading-tight text-[#0F172A] transition-colors group-hover:text-[#C45A00]"
+              style={{ fontFamily: 'var(--font-outfit), sans-serif' }}
+            >
+              {relatedPost.title}
+            </h3>
+            <p className="mt-3 text-sm leading-6 text-[#64748B]">
+              {relatedPost.excerpt}
+            </p>
+            <span className="mt-4 inline-flex items-center gap-2 text-sm font-bold text-[#FF8A1F]">
+              Read next <ArrowRight className="h-4 w-4" />
+            </span>
+          </Link>
+        ))}
+      </div>
+    </section>
+  );
 }
 
 function ArticleSectionsNav({
@@ -188,7 +316,7 @@ function ArticleSectionsNav({
   );
 }
 
-function renderBlock(block: BlogPostContentBlock, index: number, headingId?: string) {
+function renderBlock(block: BlogPostContentBlock, index: number, locale: Locale, headingId?: string) {
   switch (block.type) {
     case 'heading':
       return (
@@ -204,7 +332,7 @@ function renderBlock(block: BlogPostContentBlock, index: number, headingId?: str
     case 'paragraph':
       return (
         <p key={`${block.type}-${index}`} className="mt-5 text-[15px] leading-8 text-[#334155]">
-          {block.text}
+          {renderLinkedText(block.text, block.links, locale)}
         </p>
       );
     case 'list':
@@ -277,7 +405,7 @@ export async function generateMetadata({
   const post = blogPosts.find((item) => item.slug === slug);
   if (!post) return { title: 'Article Not Found' };
 
-  const title = `${post.title} | GateRemoteSource`;
+  const title = `${post.seoTitle || post.title} | GateRemoteSource`;
   const openGraph: Metadata['openGraph'] = {
     type: 'article',
     siteName,
@@ -382,9 +510,10 @@ export default async function BlogPostPage({
             {post.excerpt}
           </p>
           <ArticleSectionsNav sections={articleSections} readTime={post.readTime} variant="mobile" />
-          <div>{post.content.map((block, index) => renderBlock(block, index, headingIdsByIndex.get(index)))}</div>
+          <div>{post.content.map((block, index) => renderBlock(block, index, locale, headingIdsByIndex.get(index)))}</div>
           <BlogCommentBox articleTitle={post.title} />
           <AuthorBio />
+          <RelatedArticles currentPost={post} locale={locale} categoryLabels={categoryLabels} />
 
           <div className="mt-12 rounded-lg bg-[#062748] p-6">
             <h2
