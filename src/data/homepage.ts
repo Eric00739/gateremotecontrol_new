@@ -218,14 +218,14 @@ export const oemSteps = [
 ];
 
 export const factoryItems = [
-  { name: 'SMT Production Line', image: basePath + '/images/factory-smt.jpg' },
-  { name: 'Assembly Workshop', image: basePath + '/images/factory-assembly.jpg' },
-  { name: 'Functional Testing', image: basePath + '/images/factory-testing.jpg' },
-  { name: 'Aging Test Room', image: basePath + '/images/factory-aging.jpg' },
-  { name: 'Engineering R&D', image: basePath + '/images/factory-rd.jpg' },
-  { name: 'Packaging Inspection', image: basePath + '/images/factory-packaging.jpg' },
-  { name: 'Warehouse Stock', image: basePath + '/images/factory-warehouse.jpg' },
-  { name: 'Loading & Shipment', image: basePath + '/images/factory-loading.jpg' },
+  { name: 'SMT Production Line', image: basePath + '/images/factory-smt.webp' },
+  { name: 'Assembly Workshop', image: basePath + '/images/factory-assembly.webp' },
+  { name: 'Functional Testing', image: basePath + '/images/factory-testing.webp' },
+  { name: 'Aging Test Room', image: basePath + '/images/factory-aging.webp' },
+  { name: 'Engineering R&D', image: basePath + '/images/factory-rd.webp' },
+  { name: 'Packaging Inspection', image: basePath + '/images/factory-packaging.webp' },
+  { name: 'Warehouse Stock', image: basePath + '/images/factory-warehouse.webp' },
+  { name: 'Loading & Shipment', image: basePath + '/images/factory-loading.webp' },
 ];
 
 export const resources = [
