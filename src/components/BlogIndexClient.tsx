@@ -9,6 +9,8 @@ import { blogCategories, blogPosts, popularGuides, type BlogPost } from '@/data/
 import LeadModalTrigger from '@/components/LeadModalTrigger';
 import { useDict, useLocale } from '@/i18n';
 
+const INITIAL_VISIBLE_ARTICLES = 8;
+
 function formatDate(date?: string) {
   if (!date) return null;
   const parsed = new Date(date);
@@ -47,6 +49,7 @@ export default function BlogIndexClient() {
   const dict = useDict();
   const locale = useLocale();
   const [selectedCategory, setSelectedCategory] = useState('all');
+  const [searchQuery, setSearchQuery] = useState('');
 
   const categoryLabels: Record<string, string> = {
     all: dict.blog.categories.all,
@@ -68,9 +71,28 @@ export default function BlogIndexClient() {
   };
 
   const filteredPosts = useMemo(() => {
-    if (selectedCategory === 'all') return blogPosts;
-    return blogPosts.filter((post) => post.category === selectedCategory);
-  }, [selectedCategory]);
+    const postsByCategory = selectedCategory === 'all'
+      ? blogPosts
+      : blogPosts.filter((post) => post.category === selectedCategory);
+    const normalizedQuery = searchQuery.trim().toLowerCase();
+
+    if (!normalizedQuery) return postsByCategory;
+
+    return postsByCategory.filter((post) => {
+      const searchableText = [
+        post.title,
+        post.excerpt,
+        post.category,
+        post.author,
+        post.readTime,
+      ]
+        .filter(Boolean)
+        .join(' ')
+        .toLowerCase();
+
+      return searchableText.includes(normalizedQuery);
+    });
+  }, [searchQuery, selectedCategory]);
   const categoryCounts = useMemo(() => {
     return blogCategories.reduce<Record<string, number>>((counts, category) => {
       counts[category.key] = category.key === 'all'
@@ -90,6 +112,9 @@ export default function BlogIndexClient() {
   const articleList = featuredPost
     ? filteredPosts.filter((post) => post.slug !== featuredPost.slug)
     : [];
+  const [visibleArticleCount, setVisibleArticleCount] = useState(INITIAL_VISIBLE_ARTICLES);
+  const visibleArticleList = articleList.slice(0, visibleArticleCount);
+  const hiddenArticleCount = Math.max(articleList.length - visibleArticleList.length, 0);
   const startHerePosts = blogPosts.slice(0, 2);
   const startHereSlugs = new Set(startHerePosts.map((post) => post.slug));
   const popularPosts = popularGuides
@@ -97,6 +122,16 @@ export default function BlogIndexClient() {
     .filter((post): post is BlogPost => Boolean(post))
     .filter((post) => !startHereSlugs.has(post.slug));
   const activeCategoryLabel = categoryLabels[selectedCategory] || selectedCategory;
+
+  const handleCategorySelect = (categoryKey: string) => {
+    setSelectedCategory(categoryKey);
+    setVisibleArticleCount(INITIAL_VISIBLE_ARTICLES);
+  };
+
+  const handleSearchChange = (value: string) => {
+    setSearchQuery(value);
+    setVisibleArticleCount(INITIAL_VISIBLE_ARTICLES);
+  };
 
   const renderCategoryButton = (category: { key: string; label: string }) => {
     const isActive = selectedCategory === category.key;
@@ -106,7 +141,7 @@ export default function BlogIndexClient() {
       <button
         key={category.key}
         type="button"
-        onClick={() => setSelectedCategory(category.key)}
+        onClick={() => handleCategorySelect(category.key)}
         className={`inline-flex shrink-0 items-center justify-between gap-3 rounded-lg border px-3 py-2 text-xs font-bold transition-colors ${
           isActive
             ? 'border-[#FF8A1F] bg-[#FFF7ED] text-[#C45A00]'
@@ -192,8 +227,21 @@ export default function BlogIndexClient() {
                   </p>
                 </div>
 
-                <div className="mt-5 flex gap-2 overflow-x-auto pb-2">
-                  {activeCategories.map((category) => renderCategoryButton(category))}
+                <div className="mt-5 grid gap-3 xl:grid-cols-[minmax(0,1fr)_320px]">
+                  <div className="flex gap-2 overflow-x-auto pb-2">
+                    {activeCategories.map((category) => renderCategoryButton(category))}
+                  </div>
+                  <label className="relative block">
+                    <span className="sr-only">Search blog articles</span>
+                    <Search className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-[#94A3B8]" />
+                    <input
+                      type="search"
+                      value={searchQuery}
+                      onChange={(event) => handleSearchChange(event.target.value)}
+                      placeholder="Search title, topic, problem..."
+                      className="h-10 w-full rounded-lg border border-[#D7E2EE] bg-white pl-10 pr-3 text-sm font-medium text-[#0F172A] outline-none transition-colors placeholder:text-[#94A3B8] focus:border-[#FF8A1F]"
+                    />
+                  </label>
                 </div>
 
                 {featuredPost ? (
@@ -236,47 +284,88 @@ export default function BlogIndexClient() {
                       </div>
                     )}
                   </Link>
-                ) : (
-                  <div className="mt-6 rounded-lg border border-dashed border-[#CBD5E1] bg-[#F8FAFC] px-6 py-10 text-center">
-                    <p className="text-sm text-[#64748B]">No articles in this topic yet.</p>
-                  </div>
-                )}
+                ) : null}
 
                 {articleList.length > 0 && (
-                  <div className="mt-6 grid gap-4 xl:grid-cols-2">
-                    {articleList.map((post) => {
-                      const categoryLabel = categoryLabels[post.category] || post.category;
+                  <div className="mt-6 overflow-hidden rounded-lg border border-[#E2E8F0] bg-white shadow-sm shadow-[#0F172A]/5">
+                    <div className="flex flex-col gap-1 border-b border-[#E2E8F0] bg-[#F8FAFC] px-4 py-3 sm:flex-row sm:items-center sm:justify-between">
+                      <p
+                        className="text-[11px] font-semibold uppercase tracking-[0.18em] text-[#64748B]"
+                        style={{ fontFamily: 'var(--font-jetbrains-mono), monospace' }}
+                      >
+                        Article index
+                      </p>
+                      <p className="text-xs text-[#64748B]">
+                        Compact view for larger content libraries
+                      </p>
+                    </div>
+                    <div className="divide-y divide-[#E2E8F0]">
+                      {visibleArticleList.map((post) => {
+                        const categoryLabel = categoryLabels[post.category] || post.category;
 
-                      return (
-                        <Link
-                          key={post.slug}
-                          href={`/${locale}/blog/${post.slug}`}
-                          className="group flex min-h-[250px] flex-col rounded-lg border border-[#E2E8F0] bg-white p-5 shadow-sm shadow-[#0F172A]/5 transition-all hover:-translate-y-0.5 hover:border-[#FF8A1F]/50 hover:shadow-md"
+                        return (
+                          <Link
+                            key={post.slug}
+                            href={`/${locale}/blog/${post.slug}`}
+                            className="group flex flex-col gap-4 px-4 py-4 transition-colors hover:bg-[#F8FAFC] sm:flex-row sm:items-start"
+                          >
+                            {post.image && (
+                              <div className="relative h-24 w-full shrink-0 overflow-hidden rounded-md bg-[#062748] sm:w-32">
+                                <Image
+                                  src={post.image}
+                                  alt={post.title}
+                                  fill
+                                  sizes="(max-width: 640px) 100vw, 128px"
+                                  className="object-cover transition-transform duration-300 group-hover:scale-105"
+                                />
+                              </div>
+                            )}
+                            <div className="min-w-0 flex-1">
+                              <span
+                                className="inline-flex max-w-full rounded-full border border-[#FF8A1F]/25 bg-[#FFF7ED] px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.16em] text-[#C45A00]"
+                                style={{ fontFamily: 'var(--font-jetbrains-mono), monospace' }}
+                              >
+                                {categoryLabel}
+                              </span>
+                              <h3
+                                className="mt-3 text-lg font-bold leading-snug text-[#0F172A] group-hover:text-[#C45A00] sm:text-xl"
+                                style={{ fontFamily: 'var(--font-outfit), sans-serif' }}
+                              >
+                                {post.title}
+                              </h3>
+                              <p className="mt-2 text-sm leading-6 text-[#475569]">
+                                {post.excerpt}
+                              </p>
+                              <div className="mt-5">
+                                <ArticleMeta post={post} />
+                              </div>
+                            </div>
+                            <span className="inline-flex shrink-0 items-center gap-2 self-start text-sm font-bold text-[#FF8A1F] transition-all group-hover:gap-3 sm:mt-2">
+                              {dict.blog.readMore} <ArrowRight className="h-4 w-4" />
+                            </span>
+                          </Link>
+                        );
+                      })}
+                    </div>
+                    {hiddenArticleCount > 0 && (
+                      <div className="border-t border-[#E2E8F0] bg-[#F8FAFC] px-4 py-4 text-center">
+                        <button
+                          type="button"
+                          onClick={() => setVisibleArticleCount((count) => count + INITIAL_VISIBLE_ARTICLES)}
+                          className="inline-flex items-center justify-center gap-2 rounded-lg border border-[#D7E2EE] bg-white px-4 py-2.5 text-sm font-bold text-[#0F172A] transition-colors hover:border-[#FF8A1F]/60 hover:text-[#C45A00]"
                         >
-                          <span
-                            className="mb-4 inline-flex max-w-full self-start rounded-full border border-[#FF8A1F]/25 bg-[#FFF7ED] px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.16em] text-[#C45A00]"
-                            style={{ fontFamily: 'var(--font-jetbrains-mono), monospace' }}
-                          >
-                            {categoryLabel}
-                          </span>
-                          <h3
-                            className="text-xl font-bold leading-tight text-[#0F172A]"
-                            style={{ fontFamily: 'var(--font-outfit), sans-serif' }}
-                          >
-                            {post.title}
-                          </h3>
-                          <p className="mt-3 flex-1 text-sm leading-7 text-[#475569]">
-                            {post.excerpt}
-                          </p>
-                          <div className="mt-5">
-                            <ArticleMeta post={post} />
-                          </div>
-                          <span className="mt-5 inline-flex items-center gap-2 text-sm font-bold text-[#FF8A1F] transition-all group-hover:gap-3">
-                            {dict.blog.readMore} <ArrowRight className="h-4 w-4" />
-                          </span>
-                        </Link>
-                      );
-                    })}
+                          Show {Math.min(hiddenArticleCount, INITIAL_VISIBLE_ARTICLES)} more
+                          <ArrowRight className="h-4 w-4" />
+                        </button>
+                      </div>
+                    )}
+                  </div>
+                )}
+                {!featuredPost && (
+                  <div className="mt-6 rounded-lg border border-dashed border-[#CBD5E1] bg-[#F8FAFC] px-6 py-10 text-center">
+                    <p className="text-sm text-[#64748B]">
+                      {searchQuery.trim() ? 'No articles match this search yet.' : 'No articles in this topic yet.'}
+                    </p>
                   </div>
                 )}
               </main>
@@ -301,7 +390,7 @@ export default function BlogIndexClient() {
                             <button
                               key={category.key}
                               type="button"
-                              onClick={() => setSelectedCategory(category.key)}
+                              onClick={() => handleCategorySelect(category.key)}
                               className="group w-full border-b border-[#E2E8F0] pb-4 text-left last:border-b-0 last:pb-0"
                             >
                               <span className="flex items-center justify-between gap-3">
