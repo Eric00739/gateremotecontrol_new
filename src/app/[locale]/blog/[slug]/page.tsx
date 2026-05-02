@@ -8,9 +8,10 @@ import { notFound } from 'next/navigation';
 import LeadModalTrigger from '@/components/LeadModalTrigger';
 import AuthorBio from '@/components/AuthorBio';
 import BlogCommentBox from '@/components/BlogCommentBox';
-import { type Locale, locales } from '@/i18n';
+import { defaultLocale, type Locale, locales } from '@/i18n';
 import { getDictSync } from '@/i18n/dictionaries';
 import { siteName } from '@/data/site';
+import { absoluteUrl, blogPostingJsonLd, breadcrumbJsonLd, jsonLd } from '@/lib/seo';
 
 const emptyBlogSlug = '__no-articles__';
 
@@ -406,12 +407,17 @@ export async function generateMetadata({
   if (!post) return { title: 'Article Not Found' };
 
   const title = `${post.seoTitle || post.title} | GateRemoteSource`;
+  const isDefaultLocaleArticle = locale === defaultLocale;
+  const canonicalPath = `/${defaultLocale}/blog/${post.slug}`;
   const openGraph: Metadata['openGraph'] = {
     type: 'article',
     siteName,
-    url: `/${locale}/blog/${post.slug}`,
+    url: canonicalPath,
     title,
     description: post.excerpt,
+    publishedTime: post.publishedAt,
+    modifiedTime: post.updatedAt || post.publishedAt,
+    authors: post.author ? [post.author] : undefined,
   };
 
   if (post.image) {
@@ -421,10 +427,17 @@ export async function generateMetadata({
   return {
     title,
     description: post.excerpt,
+    robots: isDefaultLocaleArticle ? undefined : { index: false, follow: true },
     alternates: {
-      canonical: `/${locale}/blog/${post.slug}`,
+      canonical: canonicalPath,
     },
     openGraph,
+    twitter: {
+      card: post.image ? 'summary_large_image' : 'summary',
+      title,
+      description: post.excerpt,
+      images: post.image ? [post.image] : undefined,
+    },
   };
 }
 
@@ -455,9 +468,22 @@ export default async function BlogPostPage({
   const dateLabel = formatDate(post.publishedAt);
   const articleSections = buildArticleSections(post.content);
   const headingIdsByIndex = new Map(articleSections.map((section) => [section.blockIndex, section.id]));
+  const isDefaultLocaleArticle = locale === defaultLocale;
+  const articleJsonLd = blogPostingJsonLd({ post, locale: defaultLocale, categoryLabel });
+  const breadcrumb = breadcrumbJsonLd([
+    { name: 'Home', url: absoluteUrl(`/${defaultLocale}`) },
+    { name: 'Blog', url: absoluteUrl(`/${defaultLocale}/blog`) },
+    { name: post.title, url: absoluteUrl(`/${defaultLocale}/blog/${post.slug}`) },
+  ]);
 
   return (
     <div className="min-h-screen bg-white">
+      {isDefaultLocaleArticle && (
+        <>
+          <script type="application/ld+json" dangerouslySetInnerHTML={jsonLd(articleJsonLd)} />
+          <script type="application/ld+json" dangerouslySetInnerHTML={jsonLd(breadcrumb)} />
+        </>
+      )}
       <div className="border-b border-[#E2E8F0] bg-white">
         <div className="mx-auto max-w-[1280px] px-4 py-3 sm:px-6 lg:px-8">
           <Link

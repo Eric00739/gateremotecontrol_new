@@ -7,6 +7,7 @@ import { compatibilityBrands } from '@/data/compatibility';
 import { type Locale, locales } from '@/i18n';
 import { getDictSync } from '@/i18n/dictionaries';
 import { siteName } from '@/data/site';
+import { absoluteUrl, breadcrumbJsonLd, jsonLd, localizedAlternates } from '@/lib/seo';
 
 export function generateStaticParams() {
   return locales.map((locale) => ({ locale }));
@@ -23,11 +24,17 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
       description: dict.compatibility.subtitle,
       alternates: {
         canonical: `/${locale}/compatibility`,
+        languages: localizedAlternates('/compatibility'),
       },
       openGraph: {
         type: 'website',
         siteName,
         url: `/${locale}/compatibility`,
+        title,
+        description: dict.compatibility.subtitle,
+      },
+      twitter: {
+        card: 'summary',
         title,
         description: dict.compatibility.subtitle,
       },
@@ -45,10 +52,24 @@ export default async function CompatibilityPage({
   const { locale: rawLocale } = await params;
   const locale = locales.includes(rawLocale as Locale) ? rawLocale as Locale : 'en';
   const dict = getDictSync(locale);
+  const collectionJsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'CollectionPage',
+    name: dict.compatibility.title,
+    description: dict.compatibility.subtitle,
+    url: absoluteUrl(`/${locale}/compatibility`),
+    inLanguage: locale,
+  };
+  const breadcrumb = breadcrumbJsonLd([
+    { name: 'Home', url: absoluteUrl(`/${locale}`) },
+    { name: dict.compatibility.title, url: absoluteUrl(`/${locale}/compatibility`) },
+  ]);
 
   return (
     <LeadModalProvider>
       <div className="bg-[#F8FAFC] text-[#0F172A]">
+      <script type="application/ld+json" dangerouslySetInnerHTML={jsonLd(collectionJsonLd)} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={jsonLd(breadcrumb)} />
       <section className="relative overflow-hidden bg-[#062748]">
         <div className="absolute inset-0 tech-grid" />
         <div className="relative max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8 py-16 lg:py-24">
@@ -72,7 +93,7 @@ export default async function CompatibilityPage({
               >
                 {dict.compatibility.cta}
               </LeadModalTrigger>
-              <Link href="/blog/what-buyers-should-send-before-rf-matching" className="inline-flex items-center gap-2 rounded-lg border border-[#2A587C] px-6 py-3 text-sm font-semibold text-[#C7D7E8] transition-colors hover:border-[#FF8A1F]/50 hover:text-[#F7FBFF]">
+              <Link href={`/${locale}/blog/why-universal-remote-cannot-copy`} className="inline-flex items-center gap-2 rounded-lg border border-[#2A587C] px-6 py-3 text-sm font-semibold text-[#C7D7E8] transition-colors hover:border-[#FF8A1F]/50 hover:text-[#F7FBFF]">
                 {dict.compatibility.checklistLabel} <ArrowRight className="w-4 h-4 text-[#FF8A1F]" />
               </Link>
             </div>
@@ -94,7 +115,7 @@ export default async function CompatibilityPage({
           {compatibilityBrands.map((brand) => (
             <Link
               key={brand.slug}
-              href={`/compatibility/${brand.slug}`}
+              href={`/${locale}/compatibility/${brand.slug}`}
               className="group block rounded-lg border border-[#E2E8F0] bg-white p-6 transition-all hover:-translate-y-0.5 hover:border-[#FF8A1F]/35 hover:shadow-lg hover:shadow-slate-200/70"
             >
               <div className="mb-5 flex items-start justify-between gap-4">

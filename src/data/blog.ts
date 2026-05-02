@@ -107,13 +107,14 @@ export const popularGuides = [
 export const blogPosts: BlogPost[] = [
   {
     title: 'Circuits Don\'t Act: Why I Hate "Good Enough" Transmitter Modules More and More',
-    seoTitle: 'Why Cheap RF Transmitter Modules Fail in Gate Opener Systems',
+    seoTitle: 'Why Cheap RF Transmitter Modules Fail',
     category: 'rf-engineering',
     excerpt:
       'A transmitter module is not reliable just because it can send a signal. Real quality depends on stability, clean output, tuning margin, and repeatable mass production.',
     slug: 'circuits-dont-act-good-enough-transmitter-modules',
     author: 'Eric Huang',
     publishedAt: '2026-05-01',
+    updatedAt: '2026-05-02',
     readTime: '14 min read',
     featured: true,
     image: '/images/blog/circuits-dont-act/circuits-dont-act-cover.webp',
@@ -524,13 +525,14 @@ export const blogPosts: BlogPost[] = [
   },
   {
     title: 'OEM or ODM? You Think You\'re Choosing a Production Method, But You\'re Actually Choosing Your Future',
-    seoTitle: 'OEM vs ODM RF Remote Control Manufacturing: Which Path Should Hardware Buyers Choose?',
+    seoTitle: 'OEM vs ODM: Which Path Should You Choose',
     category: 'oem-odm',
     excerpt:
       'For hardware startups, OEM and ODM are not just production labels. They decide who controls the product, the certification path, and the future leverage in the supply chain.',
     slug: 'oem-odm-hardware-future',
     author: 'Eric Huang',
     publishedAt: '2026-05-01',
+    updatedAt: '2026-05-02',
     readTime: '7 min read',
     image: '/images/blog/oem-odm-hardware-future/oem-vs-odm-path.webp',
     relatedSlugs: ['circuits-dont-act-good-enough-transmitter-modules', 'rf-remote-control-concurrency-anti-collision'],
@@ -758,13 +760,14 @@ export const blogPosts: BlogPost[] = [
   },
   {
     title: 'RF Remote Control Concurrency and Anti-Collision: From Physical Layer to Protocol Layer',
-    seoTitle: 'RF Remote Control Anti-Collision: Concurrency from Physical Layer to Protocol Layer',
+    seoTitle: 'RF Remote Anti-Collision Explained',
     category: 'rf-engineering',
     excerpt:
       'When many RF remotes share the same channel, reliability depends on how the system handles collisions, interference, timing, and recovery.',
     slug: 'rf-remote-control-concurrency-anti-collision',
     author: 'Eric Huang',
     publishedAt: '2026-05-01',
+    updatedAt: '2026-05-02',
     readTime: '9 min read',
     image: '/images/blog/rf-remote-control-concurrency-anti-collision/collision-scenarios.webp',
     relatedSlugs: ['circuits-dont-act-good-enough-transmitter-modules', 'oem-odm-hardware-future'],
@@ -951,13 +954,14 @@ export const blogPosts: BlogPost[] = [
   },
   {
     title: 'Why Your Universal Remote Control Cannot Copy: Fixed Code, Learning Code, and Rolling Code Explained',
-    seoTitle: 'Why Universal Remote Controls Fail to Copy: Fixed Code, Learning Code, and Rolling Code',
+    seoTitle: 'Why Universal Remotes Fail to Copy',
     category: 'troubleshooting',
     excerpt:
       'Most universal remote copying failures come from frequency mismatch, incompatible code type, rolling code, private protocol logic, or weak RF hardware.',
     slug: 'why-universal-remote-cannot-copy',
     author: 'Eric Huang',
     publishedAt: '2026-05-01',
+    updatedAt: '2026-05-02',
     readTime: '10 min read',
     image: '/images/blog/why-universal-remote-cannot-copy/universal-remotes-fail-to-copy.webp',
     relatedSlugs: ['rf-remote-control-concurrency-anti-collision', 'circuits-dont-act-good-enough-transmitter-modules'],

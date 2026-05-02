@@ -4,10 +4,11 @@ import Link from 'next/link';
 import { ArrowRight, Search } from 'lucide-react';
 import { useMemo, useState } from 'react';
 import { brands, compatibilityRows } from '@/data/homepage';
-import { useDict } from '@/i18n';
+import { useDict, useLocale } from '@/i18n';
 
 export default function BrandCompatibilitySection() {
   const dict = useDict();
+  const locale = useLocale();
   const [query, setQuery] = useState('');
   const normalizedQuery = query.trim().toLowerCase();
   const filteredRows = useMemo(() => {
@@ -152,7 +153,7 @@ export default function BrandCompatibilitySection() {
             <p className="text-xs text-[#64748B] leading-relaxed">
               {dict.compatibilityTable.disclaimer}
             </p>
-            <Link href="/compatibility" className="inline-flex items-center gap-1.5 text-xs font-bold text-[#FF8A1F] transition-colors hover:text-[#F97316]">
+            <Link href={`/${locale}/compatibility`} className="inline-flex items-center gap-1.5 text-xs font-bold text-[#FF8A1F] transition-colors hover:text-[#F97316]">
               {dict.compatibilityTable.viewAll} <ArrowRight className="h-3.5 w-3.5" />
             </Link>
           </div>

@@ -27,7 +27,7 @@ export default function ResourcesSection() {
           <h2 className="text-3xl lg:text-4xl font-bold text-[#0F172A]" style={{ fontFamily: "var(--font-outfit), sans-serif" }}>
             {dict.resources.title}
           </h2>
-          <Link href="/blog" className="hidden sm:inline-flex items-center gap-1.5 text-[12px] font-bold text-[#FF8A1F] hover:text-[#F97316] transition-colors" style={{ fontFamily: "var(--font-jetbrains-mono), monospace" }}>
+          <Link href={`/${locale}/blog`} className="hidden sm:inline-flex items-center gap-1.5 text-[12px] font-bold text-[#FF8A1F] hover:text-[#F97316] transition-colors" style={{ fontFamily: "var(--font-jetbrains-mono), monospace" }}>
             {dict.resources.viewAll} <ArrowRight className="w-3.5 h-3.5" />
           </Link>
         </div>

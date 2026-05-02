@@ -25,14 +25,22 @@ export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
 };
 
+const syncDocumentLanguage = `
+(() => {
+  const match = window.location.pathname.match(/^\\/(en|it|pt|es|ru|fr)(?:\\/|$)/);
+  document.documentElement.lang = match ? match[1] : 'en';
+})();
+`;
+
 export default function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
   return (
-    <html className={`${outfit.variable} ${inter.variable} ${jetBrainsMono.variable} antialiased`} data-scroll-behavior="smooth" suppressHydrationWarning>
+    <html lang="en" className={`${outfit.variable} ${inter.variable} ${jetBrainsMono.variable} antialiased`} data-scroll-behavior="smooth" suppressHydrationWarning>
       <body className="min-h-screen flex flex-col bg-[#062748]">
+        <script dangerouslySetInnerHTML={{ __html: syncDocumentLanguage }} />
         {children}
       </body>
     </html>

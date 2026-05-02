@@ -7,7 +7,8 @@ import LeadModalTrigger from '@/components/LeadModalTrigger';
 import { compatibilityBrands, getCompatibilityBrand } from '@/data/compatibility';
 import { type Locale, locales } from '@/i18n';
 import { getDictSync } from '@/i18n/dictionaries';
-import { siteName, siteUrl } from '@/data/site';
+import { siteName } from '@/data/site';
+import { absoluteUrl, breadcrumbJsonLd, jsonLd, localizedAlternates } from '@/lib/seo';
 
 export async function generateStaticParams() {
   return compatibilityBrands.map((brand) => ({ brand: brand.slug }));
@@ -32,11 +33,17 @@ export async function generateMetadata({ params }: { params: Promise<{ brand: st
       description,
       alternates: {
         canonical: `/${locale}/compatibility/${brand.slug}`,
+        languages: localizedAlternates(`/compatibility/${brand.slug}`),
       },
       openGraph: {
         type: 'article',
         siteName,
         url: `/${locale}/compatibility/${brand.slug}`,
+        title,
+        description,
+      },
+      twitter: {
+        card: 'summary',
         title,
         description,
       },
@@ -72,15 +79,11 @@ export default async function BrandCompatibilityPage({
     },
   ];
 
-  const breadcrumbJsonLd = {
-    '@context': 'https://schema.org',
-    '@type': 'BreadcrumbList',
-    itemListElement: [
-      { '@type': 'ListItem', position: 1, name: dict.brandPage.breadcrumb.home, item: siteUrl },
-      { '@type': 'ListItem', position: 2, name: dict.brandPage.breadcrumb.compatibility, item: `${siteUrl}/${locale}/compatibility` },
-      { '@type': 'ListItem', position: 3, name: brand.name, item: `${siteUrl}/${locale}/compatibility/${brand.slug}` },
-    ],
-  };
+  const breadcrumbJsonLdData = breadcrumbJsonLd([
+    { name: dict.brandPage.breadcrumb.home, url: absoluteUrl(`/${locale}`) },
+    { name: dict.brandPage.breadcrumb.compatibility, url: absoluteUrl(`/${locale}/compatibility`) },
+    { name: brand.name, url: absoluteUrl(`/${locale}/compatibility/${brand.slug}`) },
+  ]);
 
   const faqJsonLd = {
     '@context': 'https://schema.org',
@@ -95,12 +98,12 @@ export default async function BrandCompatibilityPage({
   return (
     <LeadModalProvider>
       <div className="bg-[#F8FAFC] text-[#0F172A]">
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }} />
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={jsonLd(breadcrumbJsonLdData)} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={jsonLd(faqJsonLd)} />
 
       <div className="bg-white border-b border-[#E2E8F0]">
         <div className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8 py-4">
-          <Link href="/compatibility" className="inline-flex items-center gap-2 text-sm font-medium text-[#64748B] transition-colors hover:text-[#FF8A1F]">
+          <Link href={`/${locale}/compatibility`} className="inline-flex items-center gap-2 text-sm font-medium text-[#64748B] transition-colors hover:text-[#FF8A1F]">
             <ArrowLeft className="w-4 h-4" /> {dict.brandPage.backLink}
           </Link>
         </div>
@@ -126,7 +129,7 @@ export default async function BrandCompatibilityPage({
               >
                 {dict.compatibility.cta} {brand.name}
               </LeadModalTrigger>
-              <Link href="/blog/what-buyers-should-send-before-rf-matching" className="inline-flex items-center gap-2 rounded-lg border border-[#2A587C] px-6 py-3 text-sm font-semibold text-[#C7D7E8] transition-colors hover:border-[#FF8A1F]/50 hover:text-[#F7FBFF]">
+              <Link href={`/${locale}/blog/why-universal-remote-cannot-copy`} className="inline-flex items-center gap-2 rounded-lg border border-[#2A587C] px-6 py-3 text-sm font-semibold text-[#C7D7E8] transition-colors hover:border-[#FF8A1F]/50 hover:text-[#F7FBFF]">
                 {dict.compatibility.checklistLabel} <ArrowRight className="w-4 h-4 text-[#FF8A1F]" />
               </Link>
             </div>
@@ -251,13 +254,13 @@ export default async function BrandCompatibilityPage({
             </p>
             <div className="mt-3 flex flex-wrap gap-2">
               {relatedBrands.map((item) => (
-                <Link key={item.slug} href={`/compatibility/${item.slug}`} className="rounded-lg border border-[#E2E8F0] bg-white px-4 py-2 text-sm font-semibold text-[#153A5C] transition-colors hover:border-[#FF8A1F]/40 hover:text-[#FF8A1F]">
+                <Link key={item.slug} href={`/${locale}/compatibility/${item.slug}`} className="rounded-lg border border-[#E2E8F0] bg-white px-4 py-2 text-sm font-semibold text-[#153A5C] transition-colors hover:border-[#FF8A1F]/40 hover:text-[#FF8A1F]">
                   {item.name}
                 </Link>
               ))}
             </div>
           </div>
-          <Link href="/compatibility" className="inline-flex items-center gap-2 text-sm font-bold text-[#FF8A1F] transition-colors hover:text-[#F97316]">
+          <Link href={`/${locale}/compatibility`} className="inline-flex items-center gap-2 text-sm font-bold text-[#FF8A1F] transition-colors hover:text-[#F97316]">
             {dict.compatibilityTable.viewAll} <ArrowRight className="h-4 w-4" />
           </Link>
         </div>

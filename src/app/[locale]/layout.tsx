@@ -6,6 +6,7 @@ import AnnouncementBar from '@/components/AnnouncementBar';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import LeadModalProvider from '@/components/LeadModalProvider';
+import { defaultOgImage, jsonLd, localizedAlternates, organizationJsonLd, websiteJsonLd } from '@/lib/seo';
 
 export function generateStaticParams() {
   return locales.map((locale) => ({ locale }));
@@ -20,6 +21,7 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
     description: dict.meta.description,
     alternates: {
       canonical: `/${locale}`,
+      languages: localizedAlternates(''),
     },
     openGraph: {
       type: 'website',
@@ -27,7 +29,13 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
       url: `/${locale}`,
       title: dict.meta.title,
       description: dict.meta.description,
-      images: ['/images/hero-products.png'],
+      images: [defaultOgImage],
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: dict.meta.title,
+      description: dict.meta.description,
+      images: [defaultOgImage],
     },
   };
 }
@@ -46,6 +54,8 @@ export default async function LocaleLayout({
   return (
     <I18nProvider locale={locale} dict={dict}>
       <LeadModalProvider>
+        <script type="application/ld+json" dangerouslySetInnerHTML={jsonLd(organizationJsonLd())} />
+        <script type="application/ld+json" dangerouslySetInnerHTML={jsonLd(websiteJsonLd(locale))} />
         <AnnouncementBar />
         <Header />
         <main className="flex-1">{children}</main>
