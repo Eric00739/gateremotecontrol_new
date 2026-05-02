@@ -1,7 +1,6 @@
 'use client';
 
 import { Shield, Zap, Package, Globe, Users } from 'lucide-react';
-import Image from 'next/image';
 import { basePath } from '@/data/homepage';
 import LeadModalTrigger from './LeadModalTrigger';
 import { useDict } from '@/i18n';
@@ -61,15 +60,26 @@ export default function HeroSection() {
 
           {/* Right: Product showcase */}
           <div className="animate-slide-in-right delay-300">
-            <div className="relative bg-[#08345F]/80 border border-[#123D63] rounded-lg p-6 backdrop-blur-sm">
-              <Image
-                src={basePath + '/images/hero-products.png'}
-                alt="Compatible replacement remotes, receivers, duplicators, and controllers"
-                width={600}
-                height={300}
-                loading="eager"
-                className="w-full object-contain"
-              />
+            <div className="relative bg-[#08345F]/80 border border-[#123D63] rounded-lg p-2 backdrop-blur-sm transition-colors duration-300 hover:border-[#FF8A1F]/35">
+              <div className="relative overflow-hidden rounded-md bg-[#062748] aspect-video">
+                <video
+                  className="h-full w-full object-cover opacity-90"
+                  autoPlay
+                  muted
+                  loop
+                  playsInline
+                  preload="metadata"
+                  poster={basePath + '/videos/gateremote-hero-poster.webp'}
+                  aria-label="GateRemoteSource factory production video"
+                >
+                  <source src={basePath + '/videos/gateremote-hero-mobile.mp4'} type="video/mp4" media="(max-width: 768px)" />
+                  <source src={basePath + '/videos/gateremote-hero.mp4'} type="video/mp4" />
+                </video>
+                <div className="pointer-events-none absolute inset-0 bg-gradient-to-tr from-[#062748]/55 via-transparent to-[#FF8A1F]/10" />
+                <div className="pointer-events-none absolute left-4 top-4 rounded-md border border-[#FF8A1F]/25 bg-[#062748]/70 px-3 py-1.5 text-[10px] font-semibold uppercase tracking-[0.18em] text-[#FFB15C] backdrop-blur-sm" style={{ fontFamily: 'var(--font-jetbrains-mono), monospace' }}>
+                  Factory Video
+                </div>
+              </div>
               <p className="text-[#7F9AB7] text-[10px] tracking-widest mt-4 text-center" style={{ fontFamily: 'var(--font-jetbrains-mono), monospace' }}>
                 {dict.hero.caption}
               </p>
