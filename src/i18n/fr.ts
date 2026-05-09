@@ -21,8 +21,8 @@ export default {
     tagline: "Gros | OEM | Marque blanche",
     title: "Télécommandes, récepteurs et solutions RF compatibles",
     subtitle: "Fourniture aftermarket indépendante pour installateurs, serruriers et distributeurs. Remplacez les télécommandes de portails et portes de garage par des options compatibles soigneusement sélectionnées pour FAAC, BFT, Nice, CAME et plus de 30 autres grandes marques.",
-    compatibilityCta: "Envoyer la liste de compatibilité",
-    productsCta: "Parcourir les produits",
+    modelDetailsCta: "Envoyez-nous les détails du modèle",
+    supportedBrandsCta: "Voir les marques prises en charge",
     trustBadge: "Compatible aftermarket — Non original",
     caption: "Photos pour référence uniquement. La correspondance doit être confirmée par modèle, fréquence et protocole.",
     trustItems: [

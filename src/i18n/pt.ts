@@ -21,8 +21,8 @@ export default {
     tagline: 'Atacado | OEM | Marca Própria',
     title: 'Controles Remotos, Receptores e Soluções RF Compatíveis',
     subtitle: 'Fornecimento independente de reposição para instaladores, chaveiros e distribuidores. Substitua controles de portões e portas de garagem com opções compatíveis cuidadosamente selecionadas para FAAC, BFT, Nice, CAME e mais de 30 outras marcas importantes.',
-    compatibilityCta: 'Enviar Lista de Compatibilidade',
-    productsCta: 'Ver Produtos',
+    modelDetailsCta: 'Envie os Detalhes do Modelo',
+    supportedBrandsCta: 'Ver Marcas Suportadas',
     trustBadge: 'Compatível de Reposição — Não é Marca Original',
     caption: 'Fotos apenas para referência. A correspondência deve ser confirmada por modelo, frequência e protocolo.',
     trustItems: [

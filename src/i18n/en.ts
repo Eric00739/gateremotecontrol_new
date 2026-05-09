@@ -21,8 +21,8 @@ export default {
     tagline: 'Wholesale | OEM | Private Label',
     title: 'Compatible Gate Remotes, Receivers & RF Solutions',
     subtitle: 'Independent aftermarket supply for installers, locksmiths, and distributors. Replace gate and garage door remotes with carefully matched compatible options across FAAC, BFT, Nice, CAME, and 30+ other major brands.',
-    compatibilityCta: 'Send Compatibility List',
-    productsCta: 'Browse Products',
+    modelDetailsCta: 'Send Us Your Model Details',
+    supportedBrandsCta: 'Check Supported Brands',
     trustBadge: 'Aftermarket Compatible — Not Original Brand',
     caption: 'Photos for reference only. Matching must be confirmed by model, frequency, and protocol.',
     trustItems: [

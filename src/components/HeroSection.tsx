@@ -42,19 +42,19 @@ export default function HeroSection() {
             </p>
 
             <div className="animate-fade-in-up delay-400 flex flex-wrap gap-4">
-              <a
-                href="#products"
-                className="btn-glow bg-[#FF8A1F] hover:bg-[#F97316] text-[#062748] font-bold px-8 py-3.5 rounded-lg transition-all hover:shadow-xl hover:shadow-amber-500/20 text-[14px]"
-              >
-                {dict.hero.productsCta}
-              </a>
               <LeadModalTrigger
                 prefillType="compatibility"
+                className="btn-glow bg-[#FF8A1F] hover:bg-[#F97316] text-[#062748] font-bold px-8 py-3.5 rounded-lg transition-all hover:shadow-xl hover:shadow-amber-500/20 text-[14px]"
+              >
+                {dict.hero.modelDetailsCta}
+              </LeadModalTrigger>
+              <a
+                href="#compatibility"
                 className="group border border-[#2A587C] hover:border-[#FF8A1F]/40 text-[#C7D7E8] hover:text-[#F7FBFF] font-medium px-8 py-3.5 rounded-lg transition-all text-[14px] flex items-center gap-2 cursor-pointer"
               >
-                {dict.hero.compatibilityCta}
+                {dict.hero.supportedBrandsCta}
                 <span className="text-[#FF8A1F] group-hover:translate-x-1 transition-transform">&rarr;</span>
-              </LeadModalTrigger>
+              </a>
             </div>
           </div>
 

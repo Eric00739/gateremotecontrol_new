@@ -21,8 +21,8 @@ export default {
     tagline: 'Venta al por mayor | OEM | Marca privada',
     title: 'Mandos compatibles, receptores y soluciones RF',
     subtitle: 'Suministro independiente postventa para instaladores, cerrajeros y distribuidores. Reemplace mandos de portones y puertas de garaje con opciones compatibles cuidadosamente seleccionadas para FAAC, BFT, Nice, CAME y ms de 30 marcas principales.',
-    compatibilityCta: 'Enviar lista de compatibilidad',
-    productsCta: 'Ver productos',
+    modelDetailsCta: 'Envíenos los Detalles del Modelo',
+    supportedBrandsCta: 'Ver Marcas Compatibles',
     trustBadge: 'Compatible de postventa - No es marca original',
     caption: 'Fotos solo como referencia. La correspondencia debe confirmarse por modelo, frecuencia y protocolo.',
     trustItems: [

@@ -21,8 +21,8 @@ export default {
     tagline: 'Ingrosso | OEM | Marchio Privato',
     title: 'Telecomandi Compatibili, Ricevitori e Soluzioni RF',
     subtitle: 'Fornitore indipendente aftermarket per installatori, fabbri e distributori. Sostituisci telecomandi per cancelli e porte da garage con opzioni compatibili attentamente selezionate per FAAC, BFT, Nice, CAME e oltre 30 altri marchi principali.',
-    compatibilityCta: 'Invia Lista Compatibilit\u00e0',
-    productsCta: 'Sfoglia Prodotti',
+    modelDetailsCta: 'Inviaci i Dettagli del Modello',
+    supportedBrandsCta: 'Controlla Marchi Supportati',
     trustBadge: 'Compatibile Aftermarket \u2014 Non Originale',
     caption: 'Foto solo a scopo di riferimento. La corrispondenza deve essere confermata per modello, frequenza e protocollo.',
     trustItems: [
