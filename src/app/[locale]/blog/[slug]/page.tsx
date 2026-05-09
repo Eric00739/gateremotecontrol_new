@@ -383,6 +383,7 @@ function renderBlock(block: BlogPostContentBlock, index: number, locale: Locale,
               alt={block.alt}
               fill
               sizes="(max-width: 1024px) 100vw, 760px"
+              loading={index === 0 ? 'eager' : 'lazy'}
               className="object-cover"
             />
           </div>
