@@ -14,12 +14,13 @@ export default function Header() {
   const currentLocale = useLocale();
   const pathname = usePathname();
   const router = useRouter();
+  const modelDetailsLabel = dict.header.modelDetails || dict.hero.modelDetailsCta || 'Send Model Details';
+  const factoryQualityLabel = dict.header.factoryQuality || `${dict.header.factory} & Quality`;
 
   const navItems = [
-    { label: dict.header.products, href: `/${currentLocale}#products` },
     { label: dict.header.compatibility, href: `/${currentLocale}/compatibility` },
-    { label: dict.header.oemOdm, href: `/${currentLocale}#oem-odm` },
-    { label: dict.header.factory, href: `/${currentLocale}#factory` },
+    { label: dict.header.oemOdm, href: `/${currentLocale}/oem-odm` },
+    { label: factoryQualityLabel, href: `/${currentLocale}/factory-quality` },
     { label: dict.header.blog, href: `/${currentLocale}/blog` },
   ];
 
@@ -118,11 +119,11 @@ export default function Header() {
               </svg>
             </a>
             <LeadModalTrigger
-              prefillType="quote"
+              prefillType="compatibility"
               className="bg-[#FF8A1F] hover:bg-[#F97316] text-[#062748] text-[12px] font-bold px-5 py-2 rounded-lg transition-all btn-glow shadow-sm shadow-orange-500/20"
               style={{ fontFamily: "var(--font-dm-sans), sans-serif" }}
             >
-              {dict.header.quote}
+              {modelDetailsLabel}
             </LeadModalTrigger>
 
             {/* Mobile menu button */}
@@ -176,11 +177,11 @@ export default function Header() {
                 ))}
               </div>
               <LeadModalTrigger
-                prefillType="quote"
+                prefillType="compatibility"
                 className="bg-[#FF8A1F] hover:bg-[#F97316] text-[#062748] text-sm font-bold py-2.5 px-5 rounded-lg text-center mt-1"
                 onClick={() => setMobileOpen(false)}
               >
-                {dict.header.quote}
+                {modelDetailsLabel}
               </LeadModalTrigger>
             </div>
           </nav>

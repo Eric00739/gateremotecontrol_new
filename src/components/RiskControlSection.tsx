@@ -8,6 +8,7 @@ const iconMap = [Shield, AlertTriangle, FileSearch, FlaskConical, Package, FileC
 
 export default function RiskControlSection() {
   const dict = useDict();
+  const cards = dict.risk.cards || riskCards;
 
   return (
     <section className="bg-[#F8FAFC]">
@@ -26,7 +27,7 @@ export default function RiskControlSection() {
 
         {/* 6-column single row */}
         <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-6 mb-12">
-          {riskCards.map((card, i) => {
+          {cards.map((card: { title: string; description: string }, i: number) => {
             const Icon = iconMap[i];
             return (
               <div key={card.title} className="text-center group">
@@ -47,10 +48,10 @@ export default function RiskControlSection() {
             <Info className="w-5 h-5 text-[#FF8A1F] flex-shrink-0 mt-0.5" />
             <div>
               <p className="text-sm text-[#475569] leading-relaxed">
-                Brand names are used only to indicate compatibility. We are an independent aftermarket manufacturer and are not affiliated with, endorsed by, or sponsored by these brand owners. Compatibility should be confirmed by model, frequency, IC/chip, and coding protocol before order.
+                {dict.risk.disclaimer}
               </p>
               <p className="text-[11px] text-[#94A3B8] mt-2" style={{ fontFamily: "var(--font-jetbrains-mono), monospace" }}>
-                Note: Some brands/models may require verification, sample testing, or custom development.
+                {dict.risk.note}
               </p>
             </div>
           </div>

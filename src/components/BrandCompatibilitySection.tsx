@@ -10,6 +10,14 @@ export default function BrandCompatibilitySection() {
   const dict = useDict();
   const locale = useLocale();
   const [query, setQuery] = useState('');
+  const labelMap: Record<string, string> = {
+    Available: dict.compatibilityTable.available || 'Available',
+    'To Confirm': dict.compatibilityTable.toConfirm || 'To Confirm',
+    Recommended: dict.compatibilityTable.recommended || 'Recommended',
+    Yes: dict.compatibilityTable.yes || 'Yes',
+    'Rolling Code': dict.compatibilityTable.rollingCode || 'Rolling Code',
+  };
+  const localizeValue = (value: string) => labelMap[value] || value;
   const normalizedQuery = query.trim().toLowerCase();
   const filteredRows = useMemo(() => {
     if (!normalizedQuery) return compatibilityRows;
@@ -66,7 +74,7 @@ export default function BrandCompatibilitySection() {
                   </h3>
                 </div>
                 <span className={`rounded-md px-2.5 py-1 text-xs font-bold ${row.solution === 'Available' ? 'bg-[#FF8A1F]/10 text-[#C45A00]' : 'bg-[#EFF6FF] text-[#1D4ED8]'}`}>
-                  {row.solution}
+                  {localizeValue(row.solution)}
                 </span>
               </div>
               <div className="mt-4 grid grid-cols-2 gap-3 text-sm">
@@ -80,11 +88,11 @@ export default function BrandCompatibilitySection() {
                 </div>
                 <div>
                   <p className="text-[10px] uppercase tracking-[0.12em] text-[#94A3B8]" style={{ fontFamily: "var(--font-jetbrains-mono), monospace" }}>{dict.compatibilityTable.codeTypeHeader}</p>
-                  <p className="mt-1 text-[#64748B]">{row.codeType}</p>
+                  <p className="mt-1 text-[#64748B]">{localizeValue(row.codeType)}</p>
                 </div>
                 <div>
                   <p className="text-[10px] uppercase tracking-[0.12em] text-[#94A3B8]" style={{ fontFamily: "var(--font-jetbrains-mono), monospace" }}>{dict.compatibilityTable.sampleTestHeader}</p>
-                  <p className="mt-1 text-[#64748B]">{row.sampleTest}</p>
+                  <p className="mt-1 text-[#64748B]">{localizeValue(row.sampleTest)}</p>
                 </div>
               </div>
             </div>
@@ -115,13 +123,13 @@ export default function BrandCompatibilitySection() {
                     <td className="px-5 py-4 font-bold">{row.brand}</td>
                     <td className="px-5 py-4">{row.model}</td>
                     <td className="px-5 py-4 text-[#475569]">{row.frequency}</td>
-                    <td className="px-5 py-4 text-[#475569]">{row.codeType}</td>
+                    <td className="px-5 py-4 text-[#475569]">{localizeValue(row.codeType)}</td>
                     <td className="px-5 py-4">
                       <span className={`rounded-full px-2.5 py-1 text-xs font-bold ${row.solution === 'Available' ? 'bg-[#FF8A1F]/10 text-[#C45A00]' : 'bg-[#EFF6FF] text-[#1D4ED8]'}`}>
-                        {row.solution}
+                        {localizeValue(row.solution)}
                       </span>
                     </td>
-                    <td className="px-5 py-4 text-[#475569]">{row.sampleTest}</td>
+                    <td className="px-5 py-4 text-[#475569]">{localizeValue(row.sampleTest)}</td>
                   </tr>
                 ))}
               </tbody>
@@ -141,7 +149,7 @@ export default function BrandCompatibilitySection() {
             </span>
           ))}
           <span className="rounded-lg border border-[#FF8A1F]/25 bg-[#FF8A1F]/8 px-3 py-2 text-[12px] font-bold text-[#C45A00]">
-            And more...
+            {dict.compatibilityTable.andMore || 'And more...'}
           </span>
         </div>
 

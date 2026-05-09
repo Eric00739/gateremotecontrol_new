@@ -9,6 +9,8 @@ const iconMap = [Camera, Radio, Cpu, Users, FlaskConical, Factory];
 
 export default function CompatibilityWorkflowSection() {
   const dict = useDict();
+  const steps = dict.workflowSteps || workflowSteps;
+  const fields = dict.verificationFields || verificationFields;
 
   return (
     <section className="bg-white">
@@ -34,10 +36,11 @@ export default function CompatibilityWorkflowSection() {
           <div className="hidden lg:block absolute top-7 left-[8%] right-[8%] h-[2px] border-t-2 border-dashed border-[#E2E8F0]" />
 
           <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-6 lg:gap-4">
-            {workflowSteps.map((step, i) => {
+            {steps.map((step: { step?: number; title: string; description: string }, i: number) => {
               const Icon = iconMap[i];
+              const stepNumber = step.step || i + 1;
               return (
-                <div key={step.step} className="text-center relative">
+                <div key={stepNumber} className="text-center relative">
                   {/* Numbered circle with icon */}
                   <div className="relative z-10 mb-4">
                     <div className="w-14 h-14 mx-auto bg-[#F8FAFC] rounded-full flex items-center justify-center border-2 border-[#E2E8F0] group-hover:border-[#FF8A1F] transition-colors">
@@ -46,7 +49,7 @@ export default function CompatibilityWorkflowSection() {
                     {/* Step number badge */}
                     <div className="absolute -top-1 -right-1 w-6 h-6 bg-[#FF8A1F] rounded-full flex items-center justify-center shadow-lg shadow-amber-500/20">
                       <span className="text-white text-[10px] font-bold" style={{ fontFamily: "var(--font-jetbrains-mono), monospace" }}>
-                        {step.step}
+                        {stepNumber}
                       </span>
                     </div>
                   </div>
@@ -77,7 +80,7 @@ export default function CompatibilityWorkflowSection() {
           </div>
 
           <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-3">
-            {verificationFields.map((item) => (
+            {fields.map((item: { field: string; description: string }) => (
               <div key={item.field} className="rounded-lg border border-[#E2E8F0] bg-white p-4">
                 <div className="text-[11px] font-bold uppercase tracking-[0.12em] text-[#FF8A1F] mb-2" style={{ fontFamily: "var(--font-jetbrains-mono), monospace" }}>
                   {item.field}

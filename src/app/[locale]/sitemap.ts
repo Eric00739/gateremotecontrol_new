@@ -1,6 +1,7 @@
 import type { MetadataRoute } from 'next';
 import { blogPosts } from '@/data/blog';
 import { compatibilityBrands } from '@/data/compatibility';
+import { catalogPage, factoryQualityPage, oemPage } from '@/data/servicePages';
 import { defaultLocale, locales } from '@/i18n';
 import { absoluteUrl, localizedAlternates, postLastModified, siteUpdatedAt } from '@/lib/seo';
 
@@ -31,6 +32,16 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.9,
       alternates: { languages: localizedAlternates('/compatibility') },
     });
+
+    for (const page of [oemPage, factoryQualityPage, catalogPage]) {
+      entries.push({
+        url: absoluteUrl(`/${locale}${page.path}`),
+        lastModified,
+        changeFrequency: 'monthly',
+        priority: 0.75,
+        alternates: { languages: localizedAlternates(page.path) },
+      });
+    }
 
     for (const brand of compatibilityBrands) {
       entries.push({

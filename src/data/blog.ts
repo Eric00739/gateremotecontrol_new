@@ -151,7 +151,7 @@ export const blogPosts: BlogPost[] = [
         text:
           'This article is not meant to explain RF circuits like a textbook. I want to talk about something more practical: why a good transmitter module is not just about whether it can transmit a signal, but whether it has the confidence to stay stable for a long time.',
         links: [
-          { text: 'good transmitter module', href: '/#products' },
+          { text: 'good transmitter module', href: '/request-catalog' },
         ],
       },
       {
@@ -518,7 +518,7 @@ export const blogPosts: BlogPost[] = [
         text:
           'During product export, remote control sourcing, or transmitter module mass production, what is the most difficult unstable problem you have ever met? Was the sample good but the mass production bad? Was the range unstable? Did the performance drop after changing the case? Or was the customer\'s installation environment too complicated?',
         links: [
-          { text: 'remote control sourcing', href: '/#oem-odm' },
+          { text: 'remote control sourcing', href: '/oem-odm' },
         ],
       },
     ],
@@ -547,9 +547,9 @@ export const blogPosts: BlogPost[] = [
         text:
           'A friend of mine was recently confused by three different factories while working on a smart home project. He needed an RF remote control, but each factory gave him a different suggestion. One offered OEM, another offered ODM, and another said it could do ODM customization.',
         links: [
-          { text: 'RF remote control', href: '/#products' },
-          { text: 'OEM', href: '/#oem-odm' },
-          { text: 'ODM', href: '/#oem-odm' },
+          { text: 'RF remote control', href: '/request-catalog' },
+          { text: 'OEM', href: '/oem-odm' },
+          { text: 'ODM', href: '/oem-odm' },
         ],
       },
       {
@@ -782,7 +782,7 @@ export const blogPosts: BlogPost[] = [
         text:
           'In a smart home showroom, dozens of RF remote controls may work at the same time. Some adjust lights, some close curtains, some control air conditioning, and some operate a garage door. On the surface, everything looks orderly.',
         links: [
-          { text: 'RF remote controls', href: '/#products' },
+          { text: 'RF remote controls', href: '/request-catalog' },
         ],
       },
       {
@@ -976,7 +976,7 @@ export const blogPosts: BlogPost[] = [
         text:
           'Have you ever bought a universal copy remote control, followed the copying steps, and even saw the remote show that copying was successful, but the gate still would not open?',
         links: [
-          { text: 'universal copy remote control', href: '/#products' },
+          { text: 'universal copy remote control', href: '/request-catalog' },
         ],
       },
       {
@@ -1123,7 +1123,7 @@ export const blogPosts: BlogPost[] = [
         text:
           'If the remote cannot be copied reliably, a better project solution may be to replace the wireless receiver control module and connect it directly to the motor control interface.',
         links: [
-          { text: 'receiver control module', href: '/#products' },
+          { text: 'receiver control module', href: '/request-catalog' },
         ],
       },
       { type: 'heading', text: 'Copied Successfully but Still Unstable?' },

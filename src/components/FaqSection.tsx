@@ -8,6 +8,7 @@ import { useDict } from '@/i18n';
 export default function FaqSection() {
   const dict = useDict();
   const [openIndex, setOpenIndex] = useState(0);
+  const items = dict.faq.items || faqs;
 
   return (
     <section id="faq" className="bg-[#F8FAFC]">
@@ -25,7 +26,7 @@ export default function FaqSection() {
         </h2>
 
         <div className="grid md:grid-cols-2 gap-4 max-w-5xl mx-auto">
-          {faqs.map((faq, i) => (
+          {items.map((faq: { question: string; answer: string }, i: number) => (
             <div
               key={faq.question}
               className="bg-white rounded-lg border border-[#E2E8F0] overflow-hidden card-hover-light"

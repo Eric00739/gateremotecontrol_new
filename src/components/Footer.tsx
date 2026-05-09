@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 import LeadModalTrigger from './LeadModalTrigger';
-import { useDict } from '@/i18n';
+import { useDict, useLocale } from '@/i18n';
 
 const compatibilityBrands = [
   { label: 'FAAC', href: '/compatibility/faac' },
@@ -15,13 +15,16 @@ const compatibilityBrands = [
 
 export default function Footer() {
   const dict = useDict();
+  const locale = useLocale();
+  const factoryQualityLabel = dict.header.factoryQuality || `${dict.header.factory} & Quality`;
+  const requestCatalogLabel = dict.footer.requestCatalog || 'Request Catalog';
 
   const exploreLinks = [
-    { label: dict.footer.products, href: '/#products' },
-    { label: dict.footer.compatibility, href: '/compatibility' },
-    { label: dict.header.oemOdm, href: '/#oem-odm' },
-    { label: dict.header.factory, href: '/#factory' },
-    { label: dict.footer.resources, href: '/blog' },
+    { label: dict.footer.compatibility, href: `/${locale}/compatibility` },
+    { label: dict.header.oemOdm, href: `/${locale}/oem-odm` },
+    { label: factoryQualityLabel, href: `/${locale}/factory-quality` },
+    { label: requestCatalogLabel, href: `/${locale}/request-catalog` },
+    { label: dict.footer.resources, href: `/${locale}/blog` },
   ];
 
   return (
@@ -59,7 +62,7 @@ export default function Footer() {
               </p>
               <div className="mt-2 flex flex-wrap gap-2">
                 {compatibilityBrands.map((brand) => (
-                  <Link key={brand.href} href={brand.href} className="rounded-md border border-[#123D63] px-2.5 py-1 text-xs text-[#C7D7E8] transition-colors hover:border-[#FF8A1F]/50 hover:text-[#FF8A1F]">
+                  <Link key={brand.href} href={`/${locale}${brand.href}`} className="rounded-md border border-[#123D63] px-2.5 py-1 text-xs text-[#C7D7E8] transition-colors hover:border-[#FF8A1F]/50 hover:text-[#FF8A1F]">
                     {brand.label}
                   </Link>
                 ))}
@@ -98,10 +101,10 @@ export default function Footer() {
               </p>
             </div>
             <LeadModalTrigger
-              prefillType="quote"
+              prefillType="compatibility"
               className="mt-5 inline-flex items-center justify-center rounded-lg bg-[#FF8A1F] px-5 py-2.5 text-sm font-bold text-[#062748] transition-colors hover:bg-[#F97316] btn-glow"
             >
-              {dict.leadModal.title}
+              {dict.hero.modelDetailsCta || dict.leadModal.title}
             </LeadModalTrigger>
           </div>
         </div>

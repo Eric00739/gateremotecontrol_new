@@ -37,7 +37,7 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
   };
 }
 
-export async function BlogPageContent({ locale }: { locale: Locale }) {
+async function BlogPageContent({ locale }: { locale: Locale }) {
   const blogJsonLd = {
     '@context': 'https://schema.org',
     '@type': 'CollectionPage',

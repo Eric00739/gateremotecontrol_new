@@ -6,6 +6,7 @@ import { useDict } from '@/i18n';
 
 export default function ApplicationScenariosSection() {
   const dict = useDict();
+  const names = dict.applications.names || [];
 
   return (
     <section className="bg-[#F8FAFC]">
@@ -23,7 +24,9 @@ export default function ApplicationScenariosSection() {
         </h2>
 
         <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
-          {applications.map((app) => (
+          {applications.map((app, index) => {
+            const name = names[index] || app.name;
+            return (
             <div
               key={app.name}
               className="relative rounded-lg overflow-hidden group card-hover-light"
@@ -31,7 +34,7 @@ export default function ApplicationScenariosSection() {
               <div className="relative h-40">
                 <Image
                   src={app.image}
-                  alt={app.name}
+                  alt={name}
                   fill
                   className="object-cover group-hover:scale-105 transition-transform duration-500"
                 />
@@ -39,10 +42,10 @@ export default function ApplicationScenariosSection() {
               <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent" />
               <div className="absolute inset-0 flex flex-col justify-end p-5">
                 <div className="w-8 h-[2px] bg-[#FF8A1F] mb-3 group-hover:w-12 transition-all duration-300" />
-                <span className="text-white font-bold text-[15px]" style={{ fontFamily: "var(--font-outfit), sans-serif" }}>{app.name}</span>
+                <span className="text-white font-bold text-[15px]" style={{ fontFamily: "var(--font-outfit), sans-serif" }}>{name}</span>
               </div>
             </div>
-          ))}
+          );})}
         </div>
       </div>
     </section>
