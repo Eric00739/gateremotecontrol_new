@@ -106,6 +106,255 @@ export const popularGuides = [
 
 export const blogPosts: BlogPost[] = [
   {
+    title: 'Is Your Garage Door Actually Secure? A Clear-Eyed Guide to Remote Control Cloning',
+    seoTitle: 'Garage Door Remote Cloning: Fixed Code vs Rolling Code Security',
+    category: 'rolling-code',
+    excerpt:
+      'Garage door remote security depends mainly on whether the system uses fixed code or rolling code. Fixed code can be copied easily; properly implemented rolling code defeats normal replay attacks.',
+    slug: 'garage-door-remote-cloning-security-guide',
+    author: 'Eric Huang',
+    publishedAt: '2026-05-10',
+    updatedAt: '2026-05-10',
+    readTime: '9 min read',
+    image: '/images/blog/garage-door-remote-cloning-security-guide/hero.webp',
+    relatedSlugs: [
+      'why-universal-remote-cannot-copy',
+      '433mhz-remote-short-range-diagnostics',
+      'rf-remote-controller-application-scenarios',
+    ],
+    content: [
+      {
+        type: 'paragraph',
+        text:
+          'Here is a scenario worth thinking about.',
+      },
+      {
+        type: 'paragraph',
+        text:
+          'You park the car, press the lock button, and walk away. Everything looks routine. But somewhere just out of your line of sight, someone is holding a small black device.',
+      },
+      {
+        type: 'paragraph',
+        text:
+          'Within seconds, that device may have captured your remote signal and learned enough to try a replay attack.',
+      },
+      {
+        type: 'paragraph',
+        text:
+          'This is not a movie plot. Wireless replay is a real attack category, and the basic capture hardware is cheap. With clone remotes widely available online, the reasonable question is simple: how easy is it to copy my remote, and what actually stops it?',
+      },
+      {
+        type: 'image',
+        src: '/images/blog/garage-door-remote-cloning-security-guide/hero.webp',
+        alt: 'Garage door remote cloning security comparison showing fixed code replay and rolling code protection',
+        caption:
+          'Fixed code repeats the same value. Rolling code changes on every press, which is why ordinary replay cloning fails.',
+      },
+      {
+        type: 'paragraph',
+        text:
+          'The answer depends mostly on whether your remote uses fixed code or rolling code. Most users have never heard of either, but that one difference decides whether a cheap copy remote is a real threat.',
+      },
+      {
+        type: 'heading',
+        text: 'Why Remotes Can Be Copied at All',
+      },
+      {
+        type: 'paragraph',
+        text:
+          'Every remote control sends a signal when you press the button. The security question is whether that signal is always the same, or whether it changes each time.',
+      },
+      {
+        type: 'paragraph',
+        text:
+          'Fixed-code remotes, including many older and cheaper systems built around PT2262-style or EV1527-style chips, send the same binary sequence every time. The receiver listens for that known code and opens the door when it hears it.',
+      },
+      {
+        type: 'paragraph',
+        text:
+          'The security implication is simple. If the code never changes, anyone who captures it once can replay it later.',
+      },
+      {
+        type: 'paragraph',
+        text:
+          'That is why universal copy remotes exist as a product category. They are not magic. They exploit the fact that many older remote systems repeat the same code every time.',
+      },
+      {
+        type: 'callout',
+        title: 'Plain-language test',
+        text:
+          'If your remote sends the same signal every time, copying it is fundamentally a recording problem. If the signal changes securely every time, copying it becomes a much harder authentication problem.',
+      },
+      {
+        type: 'heading',
+        text: 'What Rolling Code Actually Does',
+      },
+      {
+        type: 'paragraph',
+        text:
+          'Rolling code was developed to close the replay gap. A common implementation uses chips such as HCS301 and the KeeLoq encryption family.',
+      },
+      {
+        type: 'paragraph',
+        text:
+          'The core idea is straightforward: the code changes with every button press, and old codes should not be accepted again.',
+      },
+      {
+        type: 'paragraph',
+        text:
+          'The remote and receiver share a secret key and a synchronized counter. Each press generates a new encrypted value from that key and counter. The receiver checks whether the incoming value fits the expected sequence.',
+      },
+      {
+        type: 'paragraph',
+        text:
+          'If a captured code has already been used, the receiver rejects it. That is why recording a rolling-code signal usually gives an attacker nothing useful for normal replay.',
+      },
+      {
+        type: 'paragraph',
+        text:
+          'Rolling code does not make a system mathematically untouchable. Research-level attacks and poor implementations exist. But it moves the threat well beyond a casual thief with a cheap consumer copy device.',
+      },
+      {
+        type: 'heading',
+        text: 'The Middle Ground Is Where Buyers Get Confused',
+      },
+      {
+        type: 'paragraph',
+        text:
+          'The market between obvious fixed code and genuine rolling code is murky.',
+      },
+      {
+        type: 'paragraph',
+        text:
+          'Some products claim rolling-code behavior because the transmitted value changes on each press. But changing value is not the same as strong encrypted rolling code.',
+      },
+      {
+        type: 'paragraph',
+        text:
+          'A weak algorithm may defeat the cheapest clone remote while still falling short of real security. This is the category that creates false confidence.',
+      },
+      {
+        type: 'paragraph',
+        text:
+          'The only reliable way to know what you are dealing with is to identify the chip, receiver system, or documented protocol behind the product.',
+      },
+      {
+        type: 'heading',
+        text: 'How to Check What Your Remote Uses',
+      },
+      {
+        type: 'paragraph',
+        text:
+          'The most direct method is opening the remote and reading the chip markings.',
+      },
+      {
+        type: 'list',
+        items: [
+          'PT2262, PT2264, EV1527, HS1527, PT2240, and similar chips usually indicate fixed code or basic learning code.',
+          'HCS300, HCS301, HCS320, and similar chips usually indicate KeeLoq-style rolling-code systems.',
+          'If the chip marking has been sanded off, treat the product as unknown until the supplier can document the protocol.',
+          'If the receiver manual mentions learn-button registration for rolling-code transmitters, verify the transmitter model and chip class too.',
+        ],
+      },
+      {
+        type: 'paragraph',
+        text:
+          'A practical non-technical test is trying to copy the remote with an inexpensive clone remote. If the copied remote can control the door reliably, the current system should not be treated as secure.',
+      },
+      {
+        type: 'paragraph',
+        text:
+          'That test is useful because it gives a clear answer without RF instruments. It does not prove a rolling-code system is perfectly secure, but it quickly identifies systems that are plainly copyable.',
+      },
+      {
+        type: 'heading',
+        text: 'What to Do If Your Remote Is Not Secure',
+      },
+      {
+        type: 'paragraph',
+        text:
+          'If the installation is relatively new, contact the manufacturer or installer and ask specifically whether rolling code is supported. Do not ask only whether the remote is secure.',
+      },
+      {
+        type: 'paragraph',
+        text:
+          'If the receiver already supports rolling code, you may only need compatible rolling-code remotes and correct registration.',
+      },
+      {
+        type: 'paragraph',
+        text:
+          'If the motor is an older fixed-code system, replacing the whole motor is not always necessary. An external rolling-code receiver module can often be wired into the motor switch input. The new receiver handles authentication, and the motor simply receives a clean open or close command.',
+      },
+      {
+        type: 'paragraph',
+        text:
+          'If you are buying new, ask for the actual chip or protocol family. "Secure remote" is not a technical answer. "HCS301 with KeeLoq rolling code" or equivalent documented architecture is much more useful.',
+      },
+      {
+        type: 'heading',
+        text: 'The Layer Above RF',
+      },
+      {
+        type: 'paragraph',
+        text:
+          'Rolling code addresses replay attacks well. It does not solve every access-control problem.',
+      },
+      {
+        type: 'paragraph',
+        text:
+          'A lost or stolen remote is still valid until it is removed from the receiver memory. In many traditional systems, that deletion requires physical access to the receiver.',
+      },
+      {
+        type: 'paragraph',
+        text:
+          'Newer systems increasingly add Wi-Fi, Bluetooth, or gateway management on top of RF. That can allow remote user management, access logs, revocation, and alerts when the door is used.',
+      },
+      {
+        type: 'paragraph',
+        text:
+          'For commercial properties, rental units, shared garages, and managed access situations, this hybrid approach is often worth the added cost.',
+      },
+      {
+        type: 'heading',
+        text: 'What to Buy',
+      },
+      {
+        type: 'list',
+        items: [
+          'For low-security private use, fixed code may still work functionally, but it should not be described as anti-clone.',
+          'For garages, gates, and shared access, choose rolling code from a supplier that can identify the chip or protocol.',
+          'For property management, choose systems that support deleting individual remotes instead of wiping all memory.',
+          'For higher-security sites, consider RF rolling code plus app or gateway-based access management.',
+          'Avoid products that only say universal, encrypted, or anti-copy without naming the actual architecture.',
+        ],
+      },
+      {
+        type: 'heading',
+        text: 'The Bottom Line',
+      },
+      {
+        type: 'paragraph',
+        text:
+          'Fixed-code remotes are genuinely easy to clone. The equipment is cheap, the process can be fast, and many users do not know the risk exists.',
+      },
+      {
+        type: 'paragraph',
+        text:
+          'Properly implemented rolling code closes the practical replay gap against opportunistic attacks. It does not make a system unbreakable, but it raises the difficulty far beyond ordinary consumer clone tools.',
+      },
+      {
+        type: 'quote',
+        text:
+          'The cost gap between a basic fixed-code remote and a properly engineered rolling-code system is small compared with the access risk it can remove.',
+      },
+      {
+        type: 'paragraph',
+        text:
+          'If you do not know what kind of remote you have, check it. If the answer is fixed code and the door matters, upgrade the receiver path before the problem becomes real.',
+      },
+    ],
+  },
+  {
     title: "Stop Blaming the Battery: Your Car Key's Short Range Might Be the Window Tint",
     seoTitle: 'Car Key Remote Short Range: Battery, Window Tint, EMI, and Antenna Checks',
     category: 'troubleshooting',
