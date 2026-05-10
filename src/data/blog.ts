@@ -106,6 +106,278 @@ export const popularGuides = [
 
 export const blogPosts: BlogPost[] = [
   {
+    title: 'Same Batch of 433MHz Remotes: One Opens Instantly, One Plays Dead',
+    seoTitle: '433MHz Remote Short Range: Check Battery, Antenna, and EMI First',
+    category: 'troubleshooting',
+    excerpt:
+      'When two identical 433MHz remotes behave differently on site, the fastest diagnosis starts with battery voltage under load, antenna placement, and electromagnetic interference.',
+    slug: '433mhz-remote-short-range-diagnostics',
+    author: 'Eric Huang',
+    publishedAt: '2026-05-10',
+    updatedAt: '2026-05-10',
+    readTime: '10 min read',
+    image: '/images/blog/433mhz-remote-short-range-diagnostics/hero.webp',
+    relatedSlugs: [
+      'rf-receiver-sensitivity-range-spec',
+      'cr2032-rf-remote-battery-life',
+      'why-universal-remote-cannot-copy',
+    ],
+    content: [
+      {
+        type: 'paragraph',
+        text:
+          'A longtime customer who does sliding gate installations messaged me a couple of days ago. He was not happy.',
+      },
+      {
+        type: 'quote',
+        text:
+          'Eric, something is wrong. Same batch of 433MHz remotes, installed the same day. The one on the south side opens the gate from 50 meters without a hitch. On the north side, the car almost drove into the door before it got a response. Did you send me the wrong product?',
+      },
+      {
+        type: 'paragraph',
+        text:
+          'After seven or eight years in the RF remote industry, I have seen this pattern more times than I can count.',
+      },
+      {
+        type: 'image',
+        src: '/images/blog/433mhz-remote-short-range-diagnostics/hero.webp',
+        alt: '433MHz remote control range troubleshooting showing battery, antenna, and EMI checks',
+        caption: 'Same product, different site result. In the field, range problems usually start with battery, antenna, or interference.',
+      },
+      {
+        type: 'heading',
+        text: 'The Short Answer First',
+      },
+      {
+        type: 'paragraph',
+        text:
+          'Short range on a remote comes down to one thing: somewhere in the chain of signal transmission, propagation, and reception, at least one link has broken down.',
+      },
+      {
+        type: 'paragraph',
+        text:
+          'The fastest way to diagnose on site is to check three things first: battery voltage, antenna condition, and electromagnetic interference.',
+      },
+      {
+        type: 'paragraph',
+        text:
+          'Nail those three, and you will solve most short-range complaints on the spot. The remaining cases are usually structural: insufficient receiver sensitivity, weak RF design, or transmit power that cannot legally be increased.',
+      },
+      {
+        type: 'callout',
+        title: 'Field rule',
+        text:
+          'Before replacing the product, check whether the signal is leaving the transmitter, whether the antenna lets it travel, and whether the receiver can still hear it through noise.',
+      },
+      {
+        type: 'heading',
+        text: 'Do Not Trust the Indicator Light',
+      },
+      {
+        type: 'paragraph',
+        text:
+          'Most people see the LED still lit and conclude the battery is fine. That is the most common trap.',
+      },
+      {
+        type: 'paragraph',
+        text:
+          'Many 433MHz remotes run on a 12V 23A battery or a 3V coin cell. RF transmission is much more sensitive to supply voltage than the small indicator LED is.',
+      },
+      {
+        type: 'paragraph',
+        text:
+          'A 12V battery that has dropped to 9V may still light the LED without hesitation, but transmit power can already be weak enough to cut range sharply.',
+      },
+      {
+        type: 'paragraph',
+        text:
+          'With an older remote, the first move is not changing the receiver module. It is measuring battery voltage under load.',
+      },
+      {
+        type: 'paragraph',
+        text:
+          'On a new installation, do not blame the environment too quickly. Look at the transmitter side too: PCB trace layout, supply circuit, and instantaneous current capability. A design can look fine until the button press demands real current.',
+      },
+      {
+        type: 'list',
+        items: [
+          'Use quality batteries instead of bargain cells with poor voltage stability.',
+          'Measure voltage under load, not only open-circuit voltage.',
+          'Watch current draw during a button press. If the transmitter cannot pull current properly, range will not recover.',
+          'For coin-cell remotes, remember that voltage sag during RF bursts can be more important than nominal capacity.',
+        ],
+      },
+      {
+        type: 'heading',
+        text: 'The Antenna Is Not a Decoration',
+      },
+      {
+        type: 'paragraph',
+        text:
+          'Installers sometimes coil the receiver antenna neatly or stuff it inside a metal control enclosure. It looks tidy, but RF does not reward tidiness that blocks radiation.',
+      },
+      {
+        type: 'paragraph',
+        text:
+          'The quarter-wave antenna length around 433MHz is about 17cm. The moment that wire is curled into a loop, pressed against a wall, or shielded by metal, range can collapse.',
+      },
+      {
+        type: 'paragraph',
+        text:
+          'One of the most common on-site fixes is simply pulling the receive antenna straight and moving it outside the metal enclosure. A jump from 10 meters to 50 meters is not unusual.',
+      },
+      {
+        type: 'list',
+        items: [
+          'Run the receive antenna straight where possible, ideally vertical.',
+          'Do not coil the antenna wire inside the control box.',
+          'Keep the receiver and antenna away from large metal surfaces.',
+          'If the controller must sit inside a steel cabinet, use an external antenna with a feedline.',
+          'Give the receive module some physical gap from metal mounting plates.',
+        ],
+      },
+      {
+        type: 'heading',
+        text: 'Something May Be Shouting Over Your Signal',
+      },
+      {
+        type: 'paragraph',
+        text:
+          'The air is crowded. 433MHz and 315MHz are shared bands, and plenty of equipment can put noise into the same neighborhood without meaning to.',
+      },
+      {
+        type: 'paragraph',
+        text:
+          'A nearby variable frequency drive, a cheap LED driver, a low-quality battery charger, or a noisy switching power supply can create electromagnetic interference that lands close enough to hurt the receiver.',
+      },
+      {
+        type: 'paragraph',
+        text:
+          'From the receiver viewpoint, it is like someone screaming in its ear. Your remote still transmits. The receiver just cannot hear it clearly through the noise.',
+      },
+      {
+        type: 'paragraph',
+        text:
+          'One memorable site had roughly 100 meters of range during the day and only 5 meters at night. The cause was a row of cheap LED signage switched on after dark. The driver noise drowned the 433MHz link.',
+      },
+      {
+        type: 'list',
+        items: [
+          'Power down nearby high-current equipment and suspect power supplies one by one, then retest range.',
+          'Move the receiver away from motors, VFDs, chargers, and LED driver clusters.',
+          'In noisy environments, replace cheap super-regenerative receivers with superheterodyne designs.',
+          'Where regulations and product architecture allow, consider whether another band such as 868MHz or 915MHz fits the target market better.',
+        ],
+      },
+      {
+        type: 'heading',
+        text: 'Encoding Can Change the Experience Under Stress',
+      },
+      {
+        type: 'paragraph',
+        text:
+          'People often ask whether rolling code gives shorter range than fixed code. Strictly speaking, the protocol does not change how the signal propagates through the air.',
+      },
+      {
+        type: 'paragraph',
+        text:
+          'In practice, the user experience can still differ. Rolling code systems such as HCS301 are built for stronger security, longer data frames, and stricter verification. If a few bits are corrupted, the receiver may reject the entire frame.',
+      },
+      {
+        type: 'paragraph',
+        text:
+          'Fixed code and learning code systems often use shorter packets and simpler validation. In weak-signal or light-interference conditions, they can appear more responsive, even though the RF path itself is not magically better.',
+      },
+      {
+        type: 'paragraph',
+        text:
+          'For a clean environment where the goal is simple press-and-open control, learning code plus a strong superheterodyne receiver is often low-maintenance. For upscale residential and garage door systems where security is not optional, rolling code is the right direction, but the receive side must be designed seriously.',
+      },
+      {
+        type: 'list',
+        items: [
+          'Ask suppliers for receiver sensitivity, not only remote frequency.',
+          'Match transmitter and receiver algorithms carefully.',
+          'Do not let decode failures masquerade as pure range problems.',
+          'Treat -95 dBm and -110 dBm receivers as different classes of product, not small spec variations.',
+        ],
+      },
+      {
+        type: 'heading',
+        text: 'Do Not Solve Export Range Problems by Turning Up Power',
+      },
+      {
+        type: 'paragraph',
+        text:
+          'For export products, especially into regulated markets, the old shortcut of more power equals more range is the wrong mindset.',
+      },
+      {
+        type: 'paragraph',
+        text:
+          'Transmit power has legal limits. Higher power can also worsen harmonic emissions, create certification problems, and interfere with nearby systems.',
+      },
+      {
+        type: 'paragraph',
+        text:
+          'For certain wireless products placed on the EU market, RED cybersecurity requirements under Delegated Regulation (EU) 2022/30 have applied from August 1, 2025. Not every simple remote is affected, but the direction is clear: wireless products are being judged as complete compliant systems, not just as devices that transmit far enough.',
+      },
+      {
+        type: 'paragraph',
+        text:
+          'The better path is higher receiver sensitivity, better interference rejection, cleaner antenna design, and smarter error handling. Earn the range with engineering, not raw power.',
+      },
+      {
+        type: 'heading',
+        text: 'From Key to System',
+      },
+      {
+        type: 'paragraph',
+        text:
+          'RF remotes increasingly do not stand alone. The growth is in solution-level delivery.',
+      },
+      {
+        type: 'paragraph',
+        text:
+          'Many overseas customers want a remote paired with a Wi-Fi or Bluetooth gateway and a mobile app so they can check whether a gate closed properly or open it remotely when needed.',
+      },
+      {
+        type: 'paragraph',
+        text:
+          'When a customer keeps getting stuck on whether the range is 50 meters or 70 meters, the smarter move may be reframing the solution. Let the remote handle the short, reliable local link at the gate. Let the internet handle everything beyond that.',
+      },
+      {
+        type: 'paragraph',
+        text:
+          'That solves range anxiety and increases the project margin at the same time.',
+      },
+      {
+        type: 'heading',
+        text: 'Quick Field Diagnostic Checklist',
+      },
+      {
+        type: 'list',
+        items: [
+          'Battery: is the voltage under load below a useful operating level?',
+          'Antenna: is the receive antenna straight, vertical, and outside metal shielding?',
+          'Interference: are LED drivers, high-power motors, chargers, or VFDs nearby?',
+          'Module: is the receiver a cheap super-regenerative design or a proper superheterodyne module?',
+          'Frequency match: are transmitter and receiver on the exact same frequency, such as 433.92MHz?',
+          'Protocol match: are the transmitter and receiver using compatible encoding and decode logic?',
+        ],
+      },
+      {
+        type: 'paragraph',
+        text:
+          'In this field, details are everything. If a short-range problem is stubborn, collect the real project facts: range requirement, indoor or outdoor environment, frequency band, receiver module, antenna type, supply voltage, load type, and nearby equipment.',
+      },
+      {
+        type: 'paragraph',
+        text:
+          'That is enough to tell whether a new antenna solves it, or whether the whole approach needs rethinking.',
+      },
+    ],
+  },
+  {
     title: 'Your Remote Control Has a Hearing Problem: How Receiver Sensitivity Decides RF Range',
     seoTitle: 'Receiver Sensitivity and RF Remote Range Specs',
     category: 'rf-engineering',
