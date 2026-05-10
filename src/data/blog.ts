@@ -106,6 +106,286 @@ export const popularGuides = [
 
 export const blogPosts: BlogPost[] = [
   {
+    title: 'Exporting Wi-Fi Switches to the EU: What Does CE Actually Require?',
+    seoTitle: 'EU CE Requirements for Wi-Fi Switches',
+    category: 'buyer-checklist',
+    excerpt:
+      'For Wi-Fi switches and smart plugs, CE is not a single certificate. It is a compliance loop covering RED, RoHS, technical documentation, labeling, instructions, DoC, economic operator details, and market obligations.',
+    slug: 'exporting-wifi-switches-eu-ce-requirements',
+    author: 'Eric Huang',
+    publishedAt: '2026-05-10',
+    updatedAt: '2026-05-10',
+    readTime: '11 min read',
+    image: '/images/blog/exporting-wifi-switches-eu-ce-requirements/hero.webp',
+    relatedSlugs: [
+      'oem-odm-hardware-future',
+      'circuits-dont-act-good-enough-transmitter-modules',
+      'rf-remote-control-concurrency-anti-collision',
+    ],
+    content: [
+      {
+        type: 'quote',
+        text:
+          'CE is not a certificate. It is a closed-loop compliance system around the EU rules that apply to your actual product.',
+      },
+      {
+        type: 'paragraph',
+        text:
+          'Over the past few years, I have watched the same scene play out more than twenty times.',
+      },
+      {
+        type: 'paragraph',
+        text:
+          'A buyer, brand, Amazon seller, or private-label trading company walks up to a factory and asks, in a perfectly serious tone: "What standard are your CE certifications based on?"',
+      },
+      {
+        type: 'paragraph',
+        text:
+          'Then there is a pause on the factory side. It is a peculiar kind of silence. Not because they have no idea, but because it has never occurred to them that CE could even be asked about that way.',
+      },
+      {
+        type: 'paragraph',
+        text:
+          'After a moment, the reply comes: "CE? Oh, we have a CE certificate."',
+      },
+      {
+        type: 'paragraph',
+        text:
+          'That one sentence reveals something extremely common in this industry. It is not always dishonesty. Very often, it is a misunderstanding that starts at step one.',
+      },
+      {
+        type: 'paragraph',
+        text:
+          'A lot of people, including factory owners who have been in business for decades, think of CE as a specific tangible thing: a certificate, a stamp, a document you pay someone for and then use to clear customs.',
+      },
+      {
+        type: 'paragraph',
+        text:
+          'And with that understanding in their heads, they ship products to Europe.',
+      },
+      {
+        type: 'image',
+        src: '/images/blog/exporting-wifi-switches-eu-ce-requirements/hero.webp',
+        alt: 'Wi-Fi switch and smart plug with CE compliance loop for RED RoHS WEEE DoC cybersecurity label and technical documentation',
+        caption:
+          'For a connected electrical product, CE is a loop of product classification, testing, documents, labels, instructions, and market responsibilities.',
+      },
+      { type: 'heading', text: 'CE Is Not a Certificate' },
+      {
+        type: 'paragraph',
+        text:
+          'The real question is never just "do you have CE?" The real question is: do you actually know what CE is?',
+      },
+      {
+        type: 'paragraph',
+        text:
+          'The difference in risk between those two questions is not small.',
+      },
+      {
+        type: 'paragraph',
+        text:
+          'CE marking is closer to a compliance loop built around the EU legislation that applies to your product. You identify the applicable regulations, complete the required conformity assessment, prepare technical documentation, label the product correctly, provide instructions and safety information, and draw up the EU Declaration of Conformity.',
+      },
+      {
+        type: 'paragraph',
+        text:
+          'Only after that loop is properly closed should the product be placed on the EU market with the CE mark.',
+      },
+      {
+        type: 'callout',
+        title: 'The first misunderstanding',
+        text:
+          'A test report can be part of the evidence. It is not the whole CE system, and it does not transfer responsibility away from the manufacturer or the party placing the product on the market.',
+      },
+      { type: 'heading', text: 'What CE Usually Means for a Wi-Fi Switch' },
+      {
+        type: 'paragraph',
+        text:
+          'For a Wi-Fi smart switch or smart plug, the compliance threads usually start with radio, materials, electrical safety, documentation, and market obligations.',
+      },
+      {
+        type: 'list',
+        items: [
+          'RED: If the product includes Wi-Fi, Bluetooth, Zigbee, or another wireless function, the Radio Equipment Directive is usually the primary regulation. It covers safety, electromagnetic compatibility, and efficient use of radio spectrum.',
+          'RoHS: Restrictions on lead, mercury, cadmium, hexavalent chromium, and other substances must be supported by technical documentation. Test reports are common, but they should sit inside a wider chain of material and supplier evidence.',
+          'WEEE: This is often overlooked. It is not simply a CE test item, but electrical and electronic products placed on the EU market commonly have waste, registration, take-back, recycling, and marking obligations.',
+        ],
+      },
+      {
+        type: 'paragraph',
+        text:
+          'The crossed-out wheelie bin symbol on electronics comes from the WEEE world. If you are selling electrical or electronic equipment in the EU, do not treat that marking and producer responsibility as decoration.',
+      },
+      { type: 'heading', text: 'The Obligations People Miss in Practice' },
+      {
+        type: 'paragraph',
+        text:
+          'Some requirements are easy to miss because they do not look like laboratory tests. But in real market access work, they matter.',
+      },
+      {
+        type: 'list',
+        items: [
+          'REACH and SVHC disclosure obligations may apply depending on materials and substances in the product.',
+          'Packaging requirements and documentation may be relevant in the target country.',
+          'Instructions and safety information need to be provided in a language understood by end users in the country of sale.',
+          'Traceability information, model numbers, label content, packaging, user manuals, and platform listings need to be consistent.',
+          'For products coming from outside the EU, the relevant EU economic operator information must be real, current, and correctly placed according to the applicable rules.',
+        ],
+      },
+      {
+        type: 'paragraph',
+        text:
+          'That EU economic operator may be an importer, an authorized representative, or in some cases a fulfillment service provider. The practical point is simple: for many non-EU products entering the EU market, there needs to be an accountable operator established in the EU, and their name and contact address need to appear where the applicable rules require.',
+      },
+      { type: 'heading', text: 'Cybersecurity Is No Longer Just Future Talk' },
+      {
+        type: 'paragraph',
+        text:
+          'For connected wireless products, cybersecurity can no longer be treated as a distant future issue. RED Article 3.3 requirements for certain categories of radio equipment have applied from August 1, 2025.',
+      },
+      {
+        type: 'paragraph',
+        text:
+          'If your device can connect to the internet directly or indirectly, pay attention. If it processes personal data, traffic data, or location data, look more carefully. If it involves payments, value transfers, or virtual currencies, look again.',
+      },
+      {
+        type: 'paragraph',
+        text:
+          'A Wi-Fi smart plug with an app, cloud connectivity, remote control, and energy monitoring should not be handled with the old mindset of "if the basic wireless test passes, we are done."',
+      },
+      {
+        type: 'callout',
+        title: 'Connected product reality',
+        text:
+          'For smart switches and plugs, compliance is not only about RF output. It also touches electrical safety, EMC behavior, data-related risk, instructions, labels, documentation, and the entity responsible in the market.',
+      },
+      { type: 'heading', text: 'Why So Many People Get CE Wrong' },
+      {
+        type: 'paragraph',
+        text:
+          'The first mistake is treating CE as a certificate. A company gets a test report or a template document from a lab and thinks CE is done. But CE is not a pass issued by someone else. A report is one piece of evidence. The EU Declaration of Conformity is the formal declaration that the product meets the applicable regulations, and it is normally signed by the manufacturer or authorized representative.',
+      },
+      {
+        type: 'paragraph',
+        text:
+          'The second mistake is treating the test report as the finish line. Is the label correct? Is the manual in the right language? Does the DoC reference the right regulations and standards? Is the EU economic operator information in the right place? Has the WEEE obligation been handled?',
+      },
+      {
+        type: 'paragraph',
+        text:
+          'None of these are optional extras. They are links in the compliance chain. Even if the test report is clean, one missing link can still create trouble at customs, market surveillance, or platform review.',
+      },
+      {
+        type: 'paragraph',
+        text:
+          'The third mistake is following only the platform requirement, not the regulation. A platform may approve your listing after you upload the documents it asks for. That approval is not the same thing as legal compliance. Customs authorities and market surveillance bodies are the ones that can demand documentation, stop shipments, or require corrective action.',
+      },
+      {
+        type: 'paragraph',
+        text:
+          'The fourth mistake is handling wireless testing while ignoring materials and market obligations. Wi-Fi tested, frequency band cleared, done. Except RoHS evidence is missing, WEEE has not been addressed, the label is incomplete, and the manual is the wrong version.',
+      },
+      { type: 'heading', text: 'Choose the Regulatory Path First' },
+      {
+        type: 'paragraph',
+        text:
+          'The correct approach is not to "pick CE". The correct approach is to identify the regulatory path for the actual product.',
+      },
+      {
+        type: 'list',
+        items: [
+          'How is the product defined? If it has Wi-Fi, Bluetooth, or Zigbee, you generally evaluate it as radio equipment and start with RED.',
+          'Which market are you selling into? The EU has its CE framework. Great Britain and Northern Ireland have their own current UKCA, CE, and UKNI rules, and the position has changed over time.',
+          'What does the product actually do? Internet connectivity, app control, accounts, device usage data, traffic data, and location-related data can change the risk picture.',
+          'Where are the real technical risks? A smart plug or switch is connected to mains power, often carries load current, and may be remotely controlled. Insulation, protection, temperature rise, abnormal operation, and long-term reliability matter.',
+        ],
+      },
+      {
+        type: 'paragraph',
+        text:
+          'Do not reduce compliance to paperwork. At its core, it is a product capability question.',
+      },
+      { type: 'heading', text: 'Different Product Types Need Different Paths' },
+      {
+        type: 'paragraph',
+        text:
+          'A direct practical breakdown looks like this.',
+      },
+      {
+        type: 'list',
+        items: [
+          'Pure mechanical switches: Do not automatically apply the Wi-Fi and RED framework. The applicable path depends on product type and function boundary.',
+          'Wired electronic switches without wireless: Traditional electrical safety and EMC logic may be central, but the specific structure, voltage range, and function still need assessment.',
+          'Wi-Fi switches and smart plugs: RED is typically the primary regulation. RoHS, WEEE, language requirements, EU economic operator information, labeling, and technical documentation still need attention.',
+          'Multi-mode products with Wi-Fi, Bluetooth, or Zigbee: Complexity increases. More functions, more frequency bands, more documentation, and a wider test scope usually mean higher compliance cost.',
+        ],
+      },
+      {
+        type: 'paragraph',
+        text:
+          'This is why two products both called smart plugs can have compliance costs that differ by an order of magnitude. The cheaper one may only have covered part of the picture. The more expensive one may have actually closed the full loop.',
+      },
+      { type: 'heading', text: 'What a Complete Compliance Loop Looks Like' },
+      {
+        type: 'paragraph',
+        text:
+          'A lot of business owners focus on whether they received a certificate. What matters more is whether the pre-shipment compliance loop has been properly closed.',
+      },
+      {
+        type: 'list',
+        items: [
+          'Applicable regulations correctly identified.',
+          'Testing and technical documentation matched to the actual product version.',
+          'EU Declaration of Conformity accurate and properly signed.',
+          'Product label information complete.',
+          'CE marking applied correctly.',
+          'WEEE marking and registration obligations addressed.',
+          'EU economic operator information real, current, and correctly placed.',
+          'Instructions and safety information in the correct language or languages for the country of sale.',
+          'Model numbers and product information consistent across platform listings, packaging, user manuals, and the physical product.',
+        ],
+      },
+      {
+        type: 'paragraph',
+        text:
+          'None of these items individually sounds catastrophic. But if one link breaks, the compliance chain is no longer closed. At that point, a platform can delist the product, customs can hold goods, and market surveillance authorities can demand documentation or corrective action.',
+      },
+      { type: 'heading', text: 'Who Is Actually Responsible?' },
+      {
+        type: 'paragraph',
+        text:
+          'I am not writing this to make anyone anxious. I am writing it to say that exporting to the EU cannot stay at the level of "just find an agent to handle it for me".',
+      },
+      {
+        type: 'paragraph',
+        text:
+          'You need to understand the basic logic yourself. You need to know what the other party has actually done, how far they have taken it, what is still missing, and whether the result matches the real product.',
+      },
+      {
+        type: 'paragraph',
+        text:
+          'The entity that carries legal responsibility is not the lab, not the salesperson, and not a cheap contact in a chat group. The responsible party is the one that places the product on the market and signs or relies on the compliance chain behind it.',
+      },
+      {
+        type: 'quote',
+        text:
+          'Not knowing what you are doing is the biggest risk of all.',
+      },
+      { type: 'heading', text: 'Practical Reference Points' },
+      {
+        type: 'list',
+        items: [
+          'European Commission and Your Europe guidance: CE marking is based on manufacturer responsibility, conformity assessment, technical documentation, and an EU Declaration of Conformity.',
+          'Your Europe technical documentation guidance: the technical file supports the DoC and is normally kept for 10 years after the product is placed on the market unless specific rules say otherwise.',
+          'Your Europe product compliance guidance: manufacturers, importers, and authorized representatives have defined obligations, including traceability, labels, instructions, and documentation access.',
+          'Your Europe WEEE guidance: most electrical and electronic equipment sold in the EU needs WEEE marking, and producers generally need to register and handle reporting and waste responsibilities in the countries where they sell.',
+          'UK government guidance: Great Britain and Northern Ireland product marking rules should be checked against current guidance, because CE, UKCA, and UKNI recognition is not accurately summarized by old post-Brexit slogans.',
+          'EU Radio Equipment Directive and delegated acts: connected radio equipment should be checked against the applicable RED Article 3.3 cybersecurity requirements and current transition rules.',
+        ],
+      },
+    ],
+  },
+  {
     title: 'How Can a Single CR2032 Keep an RF Remote Running for Years?',
     seoTitle: 'How CR2032 Batteries Power RF Remotes for Years',
     category: 'rf-engineering',
