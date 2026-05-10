@@ -3,13 +3,13 @@
 import { useMemo, useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
-import { ArrowRight, CalendarDays, Clock, FileText, MessageSquare, Radio, Search, UserRound } from 'lucide-react';
+import { ArrowRight, CalendarDays, ChevronLeft, ChevronRight, Clock, FileText, MessageSquare, Radio, Search, UserRound } from 'lucide-react';
 import { authorProfile } from '@/data/author';
 import { blogCategories, blogPosts, popularGuides, type BlogPost } from '@/data/blog';
 import LeadModalTrigger from '@/components/LeadModalTrigger';
 import { useDict, useLocale } from '@/i18n';
 
-const INITIAL_VISIBLE_ARTICLES = 8;
+const ARTICLES_PER_PAGE = 10;
 
 function formatDate(date?: string) {
   if (!date) return null;
@@ -21,6 +21,24 @@ function formatDate(date?: string) {
     month: 'short',
     day: '2-digit',
   }).format(parsed);
+}
+
+function getPostSortTime(post: BlogPost) {
+  const sortDate = post.publishedAt || post.updatedAt;
+  if (!sortDate) return 0;
+
+  const parsed = new Date(sortDate);
+  return Number.isNaN(parsed.getTime()) ? 0 : parsed.getTime();
+}
+
+function sortPostsNewestFirst(posts: BlogPost[]) {
+  return posts
+    .map((post, index) => ({ post, index }))
+    .sort((a, b) => {
+      const timeDifference = getPostSortTime(b.post) - getPostSortTime(a.post);
+      return timeDifference || a.index - b.index;
+    })
+    .map(({ post }) => post);
 }
 
 function ArticleMeta({ post }: { post: BlogPost }) {
@@ -70,10 +88,12 @@ export default function BlogIndexClient() {
     troubleshooting: 'Practical causes behind unstable range, pairing failure, and batch variation.',
   };
 
+  const sortedBlogPosts = useMemo(() => sortPostsNewestFirst(blogPosts), []);
+
   const filteredPosts = useMemo(() => {
     const postsByCategory = selectedCategory === 'all'
-      ? blogPosts
-      : blogPosts.filter((post) => post.category === selectedCategory);
+      ? sortedBlogPosts
+      : sortedBlogPosts.filter((post) => post.category === selectedCategory);
     const normalizedQuery = searchQuery.trim().toLowerCase();
 
     if (!normalizedQuery) return postsByCategory;
@@ -92,7 +112,7 @@ export default function BlogIndexClient() {
 
       return searchableText.includes(normalizedQuery);
     });
-  }, [searchQuery, selectedCategory]);
+  }, [searchQuery, selectedCategory, sortedBlogPosts]);
   const categoryCounts = useMemo(() => {
     return blogCategories.reduce<Record<string, number>>((counts, category) => {
       counts[category.key] = category.key === 'all'
@@ -108,14 +128,39 @@ export default function BlogIndexClient() {
     (category) => category.key !== 'all' && categoryCounts[category.key] === 0,
   ).length;
 
-  const featuredPost = filteredPosts.find((post) => post.featured) || filteredPosts[0];
+  const featuredPost = filteredPosts[0];
   const articleList = featuredPost
     ? filteredPosts.filter((post) => post.slug !== featuredPost.slug)
     : [];
-  const [visibleArticleCount, setVisibleArticleCount] = useState(INITIAL_VISIBLE_ARTICLES);
-  const visibleArticleList = articleList.slice(0, visibleArticleCount);
-  const hiddenArticleCount = Math.max(articleList.length - visibleArticleList.length, 0);
-  const startHerePosts = blogPosts.slice(0, 2);
+  const [currentPage, setCurrentPage] = useState(1);
+  const totalPages = Math.max(Math.ceil(filteredPosts.length / ARTICLES_PER_PAGE), 1);
+  const isFirstPage = currentPage === 1;
+  const articleStartIndex = isFirstPage
+    ? 0
+    : (ARTICLES_PER_PAGE - 1) + (currentPage - 2) * ARTICLES_PER_PAGE;
+  const articleEndIndex = isFirstPage
+    ? ARTICLES_PER_PAGE - 1
+    : articleStartIndex + ARTICLES_PER_PAGE;
+  const paginatedArticleList = articleList.slice(articleStartIndex, articleEndIndex);
+  const paginationItems = useMemo(() => {
+    if (totalPages <= 7) {
+      return Array.from({ length: totalPages }, (_, index) => index + 1);
+    }
+
+    const pages = new Set([1, totalPages, currentPage - 1, currentPage, currentPage + 1]);
+    return Array.from(pages)
+      .filter((page) => page >= 1 && page <= totalPages)
+      .sort((a, b) => a - b)
+      .reduce<(number | string)[]>((items, page) => {
+        const previous = items[items.length - 1];
+        if (typeof previous === 'number' && page - previous > 1) {
+          items.push(`ellipsis-${previous}-${page}`);
+        }
+        items.push(page);
+        return items;
+      }, []);
+  }, [currentPage, totalPages]);
+  const startHerePosts = sortedBlogPosts.slice(0, 2);
   const startHereSlugs = new Set(startHerePosts.map((post) => post.slug));
   const popularPosts = popularGuides
     .map((slug) => blogPosts.find((post) => post.slug === slug))
@@ -125,12 +170,21 @@ export default function BlogIndexClient() {
 
   const handleCategorySelect = (categoryKey: string) => {
     setSelectedCategory(categoryKey);
-    setVisibleArticleCount(INITIAL_VISIBLE_ARTICLES);
+    setCurrentPage(1);
   };
 
   const handleSearchChange = (value: string) => {
     setSearchQuery(value);
-    setVisibleArticleCount(INITIAL_VISIBLE_ARTICLES);
+    setCurrentPage(1);
+  };
+
+  const handlePageChange = (page: number) => {
+    const nextPage = Math.min(Math.max(page, 1), totalPages);
+    setCurrentPage(nextPage);
+    document.getElementById('blog-article-library')?.scrollIntoView({
+      behavior: 'smooth',
+      block: 'start',
+    });
   };
 
   const renderCategoryButton = (category: { key: string; label: string }) => {
@@ -211,7 +265,7 @@ export default function BlogIndexClient() {
         <div className="mx-auto grid max-w-[1280px] gap-10 px-4 py-10 sm:px-6 lg:grid-cols-[minmax(0,1fr)_340px] lg:px-8 lg:py-14">
           {blogPosts.length > 0 ? (
             <>
-              <main className="min-w-0">
+              <main id="blog-article-library" className="min-w-0">
                 <div className="flex flex-col gap-4 border-b border-[#E2E8F0] pb-5 sm:flex-row sm:items-end sm:justify-between">
                   <div>
                     <p className="inline-flex items-center gap-2 text-[11px] font-semibold uppercase tracking-[0.18em] text-[#C45A00]" style={{ fontFamily: 'var(--font-jetbrains-mono), monospace' }}>
@@ -244,7 +298,7 @@ export default function BlogIndexClient() {
                   </label>
                 </div>
 
-                {featuredPost ? (
+                {isFirstPage && featuredPost ? (
                   <Link
                     href={`/${locale}/blog/${featuredPost.slug}`}
                     className="group mt-6 grid overflow-hidden rounded-lg border border-[#D7E2EE] bg-[#F8FAFC] shadow-sm shadow-[#0F172A]/5 transition-all hover:-translate-y-0.5 hover:border-[#FF8A1F]/60 hover:shadow-md md:grid-cols-[minmax(0,1fr)_280px]"
@@ -300,7 +354,7 @@ export default function BlogIndexClient() {
                       </p>
                     </div>
                     <div className="divide-y divide-[#E2E8F0]">
-                      {visibleArticleList.map((post) => {
+                      {paginatedArticleList.map((post) => {
                         const categoryLabel = categoryLabels[post.category] || post.category;
 
                         return (
@@ -347,16 +401,55 @@ export default function BlogIndexClient() {
                         );
                       })}
                     </div>
-                    {hiddenArticleCount > 0 && (
-                      <div className="border-t border-[#E2E8F0] bg-[#F8FAFC] px-4 py-4 text-center">
-                        <button
-                          type="button"
-                          onClick={() => setVisibleArticleCount((count) => count + INITIAL_VISIBLE_ARTICLES)}
-                          className="inline-flex items-center justify-center gap-2 rounded-lg border border-[#D7E2EE] bg-white px-4 py-2.5 text-sm font-bold text-[#0F172A] transition-colors hover:border-[#FF8A1F]/60 hover:text-[#C45A00]"
-                        >
-                          Show {Math.min(hiddenArticleCount, INITIAL_VISIBLE_ARTICLES)} more
-                          <ArrowRight className="h-4 w-4" />
-                        </button>
+                    {totalPages > 1 && (
+                      <div className="flex flex-col gap-4 border-t border-[#E2E8F0] bg-[#F8FAFC] px-4 py-4 sm:flex-row sm:items-center sm:justify-between">
+                        <p className="text-xs font-medium text-[#64748B]">
+                          Page {currentPage} of {totalPages}
+                        </p>
+                        <div className="flex flex-wrap items-center gap-2">
+                          <button
+                            type="button"
+                            onClick={() => handlePageChange(currentPage - 1)}
+                            disabled={currentPage === 1}
+                            className="inline-flex h-9 items-center justify-center gap-1.5 rounded-lg border border-[#D7E2EE] bg-white px-3 text-xs font-bold text-[#0F172A] transition-colors hover:border-[#FF8A1F]/60 hover:text-[#C45A00] disabled:cursor-not-allowed disabled:opacity-45 disabled:hover:border-[#D7E2EE] disabled:hover:text-[#0F172A]"
+                          >
+                            <ChevronLeft className="h-4 w-4" />
+                            {dict.blog.pagination.prev}
+                          </button>
+                          {paginationItems.map((item) => (
+                            typeof item === 'number' ? (
+                              <button
+                                key={item}
+                                type="button"
+                                onClick={() => handlePageChange(item)}
+                                aria-current={item === currentPage ? 'page' : undefined}
+                                className={`h-9 min-w-9 rounded-lg border px-3 text-xs font-bold transition-colors ${
+                                  item === currentPage
+                                    ? 'border-[#FF8A1F] bg-[#FFF7ED] text-[#C45A00]'
+                                    : 'border-[#D7E2EE] bg-white text-[#0F172A] hover:border-[#FF8A1F]/60 hover:text-[#C45A00]'
+                                }`}
+                              >
+                                {item}
+                              </button>
+                            ) : (
+                              <span
+                                key={item}
+                                className="flex h-9 min-w-9 items-center justify-center text-xs font-bold text-[#94A3B8]"
+                              >
+                                ...
+                              </span>
+                            )
+                          ))}
+                          <button
+                            type="button"
+                            onClick={() => handlePageChange(currentPage + 1)}
+                            disabled={currentPage === totalPages}
+                            className="inline-flex h-9 items-center justify-center gap-1.5 rounded-lg border border-[#D7E2EE] bg-white px-3 text-xs font-bold text-[#0F172A] transition-colors hover:border-[#FF8A1F]/60 hover:text-[#C45A00] disabled:cursor-not-allowed disabled:opacity-45 disabled:hover:border-[#D7E2EE] disabled:hover:text-[#0F172A]"
+                          >
+                            {dict.blog.pagination.next}
+                            <ChevronRight className="h-4 w-4" />
+                          </button>
+                        </div>
                       </div>
                     )}
                   </div>
