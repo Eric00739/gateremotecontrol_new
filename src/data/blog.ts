@@ -106,6 +106,281 @@ export const popularGuides = [
 
 export const blogPosts: BlogPost[] = [
   {
+    title: 'Your Remote Control Has a Hearing Problem: How Receiver Sensitivity Decides RF Range',
+    seoTitle: 'Receiver Sensitivity and RF Remote Range Specs',
+    category: 'rf-engineering',
+    excerpt:
+      'Receiver sensitivity is the spec that tells you how weak a signal the receiver can still decode, and it often matters more for usable RF range than louder transmit power.',
+    slug: 'rf-receiver-sensitivity-range-spec',
+    author: 'Eric Huang',
+    publishedAt: '2026-05-10',
+    updatedAt: '2026-05-10',
+    readTime: '9 min read',
+    image: '/images/blog/rf-receiver-sensitivity-range-spec/hero.webp',
+    relatedSlugs: [
+      'rf-remote-control-concurrency-anti-collision',
+      'cr2032-rf-remote-battery-life',
+      'circuits-dont-act-good-enough-transmitter-modules',
+    ],
+    content: [
+      {
+        type: 'paragraph',
+        text:
+          'Two RC cars line up at the same starting position. Same chassis, same motors, even the same antenna supplier. But somewhere deep in the corner of the track, one of them goes deaf.',
+      },
+      {
+        type: 'paragraph',
+        text:
+          'The steering command goes out. The car does nothing for a moment, then plows into the barrier at a completely wrong angle.',
+      },
+      {
+        type: 'paragraph',
+        text:
+          'The first instinct is always to blame the transmitter or the frequency environment. Almost nobody looks in the other direction: maybe the receiver simply has bad ears.',
+      },
+      {
+        type: 'image',
+        src: '/images/blog/rf-receiver-sensitivity-range-spec/hero.webp',
+        alt: 'RC remote control receiver sensitivity comparison showing signal strength and usable distance',
+        caption: 'In RF control, the receiver side often decides whether a weak command still becomes a reliable action.',
+      },
+      {
+        type: 'heading',
+        text: 'A Thought Experiment First',
+      },
+      {
+        type: 'paragraph',
+        text:
+          'Imagine standing next to a noisy construction site while someone calls your name from thirty meters away.',
+      },
+      {
+        type: 'paragraph',
+        text:
+          'Whether you hear them depends on two things: how loudly they shout, and how sharp your hearing is.',
+      },
+      {
+        type: 'paragraph',
+        text:
+          'Translate that into radio: the remote is the person shouting, the receiver is your ears, the electromagnetic interference in the air is the construction noise, and distance makes the whole problem harder.',
+      },
+      {
+        type: 'paragraph',
+        text:
+          'Receiver sensitivity is how sharp those ears are. It tells you how weak a signal the receiver can still pull out of the noise and decode correctly.',
+      },
+      {
+        type: 'callout',
+        title: 'The practical meaning',
+        text:
+          'A remote control system is not only about how loudly the transmitter speaks. It is also about how quietly the receiver can still listen.',
+      },
+      {
+        type: 'heading',
+        text: 'That Confusing Negative Number',
+      },
+      {
+        type: 'paragraph',
+        text:
+          'Receiver sensitivity is usually written in dBm. On a spec sheet, it may look like this: receiver sensitivity: -105 dBm.',
+      },
+      {
+        type: 'paragraph',
+        text:
+          'The first time you see it, the natural reaction is confusion. A negative number sounds like a worse number. In RF sensitivity, more negative is better.',
+      },
+      {
+        type: 'paragraph',
+        text:
+          'That number represents the weakest signal the receiver can still detect and decode under the stated test conditions. A -105 dBm receiver can hear a weaker signal than a -90 dBm receiver.',
+      },
+      {
+        type: 'paragraph',
+        text:
+          'Because dBm is logarithmic, the difference is not linear. Every 10 dB represents a 10x power ratio. A 15 dB difference is about 32x.',
+      },
+      {
+        type: 'paragraph',
+        text:
+          'So a receiver rated at -105 dBm can decode a signal roughly thirty-two times weaker than a receiver rated at -90 dBm, assuming the same modulation, bit rate, error target, and test setup.',
+      },
+      {
+        type: 'paragraph',
+        text:
+          'That is not a small spec improvement. In a difficult RF environment, it can be the difference between stable control and random dropouts.',
+      },
+      {
+        type: 'heading',
+        text: 'How Distance Eats the Signal',
+      },
+      {
+        type: 'paragraph',
+        text:
+          'Radio signals traveling through open space follow a rule that is easy to remember: every time distance doubles, received signal strength drops by about 6 dB.',
+      },
+      {
+        type: 'paragraph',
+        text:
+          'The exact received level depends on frequency, antenna gain, polarization, path loss, ground reflection, multipath, obstacles, and receiver bandwidth. But the 6 dB-per-doubling rule is the right mental model for free-space loss.',
+      },
+      {
+        type: 'paragraph',
+        text:
+          'Use a simplified example. If the receiver sees about -75 dBm at 50 meters in a given setup, then the same setup may look roughly like this as distance doubles:',
+      },
+      {
+        type: 'list',
+        items: [
+          '50 meters: about -75 dBm',
+          '100 meters: about -81 dBm',
+          '200 meters: about -87 dBm',
+          '400 meters: about -93 dBm',
+          '800 meters: about -99 dBm',
+        ],
+      },
+      {
+        type: 'paragraph',
+        text:
+          'Now compare two receivers on that same link. A -90 dBm receiver is already running out of usable margin around the 200 to 400 meter region. A -105 dBm receiver still has meaningful headroom.',
+      },
+      {
+        type: 'paragraph',
+        text:
+          'Same transmitter, same antenna position, same environment. The range difference comes from the receiver side.',
+      },
+      {
+        type: 'paragraph',
+        text:
+          'This is why experienced RF engineers do not get too excited by marketing copy that only says "high transmit power" or "long range." They look for the receiver sensitivity line first.',
+      },
+      {
+        type: 'heading',
+        text: 'Why Not Just Turn Up the Power?',
+      },
+      {
+        type: 'paragraph',
+        text:
+          'The most common misunderstanding is simple: if range is not enough, just increase transmit power.',
+      },
+      {
+        type: 'paragraph',
+        text:
+          'That approach has two problems. First, transmit power has regulatory limits. Products that exceed the legal limit for the target market cannot be sold or used compliantly.',
+      },
+      {
+        type: 'paragraph',
+        text:
+          'Second, the conversion rate between power and range is punishing. In free space, doubling range requires about 6 dB more link budget, which means roughly four times the transmit power.',
+      },
+      {
+        type: 'paragraph',
+        text:
+          'Double the range again and the power requirement multiplies again. Battery life drops, heat increases, and the design becomes harder to certify.',
+      },
+      {
+        type: 'paragraph',
+        text:
+          'Sensitivity works differently. Improving receiver sensitivity by 10 dB gives the link budget the same kind of benefit as increasing transmit power by 10 dB, but without making the transmitter louder, hotter, and more power-hungry.',
+      },
+      {
+        type: 'callout',
+        title: 'Where the money often works hardest',
+        text:
+          'For many RF remote products, spending more on the receive side is a higher-return range decision than trying to force more transmit power out of the remote.',
+      },
+      {
+        type: 'heading',
+        text: 'What Actually Determines Sensitivity?',
+      },
+      {
+        type: 'paragraph',
+        text:
+          'Two ideas sit at the core of receiver sensitivity: noise floor and modulation scheme.',
+      },
+      {
+        type: 'paragraph',
+        text:
+          'Noise floor is the unwanted noise generated by the receiver circuitry itself, plus the thermal noise inside the receiver bandwidth. If the signal is buried under that floor, the receiver cannot recover it reliably.',
+      },
+      {
+        type: 'paragraph',
+        text:
+          'This is where serious RF chips separate themselves from generic modules. Better low-noise design, filtering, gain control, and demodulation all help the receiver hear weaker signals.',
+      },
+      {
+        type: 'paragraph',
+        text:
+          'Modulation matters too. A low-data-rate FSK link can often reach much better sensitivity than a simple wideband ASK link. Spread-spectrum technologies can go even further because they trade bandwidth and processing for robustness.',
+      },
+      {
+        type: 'paragraph',
+        text:
+          'Antenna design also belongs in the same conversation. A high-quality receiver chip connected to a mismatched antenna can lose several dB immediately. That loss can erase a large part of the sensitivity advantage you paid for.',
+      },
+      {
+        type: 'paragraph',
+        text:
+          'Channel bandwidth is another quiet factor. Narrower bandwidth collects less noise, which is one reason low-data-rate devices such as remotes can be optimized for strong sensitivity.',
+      },
+      {
+        type: 'heading',
+        text: 'Buying Guidance: The Traps Worth Avoiding',
+      },
+      {
+        type: 'paragraph',
+        text:
+          'If you are specifying or sourcing an RF remote system, do not stop at the range number printed on the product page.',
+      },
+      {
+        type: 'list',
+        items: [
+          'Ask for the test condition behind the sensitivity number: modulation, data rate, bandwidth, packet error rate or bit error rate, and test temperature.',
+          'Discount open-field range claims for real sites. Metal, walls, cars, motors, and multipath can cut practical range sharply.',
+          'Check link margin, not just maximum range. A useful design should still have reserve at the rated operating distance.',
+          'Ask about co-channel interference testing. Sensitivity tells you how weak a desired signal can be; interference rejection tells you how well the receiver behaves when other devices are talking too.',
+          'Look at antenna implementation. Bad placement, poor matching, and metal enclosures can waste an otherwise good receiver.',
+        ],
+      },
+      {
+        type: 'paragraph',
+        text:
+          'A product that barely works at the advertised range has no reserve. Once temperature changes, the battery weakens, the antenna angle shifts, or another transmitter appears nearby, the customer sees dropouts.',
+      },
+      {
+        type: 'heading',
+        text: 'Back at the Starting Line',
+      },
+      {
+        type: 'paragraph',
+        text:
+          'The RC car that hit the barrier was eventually diagnosed. The receiver used a generic module with weak real-world sensitivity. At the far end of the track, distance and interference pushed the link past its limit.',
+      },
+      {
+        type: 'paragraph',
+        text:
+          'After swapping in a higher-sensitivity receiver module, the same car, same transmitter, same track, and same race conditions became stable.',
+      },
+      {
+        type: 'paragraph',
+        text:
+          'That is the lesson. In wireless control, your ears matter as much as your voice. Sometimes they matter more.',
+      },
+      {
+        type: 'paragraph',
+        text:
+          'Next time you read a remote control spec sheet, find the receiver sensitivity line first. Write down that negative dBm number and take it seriously.',
+      },
+      {
+        type: 'quote',
+        text: 'A louder transmitter may look impressive, but a sharper receiver is often what turns range into reliability.',
+      },
+      {
+        type: 'paragraph',
+        text:
+          'Next topic: same sensitivity, two antennas - one gains real distance, the other wastes your money. Antenna matching is where the next part of the range story begins.',
+      },
+    ],
+  },
+  {
     title: '10 Real-World Application Scenarios: How RF Remotes and Controllers Actually Deliver Wireless Control',
     seoTitle: '10 RF Remote and Controller Application Scenarios',
     category: 'buyer-checklist',
