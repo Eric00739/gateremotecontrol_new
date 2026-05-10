@@ -68,6 +68,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
       lastModified: postLastModified(post),
       changeFrequency: 'monthly',
       priority: 0.7,
+      images: post.image ? [absoluteUrl(post.image)] : undefined,
     });
   }
 
