@@ -1,6 +1,5 @@
 import type { Metadata } from 'next';
 import BlogIndexClient from '@/components/BlogIndexClient';
-import LeadModalProvider from '@/components/LeadModalProvider';
 import { type Locale, locales } from '@/i18n';
 import { getDictSync } from '@/i18n/dictionaries';
 import { siteName } from '@/data/site';
@@ -52,11 +51,11 @@ async function BlogPageContent({ locale }: { locale: Locale }) {
   ]);
 
   return (
-    <LeadModalProvider>
+    <>
       <script type="application/ld+json" dangerouslySetInnerHTML={jsonLd(blogJsonLd)} />
       <script type="application/ld+json" dangerouslySetInnerHTML={jsonLd(breadcrumb)} />
       <BlogIndexClient />
-    </LeadModalProvider>
+    </>
   );
 }
 

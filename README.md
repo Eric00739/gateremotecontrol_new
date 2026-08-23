@@ -1,36 +1,48 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# GateRemoteSource
 
-## Getting Started
+面向安装商、锁匠、批发商和 OEM 客户的多语言 RF 遥控器与接收器 B2B 静态网站。
 
-First, run the development server:
+## 本地运行
+
+要求：Node.js 20（与 GitHub Pages 工作流一致）。
 
 ```bash
+npm ci
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+打开 `http://localhost:3000/en`。可用语言：`en`、`es`、`fr`、`it`、`pt`、`ru`。
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## 验证与构建
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```bash
+npm run lint
+npm run build
+```
 
-## Learn More
+`npm run build` 生成 `out/` 静态站点，并生成旧 URL 的静态重定向页面。由于项目使用 Next.js `output: 'export'`，不要运行 `next start`；若需预览构建产物，可运行：
 
-To learn more about Next.js, take a look at the following resources:
+```bash
+npx serve out -l 4173
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## 发布
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+GitHub Actions 工作流 [`.github/workflows/deploy.yml`](.github/workflows/deploy.yml) 会在 `main` 分支推送后构建 `out/` 并发布到 GitHub Pages。当前仓库未在本地自动提交、推送或部署；本地构建成功不代表线上已经更新。
 
-## Deploy on Vercel
+## 目录说明
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+- `src/app/`：Next.js App Router 路由与元数据。
+- `src/components/`：首页、询盘、导航和内容组件。
+- `src/i18n/`：六种语言词典；以 `en.ts` 为键结构基准。
+- `src/data/`：兼容性、博客、服务页和站点数据。
+- `public/`：已批准的静态图片和视频。
+- `scripts/generate-static-redirects.mjs`：旧 URL 重定向和导出 HTML 的语言标记修正。
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## 询盘与内容边界
+
+这是纯静态站点。询盘按钮只会打开 WhatsApp 或本机邮件草稿；网站不会接收表单数据或上传附件。接入真实表单、附件上传、CRM、统计或其他第三方服务前，需要先确认托管、隐私和密钥方案。
+
+不要把未经站点所有者确认的公司身份、工厂关系、SKU、MOQ、认证、交期、客户案例或图片场景写成事实。真实产品和工厂图片到位前，不重新启用“工厂证据”图库。
+
+当前可执行改造与仍需所有者输入的事项见 [WEBSITE_IMPROVEMENT_PLAN.md](WEBSITE_IMPROVEMENT_PLAN.md)。

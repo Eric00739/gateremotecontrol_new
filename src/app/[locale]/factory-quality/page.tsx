@@ -1,9 +1,7 @@
 import type { Metadata } from 'next';
-import Image from 'next/image';
 import Link from 'next/link';
 import { ArrowRight, CheckCircle2, FlaskConical, PackageCheck, RadioTower, ShieldCheck } from 'lucide-react';
 import LeadModalTrigger from '@/components/LeadModalTrigger';
-import { factoryItems } from '@/data/homepage';
 import { factoryQualityPage } from '@/data/servicePages';
 import { type Locale, locales } from '@/i18n';
 import { getDictSync } from '@/i18n/dictionaries';
@@ -70,7 +68,7 @@ export default async function FactoryQualityPage({ params }: { params: Promise<{
       <section className="relative overflow-hidden bg-[#062748]">
         <div className="absolute inset-0 tech-grid" />
         <div className="relative max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8 py-16 lg:py-24">
-          <div className="grid gap-12 lg:grid-cols-[0.9fr_1.1fr] lg:items-center">
+          <div className="max-w-3xl">
             <div>
               <div className="flex items-center gap-3 mb-5">
                 <div className="w-8 h-[2px] bg-[#FF8A1F]" />
@@ -95,17 +93,6 @@ export default async function FactoryQualityPage({ params }: { params: Promise<{
               </div>
             </div>
 
-            <div className="grid grid-cols-2 gap-3">
-              {factoryItems.slice(0, 4).map((item) => (
-                <div key={item.name} className="relative h-40 overflow-hidden rounded-lg border border-[#123D63] bg-[#08345F] sm:h-48">
-                  <Image src={item.image} alt={item.name} fill priority className="object-cover opacity-90" />
-                  <div className="absolute inset-0 bg-gradient-to-t from-[#062748]/80 via-transparent to-transparent" />
-                  <p className="absolute bottom-3 left-3 right-3 text-xs font-bold text-[#F7FBFF]" style={{ fontFamily: 'var(--font-outfit), sans-serif' }}>
-                    {item.name}
-                  </p>
-                </div>
-              ))}
-              </div>
             </div>
           </div>
       </section>
@@ -134,29 +121,6 @@ export default async function FactoryQualityPage({ params }: { params: Promise<{
               })}
             </div>
           </div>
-        </div>
-      </section>
-
-      <section className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8 py-14 lg:py-20">
-        <div className="mb-8 max-w-2xl">
-          <p className="text-[11px] font-bold uppercase tracking-[0.18em] text-[#FF8A1F]" style={{ fontFamily: 'var(--font-jetbrains-mono), monospace' }}>
-            {page.facilityLabel}
-          </p>
-          <h2 className="mt-3 text-2xl lg:text-3xl font-bold" style={{ fontFamily: 'var(--font-outfit), sans-serif' }}>
-            {page.facilityTitle}
-          </h2>
-        </div>
-        <div className="grid grid-cols-2 gap-4 sm:grid-cols-4">
-          {factoryItems.slice(4).map((item) => (
-            <div key={item.name} className="overflow-hidden rounded-lg border border-[#E2E8F0] bg-white">
-              <div className="relative h-36">
-                <Image src={item.image} alt={item.name} fill className="object-cover" />
-              </div>
-              <p className="px-4 py-3 text-center text-xs font-semibold text-[#0F172A]" style={{ fontFamily: 'var(--font-outfit), sans-serif' }}>
-                {item.name}
-              </p>
-            </div>
-          ))}
         </div>
       </section>
     </div>

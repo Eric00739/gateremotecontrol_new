@@ -3,25 +3,13 @@
 import { useMemo, useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
-import { ArrowRight, CalendarDays, ChevronLeft, ChevronRight, Clock, FileText, MessageSquare, Radio, Search, UserRound } from 'lucide-react';
+import { ArrowRight, ChevronLeft, ChevronRight, Clock, FileText, MessageSquare, Radio, Search, UserRound } from 'lucide-react';
 import { authorProfile } from '@/data/author';
 import { blogCategories, blogPosts, popularGuides, type BlogPost } from '@/data/blog';
 import LeadModalTrigger from '@/components/LeadModalTrigger';
 import { useDict, useLocale } from '@/i18n';
 
 const ARTICLES_PER_PAGE = 10;
-
-function formatDate(date?: string) {
-  if (!date) return null;
-  const parsed = new Date(date);
-  if (Number.isNaN(parsed.getTime())) return date;
-
-  return new Intl.DateTimeFormat('en', {
-    year: 'numeric',
-    month: 'short',
-    day: '2-digit',
-  }).format(parsed);
-}
 
 function getPostSortTime(post: BlogPost) {
   const sortDate = post.publishedAt || post.updatedAt;
@@ -42,17 +30,9 @@ function sortPostsNewestFirst(posts: BlogPost[]) {
 }
 
 function ArticleMeta({ post }: { post: BlogPost }) {
-  const dateLabel = formatDate(post.publishedAt);
-
   return (
     <div className="flex flex-wrap items-center gap-x-4 gap-y-2 text-[12px] text-[#64748B]">
       {post.author && <span>{post.author}</span>}
-      {dateLabel && (
-        <span className="inline-flex items-center gap-1.5">
-          <CalendarDays className="h-3.5 w-3.5" />
-          {dateLabel}
-        </span>
-      )}
       {post.readTime && (
         <span className="inline-flex items-center gap-1.5">
           <Clock className="h-3.5 w-3.5" />

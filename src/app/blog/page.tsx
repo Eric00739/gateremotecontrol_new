@@ -1,6 +1,5 @@
 import type { Metadata } from 'next';
 import BlogIndexClient from '@/components/BlogIndexClient';
-import LeadModalProvider from '@/components/LeadModalProvider';
 import LegacyEnglishShell from '@/components/LegacyEnglishShell';
 
 export const metadata: Metadata = {
@@ -12,9 +11,7 @@ export const metadata: Metadata = {
 export default function LegacyBlogPage() {
   return (
     <LegacyEnglishShell>
-      <LeadModalProvider>
-        <BlogIndexClient />
-      </LeadModalProvider>
+      <BlogIndexClient />
     </LegacyEnglishShell>
   );
 }

@@ -2,7 +2,6 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 import { ArrowLeft, ArrowRight, CheckCircle2 } from 'lucide-react';
 import { notFound } from 'next/navigation';
-import LeadModalProvider from '@/components/LeadModalProvider';
 import LeadModalTrigger from '@/components/LeadModalTrigger';
 import { compatibilityBrands, getCompatibilityBrand } from '@/data/compatibility';
 import { type Locale, locales } from '@/i18n';
@@ -96,7 +95,7 @@ export default async function BrandCompatibilityPage({
   };
 
   return (
-    <LeadModalProvider>
+    <>
       <div className="bg-[#F8FAFC] text-[#0F172A]">
       <script type="application/ld+json" dangerouslySetInnerHTML={jsonLd(breadcrumbJsonLdData)} />
       <script type="application/ld+json" dangerouslySetInnerHTML={jsonLd(faqJsonLd)} />
@@ -266,6 +265,6 @@ export default async function BrandCompatibilityPage({
         </div>
       </section>
     </div>
-    </LeadModalProvider>
+    </>
   );
 }

@@ -4,7 +4,7 @@ import { FormEvent, useState } from 'react';
 import { MessageSquare, Send } from 'lucide-react';
 
 export default function BlogCommentBox({ articleTitle }: { articleTitle: string }) {
-  const [status, setStatus] = useState('Your comment opens as an email draft so you can review it before sending.');
+  const [status, setStatus] = useState('This opens an email draft. Your question is not submitted on this website.');
 
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -21,23 +21,23 @@ export default function BlogCommentBox({ articleTitle }: { articleTitle: string 
       `Email: ${email}`,
       `Company: ${company || 'Not provided'}`,
       '',
-      'Comment:',
+      'RF question:',
       message,
     ].join('\n');
 
     const mailto = new URL('mailto:sales@gateremotesource.com');
-    mailto.searchParams.set('subject', `Blog comment: ${articleTitle}`);
+    mailto.searchParams.set('subject', `RF question: ${articleTitle}`);
     mailto.searchParams.set('body', body);
     window.location.href = mailto.toString();
-    setStatus('Email draft opened. Please review it in your mail app before sending.');
+    setStatus('Email draft requested. If no mail app opened, use sales@gateremotesource.com. Nothing has been submitted on this website.');
   };
 
   return (
     <section
-      id="comments"
-      data-testid="blog-comments"
+      id="rf-question"
+      data-testid="blog-rf-question"
       className="mt-10 w-full scroll-mt-24 rounded-lg border border-[#D7E2EE] bg-[#F8FAFC] p-5 shadow-sm shadow-[#0F172A]/5 sm:p-6"
-      aria-labelledby="comments-title"
+      aria-labelledby="rf-question-title"
     >
       <div className="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
         <div className="min-w-0">
@@ -46,21 +46,21 @@ export default function BlogCommentBox({ articleTitle }: { articleTitle: string 
             style={{ fontFamily: 'var(--font-jetbrains-mono), monospace' }}
           >
             <MessageSquare className="h-4 w-4" />
-            Comments
+            RF questions by email
           </p>
           <h2
-            id="comments-title"
+            id="rf-question-title"
             className="mt-2 break-words text-xl font-bold leading-tight text-[#0F172A] sm:text-2xl"
             style={{ fontFamily: 'var(--font-outfit), sans-serif' }}
           >
-            Leave a comment or RF question
+            Email Eric an RF question
           </h2>
           <p className="mt-2 text-sm leading-7 text-[#475569]">
             Share your unstable range, batch consistency, matching, filtering, case effect, or export production question. Eric will review the details and reply directly.
           </p>
         </div>
         <p className="w-full rounded-md border border-[#FFE0B8] bg-[#FFF7ED] px-3 py-2 text-xs leading-5 text-[#9A3412] sm:max-w-[220px]">
-          Comments are handled by email for now, so you can review the message before sending.
+          This is not a public comment system. It opens your email app so you can review the message before sending.
         </p>
       </div>
 
@@ -99,7 +99,7 @@ export default function BlogCommentBox({ articleTitle }: { articleTitle: string 
           />
         </label>
         <label className="grid min-w-0 gap-2 text-xs font-bold text-[#334155]">
-          Comment
+          RF question
           <textarea
             name="message"
             required
@@ -113,7 +113,7 @@ export default function BlogCommentBox({ articleTitle }: { articleTitle: string 
             type="submit"
             className="inline-flex items-center justify-center gap-2 rounded-lg bg-[#FF8A1F] px-5 py-2.5 text-sm font-bold text-[#062748] transition-colors hover:bg-[#F97316]"
           >
-            Send Comment <Send className="h-4 w-4" />
+            Open Email Draft <Send className="h-4 w-4" />
           </button>
           <p className="text-xs leading-5 text-[#64748B]">{status}</p>
         </div>

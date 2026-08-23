@@ -6,6 +6,7 @@ import AnnouncementBar from '@/components/AnnouncementBar';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import LeadModalProvider from '@/components/LeadModalProvider';
+import DocumentLanguage from '@/components/DocumentLanguage';
 import { defaultOgImage, jsonLd, localizedAlternates, organizationJsonLd, websiteJsonLd } from '@/lib/seo';
 
 export function generateStaticParams() {
@@ -54,6 +55,7 @@ export default async function LocaleLayout({
   return (
     <I18nProvider locale={locale} dict={dict}>
       <LeadModalProvider>
+        <DocumentLanguage locale={locale} />
         <script type="application/ld+json" dangerouslySetInnerHTML={jsonLd(organizationJsonLd())} />
         <script type="application/ld+json" dangerouslySetInnerHTML={jsonLd(websiteJsonLd(locale))} />
         <AnnouncementBar />

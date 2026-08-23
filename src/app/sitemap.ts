@@ -3,7 +3,7 @@ import { blogPosts } from '@/data/blog';
 import { compatibilityBrands } from '@/data/compatibility';
 import { catalogPage, factoryQualityPage, oemPage } from '@/data/servicePages';
 import { defaultLocale, locales } from '@/i18n';
-import { absoluteUrl, localizedAlternates, postLastModified, siteUpdatedAt } from '@/lib/seo';
+import { absoluteUrl, localizedAlternates, siteUpdatedAt } from '@/lib/seo';
 
 export const dynamic = 'force-static';
 
@@ -60,7 +60,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
   for (const post of blogPosts) {
     entries.push({
       url: absoluteUrl(`/${defaultLocale}/blog/${post.slug}`),
-      lastModified: postLastModified(post),
       changeFrequency: 'monthly',
       priority: 0.7,
       images: post.image ? [absoluteUrl(post.image)] : undefined,

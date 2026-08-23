@@ -18,7 +18,7 @@ export default function CompatibilityWorkflowSection() {
         {/* Section label */}
         <div className="flex items-center gap-3 mb-4">
           <div className="w-8 h-[2px] bg-[#FF8A1F]" />
-          <span className="text-[11px] font-semibold tracking-[0.2em] uppercase text-[#FF8A1F]" style={{ fontFamily: "var(--font-jetbrains-mono), monospace" }}>
+          <span className="text-[11px] font-semibold tracking-[0.2em] uppercase text-[#9A3F00]" style={{ fontFamily: "var(--font-jetbrains-mono), monospace" }}>
             {dict.workflow.sectionLabel}
           </span>
         </div>
@@ -73,7 +73,7 @@ export default function CompatibilityWorkflowSection() {
             </div>
             <LeadModalTrigger
               prefillType="compatibility"
-              className="inline-flex items-center justify-center rounded-lg bg-[#FF8A1F] px-5 py-2.5 text-sm font-bold text-white transition-colors hover:bg-[#F97316]"
+              className="inline-flex items-center justify-center rounded-lg bg-[#FF8A1F] px-5 py-2.5 text-sm font-bold text-[#062748] transition-colors hover:bg-[#F97316]"
             >
               {dict.workflow.requestCta}
             </LeadModalTrigger>
@@ -82,7 +82,7 @@ export default function CompatibilityWorkflowSection() {
           <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-3">
             {fields.map((item: { field: string; description: string }) => (
               <div key={item.field} className="rounded-lg border border-[#E2E8F0] bg-white p-4">
-                <div className="text-[11px] font-bold uppercase tracking-[0.12em] text-[#FF8A1F] mb-2" style={{ fontFamily: "var(--font-jetbrains-mono), monospace" }}>
+                <div className="text-[11px] font-bold uppercase tracking-[0.12em] text-[#9A3F00] mb-2" style={{ fontFamily: "var(--font-jetbrains-mono), monospace" }}>
                   {item.field}
                 </div>
                 <p className="text-[12px] leading-relaxed text-[#64748B]">

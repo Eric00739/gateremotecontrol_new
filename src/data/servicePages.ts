@@ -26,19 +26,19 @@ export const oemPage = {
 
 export const factoryQualityPage = {
   path: '/factory-quality',
-  metaTitle: 'Factory & Quality Evidence | GateRemoteSource',
+  metaTitle: 'Quality Verification Process | GateRemoteSource',
   metaDescription:
-    'Production evidence, RF testing, packaging inspection, sample verification, and export documentation support for compatible remote supply.',
-  eyebrow: 'Factory & Quality',
-  title: 'Factory Evidence Before Bulk Orders',
+    'Sample verification, RF testing, packaging inspection, and export documentation workflow for compatible remote orders.',
+  eyebrow: 'Quality & Verification',
+  title: 'Quality Checks Before Bulk Orders',
   subtitle:
-    'Show buyers how RF remote supply is controlled: sample verification, functional testing, packaging checks, and shipment preparation.',
+    'Review how an RF remote order can be verified through samples, functional checks, packaging review, and shipment preparation.',
   primaryCta: 'Send Model for Verification',
   secondaryCta: 'Request Wholesale Catalog',
-  processLabel: 'Production control',
-  processTitle: 'Quality controls buyers can understand',
+  processLabel: 'Verification workflow',
+  processTitle: 'Quality checks buyers can request',
   processSubtitle:
-    'The page focuses on process evidence instead of exposing risky product shell comparisons.',
+    'Confirm the required checks and available supporting records with sales before placing an order.',
   checks: [
     'Incoming material and PCB inspection',
     'Frequency and signal range testing',

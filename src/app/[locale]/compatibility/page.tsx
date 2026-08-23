@@ -1,7 +1,6 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import { ArrowRight, Camera, Cpu, Radio, ShieldCheck } from 'lucide-react';
-import LeadModalProvider from '@/components/LeadModalProvider';
 import LeadModalTrigger from '@/components/LeadModalTrigger';
 import { compatibilityBrands } from '@/data/compatibility';
 import { type Locale, locales } from '@/i18n';
@@ -66,7 +65,7 @@ export default async function CompatibilityPage({
   ]);
 
   return (
-    <LeadModalProvider>
+    <>
       <div className="bg-[#F8FAFC] text-[#0F172A]">
       <script type="application/ld+json" dangerouslySetInnerHTML={jsonLd(collectionJsonLd)} />
       <script type="application/ld+json" dangerouslySetInnerHTML={jsonLd(breadcrumb)} />
@@ -192,6 +191,6 @@ export default async function CompatibilityPage({
         </div>
       </section>
     </div>
-    </LeadModalProvider>
+    </>
   );
 }
