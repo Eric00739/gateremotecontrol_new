@@ -16,7 +16,7 @@ export default function FaqSection() {
         {/* Section label */}
         <div className="flex items-center gap-3 mb-4">
           <div className="w-8 h-[2px] bg-[#FF8A1F]" />
-          <span className="text-[11px] font-semibold tracking-[0.2em] uppercase text-[#FF8A1F]" style={{ fontFamily: "var(--font-jetbrains-mono), monospace" }}>
+          <span className="text-[11px] font-semibold tracking-[0.2em] uppercase text-[#9A3F00]" style={{ fontFamily: "var(--font-jetbrains-mono), monospace" }}>
             {dict.faq.sectionLabel}
           </span>
         </div>

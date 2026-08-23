@@ -16,7 +16,7 @@ export default function RiskControlSection() {
         {/* Section label */}
         <div className="flex items-center gap-3 mb-4">
           <div className="w-8 h-[2px] bg-[#FF8A1F]" />
-          <span className="text-[11px] font-semibold tracking-[0.2em] uppercase text-[#FF8A1F]" style={{ fontFamily: "var(--font-jetbrains-mono), monospace" }}>
+          <span className="text-[11px] font-semibold tracking-[0.2em] uppercase text-[#9A3F00]" style={{ fontFamily: "var(--font-jetbrains-mono), monospace" }}>
             {dict.risk.sectionLabel}
           </span>
         </div>
@@ -50,7 +50,7 @@ export default function RiskControlSection() {
               <p className="text-sm text-[#475569] leading-relaxed">
                 {dict.risk.disclaimer}
               </p>
-              <p className="text-[11px] text-[#94A3B8] mt-2" style={{ fontFamily: "var(--font-jetbrains-mono), monospace" }}>
+              <p className="text-[11px] text-[#475569] mt-2" style={{ fontFamily: "var(--font-jetbrains-mono), monospace" }}>
                 {dict.risk.note}
               </p>
             </div>

@@ -70,14 +70,14 @@ export default function HeroSection() {
                   playsInline
                   preload="metadata"
                   poster={basePath + '/videos/gateremote-hero-poster.webp'}
-                  aria-label="GateRemoteSource factory production video"
+                  aria-label="GateRemoteSource product overview video"
                 >
                   <source src={basePath + '/videos/gateremote-hero-mobile.mp4'} type="video/mp4" media="(max-width: 768px)" />
                   <source src={basePath + '/videos/gateremote-hero.mp4'} type="video/mp4" />
                 </video>
                 <div className="pointer-events-none absolute inset-0 bg-gradient-to-tr from-[#062748]/55 via-transparent to-[#FF8A1F]/10" />
                 <div className="pointer-events-none absolute left-4 top-4 rounded-md border border-[#FF8A1F]/25 bg-[#062748]/70 px-3 py-1.5 text-[10px] font-semibold uppercase tracking-[0.18em] text-[#FFB15C] backdrop-blur-sm" style={{ fontFamily: 'var(--font-jetbrains-mono), monospace' }}>
-                  Factory Video
+                  Product Overview
                 </div>
               </div>
               <p className="text-[#7F9AB7] text-[10px] tracking-widest mt-4 text-center" style={{ fontFamily: 'var(--font-jetbrains-mono), monospace' }}>

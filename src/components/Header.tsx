@@ -18,6 +18,7 @@ export default function Header() {
   const factoryQualityLabel = dict.header.factoryQuality || `${dict.header.factory} & Quality`;
 
   const navItems = [
+    { label: dict.header.products, href: `/${currentLocale}/#products` },
     { label: dict.header.compatibility, href: `/${currentLocale}/compatibility` },
     { label: dict.header.oemOdm, href: `/${currentLocale}/oem-odm` },
     { label: factoryQualityLabel, href: `/${currentLocale}/factory-quality` },
@@ -46,7 +47,7 @@ export default function Header() {
                 <span className="text-[#FF8A1F] font-extrabold text-lg tracking-tight" style={{ fontFamily: "var(--font-outfit), sans-serif" }}>Remote</span>
                 <span className="text-[#0B2745] font-extrabold text-lg tracking-tight" style={{ fontFamily: "var(--font-outfit), sans-serif" }}>Source</span>
               </div>
-              <p className="text-[8px] text-[#6B7F96] tracking-[0.2em] uppercase -mt-0.5" style={{ fontFamily: "var(--font-jetbrains-mono), monospace" }}>
+              <p className="text-[10px] text-[#3B5068] tracking-[0.16em] uppercase -mt-0.5" style={{ fontFamily: "var(--font-jetbrains-mono), monospace" }}>
                 {dict.header.tagline}
               </p>
             </div>
@@ -80,23 +81,27 @@ export default function Header() {
               <button
                 type="button"
                 onClick={() => setLangOpen(!langOpen)}
-                className="flex items-center gap-1 text-[10px] text-[#6B7F96] border border-[#D8E4F0] rounded-md px-2 py-1 font-medium hover:border-[#FF8A1F]/50 hover:text-[#FF8A1F] transition-colors"
+                aria-expanded={langOpen}
+                aria-haspopup="menu"
+                aria-controls="language-menu"
+                className="flex items-center gap-1 text-xs text-[#3B5068] border border-[#B6C6D8] rounded-md px-2 py-1 font-medium hover:border-[#C2410C] hover:text-[#9A3412] transition-colors"
                 style={{ fontFamily: "var(--font-jetbrains-mono), monospace" }}
               >
                 <Globe className="w-3 h-3" />
                 {localeNames[currentLocale]}
               </button>
               {langOpen && (
-                <div className="absolute right-0 top-full mt-1 bg-white border border-[#E2E8F0] rounded-lg shadow-lg py-1 z-50 min-w-[80px]">
+                <div id="language-menu" role="menu" className="absolute right-0 top-full mt-1 bg-white border border-[#E2E8F0] rounded-lg shadow-lg py-1 z-50 min-w-[80px]">
                   {locales.map((locale) => (
                     <button
                       key={locale}
                       type="button"
+                      role="menuitem"
                       onClick={() => { switchLocale(locale); setLangOpen(false); }}
                       className={`w-full text-left px-3 py-1.5 text-xs font-medium transition-colors ${
                         locale === currentLocale
-                          ? 'bg-[#FF8A1F]/10 text-[#FF8A1F]'
-                          : 'text-[#64748B] hover:bg-[#F8FAFC]'
+                          ? 'bg-[#FF8A1F]/10 text-[#9A3412]'
+                          : 'text-[#475569] hover:bg-[#F8FAFC]'
                       }`}
                       style={{ fontFamily: "var(--font-jetbrains-mono), monospace" }}
                     >
@@ -128,9 +133,12 @@ export default function Header() {
 
             {/* Mobile menu button */}
             <button
+              type="button"
               className="lg:hidden p-2 text-[#153A5C]"
               onClick={() => setMobileOpen(!mobileOpen)}
               aria-label="Toggle menu"
+              aria-expanded={mobileOpen}
+              aria-controls="mobile-navigation"
             >
               {mobileOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
             </button>
@@ -139,7 +147,7 @@ export default function Header() {
 
         {/* Mobile Nav */}
         {mobileOpen && (
-          <nav className="lg:hidden py-4 border-t border-[#D8E4F0] bg-white">
+          <nav id="mobile-navigation" className="lg:hidden py-4 border-t border-[#D8E4F0] bg-white">
             <div className="flex flex-col gap-2">
               {navItems.map((item) => (
                 <Link

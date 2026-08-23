@@ -36,7 +36,7 @@ export default function BrandCompatibilitySection() {
         {/* Section label */}
         <div className="flex items-center gap-3 mb-4">
           <div className="w-8 h-[2px] bg-[#FF8A1F]" />
-          <span className="text-[11px] font-semibold tracking-[0.2em] uppercase text-[#FF8A1F]" style={{ fontFamily: "var(--font-jetbrains-mono), monospace" }}>
+          <span className="text-[11px] font-semibold tracking-[0.2em] uppercase text-[#9A3F00]" style={{ fontFamily: "var(--font-jetbrains-mono), monospace" }}>
             {dict.compatibilityTable.title}
           </span>
         </div>
@@ -66,32 +66,32 @@ export default function BrandCompatibilitySection() {
             <div key={`${row.brand}-${row.model}`} className="rounded-lg border border-[#D8E4F0] bg-white p-4 shadow-sm shadow-[#062748]/5">
               <div className="flex items-start justify-between gap-4">
                 <div>
-                  <p className="text-[10px] uppercase tracking-[0.14em] text-[#94A3B8]" style={{ fontFamily: "var(--font-jetbrains-mono), monospace" }}>
+                  <p className="text-[10px] uppercase tracking-[0.14em] text-[#475569]" style={{ fontFamily: "var(--font-jetbrains-mono), monospace" }}>
                     {dict.compatibilityTable.brandHeader}
                   </p>
                   <h3 className="mt-1 text-base font-bold text-[#0F172A]" style={{ fontFamily: "var(--font-outfit), sans-serif" }}>
                     {row.brand}
                   </h3>
                 </div>
-                <span className={`rounded-md px-2.5 py-1 text-xs font-bold ${row.solution === 'Available' ? 'bg-[#FF8A1F]/10 text-[#C45A00]' : 'bg-[#EFF6FF] text-[#1D4ED8]'}`}>
+                <span className={`rounded-md px-2.5 py-1 text-xs font-bold ${row.solution === 'Available' ? 'bg-[#FF8A1F]/10 text-[#8A3600]' : 'bg-[#EFF6FF] text-[#1D4ED8]'}`}>
                   {localizeValue(row.solution)}
                 </span>
               </div>
               <div className="mt-4 grid grid-cols-2 gap-3 text-sm">
                 <div>
-                  <p className="text-[10px] uppercase tracking-[0.12em] text-[#94A3B8]" style={{ fontFamily: "var(--font-jetbrains-mono), monospace" }}>{dict.compatibilityTable.modelHeader}</p>
+                  <p className="text-[10px] uppercase tracking-[0.12em] text-[#475569]" style={{ fontFamily: "var(--font-jetbrains-mono), monospace" }}>{dict.compatibilityTable.modelHeader}</p>
                   <p className="mt-1 font-semibold text-[#153A5C]">{row.model}</p>
                 </div>
                 <div>
-                  <p className="text-[10px] uppercase tracking-[0.12em] text-[#94A3B8]" style={{ fontFamily: "var(--font-jetbrains-mono), monospace" }}>{dict.compatibilityTable.frequencyHeader}</p>
+                  <p className="text-[10px] uppercase tracking-[0.12em] text-[#475569]" style={{ fontFamily: "var(--font-jetbrains-mono), monospace" }}>{dict.compatibilityTable.frequencyHeader}</p>
                   <p className="mt-1 font-semibold text-[#153A5C]">{row.frequency}</p>
                 </div>
                 <div>
-                  <p className="text-[10px] uppercase tracking-[0.12em] text-[#94A3B8]" style={{ fontFamily: "var(--font-jetbrains-mono), monospace" }}>{dict.compatibilityTable.codeTypeHeader}</p>
+                  <p className="text-[10px] uppercase tracking-[0.12em] text-[#475569]" style={{ fontFamily: "var(--font-jetbrains-mono), monospace" }}>{dict.compatibilityTable.codeTypeHeader}</p>
                   <p className="mt-1 text-[#64748B]">{localizeValue(row.codeType)}</p>
                 </div>
                 <div>
-                  <p className="text-[10px] uppercase tracking-[0.12em] text-[#94A3B8]" style={{ fontFamily: "var(--font-jetbrains-mono), monospace" }}>{dict.compatibilityTable.sampleTestHeader}</p>
+                  <p className="text-[10px] uppercase tracking-[0.12em] text-[#475569]" style={{ fontFamily: "var(--font-jetbrains-mono), monospace" }}>{dict.compatibilityTable.sampleTestHeader}</p>
                   <p className="mt-1 text-[#64748B]">{localizeValue(row.sampleTest)}</p>
                 </div>
               </div>
@@ -125,7 +125,7 @@ export default function BrandCompatibilitySection() {
                     <td className="px-5 py-4 text-[#475569]">{row.frequency}</td>
                     <td className="px-5 py-4 text-[#475569]">{localizeValue(row.codeType)}</td>
                     <td className="px-5 py-4">
-                      <span className={`rounded-full px-2.5 py-1 text-xs font-bold ${row.solution === 'Available' ? 'bg-[#FF8A1F]/10 text-[#C45A00]' : 'bg-[#EFF6FF] text-[#1D4ED8]'}`}>
+                      <span className={`rounded-full px-2.5 py-1 text-xs font-bold ${row.solution === 'Available' ? 'bg-[#FF8A1F]/10 text-[#8A3600]' : 'bg-[#EFF6FF] text-[#1D4ED8]'}`}>
                         {localizeValue(row.solution)}
                       </span>
                     </td>
@@ -148,7 +148,7 @@ export default function BrandCompatibilitySection() {
               {brand}
             </span>
           ))}
-          <span className="rounded-lg border border-[#FF8A1F]/25 bg-[#FF8A1F]/8 px-3 py-2 text-[12px] font-bold text-[#C45A00]">
+          <span className="rounded-lg border border-[#FF8A1F]/25 bg-[#FF8A1F]/8 px-3 py-2 text-[12px] font-bold text-[#8A3600]">
             {dict.compatibilityTable.andMore || 'And more...'}
           </span>
         </div>
@@ -161,7 +161,7 @@ export default function BrandCompatibilitySection() {
             <p className="text-xs text-[#64748B] leading-relaxed">
               {dict.compatibilityTable.disclaimer}
             </p>
-            <Link href={`/${locale}/compatibility`} className="inline-flex items-center gap-1.5 text-xs font-bold text-[#FF8A1F] transition-colors hover:text-[#F97316]">
+            <Link href={`/${locale}/compatibility`} className="inline-flex items-center gap-1.5 text-xs font-bold text-[#9A3F00] transition-colors hover:text-[#7C3200]">
               {dict.compatibilityTable.viewAll} <ArrowRight className="h-3.5 w-3.5" />
             </Link>
           </div>

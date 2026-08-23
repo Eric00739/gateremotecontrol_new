@@ -21,17 +21,6 @@ export function localizedAlternates(path = '') {
   };
 }
 
-export function toIsoDate(date?: string) {
-  const value = date || siteUpdatedAt;
-  const parsed = new Date(value.includes('T') ? value : `${value}T00:00:00.000Z`);
-
-  return Number.isNaN(parsed.getTime()) ? new Date(siteUpdatedAt).toISOString() : parsed.toISOString();
-}
-
-export function postLastModified(post: BlogPost) {
-  return new Date(toIsoDate(post.updatedAt || post.publishedAt));
-}
-
 export function jsonLd(data: unknown) {
   return {
     __html: JSON.stringify(data).replace(/</g, '\\u003c'),
@@ -45,7 +34,6 @@ export function organizationJsonLd() {
     name: siteName,
     url: siteUrl,
     logo: absoluteUrl(organizationLogo),
-    sameAs: ['https://github.com/Eric00739'],
     contactPoint: [
       {
         '@type': 'ContactPoint',
@@ -127,8 +115,6 @@ export function blogPostingJsonLd({
     alternativeHeadline: post.title,
     description: post.excerpt,
     image: [image],
-    datePublished: toIsoDate(post.publishedAt),
-    dateModified: toIsoDate(post.updatedAt || post.publishedAt),
     author: {
       '@type': 'Person',
       name: post.author || 'Eric Huang',

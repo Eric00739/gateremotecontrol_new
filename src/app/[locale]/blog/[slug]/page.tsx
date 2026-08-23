@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 import type { ReactNode } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
-import { ArrowLeft, ArrowRight, CalendarDays, ChevronDown, Clock, ListChecks, MessageSquare } from 'lucide-react';
+import { ArrowLeft, ArrowRight, ChevronDown, Clock, ListChecks, MessageSquare } from 'lucide-react';
 import { blogCategories, blogPosts, type BlogInlineLink, type BlogPost, type BlogPostContentBlock } from '@/data/blog';
 import { notFound } from 'next/navigation';
 import LeadModalTrigger from '@/components/LeadModalTrigger';
@@ -23,18 +23,6 @@ export async function generateStaticParams() {
   }
 
   return blogPosts.map((post) => ({ slug: post.slug }));
-}
-
-function formatDate(date?: string) {
-  if (!date) return null;
-  const parsed = new Date(date);
-  if (Number.isNaN(parsed.getTime())) return date;
-
-  return new Intl.DateTimeFormat('en', {
-    year: 'numeric',
-    month: 'long',
-    day: '2-digit',
-  }).format(parsed);
 }
 
 function slugifyHeading(text: string) {
@@ -416,8 +404,6 @@ export async function generateMetadata({
     url: canonicalPath,
     title,
     description: post.excerpt,
-    publishedTime: post.publishedAt,
-    modifiedTime: post.updatedAt || post.publishedAt,
     authors: post.author ? [post.author] : undefined,
   };
 
@@ -466,7 +452,11 @@ export default async function BlogPostPage({
     categoryLabels[post.category] ||
     blogCategories.find((category) => category.key === post.category)?.label ||
     post.category;
-  const dateLabel = formatDate(post.publishedAt);
+  const inquiryPrefillType = post.category === 'oem-odm'
+    ? 'oem'
+    : post.category === 'buyer-checklist'
+      ? 'quote'
+      : 'compatibility';
   const articleSections = buildArticleSections(post.content);
   const headingIdsByIndex = new Map(articleSections.map((section) => [section.blockIndex, section.id]));
   const isDefaultLocaleArticle = locale === defaultLocale;
@@ -514,12 +504,6 @@ export default async function BlogPostPage({
             </h1>
             <div className="mt-4 flex flex-wrap items-center gap-x-4 gap-y-2 text-xs text-[#9FB4CC] sm:text-sm">
               {post.author && <span>{post.author}</span>}
-              {dateLabel && (
-                <span className="inline-flex items-center gap-1.5">
-                  <CalendarDays className="h-4 w-4" />
-                  {dateLabel}
-                </span>
-              )}
               {post.readTime && (
                 <span className="inline-flex items-center gap-1.5">
                   <Clock className="h-4 w-4" />
@@ -553,7 +537,7 @@ export default async function BlogPostPage({
               {dict.blogPost.needHelpSubtitle}
             </p>
             <LeadModalTrigger
-              prefillType="support"
+              prefillType={inquiryPrefillType}
               className="mt-4 inline-flex items-center gap-2 rounded-lg bg-[#FF8A1F] px-5 py-2.5 text-sm font-bold text-[#062748] transition-colors hover:bg-[#F97316]"
             >
               {dict.blogPost.contactUs} <ArrowRight className="h-4 w-4" />
@@ -580,7 +564,7 @@ export default async function BlogPostPage({
                 {dict.blog.helpSubtitle}
               </p>
               <LeadModalTrigger
-                prefillType="support"
+                prefillType={inquiryPrefillType}
                 className="mt-4 inline-flex w-full items-center justify-center rounded-lg bg-[#FF8A1F] px-4 py-2.5 text-xs font-bold text-[#062748] transition-colors hover:bg-[#F97316]"
               >
                 {dict.blog.helpCta}

@@ -72,9 +72,9 @@ export default function Footer() {
 
           {/* Explore */}
           <div>
-            <h4 className="text-sm font-semibold text-[#F7FBFF] mb-4" style={{ fontFamily: 'var(--font-outfit), sans-serif' }}>
+            <p className="text-sm font-semibold text-[#F7FBFF] mb-4" style={{ fontFamily: 'var(--font-outfit), sans-serif' }}>
               {dict.footer.company}
-            </h4>
+            </p>
             <nav className="grid grid-cols-2 gap-x-6 gap-y-2 lg:grid-cols-1">
               {exploreLinks.map((link) => (
                 <Link key={link.label} href={link.href} className="text-sm text-[#C7D7E8] hover:text-[#FF8A1F] transition-colors">
@@ -86,9 +86,9 @@ export default function Footer() {
 
           {/* Contact */}
           <div>
-            <h4 className="text-sm font-semibold text-[#F7FBFF] mb-4" style={{ fontFamily: 'var(--font-outfit), sans-serif' }}>
+            <p className="text-sm font-semibold text-[#F7FBFF] mb-4" style={{ fontFamily: 'var(--font-outfit), sans-serif' }}>
               {dict.footer.sendModelList}
-            </h4>
+            </p>
             <div className="space-y-2 text-sm text-[#C7D7E8]">
               <a href="mailto:sales@gateremotesource.com" className="block hover:text-[#FF8A1F] transition-colors">
                 sales@gateremotesource.com

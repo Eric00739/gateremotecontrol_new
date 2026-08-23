@@ -1,6 +1,7 @@
 'use client';
 
 import { useLeadModal, type PrefillType } from './LeadModalProvider';
+import { useRef } from 'react';
 
 export default function LeadModalTrigger({
   prefillType,
@@ -16,13 +17,15 @@ export default function LeadModalTrigger({
   children: React.ReactNode;
 }) {
   const { openModal } = useLeadModal();
+  const triggerRef = useRef<HTMLButtonElement>(null);
 
   return (
     <button
       type="button"
+      ref={triggerRef}
       className={className}
       style={style}
-      onClick={() => { openModal(prefillType); onClick?.(); }}
+      onClick={() => { openModal(prefillType, triggerRef.current); onClick?.(); }}
     >
       {children}
     </button>

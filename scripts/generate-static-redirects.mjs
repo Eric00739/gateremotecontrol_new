@@ -1,8 +1,9 @@
-import { mkdir, writeFile } from 'node:fs/promises';
+import { mkdir, readFile, readdir, writeFile } from 'node:fs/promises';
 import path from 'node:path';
 
 const siteUrl = 'https://www.gateremotesource.com';
 const outputDir = path.join(process.cwd(), 'out');
+const supportedLocales = new Set(['en', 'it', 'pt', 'es', 'ru', 'fr']);
 
 const redirects = [
   ['/it/', '/it'],
@@ -111,4 +112,35 @@ async function writeRedirect(sourcePath, destinationPath) {
 
 await Promise.all(redirects.map(([sourcePath, destinationPath]) => writeRedirect(sourcePath, destinationPath)));
 
+async function htmlFiles(directory) {
+  const entries = await readdir(directory, { withFileTypes: true });
+  const nestedFiles = await Promise.all(entries.map((entry) => {
+    const entryPath = path.join(directory, entry.name);
+    return entry.isDirectory() ? htmlFiles(entryPath) : [entryPath];
+  }));
+
+  return nestedFiles.flat().filter((filePath) => filePath.endsWith('.html'));
+}
+
+async function setStaticDocumentLanguages() {
+  const files = await htmlFiles(outputDir);
+
+  await Promise.all(files.map(async (filePath) => {
+    const relativePath = path.relative(outputDir, filePath);
+    const firstSegment = relativePath.split(path.sep)[0].replace(/\.html$/, '');
+    const locale = supportedLocales.has(firstSegment) ? firstSegment : 'en';
+    const html = await readFile(filePath, 'utf8');
+    const localizedHtml = html.replace(/<html lang="[^"]*"/, `<html lang="${locale}"`);
+
+    if (localizedHtml !== html) {
+      await writeFile(filePath, localizedHtml, 'utf8');
+    }
+  }));
+
+  return files.length;
+}
+
+const localizedHtmlCount = await setStaticDocumentLanguages();
+
 console.log(`Generated ${redirects.length} static redirect entries for legacy Google Search Console URLs.`);
+console.log(`Set document language on ${localizedHtmlCount} exported HTML files.`);
