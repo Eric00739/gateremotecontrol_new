@@ -370,6 +370,8 @@ export default {
     attachmentNote: 'This website does not upload files. After WhatsApp or your email app opens, attach photos or documents there.',
     sendWhatsApp: 'Continue in WhatsApp',
     sendEmail: 'Open Email Draft',
+    copyContent: 'Copy inquiry content',
+    copied: 'Copied',
     rememberAttach: 'Remember to attach',
     closeLabel: 'Close',
     messageNameLabel: 'Name',
@@ -493,4 +495,4 @@ export default {
     needHelpSubtitle: 'Send us your compatibility question and we\'ll respond directly.',
     contactUs: 'Contact Us',
   },
-} as const;
+};

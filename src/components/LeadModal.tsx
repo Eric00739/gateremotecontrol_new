@@ -2,7 +2,7 @@
 
 import { createPortal } from 'react-dom';
 import { useEffect, useRef, useState } from 'react';
-import { X } from 'lucide-react';
+import { Check, Copy, X } from 'lucide-react';
 import { useLeadModal } from './LeadModalProvider';
 import { localeNames, useDict, useLocale } from '@/i18n';
 
@@ -27,6 +27,7 @@ function LeadModalContent() {
   const [whatsApp, setWhatsApp] = useState('');
   const [requestType, setRequestType] = useState(prefillTypeToRequestType[prefillType] || 'quote');
   const [message, setMessage] = useState('');
+  const [copyState, setCopyState] = useState<'idle' | 'copied'>('idle');
   const firstInputRef = useRef<HTMLInputElement>(null);
   const dialogRef = useRef<HTMLDivElement>(null);
   const overlayRef = useRef<HTMLDivElement>(null);
@@ -35,6 +36,7 @@ function LeadModalContent() {
     if (!open) return;
     const handleKey = (e: KeyboardEvent) => {
       if (e.key === 'Escape') {
+        setCopyState('idle');
         closeModal();
         return;
       }
@@ -100,7 +102,42 @@ function LeadModalContent() {
     const subject = encodeURIComponent(`${dict.leadModal.messageSubjectPrefix}: ${label}`);
     const body = encodeURIComponent(text);
     window.location.href = `mailto:${EMAIL}?subject=${subject}&body=${body}`;
+    setCopyState('idle');
     closeModal();
+  };
+
+  // Fallback channel: lets buyers keep the filled-in inquiry when neither
+  // WhatsApp nor a local mail client is available on the device.
+  const handleCopyContent = async () => {
+    const text = buildMessage();
+    let copied = false;
+
+    try {
+      await navigator.clipboard.writeText(text);
+      copied = true;
+    } catch {
+      // Clipboard API unavailable (insecure context or permission denied).
+    }
+
+    if (!copied) {
+      const textarea = document.createElement('textarea');
+      textarea.value = text;
+      textarea.setAttribute('readonly', '');
+      textarea.style.position = 'fixed';
+      textarea.style.opacity = '0';
+      document.body.appendChild(textarea);
+      textarea.select();
+      try {
+        copied = document.execCommand('copy');
+      } catch {
+        // Keep the idle label; never claim success that did not happen.
+      } finally {
+        document.body.removeChild(textarea);
+      }
+    }
+
+    if (copied) setCopyState('copied');
+    window.setTimeout(() => setCopyState('idle'), 2000);
   };
 
   const inputClass = 'w-full rounded-lg border border-[#D8E4F0] bg-[#F8FAFC] px-3 py-2.5 text-sm text-[#0F172A] placeholder:text-[#94A3B8] outline-none transition-colors focus:border-[#FF8A1F]/60 focus:bg-white';
@@ -110,7 +147,7 @@ function LeadModalContent() {
     <div
       ref={overlayRef}
       className="fixed inset-0 z-[100] flex items-center justify-center bg-black/50 p-4"
-      onClick={(e) => { if (e.target === overlayRef.current) closeModal(); }}
+      onClick={(e) => { if (e.target === overlayRef.current) { setCopyState('idle'); closeModal(); } }}
     >
       <div
         ref={dialogRef}
@@ -127,7 +164,7 @@ function LeadModalContent() {
           </h2>
           <button
             type="button"
-            onClick={closeModal}
+            onClick={() => { setCopyState('idle'); closeModal(); }}
             aria-label={dict.leadModal.closeLabel}
             className="w-10 h-10 rounded-lg flex items-center justify-center text-[#64748B] hover:text-[#0F172A] hover:bg-[#F1F5F9] transition-colors"
           >
@@ -177,26 +214,39 @@ function LeadModalContent() {
         </div>
 
         {/* Actions */}
-        <div className="sticky bottom-0 bg-white border-t border-[#E2E8F0] px-5 py-3.5 flex flex-col sm:flex-row gap-2.5 rounded-b-2xl">
+        <div className="sticky bottom-0 bg-white border-t border-[#E2E8F0] px-5 py-3.5 flex flex-col gap-2.5 rounded-b-2xl">
+          <div className="flex flex-col sm:flex-row gap-2.5">
+            <button
+              type="button"
+              disabled={!name.trim()}
+              onClick={() => {
+                const text = buildMessage();
+                window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(text)}`, '_blank', 'noopener,noreferrer');
+                setCopyState('idle');
+                closeModal();
+              }}
+              className="flex-1 bg-[#22C55E] hover:bg-[#16A34A] disabled:opacity-40 disabled:cursor-not-allowed text-white font-bold py-2.5 rounded-lg transition-colors text-sm flex items-center justify-center gap-2"
+            >
+              {dict.leadModal.sendWhatsApp}
+            </button>
+            <button
+              type="button"
+              disabled={!name.trim() || !email.trim()}
+              onClick={handleEmailSubmit}
+              className="flex-1 bg-[#0B3A63] hover:bg-[#062748] disabled:opacity-40 disabled:cursor-not-allowed text-white font-bold py-2.5 rounded-lg transition-colors text-sm flex items-center justify-center gap-2"
+            >
+              {dict.leadModal.sendEmail}
+            </button>
+          </div>
           <button
             type="button"
-            disabled={!name.trim()}
-            onClick={() => {
-              const text = buildMessage();
-              window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(text)}`, '_blank', 'noopener,noreferrer');
-              closeModal();
-            }}
-            className="flex-1 bg-[#22C55E] hover:bg-[#16A34A] disabled:opacity-40 disabled:cursor-not-allowed text-white font-bold py-2.5 rounded-lg transition-colors text-sm flex items-center justify-center gap-2"
+            onClick={handleCopyContent}
+            className="w-full border border-[#D8E4F0] hover:border-[#FF8A1F]/60 text-[#475569] hover:text-[#0F172A] font-semibold py-2 rounded-lg transition-colors text-xs flex items-center justify-center gap-1.5"
           >
-            {dict.leadModal.sendWhatsApp}
-          </button>
-          <button
-            type="button"
-            disabled={!name.trim() || !email.trim()}
-            onClick={handleEmailSubmit}
-            className="flex-1 bg-[#0B3A63] hover:bg-[#062748] disabled:opacity-40 disabled:cursor-not-allowed text-white font-bold py-2.5 rounded-lg transition-colors text-sm flex items-center justify-center gap-2"
-          >
-            {dict.leadModal.sendEmail}
+            {copyState === 'copied'
+              ? <Check className="w-3.5 h-3.5 text-[#16A34A]" />
+              : <Copy className="w-3.5 h-3.5" />}
+            {copyState === 'copied' ? dict.leadModal.copied : dict.leadModal.copyContent}
           </button>
         </div>
       </div>

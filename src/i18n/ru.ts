@@ -370,6 +370,8 @@ export default {
     attachmentNote: 'Этот сайт не загружает файлы. После открытия WhatsApp или почтового приложения прикрепите там фото или документы.',
     sendWhatsApp: 'Продолжить в WhatsApp',
     sendEmail: 'Открыть черновик письма',
+    copyContent: 'Скопировать текст запроса',
+    copied: 'Скопировано',
     rememberAttach: 'Не забудьте прикрепить',
     closeLabel: 'Закрыть',
     messageNameLabel: 'Имя',
@@ -453,4 +455,4 @@ export default {
     needHelpSubtitle: 'Отправьте нам свой вопрос по совместимости, и мы ответим напрямую.',
     contactUs: 'Свяжитесь с нами',
   },
-} as const;
+};

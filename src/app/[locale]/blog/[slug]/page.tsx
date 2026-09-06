@@ -3,7 +3,8 @@ import type { ReactNode } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { ArrowLeft, ArrowRight, ChevronDown, Clock, ListChecks, MessageSquare } from 'lucide-react';
-import { blogCategories, blogPosts, type BlogInlineLink, type BlogPost, type BlogPostContentBlock } from '@/data/blog';
+import { blogCategories, blogPosts, type BlogInlineLink, type BlogPostContentBlock, type BlogPostMeta } from '@/data/blog';
+import { assertBlogContentIntegrity, getBlogPost, type BlogPost } from '@/data/blog-content';
 import { notFound } from 'next/navigation';
 import LeadModalTrigger from '@/components/LeadModalTrigger';
 import AuthorBio from '@/components/AuthorBio';
@@ -18,6 +19,7 @@ const emptyBlogSlug = '__no-articles__';
 export const dynamicParams = false;
 
 export async function generateStaticParams() {
+  assertBlogContentIntegrity();
   if (blogPosts.length === 0) {
     return [{ slug: emptyBlogSlug }];
   }
@@ -99,10 +101,10 @@ function renderLinkedText(text: string, links: BlogInlineLink[] | undefined, loc
   return pieces.length > 0 ? pieces : text;
 }
 
-function getRelatedPosts(post: BlogPost) {
+function getRelatedPosts(post: BlogPostMeta) {
   const relatedBySlug = (post.relatedSlugs || [])
     .map((slug) => blogPosts.find((item) => item.slug === slug))
-    .filter((item): item is BlogPost => Boolean(item))
+    .filter((item): item is BlogPostMeta => Boolean(item))
     .filter((item) => item.slug !== post.slug);
 
   const relatedSlugs = new Set(relatedBySlug.map((item) => item.slug));
@@ -436,7 +438,7 @@ export default async function BlogPostPage({
   const { slug, locale: rawLocale } = await params;
   const locale = locales.includes(rawLocale as Locale) ? (rawLocale as Locale) : 'en';
   const dict = getDictSync(locale);
-  const post = blogPosts.find((item) => item.slug === slug);
+  const post = getBlogPost(slug);
   if (!post) notFound();
 
   const categoryLabels: Record<string, string> = {

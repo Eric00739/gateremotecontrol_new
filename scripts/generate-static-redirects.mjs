@@ -1,55 +1,6 @@
 import { mkdir, readFile, readdir, writeFile } from 'node:fs/promises';
 import path from 'node:path';
-
-const siteUrl = 'https://www.gateremotesource.com';
-const outputDir = path.join(process.cwd(), 'out');
-const supportedLocales = new Set(['en', 'it', 'pt', 'es', 'ru', 'fr']);
-
-const redirects = [
-  ['/it/', '/it'],
-  ['/pt/', '/pt'],
-  ['/it/blog/', '/it/blog'],
-  ['/fr/blog/', '/fr/blog'],
-  ['/es/oem/', '/es/oem-odm'],
-  ['/fr/oem/', '/fr/oem-odm'],
-  ['/de/oem/', '/en/oem-odm'],
-  ['/oem.html', '/en/oem-odm'],
-  ['/es/catalog/', '/es/request-catalog'],
-  ['/de/catalog/', '/en/request-catalog'],
-  ['/catalog.html', '/en/request-catalog'],
-  ['/de/about/', '/en#contact'],
-  ['/it/about/', '/it#contact'],
-  ['/pt/about/', '/pt#contact'],
-  ['/about.html', '/en#contact'],
-  ['/de/contact/', '/en#contact'],
-  ['/contact.html', '/en#contact'],
-  ['/blog', '/en/blog'],
-  ['/blog.html', '/en/blog'],
-  ['/compatibility-132', '/en/compatibility'],
-  ['/compatibility-83', '/en/compatibility'],
-  ['/de/blog/nice-came-hormann-compatibility-guide/', '/en/compatibility'],
-  ['/blog-post-avoid-public-mold-trap-pcb-quality.html', '/en/blog/same-shell-hidden-downgrade-remote-manufacturing-quality'],
-  ['/blog/how-to-identify-a-compatible-gate-remote', '/en/compatibility'],
-  ['/en/blog/how-to-identify-a-compatible-gate-remote', '/en/compatibility'],
-  ['/es/blog/how-to-identify-a-compatible-gate-remote', '/es/compatibility'],
-  ['/fr/blog/how-to-identify-a-compatible-gate-remote', '/fr/compatibility'],
-  ['/it/blog/how-to-identify-a-compatible-gate-remote', '/it/compatibility'],
-  ['/pt/blog/how-to-identify-a-compatible-gate-remote', '/pt/compatibility'],
-  ['/ru/blog/how-to-identify-a-compatible-gate-remote', '/ru/compatibility'],
-  ['/blog/when-oem-remote-control-development-is-needed', '/en/oem-odm'],
-  ['/pt/blog/when-oem-remote-control-development-is-needed', '/pt/oem-odm'],
-  ['/ru/blog/when-oem-remote-control-development-is-needed', '/ru/oem-odm'],
-  ['/blog/rolling-code-vs-fixed-code-remotes', '/en/blog/why-universal-remote-cannot-copy'],
-  ['/en/blog/rolling-code-vs-fixed-code-remotes', '/en/blog/why-universal-remote-cannot-copy'],
-  ['/es/blog/rolling-code-vs-fixed-code-remotes', '/en/blog/why-universal-remote-cannot-copy'],
-  ['/fr/blog/rolling-code-vs-fixed-code-remotes', '/en/blog/why-universal-remote-cannot-copy'],
-  ['/it/blog/rolling-code-vs-fixed-code-remotes', '/en/blog/why-universal-remote-cannot-copy'],
-  ['/pt/blog/rolling-code-vs-fixed-code-remotes', '/en/blog/why-universal-remote-cannot-copy'],
-  ['/ru/blog/rolling-code-vs-fixed-code-remotes', '/en/blog/why-universal-remote-cannot-copy'],
-  ['/fr/blog/what-buyers-should-send-before-rf-matching', '/fr/request-catalog'],
-  ['/it/blog/what-buyers-should-send-before-rf-matching', '/it/request-catalog'],
-  ['/pt/blog/what-buyers-should-send-before-rf-matching', '/pt/request-catalog'],
-];
+import { outputDir, redirects, siteUrl, supportedLocales } from './legacy-redirects.mjs';
 
 function escapeHtml(value) {
   return value
@@ -100,17 +51,28 @@ function outputPathsForSource(sourcePath) {
   ];
 }
 
-async function writeRedirect(sourcePath, destinationPath) {
-  const destinationUrl = absoluteDestination(destinationPath);
-  const html = redirectHtml(sourcePath, destinationUrl);
+async function writeRedirects() {
+  // Several redirect sources can map to the same output file (e.g. /blog and
+  // /blog.html both land on out/blog.html). Resolve to one deterministic target
+  // per path and write sequentially; concurrent writes to the same file raced
+  // and could interleave into a corrupted stub.
+  const outputTargets = new Map();
 
-  for (const outputPath of outputPathsForSource(sourcePath)) {
+  for (const [sourcePath, destinationPath] of redirects) {
+    const destinationUrl = absoluteDestination(destinationPath);
+
+    for (const outputPath of outputPathsForSource(sourcePath)) {
+      outputTargets.set(outputPath, { sourcePath, destinationUrl });
+    }
+  }
+
+  for (const [outputPath, { sourcePath, destinationUrl }] of outputTargets) {
     await mkdir(path.dirname(outputPath), { recursive: true });
-    await writeFile(outputPath, html, 'utf8');
+    await writeFile(outputPath, redirectHtml(sourcePath, destinationUrl), 'utf8');
   }
 }
 
-await Promise.all(redirects.map(([sourcePath, destinationPath]) => writeRedirect(sourcePath, destinationPath)));
+await writeRedirects();
 
 async function htmlFiles(directory) {
   const entries = await readdir(directory, { withFileTypes: true });

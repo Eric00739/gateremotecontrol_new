@@ -1,4 +1,5 @@
-import type { BlogPost, BlogPostContentBlock } from '@/data/blog';
+import type { BlogPostContentBlock } from '@/data/blog';
+import type { BlogPost } from '@/data/blog-content';
 import { siteName, siteUrl } from '@/data/site';
 import { defaultLocale, locales, type Locale } from '@/i18n';
 

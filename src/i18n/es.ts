@@ -370,6 +370,8 @@ export default {
     attachmentNote: 'Este sitio web no carga archivos. Cuando se abra WhatsApp o su aplicación de correo, adjunte allí las fotos o documentos.',
     sendWhatsApp: 'Continuar en WhatsApp',
     sendEmail: 'Abrir borrador de correo',
+    copyContent: 'Copiar el contenido de la consulta',
+    copied: 'Copiado',
     rememberAttach: 'Recuerde adjuntar',
     closeLabel: 'Cerrar',
     messageNameLabel: 'Nombre',
@@ -453,4 +455,4 @@ export default {
     needHelpSubtitle: 'Envíenos su pregunta de compatibilidad y le responderemos directamente.',
     contactUs: 'Contáctenos',
   },
-} as const;
+};

@@ -370,6 +370,8 @@ export default {
     attachmentNote: 'Este site não envia arquivos. Depois de abrir o WhatsApp ou seu aplicativo de e-mail, anexe fotos ou documentos lá.',
     sendWhatsApp: 'Continuar no WhatsApp',
     sendEmail: 'Abrir rascunho de e-mail',
+    copyContent: 'Copiar o conteúdo da consulta',
+    copied: 'Copiado',
     rememberAttach: 'Lembre-se de anexar',
     closeLabel: 'Fechar',
     messageNameLabel: 'Nome',
@@ -453,4 +455,4 @@ export default {
     needHelpSubtitle: 'Envie-nos sua pergunta de compatibilidade e responderemos diretamente.',
     contactUs: 'Fale Conosco',
   },
-} as const;
+};

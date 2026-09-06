@@ -4,9 +4,13 @@ import fr from './fr';
 import it from './it';
 import pt from './pt';
 import ru from './ru';
-import type { Dict, Locale } from './index';
+import type { Locale } from './index';
 
-const dictionaries: Record<Locale, Dict> = {
+/** en.ts is the key-structure baseline; the Record<Locale, Dictionary> registry
+ * makes missing, extra, or mistyped keys in any locale a compile-time error. */
+export type Dictionary = typeof en;
+
+const dictionaries: Record<Locale, Dictionary> = {
   en,
   it,
   pt,
@@ -15,6 +19,6 @@ const dictionaries: Record<Locale, Dict> = {
   fr,
 };
 
-export function getDictSync(locale: Locale): Dict {
+export function getDictSync(locale: Locale): Dictionary {
   return dictionaries[locale] ?? dictionaries.en;
 }

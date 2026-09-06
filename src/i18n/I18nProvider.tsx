@@ -1,11 +1,12 @@
 'use client';
 
 import { createContext, useContext } from 'react';
-import type { Dict, Locale } from './index';
+import type { Dictionary } from './dictionaries';
+import type { Locale } from './index';
 
-const I18nContext = createContext<{ locale: Locale; dict: Dict } | null>(null);
+const I18nContext = createContext<{ locale: Locale; dict: Dictionary } | null>(null);
 
-export function I18nProvider({ children, locale, dict }: { children: React.ReactNode; locale: Locale; dict: Dict }) {
+export function I18nProvider({ children, locale, dict }: { children: React.ReactNode; locale: Locale; dict: Dictionary }) {
   return (
     <I18nContext.Provider value={{ locale, dict }}>
       {children}

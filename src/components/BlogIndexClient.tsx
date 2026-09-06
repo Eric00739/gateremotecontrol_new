@@ -5,13 +5,13 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { ArrowRight, ChevronLeft, ChevronRight, Clock, FileText, MessageSquare, Radio, Search, UserRound } from 'lucide-react';
 import { authorProfile } from '@/data/author';
-import { blogCategories, blogPosts, popularGuides, type BlogPost } from '@/data/blog';
+import { blogCategories, blogPosts, popularGuides, type BlogPostMeta } from '@/data/blog';
 import LeadModalTrigger from '@/components/LeadModalTrigger';
 import { useDict, useLocale } from '@/i18n';
 
 const ARTICLES_PER_PAGE = 10;
 
-function getPostSortTime(post: BlogPost) {
+function getPostSortTime(post: BlogPostMeta) {
   const sortDate = post.publishedAt || post.updatedAt;
   if (!sortDate) return 0;
 
@@ -19,7 +19,7 @@ function getPostSortTime(post: BlogPost) {
   return Number.isNaN(parsed.getTime()) ? 0 : parsed.getTime();
 }
 
-function sortPostsNewestFirst(posts: BlogPost[]) {
+function sortPostsNewestFirst(posts: BlogPostMeta[]) {
   return posts
     .map((post, index) => ({ post, index }))
     .sort((a, b) => {
@@ -29,7 +29,7 @@ function sortPostsNewestFirst(posts: BlogPost[]) {
     .map(({ post }) => post);
 }
 
-function ArticleMeta({ post }: { post: BlogPost }) {
+function ArticleMeta({ post }: { post: BlogPostMeta }) {
   return (
     <div className="flex flex-wrap items-center gap-x-4 gap-y-2 text-[12px] text-[#64748B]">
       {post.author && <span>{post.author}</span>}
@@ -144,7 +144,7 @@ export default function BlogIndexClient() {
   const startHereSlugs = new Set(startHerePosts.map((post) => post.slug));
   const popularPosts = popularGuides
     .map((slug) => blogPosts.find((post) => post.slug === slug))
-    .filter((post): post is BlogPost => Boolean(post))
+    .filter((post): post is BlogPostMeta => Boolean(post))
     .filter((post) => !startHereSlugs.has(post.slug));
   const activeCategoryLabel = categoryLabels[selectedCategory] || selectedCategory;
 
