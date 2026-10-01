@@ -55,34 +55,34 @@ export const catalogPage = {
   path: '/request-catalog',
   metaTitle: 'Request Wholesale Compatibility Catalog | GateRemoteSource',
   metaDescription:
-    'Request a private wholesale catalog for compatible remote controls, receivers, and RF solutions after model and frequency confirmation.',
-  eyebrow: 'Controlled Catalog Access',
+    'Request a wholesale catalog for compatible remotes, receivers, and RF solutions. Start with product category, target country, and estimated quantity.',
+  eyebrow: 'Wholesale Catalog',
   title: 'Request a Wholesale Compatibility Catalog',
   subtitle:
-    'Catalog access is handled after model, frequency, protocol, quantity, and target market are checked, so buyers receive relevant options without public product browsing.',
+    'Tell us what you need, where you sell, and your estimated quantity. You can start without a model or frequency; technical matching follows before samples or an order.',
   primaryCta: 'Request Wholesale Catalog',
   secondaryCta: 'Check Supported Brands',
-  cardNote: 'Model details first. Catalog after verification.',
+  cardNote: 'Start with your category, market, and quantity.',
   requirementTitle: 'What to send first',
-  requirementHeading: 'A catalog request should start with fitment data.',
+  requirementHeading: 'Start with your purchasing needs.',
   requirementSubtitle:
-    'These details help us narrow the catalog to compatible options and avoid model, frequency, or regional mismatch.',
+    'A few basic details help us suggest relevant options. Model and frequency details are optional for the first inquiry.',
   requirements: [
     {
-      title: 'Remote Photos',
-      description: 'Front, back, label, button layout, and PCB photo when possible.',
+      title: 'Product Category',
+      description: 'Replacement remotes, receivers, duplicators, controllers, accessories, or an OEM project.',
     },
     {
-      title: 'Model and Frequency',
-      description: 'Brand reference, model number, 315 / 433.92 / 868 MHz label, and code type if known.',
+      title: 'Target Country / Market',
+      description: 'Where you will sell or install the products, and your preferred packaging language.',
     },
     {
-      title: 'Target Market',
-      description: 'Country or region version, required certification notes, and packaging language.',
+      title: 'Estimated Quantity',
+      description: 'Your sample or wholesale quantity range. It is fine if the quantity is not decided yet.',
     },
     {
-      title: 'Order Scope',
-      description: 'Sample quantity, wholesale quantity, private-label needs, and timeline.',
+      title: 'Technical Details (optional)',
+      description: 'Brand, model, frequency, or system description if known. Attach photos in WhatsApp or email; we can check the details together.',
     },
   ],
   scopeLabel: 'Private scope',
@@ -113,7 +113,7 @@ export const homepageCapabilities = [
   },
   {
     title: 'Request Wholesale Catalog',
-    description: 'A private catalog path after the buyer sends model, frequency, photos, and quantity needs.',
+    description: 'Start with product category, target market, and estimated quantity; technical details can follow.',
     href: catalogPage.path,
   },
 ];

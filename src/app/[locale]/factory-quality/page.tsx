@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 import { ArrowRight, CheckCircle2, FlaskConical, PackageCheck, RadioTower, ShieldCheck } from 'lucide-react';
 import LeadModalTrigger from '@/components/LeadModalTrigger';
+import EditorialImage from '@/components/EditorialImage';
 import { factoryQualityPage } from '@/data/servicePages';
 import { type Locale, locales } from '@/i18n';
 import { getDictSync } from '@/i18n/dictionaries';
@@ -68,7 +69,7 @@ export default async function FactoryQualityPage({ params }: { params: Promise<{
       <section className="relative overflow-hidden bg-[#062748]">
         <div className="absolute inset-0 tech-grid" />
         <div className="relative max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8 py-16 lg:py-24">
-          <div className="max-w-3xl">
+          <div className="grid gap-12 lg:grid-cols-[0.95fr_1.05fr] lg:items-center">
             <div>
               <div className="flex items-center gap-3 mb-5">
                 <div className="w-8 h-[2px] bg-[#FF8A1F]" />
@@ -93,8 +94,9 @@ export default async function FactoryQualityPage({ params }: { params: Promise<{
               </div>
             </div>
 
-            </div>
+            <EditorialImage visual="engineering" copy={dict.visuals} preload />
           </div>
+        </div>
       </section>
 
       <section className="bg-white">

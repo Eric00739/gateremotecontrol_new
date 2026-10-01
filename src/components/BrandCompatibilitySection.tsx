@@ -5,6 +5,7 @@ import { ArrowRight, Search } from 'lucide-react';
 import { useMemo, useState } from 'react';
 import { brands, compatibilityRows } from '@/data/homepage';
 import { useDict, useLocale } from '@/i18n';
+import LeadModalTrigger from './LeadModalTrigger';
 
 export default function BrandCompatibilitySection() {
   const dict = useDict();
@@ -84,7 +85,7 @@ export default function BrandCompatibilitySection() {
                 </div>
                 <div>
                   <p className="text-[10px] uppercase tracking-[0.12em] text-[#475569]" style={{ fontFamily: "var(--font-jetbrains-mono), monospace" }}>{dict.compatibilityTable.frequencyHeader}</p>
-                  <p className="mt-1 font-semibold text-[#153A5C]">{row.frequency}</p>
+                  <p className="mt-1 font-semibold text-[#153A5C]">{localizeValue(row.frequency)}</p>
                 </div>
                 <div>
                   <p className="text-[10px] uppercase tracking-[0.12em] text-[#475569]" style={{ fontFamily: "var(--font-jetbrains-mono), monospace" }}>{dict.compatibilityTable.codeTypeHeader}</p>
@@ -122,7 +123,7 @@ export default function BrandCompatibilitySection() {
                   <tr key={`${row.brand}-${row.model}`} className="text-sm text-[#0F172A]">
                     <td className="px-5 py-4 font-bold">{row.brand}</td>
                     <td className="px-5 py-4">{row.model}</td>
-                    <td className="px-5 py-4 text-[#475569]">{row.frequency}</td>
+                    <td className="px-5 py-4 text-[#475569]">{localizeValue(row.frequency)}</td>
                     <td className="px-5 py-4 text-[#475569]">{localizeValue(row.codeType)}</td>
                     <td className="px-5 py-4">
                       <span className={`rounded-full px-2.5 py-1 text-xs font-bold ${row.solution === 'Available' ? 'bg-[#FF8A1F]/10 text-[#8A3600]' : 'bg-[#EFF6FF] text-[#1D4ED8]'}`}>
@@ -141,6 +142,18 @@ export default function BrandCompatibilitySection() {
             </div>
           )}
         </div>
+
+        {filteredRows.length === 0 && (
+          <div className="mb-6">
+            <LeadModalTrigger
+              prefillType="compatibility"
+              inquiryContext={{ modelReference: query.trim() }}
+              className="inline-flex rounded-lg bg-[#0B3A63] px-5 py-3 text-sm font-semibold text-white hover:bg-[#062748]"
+            >
+              {dict.compatibility.sendModelDetails}
+            </LeadModalTrigger>
+          </div>
+        )}
 
         <div className="flex flex-wrap gap-2.5 mb-6">
           {brands.slice(0, 18).map((brand) => (

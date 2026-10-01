@@ -1,8 +1,8 @@
 import type { Metadata } from 'next';
-import Image from 'next/image';
 import Link from 'next/link';
 import { ArrowRight, Box, FileText, Package, Palette, Radio, Settings } from 'lucide-react';
 import LeadModalTrigger from '@/components/LeadModalTrigger';
+import EditorialImage from '@/components/EditorialImage';
 import { oemSteps } from '@/data/homepage';
 import { oemPage } from '@/data/servicePages';
 import { type Locale, locales } from '@/i18n';
@@ -98,21 +98,7 @@ export default async function OemOdmPage({ params }: { params: Promise<{ locale:
               </div>
             </div>
 
-            <div className="relative overflow-hidden rounded-lg border border-[#123D63] bg-[#08345F]">
-              <div className="relative aspect-[16/10]">
-                <Image src="/images/factory-rd.webp" alt="RF engineering and development workspace" fill className="object-cover opacity-85" priority />
-                <div className="absolute inset-0 bg-gradient-to-tr from-[#062748]/70 via-[#062748]/20 to-[#FF8A1F]/10" />
-              </div>
-              <div className="grid grid-cols-3 border-t border-[#123D63] text-center">
-                {['RF Match', 'Sample Test', 'Private Label'].map((item) => (
-                  <div key={item} className="border-r border-[#123D63] px-3 py-4 last:border-r-0">
-                    <p className="text-[11px] font-bold uppercase tracking-[0.12em] text-[#FFB15C]" style={{ fontFamily: 'var(--font-jetbrains-mono), monospace' }}>
-                      {item}
-                    </p>
-                  </div>
-                ))}
-              </div>
-            </div>
+            <EditorialImage visual="engineering" copy={dict.visuals} preload />
           </div>
         </div>
       </section>

@@ -124,6 +124,7 @@ export default async function BrandCompatibilityPage({
             <div className="mt-8 flex flex-wrap gap-3">
               <LeadModalTrigger
                 prefillType="compatibility"
+                inquiryContext={{ modelReference: brand.name }}
                 className="btn-glow inline-flex items-center justify-center rounded-lg bg-[#FF8A1F] px-6 py-3 text-sm font-bold text-[#062748] transition-colors hover:bg-[#F97316]"
               >
                 {dict.compatibility.cta} {brand.name}
@@ -192,6 +193,7 @@ export default async function BrandCompatibilityPage({
             </div>
             <LeadModalTrigger
               prefillType="compatibility"
+              inquiryContext={{ modelReference: brand.name }}
               className="btn-glow mt-6 inline-flex w-full items-center justify-center rounded-lg bg-[#FF8A1F] px-5 py-3 text-sm font-bold text-[#062748] transition-colors hover:bg-[#F97316]"
             >
               {dict.brandPage.checklist} {brand.name}

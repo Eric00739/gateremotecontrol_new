@@ -178,7 +178,7 @@ export default async function CompatibilityPage({
                 {dict.compatibility.needModelChecked}
               </h2>
               <p className="mt-2 text-sm text-[#C7D7E8]">
-                {dict.compatibilityTable.noMatch}
+                {dict.compatibility.unlistedModelNote}
               </p>
             </div>
             <LeadModalTrigger

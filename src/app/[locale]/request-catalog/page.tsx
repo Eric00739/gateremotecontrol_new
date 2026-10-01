@@ -1,15 +1,15 @@
 import type { Metadata } from 'next';
-import Image from 'next/image';
 import Link from 'next/link';
 import { ArrowRight, Camera, Globe2, ListChecks, PackageSearch } from 'lucide-react';
 import LeadModalTrigger from '@/components/LeadModalTrigger';
+import EditorialImage from '@/components/EditorialImage';
 import { catalogPage } from '@/data/servicePages';
 import { type Locale, locales } from '@/i18n';
 import { getDictSync } from '@/i18n/dictionaries';
 import { siteName } from '@/data/site';
 import { absoluteUrl, breadcrumbJsonLd, jsonLd, localizedAlternates } from '@/lib/seo';
 
-const requirementIcons = [Camera, PackageSearch, Globe2, ListChecks];
+const requirementIcons = [PackageSearch, Globe2, ListChecks, Camera];
 
 export function generateStaticParams() {
   return locales.map((locale) => ({ locale }));
@@ -83,7 +83,7 @@ export default async function RequestCatalogPage({ params }: { params: Promise<{
               <p className="text-[#C7D7E8] leading-relaxed max-w-2xl">{page.subtitle}</p>
               <div className="mt-8 flex flex-wrap gap-3">
                 <LeadModalTrigger
-                  prefillType="compatibility"
+                  prefillType="quote"
                   className="btn-glow inline-flex items-center justify-center rounded-lg bg-[#FF8A1F] px-6 py-3 text-sm font-bold text-[#062748] transition-colors hover:bg-[#F97316]"
                 >
                   {page.primaryCta}
@@ -94,16 +94,11 @@ export default async function RequestCatalogPage({ params }: { params: Promise<{
               </div>
             </div>
 
-            <div className="relative overflow-hidden rounded-lg border border-[#123D63] bg-[#08345F]">
-              <div className="relative aspect-[16/10]">
-                <Image src="/images/factory-packaging.webp" alt="Packaging inspection for wholesale catalog request" fill className="object-cover opacity-85" priority />
-                <div className="absolute inset-0 bg-gradient-to-tr from-[#062748]/75 via-[#062748]/20 to-[#FF8A1F]/10" />
-              </div>
-              <div className="border-t border-[#123D63] px-5 py-4">
-                <p className="text-[11px] font-bold uppercase tracking-[0.14em] text-[#FFB15C]" style={{ fontFamily: 'var(--font-jetbrains-mono), monospace' }}>
-                  {page.cardNote}
-                </p>
-              </div>
+            <div>
+              <EditorialImage visual="packaging" copy={dict.visuals} preload />
+              <p className="mt-4 text-xs leading-relaxed text-[#C7D7E8]">
+                {page.cardNote}
+              </p>
             </div>
           </div>
         </div>

@@ -56,6 +56,12 @@ export default function HeroSection() {
                 <span className="text-[#FF8A1F] group-hover:translate-x-1 transition-transform">&rarr;</span>
               </a>
             </div>
+            <LeadModalTrigger
+              prefillType="compatibility"
+              className="mt-5 inline-flex text-sm text-[#C7D7E8] underline underline-offset-4 decoration-[#7F9AB7] hover:text-white"
+            >
+              {dict.hero.unknownModelCta}
+            </LeadModalTrigger>
           </div>
 
           {/* Right: Product showcase */}

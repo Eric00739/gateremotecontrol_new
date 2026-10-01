@@ -46,7 +46,8 @@ export default function ProductCategoriesSection() {
                 <h3 className="mt-5 text-xl font-bold text-[#0F172A]" style={{ fontFamily: "var(--font-outfit), sans-serif" }}>{pDict.title}</h3>
                 <p className="mt-3 text-sm leading-relaxed text-[#475569]">{pDict.description}</p>
                 <LeadModalTrigger
-                  prefillType="quote"
+                  prefillType={pKey === 'oemCustom' ? 'oem' : 'quote'}
+                  inquiryContext={{ productInterest: pDict.title }}
                   className="mt-6 inline-flex items-center gap-1.5 text-sm font-bold text-[#9A3412] transition-colors hover:text-[#C2410C]"
                 >
                   {dict.products.sendInquiry}

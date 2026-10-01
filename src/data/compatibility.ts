@@ -88,7 +88,7 @@ export const compatibilityBrands: CompatibilityBrand[] = [
     description: 'Replacement remote support for selected LiftMaster garage door and gate operator references, with careful frequency and protocol verification.',
     buyerIntent: 'LiftMaster remote replacement, LiftMaster compatible remote, garage door remote wholesale',
     models: [
-      { model: '893MAX references', frequency: 'Security+ 2.0 references', codeType: 'Rolling code references', note: 'Confirm opener generation and region.' },
+      { model: '893MAX references', frequency: 'Receiver and region dependent', codeType: 'Security+ / Security+ 2.0 references', note: 'Confirm opener generation, frequency, and region before matching.' },
       { model: '315 MHz references', frequency: '315 MHz references', codeType: 'Protocol dependent', note: 'Check original model and receiver label.' },
       { model: '390 MHz references', frequency: '390 MHz references', codeType: 'Protocol dependent', note: 'Older systems require model confirmation.' },
     ],

@@ -45,7 +45,7 @@ export const compatibilityRows = [
   {
     brand: 'LiftMaster',
     model: '893MAX',
-    frequency: 'Security+ 2.0',
+    frequency: 'To Confirm',
     codeType: 'Rolling Code',
     solution: 'To Confirm',
     sampleTest: 'Yes',

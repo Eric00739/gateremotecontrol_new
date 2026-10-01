@@ -5,16 +5,27 @@ import LeadModal from './LeadModal';
 
 export type PrefillType = 'quote' | 'compatibility' | 'oem' | 'sample' | 'support';
 
+export type InquiryContext = {
+  productInterest?: string;
+  modelReference?: string;
+};
+
 interface LeadModalContextValue {
   open: boolean;
   prefillType: PrefillType;
-  openModal: (type: PrefillType, trigger?: HTMLElement | null) => void;
+  inquiryContext: InquiryContext;
+  inquiryKey: string;
+  sourceUrl: string;
+  openModal: (type: PrefillType, trigger?: HTMLElement | null, context?: InquiryContext) => void;
   closeModal: () => void;
 }
 
 const defaultValue: LeadModalContextValue = {
   open: false,
   prefillType: 'quote',
+  inquiryContext: {},
+  inquiryKey: '',
+  sourceUrl: '',
   openModal: () => {},
   closeModal: () => {},
 };
@@ -28,10 +39,16 @@ export function useLeadModal() {
 export default function LeadModalProvider({ children }: { children: ReactNode }) {
   const [open, setOpen] = useState(false);
   const [prefillType, setPrefillType] = useState<PrefillType>('quote');
+  const [inquiryContext, setInquiryContext] = useState<InquiryContext>({});
+  const [inquiryKey, setInquiryKey] = useState('');
+  const [sourceUrl, setSourceUrl] = useState('');
   const [returnFocusElement, setReturnFocusElement] = useState<HTMLElement | null>(null);
 
-  const openModal = useCallback((type: PrefillType, trigger?: HTMLElement | null) => {
+  const openModal = useCallback((type: PrefillType, trigger?: HTMLElement | null, context: InquiryContext = {}) => {
     setPrefillType(type);
+    setInquiryContext(context);
+    setInquiryKey(JSON.stringify([window.location.pathname, type, context.productInterest, context.modelReference]));
+    setSourceUrl(window.location.href);
     setReturnFocusElement(trigger ?? (document.activeElement instanceof HTMLElement ? document.activeElement : null));
     setOpen(true);
   }, []);
@@ -52,9 +69,9 @@ export default function LeadModalProvider({ children }: { children: ReactNode })
   }, [open, returnFocusElement]);
 
   return (
-    <LeadModalContext.Provider value={{ open, prefillType, openModal, closeModal }}>
+    <LeadModalContext.Provider value={{ open, prefillType, inquiryContext, inquiryKey, sourceUrl, openModal, closeModal }}>
       {children}
-      <LeadModal key={prefillType} />
+      <LeadModal />
     </LeadModalContext.Provider>
   );
 }
