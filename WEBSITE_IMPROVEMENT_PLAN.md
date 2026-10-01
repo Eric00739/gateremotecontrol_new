@@ -68,9 +68,9 @@
 - 首页展示产品分类、买家路径、有限兼容性参考、样品验证、应用、风险说明、FAQ 和 CTA。旧 `FactoryEvidenceSection`、`StatsSection`、`QualitySection`、`OemOdmSection` 已删除；未恢复工厂证据图库。
 - 首页公开矩阵只有 4 条兼容性记录，兼容性详情数据只有 6 个品牌。
 - 询盘支持 WhatsApp、`mailto:` 和复制内容，无附件选择器或站内上传；需求预填、草稿生命周期和邮箱要求见 README。
-- 六套词典通过 `Record<Locale, Dictionary>` 以英文键结构执行构建时类型检查；明显西班牙语乱码已修正，未完成母语审核。
+- 六套词典通过 `Record<Locale, Dictionary>` 以英文键结构执行构建时类型检查；品牌详情与目录卡片使用 `brandPage.brands` 的本地化文案，FAQ 可见内容与结构化数据同源。明显西班牙语乱码已修正，未完成母语审核。
 - 博客元数据在 `src/data/blog.ts`，正文在 `src/data/blog-content.ts`，构建执行正文完整性检查；不为未核实文章编造日期。
-- `npm run build` 还执行旧 URL 重定向生成、HTML 语言修正和 `scripts/verify-export.mjs`；当前校验包含 90 个 sitemap URL 和 43 条旧重定向。
+- `npm run build` 还执行旧 URL 重定向生成、HTML 语言修正和 `scripts/verify-export.mjs`；当前校验包含 90 个 sitemap URL、43 条旧重定向及六语博客完整目录中的全部英文文章链接。
 - 三个服务页通过 `EditorialImage` 及 `src/data/visuals.ts` 共用现有参考配图；本次没有生成或替换媒体文件，来源类型不作为公司归属证据。
 
 任何执行模型开始写代码前，必须重新核查这些事实，不得把本计划当作永远正确的代码快照。
@@ -106,7 +106,7 @@
 
 ### D4：产品资料
 
-- 首批公开展示的 12–20 个产品或产品系列。
+- 先提供 3–5 个资料完整的真实产品系列，再逐步扩充至原计划的 12–20 个产品或系列；资料要求与第 11 节一致。
 - 每个产品的内部编号、频率、编码类型、按钮数、电池、MOQ、OEM 选项和适用市场。
 - 哪些品牌和型号可以公开写，哪些只能在私下目录中提供。
 - 哪些数据已经过工程验证，哪些只能写 “需确认”。
@@ -718,22 +718,22 @@ C02 规划时的缺陷（已修复）：产品分类按钮只传 `prefillType="q
 
 业务提交 [`542e0b9`](https://github.com/Eric00739/gateremotecontrol_new/commit/542e0b992186c9b70e63788b831d8e6bcbd849c1) 已推送到 `main`；[GitHub Pages 发布运行](https://github.com/Eric00739/gateremotecontrol_new/actions/runs/36801089331) 的 build 和 deploy 成功，部署于 2026-10-01 09:27（Asia/Shanghai）。未修改部署配置。正式 `/en`、`/es` 和 `/en/oem-odm` 的 HTML 与该次 GitHub 构建 artifact 完全一致；本地与 CI 单独构建的资源指纹可能不同，不据此误判部署失败。
 
-## 13. 2026-10-01 知识收尾
+## 13. 2026-10-01 知识收尾（SEO 发布后现状）
 
-本轮仅修正文档与规则，不修改业务代码、依赖或 CI/CD。README 负责运行、构建、询盘与素材维护说明；AGENTS.md 是现役规则，CLAUDE.md 通过 `@AGENTS.md` 同源；本计划保留当前待办、验收规格和发布凭证，不另建记忆或交接文件。
+本轮仅校准本计划，不修改业务代码、规则、依赖或 CI/CD。README 负责运行、构建、询盘与 SEO 维护说明；AGENTS.md 是现役规则，CLAUDE.md 通过 `@AGENTS.md` 同源；本计划保留当前待办、验收规格和发布凭证，不另建记忆或交接文件。当前业务发布与 SEO 验收详见第 14 节，第 12 节保留此前询盘改造的发布记录。
 
 | 事实面 | 收尾状态 | 依据与边界 |
 | --- | --- | --- |
-| 代码 | verified-current | 业务提交 `542e0b9`；此前 lint 无错误、build 与六语询盘复核通过，本轮未改代码 |
-| 运行态 | verified-current | 对应 Actions 成功；本轮重新检查六语首页及三个英文服务页的正式 URL、语言标记、canonical 和新内容 |
-| 文档 | changed-and-verified | 更新 README 和本计划，标明历史规格与已完成任务，补发布凭证；检查本地文件引用、导出校验与 diff |
-| 规则 | changed-and-verified | AGENTS.md 补齐复制询盘能力；CLAUDE.md 仍为唯一导入入口，无新增平行规则 |
+| 代码 | verified-current | 业务提交 `91a614e`；本轮 lint 无错误、无警告，现有导出校验通过；本轮未改代码，构建与浏览器验收凭证见第 14 节 |
+| 运行态 | verified-current | 核验基线 `29c1ed9` 与远端 main 一致，Pages 运行 `36808259711` 成功；六语首页、葡语 FAAC、西语博客目录、英文质量页共 9 个正式 URL 的标题、语言、canonical 与验收产物一致，西语目录包含全部 18 篇文章 |
+| 文档 | changed-and-verified | 四份 Markdown 已盘点；本计划更新当前事实、资料批次与收尾状态，消除过期警告说法；README 无需重复改写，文档链接与 diff 已校验 |
+| 规则 | verified-current | 全局 canonical AGENTS.md 与项目 AGENTS.md 已核对；项目 CLAUDE.md 仅含 `@AGENTS.md`，无死引用或新增平行规则；其他平台规则只读、不改 |
 | 记忆 | out-of-scope | Codex 生成记忆只读；没有获准维护的项目记忆，不创建或手改记忆文件 |
-| 工作区 | verified-current | 单一工作树；旧分支改动已合入，无一次性测试文件或未集成业务改动；保留清理候选供复核 |
+| 工作区 | verified-current | 单一工作树，核验开始时 main 与 origin/main 一致且无未提交改动；未发现一次性测试文件或未集成业务改动，旧分支保留作清理候选 |
 
-仍待输入：D1/D2/D4/D5/D6 的真实身份、商业条件、产品、法律与素材；D3 的接收服务决策；C04 的销售记录。未重新测量 Lighthouse、业务转化、依赖漏洞或母语文案质量，不沿用历史结果冒充当前验收。
+仍待输入：D1/D2/D4/D5/D6 的真实身份、商业条件、产品、法律与素材；D3 的接收服务决策；C04 的销售记录。本轮未重跑 Lighthouse、完整构建、业务转化、依赖漏洞或母语文案审核；SEO 分数与构建验收保留第 14 节的明确时间与范围。
 
-未消除警告：六套词典的匿名默认导出 lint 警告；Actions 的 Node.js 20 action 运行时弃用及 ubuntu-latest 即将迁移通知。本轮未修改业务代码或部署配置，警告不影响已完成构建与发布。
+警告现状：六套词典的匿名默认导出警告已在 SEO 批次消除，本轮 lint 为 0 警告。最新已核验 Actions 仍提示 Node.js 20 action 运行时已弃用并强制使用 Node.js 24，以及 ubuntu-latest 将从 2026-10-19 开始迁移至 Ubuntu 26；这是 Actions 运行时通知，不是项目 Node.js 版本已变更。本轮不调整 CI/CD，当前构建与发布成功。
 
 只读清理预览：本地 `codex/improve-b2b-site-and-closeout` 分支指向 `46e7ea2`，对应 [PR #1](https://github.com/Eric00739/gateremotecontrol_new/pull/1) 已合入 `8f30486`；patch-equivalence 检查没有独有改动。可以清理本地旧分支，远端分支暂保留；本轮未删除。`node_modules/`、`.next/`、`out/` 是忽略的依赖与构建目录，仍用于复核，不列作必须清理项。
 
