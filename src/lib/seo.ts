@@ -3,7 +3,26 @@ import type { BlogPost } from '@/data/blog-content';
 import { siteName, siteUrl } from '@/data/site';
 import { defaultLocale, locales, type Locale } from '@/i18n';
 
-export const siteUpdatedAt = '2026-05-02';
+// Record meaningful page changes explicitly; rebuilding does not update dates.
+const pageUpdatedAt: Partial<Record<string, string>> = {
+  '': '2026-10-01',
+  '/compatibility': '2026-10-01',
+  '/compatibility/faac': '2026-10-01',
+  '/compatibility/nice': '2026-10-01',
+  '/compatibility/bft': '2026-10-01',
+  '/compatibility/doorhan': '2026-10-01',
+  '/compatibility/came': '2026-10-01',
+  '/compatibility/liftmaster': '2026-10-01',
+  '/oem-odm': '2026-10-01',
+  '/factory-quality': '2026-10-01',
+  '/request-catalog': '2026-10-01',
+  '/blog': '2026-10-01',
+};
+
+export function pageLastModified(path: string): string | undefined {
+  return pageUpdatedAt[path];
+}
+
 export const defaultOgImage = '/images/hero-products.png';
 export const organizationLogo = '/favicon.ico';
 

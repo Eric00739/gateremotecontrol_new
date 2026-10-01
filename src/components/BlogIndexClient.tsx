@@ -7,7 +7,7 @@ import { ArrowRight, ChevronLeft, ChevronRight, Clock, FileText, MessageSquare, 
 import { authorProfile } from '@/data/author';
 import { blogCategories, blogPosts, popularGuides, type BlogPostMeta } from '@/data/blog';
 import LeadModalTrigger from '@/components/LeadModalTrigger';
-import { useDict, useLocale } from '@/i18n';
+import { defaultLocale, useDict, useLocale } from '@/i18n';
 
 const ARTICLES_PER_PAGE = 10;
 
@@ -211,6 +211,16 @@ export default function BlogIndexClient() {
             <p className="mt-5 max-w-2xl text-base leading-8 text-[#475569]">
               {dict.blog.subtitle}
             </p>
+            {locale !== defaultLocale && (
+              <p className="mt-3 text-sm font-medium text-[#64748B]">
+                {dict.blog.archiveDescription}
+              </p>
+            )}
+            {sortedBlogPosts.length > 0 && (
+              <Link href="#blog-guide-archive" className="mt-4 inline-flex items-center gap-2 text-sm font-semibold text-[#C45A00] hover:text-[#F97316]">
+                {dict.blog.archiveTitle} <ArrowRight className="h-4 w-4" aria-hidden="true" />
+              </Link>
+            )}
           </div>
           <div className="grid gap-3 self-end sm:grid-cols-3 lg:grid-cols-1">
             <div className="rounded-lg border border-[#D7E2EE] bg-white px-4 py-3 shadow-sm shadow-[#0F172A]/5">
@@ -280,7 +290,7 @@ export default function BlogIndexClient() {
 
                 {isFirstPage && featuredPost ? (
                   <Link
-                    href={`/${locale}/blog/${featuredPost.slug}`}
+                    href={`/${defaultLocale}/blog/${featuredPost.slug}`}
                     className="group mt-6 grid overflow-hidden rounded-lg border border-[#D7E2EE] bg-[#F8FAFC] shadow-sm shadow-[#0F172A]/5 transition-all hover:-translate-y-0.5 hover:border-[#FF8A1F]/60 hover:shadow-md md:grid-cols-[minmax(0,1fr)_280px]"
                   >
                     <div className="p-5 sm:p-6">
@@ -291,12 +301,13 @@ export default function BlogIndexClient() {
                         Featured guide
                       </span>
                       <h3
+                        lang="en"
                         className="mt-4 text-2xl font-extrabold leading-tight text-[#0F172A] sm:text-3xl"
                         style={{ fontFamily: 'var(--font-outfit), sans-serif' }}
                       >
                         {featuredPost.title}
                       </h3>
-                      <p className="mt-4 text-sm leading-7 text-[#475569]">
+                      <p lang="en" className="mt-4 text-sm leading-7 text-[#475569]">
                         {featuredPost.excerpt}
                       </p>
                       <div className="mt-5">
@@ -340,7 +351,7 @@ export default function BlogIndexClient() {
                         return (
                           <Link
                             key={post.slug}
-                            href={`/${locale}/blog/${post.slug}`}
+                            href={`/${defaultLocale}/blog/${post.slug}`}
                             className="group flex flex-col gap-4 px-4 py-4 transition-colors hover:bg-[#F8FAFC] sm:flex-row sm:items-start"
                           >
                             {post.image && (
@@ -362,12 +373,13 @@ export default function BlogIndexClient() {
                                 {categoryLabel}
                               </span>
                               <h3
+                                lang="en"
                                 className="mt-3 text-lg font-bold leading-snug text-[#0F172A] group-hover:text-[#C45A00] sm:text-xl"
                                 style={{ fontFamily: 'var(--font-outfit), sans-serif' }}
                               >
                                 {post.title}
                               </h3>
-                              <p className="mt-2 text-sm leading-6 text-[#475569]">
+                              <p lang="en" className="mt-2 text-sm leading-6 text-[#475569]">
                                 {post.excerpt}
                               </p>
                               <div className="mt-5">
@@ -499,13 +511,13 @@ export default function BlogIndexClient() {
                       {startHerePosts.map((post, index) => (
                         <Link
                           key={post.slug}
-                          href={`/${locale}/blog/${post.slug}`}
+                          href={`/${defaultLocale}/blog/${post.slug}`}
                           className="group grid grid-cols-[28px_1fr] gap-3 rounded-md p-2 transition-colors hover:bg-[#F8FAFC]"
                         >
                           <span className="flex h-7 w-7 items-center justify-center rounded-full bg-[#FFF7ED] text-[11px] font-bold text-[#C45A00]">
                             {String(index + 1).padStart(2, '0')}
                           </span>
-                          <span className="min-w-0 text-sm font-bold leading-5 text-[#0F172A] group-hover:text-[#C45A00]" style={{ fontFamily: 'var(--font-outfit), sans-serif' }}>
+                          <span lang="en" className="min-w-0 text-sm font-bold leading-5 text-[#0F172A] group-hover:text-[#C45A00]" style={{ fontFamily: 'var(--font-outfit), sans-serif' }}>
                             {post.title}
                           </span>
                         </Link>
@@ -525,10 +537,10 @@ export default function BlogIndexClient() {
                         {popularPosts.map((post) => (
                           <Link
                             key={post.slug}
-                            href={`/${locale}/blog/${post.slug}`}
+                            href={`/${defaultLocale}/blog/${post.slug}`}
                             className="group flex items-start justify-between gap-3 rounded-md p-2 transition-colors hover:bg-[#F8FAFC]"
                           >
-                            <span className="min-w-0 text-sm font-bold leading-5 text-[#0F172A] group-hover:text-[#C45A00]" style={{ fontFamily: 'var(--font-outfit), sans-serif' }}>
+                            <span lang="en" className="min-w-0 text-sm font-bold leading-5 text-[#0F172A] group-hover:text-[#C45A00]" style={{ fontFamily: 'var(--font-outfit), sans-serif' }}>
                               {post.title}
                             </span>
                             <ArrowRight className="mt-1 h-4 w-4 shrink-0 text-[#FF8A1F]" />
@@ -588,6 +600,33 @@ export default function BlogIndexClient() {
           )}
         </div>
       </section>
+
+      {sortedBlogPosts.length > 0 && (
+        <section id="blog-guide-archive" aria-labelledby="blog-guide-archive-title" className="border-t border-[#E2E8F0] bg-[#F8FAFC]">
+          <div className="mx-auto max-w-[1280px] px-4 py-10 sm:px-6 lg:px-8">
+            <h2 id="blog-guide-archive-title" className="text-2xl font-bold text-[#0F172A]" style={{ fontFamily: 'var(--font-outfit), sans-serif' }}>
+              {dict.blog.archiveTitle}
+            </h2>
+            {locale === defaultLocale && (
+              <p className="mt-3 text-sm leading-7 text-[#64748B]">{dict.blog.archiveDescription}</p>
+            )}
+            <ul className="mt-6 grid gap-x-8 gap-y-3 md:grid-cols-2">
+              {sortedBlogPosts.map((post) => (
+                <li key={post.slug}>
+                  <Link href={`/${defaultLocale}/blog/${post.slug}`} className="group flex items-start gap-3 rounded-lg border border-[#E2E8F0] bg-white px-4 py-3 transition-colors hover:border-[#FF8A1F]">
+                    <FileText className="mt-0.5 h-4 w-4 shrink-0 text-[#FF8A1F]" aria-hidden="true" />
+                    <span className="min-w-0 flex-1">
+                      <span className="block text-sm font-semibold leading-6 text-[#153A5C] group-hover:text-[#C45A00]" lang="en">{post.seoTitle || post.title}</span>
+                      {locale !== defaultLocale && <span className="mt-1 block text-xs text-[#64748B]">{dict.blog.englishLabel}</span>}
+                    </span>
+                    <ArrowRight className="mt-1 h-4 w-4 shrink-0 text-[#FF8A1F]" aria-hidden="true" />
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </section>
+      )}
 
       <section className="bg-[#F8FAFC]">
         <div className="mx-auto max-w-[1280px] px-4 py-12 sm:px-6 lg:px-8">

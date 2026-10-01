@@ -1,10 +1,11 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import { ArrowRight, Camera, Cpu, Radio, ShieldCheck } from 'lucide-react';
+import { notFound } from 'next/navigation';
 import LeadModalTrigger from '@/components/LeadModalTrigger';
 import { compatibilityBrands } from '@/data/compatibility';
 import { type Locale, locales } from '@/i18n';
-import { getDictSync } from '@/i18n/dictionaries';
+import { getDictSync, type Dictionary } from '@/i18n/dictionaries';
 import { siteName } from '@/data/site';
 import { absoluteUrl, breadcrumbJsonLd, jsonLd, localizedAlternates } from '@/lib/seo';
 
@@ -17,7 +18,7 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
     const { locale: rawLocale } = await params;
     const locale = locales.includes(rawLocale as Locale) ? rawLocale as Locale : 'en';
     const dict = getDictSync(locale);
-    const title = `${dict.compatibility.title} | GateRemoteSource`;
+    const title = dict.compatibility.metaTitle;
     return {
       title,
       description: dict.compatibility.subtitle,
@@ -41,7 +42,13 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
   })();
 }
 
-const splitBuyerIntent = (intent: string) => intent.split(',').map((item) => item.trim()).filter(Boolean);
+function getLocalizedBrandCopy(dict: Dictionary, slug: string) {
+  const brands = dict.brandPage.brands;
+  if (!Object.hasOwn(brands, slug)) notFound();
+  return brands[slug as keyof typeof brands];
+}
+
+const verificationIcons = [Camera, ShieldCheck, Radio, Cpu];
 
 export default async function CompatibilityPage({
   params,
@@ -60,7 +67,7 @@ export default async function CompatibilityPage({
     inLanguage: locale,
   };
   const breadcrumb = breadcrumbJsonLd([
-    { name: 'Home', url: absoluteUrl(`/${locale}`) },
+    { name: dict.brandPage.breadcrumb.home, url: absoluteUrl(`/${locale}`) },
     { name: dict.compatibility.title, url: absoluteUrl(`/${locale}/compatibility`) },
   ]);
 
@@ -92,8 +99,10 @@ export default async function CompatibilityPage({
               >
                 {dict.compatibility.cta}
               </LeadModalTrigger>
-              <Link href={`/${locale}/blog/why-universal-remote-cannot-copy`} className="inline-flex items-center gap-2 rounded-lg border border-[#2A587C] px-6 py-3 text-sm font-semibold text-[#C7D7E8] transition-colors hover:border-[#FF8A1F]/50 hover:text-[#F7FBFF]">
-                {dict.compatibility.checklistLabel} <ArrowRight className="w-4 h-4 text-[#FF8A1F]" />
+              <Link href="/en/blog/why-universal-remote-cannot-copy" className="inline-flex items-center gap-2 rounded-lg border border-[#2A587C] px-6 py-3 text-sm font-semibold text-[#C7D7E8] transition-colors hover:border-[#FF8A1F]/50 hover:text-[#F7FBFF]">
+                {dict.compatibility.checklistLabel}
+                {locale !== 'en' && <span className="text-xs font-normal">({dict.blog.englishLabel})</span>}
+                <ArrowRight className="w-4 h-4 text-[#FF8A1F]" />
               </Link>
             </div>
           </div>
@@ -128,9 +137,9 @@ export default async function CompatibilityPage({
                 </div>
                 <ArrowRight className="w-4 h-4 text-[#94A3B8] transition-transform group-hover:translate-x-1 group-hover:text-[#FF8A1F]" />
               </div>
-              <p className="text-sm leading-relaxed text-[#64748B]">{brand.shortDescription}</p>
+              <p className="text-sm leading-relaxed text-[#64748B]">{getLocalizedBrandCopy(dict, brand.slug).shortDescription}</p>
               <div className="mt-5 flex flex-wrap gap-2">
-                {splitBuyerIntent(brand.buyerIntent).map((item) => (
+                {getLocalizedBrandCopy(dict, brand.slug).buyerIntents.map((item) => (
                   <span key={item} className="rounded-md bg-[#F8FAFC] px-2.5 py-1 text-[11px] font-semibold text-[#64748B]">
                     {item}
                   </span>
@@ -153,18 +162,18 @@ export default async function CompatibilityPage({
               </h2>
             </div>
             <div className="grid sm:grid-cols-2 gap-4">
-              {(dict.compatibility.verificationItems as { title: string; description: string }[]).map((item) => (
-                <div key={item.title} className="rounded-lg border border-[#E2E8F0] bg-[#F8FAFC] p-5">
-                  {item.title === 'Original Remote Photos' && <Camera className="mb-4 h-5 w-5 text-[#FF8A1F]" />}
-                  {item.title === 'Frequency Information' && <Radio className="mb-4 h-5 w-5 text-[#FF8A1F]" />}
-                  {item.title === 'Receiver or Motor Label' && <ShieldCheck className="mb-4 h-5 w-5 text-[#FF8A1F]" />}
-                  {item.title === 'Target Market' && <Cpu className="mb-4 h-5 w-5 text-[#FF8A1F]" />}
-                  <h3 className="text-sm font-bold text-[#0F172A]" style={{ fontFamily: 'var(--font-outfit), sans-serif' }}>
-                    {item.title}
-                  </h3>
-                  <p className="mt-2 text-xs leading-relaxed text-[#64748B]">{item.description}</p>
-                </div>
-              ))}
+              {dict.compatibility.verificationItems.map((item, index) => {
+                const Icon = verificationIcons[index];
+                return (
+                  <div key={item.title} className="rounded-lg border border-[#E2E8F0] bg-[#F8FAFC] p-5">
+                    {Icon && <Icon className="mb-4 h-5 w-5 text-[#FF8A1F]" />}
+                    <h3 className="text-sm font-bold text-[#0F172A]" style={{ fontFamily: 'var(--font-outfit), sans-serif' }}>
+                      {item.title}
+                    </h3>
+                    <p className="mt-2 text-xs leading-relaxed text-[#64748B]">{item.description}</p>
+                  </div>
+                );
+              })}
             </div>
           </div>
         </div>

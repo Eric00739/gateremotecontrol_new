@@ -1,7 +1,7 @@
-export default {
+const es = {
   meta: {
-    title: 'Mandos a distancia y receptores para motores de portones, puertas de garaje y persianas enrollables',
-    description: 'Encuentre mandos a distancia y receptores compatibles para motores de portones, puertas de garaje y persianas enrollables. Suministro al por mayor, pruebas de muestras y opciones de logotipo OEM o empaquetado personalizado.',
+    title: 'Mandos para portones al por mayor | GateRemoteSource',
+    description: 'Mandos compatibles para portones y garajes, receptores y opciones OEM para instaladores y distribuidores. Confirme la compatibilidad antes del pedido.',
   },
   announcement: {
     text: 'MANDOS DE REPUESTO COMPATIBLES PARA LOS PRINCIPALES SISTEMAS DE PORTONES Y GARAJES | OEM / ODM / VENTA AL POR MAYOR',
@@ -48,6 +48,7 @@ export default {
     logoPackaging: 'Logotipo / Empaquetado',
   },
   compatibility: {
+    metaTitle: 'Compatibilidad de mandos para portones | GateRemoteSource',
     sectionLabel: 'Compatibilidad',
     title: 'Guía de mandos de repuesto compatibles',
     subtitle: 'Páginas de referencia de marca para instaladores, cerrajeros y distribuidores que necesitan encontrar mandos compatibles para portones y puertas de garaje sin marca original.',
@@ -101,6 +102,244 @@ export default {
     faqTitle: 'Preguntas del comprador',
     faqHeading: 'Preguntas frecuentes sobre correspondencia',
     morePages: 'Más páginas de marca',
+    brands: {
+      faac: {
+        shortDescription: 'Compatibilidad de mandos de repuesto para determinados sistemas de portones FAAC.',
+        description: 'Opciones de mandos de posventa para determinados sistemas de portones FAAC. La compatibilidad final depende del modelo, la frecuencia, la versión del receptor, el chip y el protocolo de codificación.',
+        buyerIntents: [
+          'Sustitución de mandos FAAC',
+          'Mandos compatibles para portones FAAC',
+          'Mandos FAAC de 433.92 MHz',
+        ],
+        models: [
+          {
+            model: 'Referencias XT2 / XT4',
+            frequency: 'Referencias 433.92 MHz',
+            codeType: 'Referencias de código variable',
+            note: 'Confirme mediante la foto del mando original y la etiqueta del receptor.',
+          },
+          {
+            model: 'Referencias SLH / mando maestro',
+            frequency: 'Depende de la versión del mercado',
+            codeType: 'Depende del protocolo',
+            note: 'Se recomienda probar muestras antes de pedidos al por mayor.',
+          },
+          {
+            model: 'Referencias antiguas de código fijo',
+            frequency: 'Depende de la etiqueta',
+            codeType: 'Referencias de código fijo',
+            note: 'Comparta los datos de los interruptores DIP o de la PCB si están disponibles.',
+          },
+        ],
+        checks: [
+          'Fotos del frente y reverso del mando original',
+          'Etiqueta del receptor o de la placa de control del motor',
+          'Etiqueta de frecuencia, por ejemplo 433.92 MHz',
+          'Identificación del chip o de la PCB, si está disponible',
+          'País de destino o versión del mercado',
+        ],
+      },
+      nice: {
+        shortDescription: 'Suministro de mandos de repuesto compatibles para determinados motores de portones Nice.',
+        description: 'Asistencia de compatibilidad para determinadas referencias de mandos Nice, incluida la comprobación del modelo, la verificación de muestras y el suministro con marca privada.',
+        buyerIntents: [
+          'Sustitución de mandos para portones Nice',
+          'Mandos compatibles con Nice',
+          'Proveedor de mandos para garajes Nice',
+        ],
+        models: [
+          {
+            model: 'Referencias FLO2R-S',
+            frequency: 'Referencias 433.92 MHz',
+            codeType: 'Referencias de código variable',
+            note: 'Confirme el modelo y la región antes de buscar compatibilidad.',
+          },
+          {
+            model: 'Referencias ON / ON-E',
+            frequency: 'Depende de la versión del mercado',
+            codeType: 'Referencias de código variable',
+            note: 'La versión del receptor puede afectar la compatibilidad.',
+          },
+          {
+            model: 'Referencias de código fijo',
+            frequency: 'Depende de la etiqueta',
+            codeType: 'Referencias de código fijo',
+            note: 'Envíe fotos del mando y del receptor para verificar.',
+          },
+        ],
+        checks: [
+          'Modelo del mando impreso en la carcasa o etiqueta',
+          'Identificación de frecuencia',
+          'Etiqueta de la placa del receptor o del motor',
+          'Número de botones y foto de la carcasa',
+          'Cantidad de muestras y necesidades OEM',
+        ],
+      },
+      bft: {
+        shortDescription: 'Mandos de repuesto tipo BFT de posventa y asistencia para comprobar la compatibilidad RF.',
+        description: 'Comprobación de mandos de repuesto para determinados sistemas de portones BFT, centrada en la verificación del comprador, las pruebas de muestras y el suministro al por mayor.',
+        buyerIntents: [
+          'Sustitución de mandos BFT',
+          'Mandos compatibles con BFT MITTO',
+          'Proveedor de mandos para portones BFT',
+        ],
+        models: [
+          {
+            model: 'Referencias MITTO 2',
+            frequency: 'Referencias 433.92 MHz',
+            codeType: 'Referencias de código variable',
+            note: 'Compruebe la compatibilidad por modelo, versión del receptor y región del mercado.',
+          },
+          {
+            model: 'Referencias MITTO 4',
+            frequency: 'Referencias 433.92 MHz',
+            codeType: 'Referencias de código variable',
+            note: 'Confirme el número de botones y la foto del mando original.',
+          },
+          {
+            model: 'Referencias regionales',
+            frequency: 'Depende de la región',
+            codeType: 'Depende del protocolo',
+            note: 'Los pedidos al por mayor requieren confirmación técnica.',
+          },
+        ],
+        checks: [
+          'Foto del mando original',
+          'Referencia del modelo o familia',
+          'Etiqueta del receptor',
+          'Frecuencia y versión del mercado',
+          'Embalaje o marca requeridos',
+        ],
+      },
+      doorhan: {
+        shortDescription: 'Compatibilidad de mandos de repuesto DoorHan para determinados sistemas de portones y garajes.',
+        description: 'Asistencia para determinadas solicitudes de sustitución de mandos DoorHan, con comprobación del modelo, confirmación de frecuencia y verificación de muestras.',
+        buyerIntents: [
+          'Sustitución de mandos DoorHan',
+          'Mandos compatibles con DoorHan',
+          'Proveedor de mandos para portones DoorHan',
+        ],
+        models: [
+          {
+            model: 'Referencias de mandos de 2 botones',
+            frequency: 'Referencias 433.92 MHz',
+            codeType: 'Depende del protocolo',
+            note: 'Confirme la carcasa, el receptor y la versión regional.',
+          },
+          {
+            model: 'Referencias de mandos de 4 botones',
+            frequency: 'Depende de la etiqueta',
+            codeType: 'Depende del protocolo',
+            note: 'Envíe fotos del mando antes de seleccionar una muestra.',
+          },
+          {
+            model: 'Referencias de motores de puertas de garaje',
+            frequency: 'Depende de la versión del mercado',
+            codeType: 'Depende del receptor',
+            note: 'La etiqueta del receptor es importante para verificar.',
+          },
+        ],
+        checks: [
+          'Foto de la carcasa del mando',
+          'Etiqueta de frecuencia',
+          'Etiqueta del receptor o del motor',
+          'Número de botones',
+          'País o versión del mercado',
+        ],
+      },
+      came: {
+        shortDescription: 'Referencias de mandos de repuesto compatibles para determinados sistemas de portones CAME.',
+        description: 'Asistencia de suministro de posventa para determinadas referencias de mandos CAME, incluida la comparación de modelos, las pruebas de muestras y las opciones de embalaje OEM.',
+        buyerIntents: [
+          'Sustitución de mandos CAME',
+          'Mandos compatibles para portones CAME',
+          'Proveedor de mandos CAME de 433.92 MHz',
+        ],
+        models: [
+          {
+            model: 'Referencias de la serie TOP',
+            frequency: 'Referencias 433.92 MHz',
+            codeType: 'Referencias de código fijo o variable',
+            note: 'Confirme el modelo exacto y la codificación antes de buscar compatibilidad.',
+          },
+          {
+            model: 'Referencias TAM / TWIN',
+            frequency: 'Depende de la etiqueta',
+            codeType: 'Depende del protocolo',
+            note: 'Envíe los detalles del mando y del receptor.',
+          },
+          {
+            model: 'Referencias de varios botones',
+            frequency: 'Depende de la versión del mercado',
+            codeType: 'Depende del receptor',
+            note: 'Se recomienda probar muestras.',
+          },
+        ],
+        checks: [
+          'Familia exacta del modelo',
+          'Etiqueta del mando y foto de la carcasa',
+          'Foto de la placa del receptor',
+          'Identificación de frecuencia',
+          'Requisitos de pedido al por mayor y marca',
+        ],
+      },
+      liftmaster: {
+        shortDescription: 'Sustitución de determinados mandos compatibles con LiftMaster y asistencia para compras al por mayor.',
+        description: 'Asistencia para sustituir mandos de determinadas referencias de motores de garajes y portones LiftMaster, con verificación cuidadosa de frecuencia y protocolo.',
+        buyerIntents: [
+          'Sustitución de mandos LiftMaster',
+          'Mandos compatibles con LiftMaster',
+          'Mandos para garajes al por mayor',
+        ],
+        models: [
+          {
+            model: 'Referencias 893MAX',
+            frequency: 'Depende del receptor y la región',
+            codeType: 'Referencias Security+ / Security+ 2.0',
+            note: 'Confirme la generación del motor, la frecuencia y la región antes de buscar compatibilidad.',
+          },
+          {
+            model: 'Referencias 315 MHz',
+            frequency: 'Referencias 315 MHz',
+            codeType: 'Depende del protocolo',
+            note: 'Compruebe el modelo original y la etiqueta del receptor.',
+          },
+          {
+            model: 'Referencias 390 MHz',
+            frequency: 'Referencias 390 MHz',
+            codeType: 'Depende del protocolo',
+            note: 'Los sistemas antiguos requieren confirmar el modelo.',
+          },
+        ],
+        checks: [
+          'Modelo del mando original',
+          'Etiqueta del motor o del receptor',
+          'Identificación de frecuencia o protocolo',
+          'Color de los botones o foto de la carcasa',
+          'País o versión del mercado',
+        ],
+      },
+    },
+    faqItems: [
+      {
+        question: '¿Cómo se confirma la compatibilidad con {brand}?',
+        answer: 'El nombre de la marca por sí solo no confirma la compatibilidad. Para {brand}, deben comprobarse el modelo, la frecuencia, la versión del receptor, el chip, el protocolo de codificación y la versión regional.',
+      },
+      {
+        question: '¿Qué datos debo enviar para comprobar un mando {brand}?',
+        answer: 'Envíe fotos del frente y reverso del mando original, la etiqueta de modelo o frecuencia, la etiqueta del receptor o motor, el número de botones y el país de destino o la versión del mercado.',
+      },
+      {
+        question: '¿Puedo consultar opciones de embalaje OEM para un mando compatible con {brand}?',
+        answer: 'El logotipo OEM, las opciones de carcasa con marca privada y el embalaje se pueden tratar después de confirmar la referencia de compatibilidad y los requisitos de las muestras.',
+      },
+    ],
+    supportItems: [
+      'Pruebas de muestras antes del pedido al por mayor',
+      'Opciones de logotipo OEM y embalaje',
+      'Confirmación del receptor y la frecuencia',
+      'Asistencia para compras al por mayor',
+    ],
     breadcrumb: { home: 'Inicio', compatibility: 'Compatibilidad' },
   },
   risk: {
@@ -420,6 +659,9 @@ export default {
     compatibilityReferences: 'Referencias de compatibilidad',
   },
   blog: {
+    archiveTitle: 'Todas las guías de compra',
+    archiveDescription: 'Explore todas las guías de compatibilidad y compra. Por ahora, las guías completas están disponibles en inglés; los enlaces abren el texto original en inglés.',
+    englishLabel: 'En inglés',
     sectionLabel: 'Base de conocimientos',
     title: 'Blog y guías de compatibilidad',
     subtitle: 'Guías prácticas sobre correspondencia de frecuencias, protocolos de código flotante, desarrollo OEM y lo que los compradores necesitan antes de solicitar verificaciones de compatibilidad RF.',
@@ -469,3 +711,5 @@ export default {
     contactUs: 'Contáctenos',
   },
 };
+
+export default es;

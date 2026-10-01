@@ -69,7 +69,32 @@ for (const url of sitemapUrls) {
   }
 }
 
-// 3. Every legacy redirect has its stub and a real destination.
+// 3. Every localized blog archive links to all indexable articles in initial HTML.
+const articlePaths = sitemapUrls
+  .map((url) => new URL(url).pathname)
+  .filter((urlPath) => /^\/en\/blog\/[^/]+$/.test(urlPath));
+
+if (articlePaths.length > 0) {
+  for (const locale of supportedLocales) {
+    const html = (await readTextIfExists(pathToHtmlFile(`/${locale}/blog`))) ?? '';
+    const archive = html.match(/<section\b[^>]*\bid="blog-guide-archive"[^>]*>([\s\S]*?)<\/section>/)?.[1];
+    if (!archive) {
+      problems.push(`Missing complete blog archive for ${locale}`);
+      continue;
+    }
+
+    const linkedPaths = new Set(
+      [...archive.matchAll(/<a\b[^>]*\bhref="([^"]+)"/g)].map((match) => match[1]),
+    );
+    for (const articlePath of articlePaths) {
+      if (!linkedPaths.has(articlePath)) {
+        problems.push(`Blog archive for ${locale} does not link to ${articlePath}`);
+      }
+    }
+  }
+}
+
+// 4. Every legacy redirect has its stub and a real destination.
 for (const [sourcePath, destinationPath] of redirects) {
   for (const stubPath of stubPathsForSource(sourcePath)) {
     if (!(await readTextIfExists(stubPath))) {

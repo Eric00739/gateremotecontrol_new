@@ -5,9 +5,15 @@ import { notFound } from 'next/navigation';
 import LeadModalTrigger from '@/components/LeadModalTrigger';
 import { compatibilityBrands, getCompatibilityBrand } from '@/data/compatibility';
 import { type Locale, locales } from '@/i18n';
-import { getDictSync } from '@/i18n/dictionaries';
+import { getDictSync, type Dictionary } from '@/i18n/dictionaries';
 import { siteName } from '@/data/site';
 import { absoluteUrl, breadcrumbJsonLd, jsonLd, localizedAlternates } from '@/lib/seo';
+
+function getLocalizedBrandCopy(dict: Dictionary, slug: string) {
+  const brands = dict.brandPage.brands;
+  if (!Object.hasOwn(brands, slug)) notFound();
+  return brands[slug as keyof typeof brands];
+}
 
 export async function generateStaticParams() {
   return compatibilityBrands.map((brand) => ({ brand: brand.slug }));
@@ -20,12 +26,11 @@ export async function generateMetadata({ params }: { params: Promise<{ brand: st
     const dict = getDictSync(locale);
     const brand = getCompatibilityBrand(slug);
 
-    if (!brand) {
-      return { title: 'Compatibility Page Not Found' };
-    }
+    if (!brand) notFound();
 
+    const localizedBrand = getLocalizedBrandCopy(dict, brand.slug);
     const title = `${brand.name} ${dict.brandPage.referenceTitle} | GateRemoteSource`;
-    const description = `${brand.shortDescription} Wholesale matching, sample verification, and OEM packaging support.`;
+    const description = localizedBrand.shortDescription;
 
     return {
       title,
@@ -62,21 +67,12 @@ export default async function BrandCompatibilityPage({
 
   if (!brand) notFound();
 
+  const localizedBrand = getLocalizedBrandCopy(dict, brand.slug);
   const relatedBrands = compatibilityBrands.filter((item) => item.slug !== brand.slug).slice(0, 5);
-  const faqItems = [
-    {
-      question: `${dict.brandPage.faqTitle} ${brand.name}?`,
-      answer: `Compatibility is not confirmed by brand name alone. ${brand.name} matching should be checked by model, frequency, receiver version, chip, coding protocol, and regional version.`,
-    },
-    {
-      question: `${dict.brandPage.sendDetails} ${brand.name}?`,
-      answer: `Send front and back photos of the original remote, the model or frequency label, receiver or opener label, button count, and target country or market version.`,
-    },
-    {
-      question: `${brand.name} OEM packaging?`,
-      answer: 'OEM logo, private-label shell options, and packaging support can be discussed after the matching reference and sample requirements are confirmed.',
-    },
-  ];
+  const faqItems = dict.brandPage.faqItems.map((item) => ({
+    question: item.question.replaceAll('{brand}', brand.name),
+    answer: item.answer.replaceAll('{brand}', brand.name),
+  }));
 
   const breadcrumbJsonLdData = breadcrumbJsonLd([
     { name: dict.brandPage.breadcrumb.home, url: absoluteUrl(`/${locale}`) },
@@ -87,6 +83,7 @@ export default async function BrandCompatibilityPage({
   const faqJsonLd = {
     '@context': 'https://schema.org',
     '@type': 'FAQPage',
+    inLanguage: locale,
     mainEntity: faqItems.map((item) => ({
       '@type': 'Question',
       name: item.question,
@@ -119,7 +116,7 @@ export default async function BrandCompatibilityPage({
               {brand.name} {dict.brandPage.referenceTitle}
             </h1>
             <p className="mt-5 max-w-2xl text-[#C7D7E8] leading-relaxed">
-              {brand.description}
+              {localizedBrand.description}
             </p>
             <div className="mt-8 flex flex-wrap gap-3">
               <LeadModalTrigger
@@ -129,8 +126,10 @@ export default async function BrandCompatibilityPage({
               >
                 {dict.compatibility.cta} {brand.name}
               </LeadModalTrigger>
-              <Link href={`/${locale}/blog/why-universal-remote-cannot-copy`} className="inline-flex items-center gap-2 rounded-lg border border-[#2A587C] px-6 py-3 text-sm font-semibold text-[#C7D7E8] transition-colors hover:border-[#FF8A1F]/50 hover:text-[#F7FBFF]">
-                {dict.compatibility.checklistLabel} <ArrowRight className="w-4 h-4 text-[#FF8A1F]" />
+              <Link href="/en/blog/why-universal-remote-cannot-copy" className="inline-flex items-center gap-2 rounded-lg border border-[#2A587C] px-6 py-3 text-sm font-semibold text-[#C7D7E8] transition-colors hover:border-[#FF8A1F]/50 hover:text-[#F7FBFF]">
+                {dict.compatibility.checklistLabel}
+                {locale !== 'en' && <span className="text-xs font-normal">({dict.blog.englishLabel})</span>}
+                <ArrowRight className="w-4 h-4 text-[#FF8A1F]" />
               </Link>
             </div>
           </div>
@@ -156,7 +155,7 @@ export default async function BrandCompatibilityPage({
                 <span>{dict.brandPage.codeTypeRef}</span>
                 <span>{dict.brandPage.matchingNote}</span>
               </div>
-              {brand.models.map((model) => (
+              {localizedBrand.models.map((model) => (
                 <div key={model.model} className="grid gap-3 border-t border-[#E2E8F0] px-5 py-4 text-sm sm:grid-cols-[1fr_0.85fr_0.9fr_1.3fr] sm:gap-4 sm:first:border-t-0">
                   <div>
                     <p className="text-[10px] font-bold uppercase tracking-[0.12em] text-[#94A3B8] sm:hidden" style={{ fontFamily: 'var(--font-jetbrains-mono), monospace' }}>{dict.brandPage.modelRef}</p>
@@ -184,7 +183,7 @@ export default async function BrandCompatibilityPage({
               {dict.brandPage.sendDetails}
             </h2>
             <div className="mt-5 space-y-3">
-              {brand.checks.map((check) => (
+              {localizedBrand.checks.map((check) => (
                 <div key={check} className="flex gap-3">
                   <CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-[#FF8A1F]" />
                   <p className="text-sm leading-relaxed text-[#64748B]">{check}</p>
@@ -214,7 +213,7 @@ export default async function BrandCompatibilityPage({
               </p>
             </div>
             <div className="grid sm:grid-cols-2 gap-4">
-              {['Sample testing before bulk order', 'OEM logo and packaging options', 'Receiver and frequency confirmation', 'Wholesale sourcing support'].map((item) => (
+              {dict.brandPage.supportItems.map((item) => (
                 <div key={item} className="rounded-lg border border-[#E2E8F0] bg-[#F8FAFC] p-4">
                   <p className="text-sm font-semibold text-[#153A5C]">{item}</p>
                 </div>
@@ -255,7 +254,7 @@ export default async function BrandCompatibilityPage({
             </p>
             <div className="mt-3 flex flex-wrap gap-2">
               {relatedBrands.map((item) => (
-                <Link key={item.slug} href={`/${locale}/compatibility/${item.slug}`} className="rounded-lg border border-[#E2E8F0] bg-white px-4 py-2 text-sm font-semibold text-[#153A5C] transition-colors hover:border-[#FF8A1F]/40 hover:text-[#FF8A1F]">
+                <Link key={item.slug} href={`/${locale}/compatibility/${item.slug}`} title={getLocalizedBrandCopy(dict, item.slug).shortDescription} className="rounded-lg border border-[#E2E8F0] bg-white px-4 py-2 text-sm font-semibold text-[#153A5C] transition-colors hover:border-[#FF8A1F]/40 hover:text-[#FF8A1F]">
                   {item.name}
                 </Link>
               ))}

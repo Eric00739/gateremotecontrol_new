@@ -3,7 +3,7 @@ import { blogPosts } from '@/data/blog';
 import { compatibilityBrands } from '@/data/compatibility';
 import { catalogPage, factoryQualityPage, oemPage } from '@/data/servicePages';
 import { defaultLocale, locales } from '@/i18n';
-import { absoluteUrl, localizedAlternates, siteUpdatedAt } from '@/lib/seo';
+import { absoluteUrl, localizedAlternates, pageLastModified } from '@/lib/seo';
 
 export const dynamic = 'force-static';
 
@@ -12,14 +12,12 @@ export function generateStaticParams() {
 }
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const lastModified = new Date(siteUpdatedAt);
-
   const entries: MetadataRoute.Sitemap = [];
 
   for (const locale of locales) {
     entries.push({
       url: absoluteUrl(`/${locale}`),
-      lastModified,
+      lastModified: pageLastModified(''),
       changeFrequency: 'monthly',
       priority: 1,
       alternates: { languages: localizedAlternates('') },
@@ -27,7 +25,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
 
     entries.push({
       url: absoluteUrl(`/${locale}/compatibility`),
-      lastModified,
+      lastModified: pageLastModified('/compatibility'),
       changeFrequency: 'weekly',
       priority: 0.9,
       alternates: { languages: localizedAlternates('/compatibility') },
@@ -36,7 +34,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     for (const page of [oemPage, factoryQualityPage, catalogPage]) {
       entries.push({
         url: absoluteUrl(`/${locale}${page.path}`),
-        lastModified,
+        lastModified: pageLastModified(page.path),
         changeFrequency: 'monthly',
         priority: 0.75,
         alternates: { languages: localizedAlternates(page.path) },
@@ -46,7 +44,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     for (const brand of compatibilityBrands) {
       entries.push({
         url: absoluteUrl(`/${locale}/compatibility/${brand.slug}`),
-        lastModified,
+        lastModified: pageLastModified(`/compatibility/${brand.slug}`),
         changeFrequency: 'weekly',
         priority: 0.85,
         alternates: { languages: localizedAlternates(`/compatibility/${brand.slug}`) },
@@ -55,7 +53,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
 
     entries.push({
       url: absoluteUrl(`/${locale}/blog`),
-      lastModified,
+      lastModified: pageLastModified('/blog'),
       changeFrequency: 'weekly',
       priority: 0.8,
       alternates: { languages: localizedAlternates('/blog') },

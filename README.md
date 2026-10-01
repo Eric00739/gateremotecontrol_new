@@ -20,7 +20,7 @@ npm run lint
 npm run build
 ```
 
-`npm run build` 完成 Next.js 构建、旧 URL 重定向生成、HTML 语言标记修正，以及 sitemap、canonical 和重定向目标校验。任何校验失败都会令构建失败。
+`npm run build` 完成 Next.js 构建、旧 URL 重定向生成、HTML 语言标记修正，以及 sitemap、canonical、博客完整目录和重定向目标校验。任何校验失败都会令构建失败。
 
 项目使用 Next.js `output: 'export'`，不要运行 `next start`。完整的本地交互检查使用 `npm run dev`；直接查看构建产物可运行：
 
@@ -44,7 +44,7 @@ GitHub Actions 工作流 [`.github/workflows/deploy.yml`](.github/workflows/depl
 - `src/data/visuals.ts`：三个服务页的图片路径、来源类型和本地化 alt 键；现用素材为参考配图，真实来源仍待核验。
 - `scripts/generate-static-redirects.mjs`：旧 URL 重定向和导出 HTML 的语言标记修正。
 - `scripts/legacy-redirects.mjs`：旧 URL 重定向数据。
-- `scripts/verify-export.mjs`：静态导出、sitemap、canonical 和重定向目标校验。
+- `scripts/verify-export.mjs`：静态导出、sitemap、canonical、六语博客目录和重定向目标校验。
 
 ## 询盘与内容边界
 
@@ -55,3 +55,11 @@ GitHub Actions 工作流 [`.github/workflows/deploy.yml`](.github/workflows/depl
 不要把未经站点所有者确认的公司身份、工厂关系、SKU、MOQ、认证、交期、客户案例或图片场景写成事实。真实产品和工厂图片到位前，不重新启用“工厂证据”图库。
 
 当前可执行改造与仍需所有者输入的事项见 [WEBSITE_IMPROVEMENT_PLAN.md](WEBSITE_IMPROVEMENT_PLAN.md)。
+
+## SEO 内容维护
+
+品牌页的正文、摘要、核对清单和 FAQ 由六套词典的 `brandPage` 提供；FAQ 可见内容与结构化数据使用同一份文案。技术型号和频率是核对线索，不能改写成已经验证的兼容承诺。
+
+博客目前只发布英文正文。六语目录链接到英文原文，保留的非英文文章 URL 继续 `noindex,follow` 并 canonical 到英文。全文翻译完成后再调整收录和 hreflang。
+
+`src/lib/seo.ts` 的 `pageUpdatedAt` 按页面路径记录实质修改日期，构建不会自动刷新日期。修改同一页面的六语内容时一起更新对应记录；各语言更新日不同时应拆开登记。未知日期的页面或文章省略 lastmod，不修改原发布日期制造更新。

@@ -1,7 +1,7 @@
-export default {
+const pt = {
   meta: {
-    title: 'Controles Remotos e Receptores para Operadores de Portões, Portas de Garagem e Persianas',
-    description: 'Encontre controles remotos e receptores compatíveis para operadores de portões, portas de garagem e persianas. Fornecimento por atacado, teste de amostras e opções de logotipo ou embalagem OEM disponíveis.',
+    title: 'Controles para portões no atacado | GateRemoteSource',
+    description: 'Controles compatíveis para portões e garagens, receptores e opções OEM para instaladores e distribuidores. Confirme a compatibilidade antes do pedido.',
   },
   announcement: {
     text: 'CONTROLES REMOTOS COMPATÍVEIS PARA PRINCIPAIS SISTEMAS DE PORTÕES E GARAGENS  |  OEM / ODM / ATACADO',
@@ -48,6 +48,7 @@ export default {
     logoPackaging: 'Logotipo / Embalagem',
   },
   compatibility: {
+    metaTitle: 'Compatibilidade de controles para portões | GateRemoteSource',
     sectionLabel: 'Compatibilidade',
     title: 'Guias de Controles Remotos Compatíveis de Reposição',
     subtitle: 'Páginas de referência de marca para instaladores, chaveiros e distribuidores que precisam combinar controles de portões e portas de garagem sem a marca original.',
@@ -101,6 +102,244 @@ export default {
     faqTitle: 'Perguntas do Comprador',
     faqHeading: 'FAQ de Correspondência',
     morePages: 'Mais Páginas de Marca',
+    brands: {
+      faac: {
+        shortDescription: 'Verificação de controles de reposição para determinados sistemas de portões FAAC.',
+        description: 'Opções de controles de reposição para determinados sistemas de portões FAAC. A compatibilidade final depende do modelo, frequência, versão do receptor, chip e protocolo de codificação.',
+        buyerIntents: [
+          'Reposição de controles FAAC',
+          'Controles compatíveis para portões FAAC',
+          'Controles FAAC 433.92 MHz',
+        ],
+        models: [
+          {
+            model: 'Referências XT2 / XT4',
+            frequency: 'Referências 433.92 MHz',
+            codeType: 'Referências de código rolante',
+            note: 'Confirme pela foto do controle original e pela etiqueta do receptor.',
+          },
+          {
+            model: 'Referências SLH / controle mestre',
+            frequency: 'Depende da versão do mercado',
+            codeType: 'Depende do protocolo',
+            note: 'Recomenda-se testar amostras antes de pedidos no atacado.',
+          },
+          {
+            model: 'Referências antigas de código fixo',
+            frequency: 'Depende da etiqueta',
+            codeType: 'Referências de código fixo',
+            note: 'Envie os detalhes das chaves DIP ou da PCB, se disponíveis.',
+          },
+        ],
+        checks: [
+          'Fotos da frente e do verso do controle original',
+          'Etiqueta do receptor ou da placa de controle do motor',
+          'Etiqueta de frequência, como 433.92 MHz',
+          'Identificação do chip ou da PCB, se disponível',
+          'País de destino ou versão do mercado',
+        ],
+      },
+      nice: {
+        shortDescription: 'Fornecimento de controles de reposição compatíveis para determinados automatizadores de portões Nice.',
+        description: 'Suporte à compatibilidade para determinadas referências de controles Nice, com verificação do modelo, validação de amostras e fornecimento com marca própria.',
+        buyerIntents: [
+          'Reposição de controles para portões Nice',
+          'Controles compatíveis com Nice',
+          'Fornecedor de controles para garagens Nice',
+        ],
+        models: [
+          {
+            model: 'Referências FLO2R-S',
+            frequency: 'Referências 433.92 MHz',
+            codeType: 'Referências de código rolante',
+            note: 'Confirme o modelo e a região antes de verificar a compatibilidade.',
+          },
+          {
+            model: 'Referências ON / ON-E',
+            frequency: 'Depende da versão do mercado',
+            codeType: 'Referências de código rolante',
+            note: 'A versão do receptor pode afetar a compatibilidade.',
+          },
+          {
+            model: 'Referências de código fixo',
+            frequency: 'Depende da etiqueta',
+            codeType: 'Referências de código fixo',
+            note: 'Envie fotos do controle e do receptor para verificação.',
+          },
+        ],
+        checks: [
+          'Modelo do controle impresso na carcaça ou etiqueta',
+          'Identificação de frequência',
+          'Etiqueta da placa do receptor ou do motor',
+          'Número de botões e foto da carcaça',
+          'Quantidade de amostras e necessidades OEM',
+        ],
+      },
+      bft: {
+        shortDescription: 'Controles de reposição do tipo BFT e suporte à verificação RF.',
+        description: 'Verificação de controles de reposição para determinados sistemas de portões BFT, com foco na verificação pelo comprador, testes de amostras e fornecimento no atacado.',
+        buyerIntents: [
+          'Reposição de controles BFT',
+          'Controles compatíveis com BFT MITTO',
+          'Fornecedor de controles para portões BFT',
+        ],
+        models: [
+          {
+            model: 'Referências MITTO 2',
+            frequency: 'Referências 433.92 MHz',
+            codeType: 'Referências de código rolante',
+            note: 'Verifique por modelo, versão do receptor e região do mercado.',
+          },
+          {
+            model: 'Referências MITTO 4',
+            frequency: 'Referências 433.92 MHz',
+            codeType: 'Referências de código rolante',
+            note: 'Confirme o número de botões e a foto do controle original.',
+          },
+          {
+            model: 'Referências regionais',
+            frequency: 'Depende da região',
+            codeType: 'Depende do protocolo',
+            note: 'Pedidos no atacado exigem confirmação técnica.',
+          },
+        ],
+        checks: [
+          'Foto do controle original',
+          'Referência do modelo ou da família',
+          'Etiqueta do receptor',
+          'Frequência e versão do mercado',
+          'Embalagem ou marca necessárias',
+        ],
+      },
+      doorhan: {
+        shortDescription: 'Verificação de controles de reposição DoorHan para determinados sistemas de portões e garagens.',
+        description: 'Suporte para determinadas solicitações de reposição de controles DoorHan, com verificação do modelo, confirmação da frequência e validação de amostras.',
+        buyerIntents: [
+          'Reposição de controles DoorHan',
+          'Controles compatíveis com DoorHan',
+          'Fornecedor de controles para portões DoorHan',
+        ],
+        models: [
+          {
+            model: 'Referências de controles de 2 botões',
+            frequency: 'Referências 433.92 MHz',
+            codeType: 'Depende do protocolo',
+            note: 'Confirme a carcaça, o receptor e a versão regional.',
+          },
+          {
+            model: 'Referências de controles de 4 botões',
+            frequency: 'Depende da etiqueta',
+            codeType: 'Depende do protocolo',
+            note: 'Envie fotos do controle antes de selecionar uma amostra.',
+          },
+          {
+            model: 'Referências de automatizadores de portas de garagem',
+            frequency: 'Depende da versão do mercado',
+            codeType: 'Depende do receptor',
+            note: 'A etiqueta do receptor é importante para a verificação.',
+          },
+        ],
+        checks: [
+          'Foto da carcaça do controle',
+          'Etiqueta de frequência',
+          'Etiqueta do receptor ou do automatizador',
+          'Número de botões',
+          'País ou versão do mercado',
+        ],
+      },
+      came: {
+        shortDescription: 'Referências de controles de reposição compatíveis para determinados sistemas de portões CAME.',
+        description: 'Suporte ao fornecimento de reposição para determinadas referências de controles CAME, com comparação de modelos, testes de amostras e opções de embalagem OEM.',
+        buyerIntents: [
+          'Reposição de controles CAME',
+          'Controles compatíveis para portões CAME',
+          'Fornecedor de controles CAME 433.92 MHz',
+        ],
+        models: [
+          {
+            model: 'Referências da série TOP',
+            frequency: 'Referências 433.92 MHz',
+            codeType: 'Referências de código fixo ou rolante',
+            note: 'Confirme o modelo exato e a codificação antes de verificar a compatibilidade.',
+          },
+          {
+            model: 'Referências TAM / TWIN',
+            frequency: 'Depende da etiqueta',
+            codeType: 'Depende do protocolo',
+            note: 'Envie os detalhes do controle e do receptor.',
+          },
+          {
+            model: 'Referências de vários botões',
+            frequency: 'Depende da versão do mercado',
+            codeType: 'Depende do receptor',
+            note: 'Recomenda-se testar amostras.',
+          },
+        ],
+        checks: [
+          'Família exata do modelo',
+          'Etiqueta do controle e foto da carcaça',
+          'Foto da placa do receptor',
+          'Identificação de frequência',
+          'Requisitos de pedido no atacado e marca',
+        ],
+      },
+      liftmaster: {
+        shortDescription: 'Reposição de determinados controles compatíveis com LiftMaster e suporte a compras no atacado.',
+        description: 'Suporte à reposição de controles para determinadas referências de automatizadores de garagens e portões LiftMaster, com verificação cuidadosa da frequência e do protocolo.',
+        buyerIntents: [
+          'Reposição de controles LiftMaster',
+          'Controles compatíveis com LiftMaster',
+          'Controles para garagens no atacado',
+        ],
+        models: [
+          {
+            model: 'Referências 893MAX',
+            frequency: 'Depende do receptor e da região',
+            codeType: 'Referências Security+ / Security+ 2.0',
+            note: 'Confirme a geração do automatizador, a frequência e a região antes de verificar a compatibilidade.',
+          },
+          {
+            model: 'Referências 315 MHz',
+            frequency: 'Referências 315 MHz',
+            codeType: 'Depende do protocolo',
+            note: 'Verifique o modelo original e a etiqueta do receptor.',
+          },
+          {
+            model: 'Referências 390 MHz',
+            frequency: 'Referências 390 MHz',
+            codeType: 'Depende do protocolo',
+            note: 'Sistemas antigos exigem confirmação do modelo.',
+          },
+        ],
+        checks: [
+          'Modelo do controle original',
+          'Etiqueta do automatizador ou do receptor',
+          'Identificação de frequência ou protocolo',
+          'Cor dos botões ou foto da carcaça',
+          'País ou versão do mercado',
+        ],
+      },
+    },
+    faqItems: [
+      {
+        question: 'Como confirmar a compatibilidade com {brand}?',
+        answer: 'O nome da marca sozinho não confirma a compatibilidade. Para {brand}, devem ser verificados modelo, frequência, versão do receptor, chip, protocolo de codificação e versão regional.',
+      },
+      {
+        question: 'Quais informações devo enviar para verificar um controle {brand}?',
+        answer: 'Envie fotos da frente e do verso do controle original, a etiqueta de modelo ou frequência, a etiqueta do receptor ou automatizador, o número de botões e o país de destino ou a versão do mercado.',
+      },
+      {
+        question: 'Posso consultar opções de embalagem OEM para um controle compatível com {brand}?',
+        answer: 'Logo OEM, opções de carcaça com marca própria e embalagem podem ser discutidos após a confirmação da referência de compatibilidade e dos requisitos de amostras.',
+      },
+    ],
+    supportItems: [
+      'Testes de amostras antes do pedido no atacado',
+      'Opções de logo OEM e embalagem',
+      'Confirmação do receptor e da frequência',
+      'Suporte ao fornecimento no atacado',
+    ],
     breadcrumb: { home: 'Início', compatibility: 'Compatibilidade' },
   },
   risk: {
@@ -420,6 +659,9 @@ export default {
     compatibilityReferences: 'Referências de Compatibilidade',
   },
   blog: {
+    archiveTitle: 'Todos os guias de compra',
+    archiveDescription: 'Explore todos os guias de compatibilidade e compra. No momento, os guias completos estão em inglês; os links abrem o texto original em inglês.',
+    englishLabel: 'Em inglês',
     sectionLabel: 'Base de Conhecimento',
     title: 'Blog e Guias de Compatibilidade',
     subtitle: 'Guias práticos sobre correspondência de frequência, protocolos de código rolante, desenvolvimento OEM e o que os compradores precisam antes de solicitar verificações de compatibilidade RF.',
@@ -469,3 +711,5 @@ export default {
     contactUs: 'Fale Conosco',
   },
 };
+
+export default pt;

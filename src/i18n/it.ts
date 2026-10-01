@@ -1,7 +1,7 @@
-export default {
+const it = {
   meta: {
-    title: 'Telecomandi e Ricevitori per Cancelli Automatici, Porte da Garage e Tende Avvolgibili',
-    description: 'Trova telecomandi e ricevitori compatibili per cancelli automatici, porte da garage e tende avvolgibili. Fornitura all\'ingrosso, test campioni e opzioni per logo OEM o packaging personalizzato.',
+    title: 'Telecomandi per cancelli all’ingrosso | GateRemoteSource',
+    description: 'Telecomandi compatibili per cancelli e garage, ricevitori e opzioni OEM per installatori e distributori. Compatibilità da confermare prima dell’ordine.',
   },
   announcement: {
     text: 'TELECOMANDI DI RICAMBIO COMPATIBILI PER I PRINCIPALI SISTEMI DI CANCELLI E GARAGE | OEM / ODM / INGROSSO',
@@ -48,6 +48,7 @@ export default {
     logoPackaging: 'Logo / Packaging',
   },
   compatibility: {
+    metaTitle: 'Compatibilità telecomandi per cancelli | GateRemoteSource',
     sectionLabel: 'Compatibilit\u00e0',
     title: 'Guide per Telecomandi di Ricambio Compatibili',
     subtitle: 'Pagine di riferimento per installatori, fabbri e distributori che necessitano di abbinare telecomandi per cancelli e porte da garage senza marchio originale.',
@@ -101,6 +102,244 @@ export default {
     faqTitle: 'Domande degli Acquirenti',
     faqHeading: 'FAQ sulla Corrispondenza',
     morePages: 'Altre Pagine per Marca',
+    brands: {
+      faac: {
+        shortDescription: 'Verifica di telecomandi di ricambio per determinati sistemi di cancelli FAAC.',
+        description: 'Opzioni di telecomandi di ricambio per determinati sistemi di cancelli FAAC. La compatibilità finale dipende da modello, frequenza, versione del ricevitore, chip e protocollo di codifica.',
+        buyerIntents: [
+          'Sostituzione telecomandi FAAC',
+          'Telecomandi compatibili per cancelli FAAC',
+          'Telecomandi FAAC 433.92 MHz',
+        ],
+        models: [
+          {
+            model: 'Riferimenti XT2 / XT4',
+            frequency: 'Riferimenti 433.92 MHz',
+            codeType: 'Riferimenti a codice variabile',
+            note: 'Confermate tramite la foto del telecomando originale e l’etichetta del ricevitore.',
+          },
+          {
+            model: 'Riferimenti SLH / telecomando master',
+            frequency: 'Dipende dalla versione di mercato',
+            codeType: 'Dipende dal protocollo',
+            note: 'Si consiglia di provare i campioni prima degli ordini all’ingrosso.',
+          },
+          {
+            model: 'Riferimenti meno recenti a codice fisso',
+            frequency: 'Dipende dall’etichetta',
+            codeType: 'Riferimenti a codice fisso',
+            note: 'Condividete i dettagli degli interruttori DIP o del PCB, se disponibili.',
+          },
+        ],
+        checks: [
+          'Foto fronte e retro del telecomando originale',
+          'Etichetta del ricevitore o della scheda di controllo del motore',
+          'Etichetta della frequenza, ad esempio 433.92 MHz',
+          'Marcatura del chip o del PCB, se disponibile',
+          'Paese di destinazione o versione di mercato',
+        ],
+      },
+      nice: {
+        shortDescription: 'Fornitura di telecomandi di ricambio compatibili per determinati motori per cancelli Nice.',
+        description: 'Assistenza alla compatibilità per determinati riferimenti di telecomandi Nice, con verifica del modello, controllo dei campioni e fornitura a marchio privato.',
+        buyerIntents: [
+          'Sostituzione telecomandi per cancelli Nice',
+          'Telecomandi compatibili con Nice',
+          'Fornitore di telecomandi per garage Nice',
+        ],
+        models: [
+          {
+            model: 'Riferimenti FLO2R-S',
+            frequency: 'Riferimenti 433.92 MHz',
+            codeType: 'Riferimenti a codice variabile',
+            note: 'Confermate modello e regione prima di verificare la compatibilità.',
+          },
+          {
+            model: 'Riferimenti ON / ON-E',
+            frequency: 'Dipende dalla versione di mercato',
+            codeType: 'Riferimenti a codice variabile',
+            note: 'La versione del ricevitore può influire sulla compatibilità.',
+          },
+          {
+            model: 'Riferimenti a codice fisso',
+            frequency: 'Dipende dall’etichetta',
+            codeType: 'Riferimenti a codice fisso',
+            note: 'Inviate foto del telecomando e del ricevitore per la verifica.',
+          },
+        ],
+        checks: [
+          'Modello del telecomando stampato sull’involucro o sull’etichetta',
+          'Marcatura della frequenza',
+          'Etichetta della scheda del ricevitore o del motore',
+          'Numero di pulsanti e foto dell’involucro',
+          'Quantità di campioni ed esigenze OEM',
+        ],
+      },
+      bft: {
+        shortDescription: 'Telecomandi di ricambio di tipo BFT e assistenza alla verifica RF.',
+        description: 'Verifica di telecomandi di ricambio per determinati sistemi di cancelli BFT, incentrata sulla verifica dell’acquirente, le prove dei campioni e la fornitura all’ingrosso.',
+        buyerIntents: [
+          'Sostituzione telecomandi BFT',
+          'Telecomandi compatibili con BFT MITTO',
+          'Fornitore di telecomandi per cancelli BFT',
+        ],
+        models: [
+          {
+            model: 'Riferimenti MITTO 2',
+            frequency: 'Riferimenti 433.92 MHz',
+            codeType: 'Riferimenti a codice variabile',
+            note: 'Verificate per modello, versione del ricevitore e regione di mercato.',
+          },
+          {
+            model: 'Riferimenti MITTO 4',
+            frequency: 'Riferimenti 433.92 MHz',
+            codeType: 'Riferimenti a codice variabile',
+            note: 'Confermate il numero di pulsanti e la foto del telecomando originale.',
+          },
+          {
+            model: 'Riferimenti regionali',
+            frequency: 'Dipende dalla regione',
+            codeType: 'Dipende dal protocollo',
+            note: 'Gli ordini all’ingrosso richiedono una conferma tecnica.',
+          },
+        ],
+        checks: [
+          'Foto del telecomando originale',
+          'Riferimento del modello o della famiglia',
+          'Etichetta del ricevitore',
+          'Frequenza e versione di mercato',
+          'Imballaggio o marchio richiesti',
+        ],
+      },
+      doorhan: {
+        shortDescription: 'Verifica di telecomandi di ricambio DoorHan per determinati sistemi di cancelli e porte da garage.',
+        description: 'Assistenza per determinate richieste di sostituzione di telecomandi DoorHan, con verifica del modello, conferma della frequenza e controllo dei campioni.',
+        buyerIntents: [
+          'Sostituzione telecomandi DoorHan',
+          'Telecomandi compatibili con DoorHan',
+          'Fornitore di telecomandi per cancelli DoorHan',
+        ],
+        models: [
+          {
+            model: 'Riferimenti di telecomandi a 2 pulsanti',
+            frequency: 'Riferimenti 433.92 MHz',
+            codeType: 'Dipende dal protocollo',
+            note: 'Confermate involucro, ricevitore e versione regionale.',
+          },
+          {
+            model: 'Riferimenti di telecomandi a 4 pulsanti',
+            frequency: 'Dipende dall’etichetta',
+            codeType: 'Dipende dal protocollo',
+            note: 'Inviate foto del telecomando prima di scegliere un campione.',
+          },
+          {
+            model: 'Riferimenti di motori per porte da garage',
+            frequency: 'Dipende dalla versione di mercato',
+            codeType: 'Dipende dal ricevitore',
+            note: 'L’etichetta del ricevitore è importante per la verifica.',
+          },
+        ],
+        checks: [
+          'Foto dell’involucro del telecomando',
+          'Etichetta della frequenza',
+          'Etichetta del ricevitore o del motore',
+          'Numero di pulsanti',
+          'Paese o versione di mercato',
+        ],
+      },
+      came: {
+        shortDescription: 'Riferimenti di telecomandi di ricambio compatibili per determinati sistemi di cancelli CAME.',
+        description: 'Assistenza alla fornitura di ricambi per determinati riferimenti di telecomandi CAME, con confronto dei modelli, prove dei campioni e opzioni di imballaggio OEM.',
+        buyerIntents: [
+          'Sostituzione telecomandi CAME',
+          'Telecomandi compatibili per cancelli CAME',
+          'Fornitore di telecomandi CAME 433.92 MHz',
+        ],
+        models: [
+          {
+            model: 'Riferimenti della serie TOP',
+            frequency: 'Riferimenti 433.92 MHz',
+            codeType: 'Riferimenti a codice fisso o variabile',
+            note: 'Confermate modello esatto e codifica prima di verificare la compatibilità.',
+          },
+          {
+            model: 'Riferimenti TAM / TWIN',
+            frequency: 'Dipende dall’etichetta',
+            codeType: 'Dipende dal protocollo',
+            note: 'Inviate i dettagli del telecomando e del ricevitore.',
+          },
+          {
+            model: 'Riferimenti a più pulsanti',
+            frequency: 'Dipende dalla versione di mercato',
+            codeType: 'Dipende dal ricevitore',
+            note: 'Si consiglia di provare i campioni.',
+          },
+        ],
+        checks: [
+          'Famiglia esatta del modello',
+          'Etichetta del telecomando e foto dell’involucro',
+          'Foto della scheda del ricevitore',
+          'Marcatura della frequenza',
+          'Requisiti per ordine all’ingrosso e marchio',
+        ],
+      },
+      liftmaster: {
+        shortDescription: 'Ricambio di determinati telecomandi compatibili con LiftMaster e assistenza per acquisti all’ingrosso.',
+        description: 'Assistenza alla sostituzione di telecomandi per determinati riferimenti di motori per garage e cancelli LiftMaster, con attenta verifica della frequenza e del protocollo.',
+        buyerIntents: [
+          'Sostituzione telecomandi LiftMaster',
+          'Telecomandi compatibili con LiftMaster',
+          'Telecomandi per garage all’ingrosso',
+        ],
+        models: [
+          {
+            model: 'Riferimenti 893MAX',
+            frequency: 'Dipende dal ricevitore e dalla regione',
+            codeType: 'Riferimenti Security+ / Security+ 2.0',
+            note: 'Confermate generazione del motore, frequenza e regione prima di verificare la compatibilità.',
+          },
+          {
+            model: 'Riferimenti 315 MHz',
+            frequency: 'Riferimenti 315 MHz',
+            codeType: 'Dipende dal protocollo',
+            note: 'Verificate il modello originale e l’etichetta del ricevitore.',
+          },
+          {
+            model: 'Riferimenti 390 MHz',
+            frequency: 'Riferimenti 390 MHz',
+            codeType: 'Dipende dal protocollo',
+            note: 'I sistemi meno recenti richiedono la conferma del modello.',
+          },
+        ],
+        checks: [
+          'Modello del telecomando originale',
+          'Etichetta del motore o del ricevitore',
+          'Marcatura della frequenza o del protocollo',
+          'Colore dei pulsanti o foto dell’involucro',
+          'Paese o versione di mercato',
+        ],
+      },
+    },
+    faqItems: [
+      {
+        question: 'Come si conferma la compatibilità con {brand}?',
+        answer: 'Il nome del marchio da solo non conferma la compatibilità. Per {brand} occorre verificare modello, frequenza, versione del ricevitore, chip, protocollo di codifica e versione regionale.',
+      },
+      {
+        question: 'Quali dettagli devo inviare per verificare un telecomando {brand}?',
+        answer: 'Inviate foto fronte e retro del telecomando originale, l’etichetta del modello o della frequenza, l’etichetta del ricevitore o del motore, il numero di pulsanti e il paese di destinazione o la versione di mercato.',
+      },
+      {
+        question: 'Posso richiedere opzioni di imballaggio OEM per un telecomando compatibile con {brand}?',
+        answer: 'Logo OEM, opzioni di involucro a marchio privato e imballaggio possono essere discussi dopo aver confermato il riferimento di compatibilità e i requisiti dei campioni.',
+      },
+    ],
+    supportItems: [
+      'Prove dei campioni prima dell’ordine all’ingrosso',
+      'Opzioni di logo OEM e imballaggio',
+      'Conferma del ricevitore e della frequenza',
+      'Assistenza alla fornitura all’ingrosso',
+    ],
     breadcrumb: { home: 'Home', compatibility: 'Compatibilit\u00e0' },
   },
   risk: {
@@ -420,6 +659,9 @@ export default {
     compatibilityReferences: 'Riferimenti di Compatibilit\u00e0',
   },
   blog: {
+    archiveTitle: 'Tutte le guide all’acquisto',
+    archiveDescription: 'Consultate tutte le guide alla compatibilità e all’acquisto. Le guide complete sono attualmente in inglese; i link aprono il testo originale inglese.',
+    englishLabel: 'In inglese',
     sectionLabel: 'Base di Conoscenza',
     title: 'Blog e Guide di Compatibilit\u00e0',
     subtitle: 'Guide pratiche su corrispondenza di frequenze, protocolli rolling code, sviluppo OEM e ci\u00f2 che gli acquirenti devono sapere prima di richiedere verifiche di compatibilit\u00e0 RF.',
@@ -469,3 +711,5 @@ export default {
     contactUs: 'Contattaci',
   },
 };
+
+export default it;

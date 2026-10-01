@@ -1,7 +1,7 @@
-export default {
+const fr = {
   meta: {
-    title: "Télécommandes et récepteurs pour portails, portes de garage et volets roulants",
-    description: "Trouvez des télécommandes et récepteurs compatibles pour portails, portes de garage et volets roulants. Fourniture en gros, tests d'échantillons et options de personnalisation de logo ou d'emballage disponibles.",
+    title: "Télécommandes de portail en gros | GateRemoteSource",
+    description: "Télécommandes compatibles pour portails et garages, récepteurs et options OEM pour installateurs et distributeurs. Compatibilité à confirmer avant commande.",
   },
   announcement: {
     text: "TÉLÉCOMMANDES DE REMPLACEMENT COMPATIBLES POUR LES PRINCIPAUX SYSTÈMES DE PORTAILS ET GARAGES  |  OEM / ODM / GROS",
@@ -48,6 +48,7 @@ export default {
     logoPackaging: "Logo / Emballage",
   },
   compatibility: {
+    metaTitle: "Compatibilité des télécommandes | GateRemoteSource",
     sectionLabel: "Compatibilité",
     title: "Guides de télécommandes de remplacement compatibles",
     subtitle: "Pages de référence par marque pour les installateurs, serruriers et distributeurs qui doivent trouver des télécommandes de portail et de garage sans marquage d'origine.",
@@ -101,6 +102,244 @@ export default {
     faqTitle: "Questions des acheteurs",
     faqHeading: "FAQ sur la correspondance",
     morePages: "Autres pages par marque",
+    brands: {
+      faac: {
+        shortDescription: "Vérification de télécommandes de remplacement pour certains systèmes de portail FAAC.",
+        description: "Options de télécommandes de remplacement pour certains systèmes de portail FAAC. La compatibilité finale dépend du modèle, de la fréquence, de la version du récepteur, de la puce et du protocole de codage.",
+        buyerIntents: [
+          "Remplacement de télécommandes FAAC",
+          "Télécommandes compatibles pour portails FAAC",
+          "Télécommandes FAAC 433.92 MHz",
+        ],
+        models: [
+          {
+            model: "Références XT2 / XT4",
+            frequency: "Références 433.92 MHz",
+            codeType: "Références à code tournant",
+            note: "Confirmez à l’aide de la photo de la télécommande d’origine et de l’étiquette du récepteur.",
+          },
+          {
+            model: "Références SLH / télécommande maître",
+            frequency: "Selon la version du marché",
+            codeType: "Selon le protocole",
+            note: "Des essais sur échantillons sont recommandés avant une commande en gros.",
+          },
+          {
+            model: "Références anciennes à code fixe",
+            frequency: "Selon l’étiquette",
+            codeType: "Références à code fixe",
+            note: "Fournissez les détails des commutateurs DIP ou du PCB, si disponibles.",
+          },
+        ],
+        checks: [
+          "Photos recto et verso de la télécommande d’origine",
+          "Étiquette du récepteur ou de la carte de commande du moteur",
+          "Étiquette de fréquence, par exemple 433.92 MHz",
+          "Marquage de la puce ou du PCB, si disponible",
+          "Pays de destination ou version du marché",
+        ],
+      },
+      nice: {
+        shortDescription: "Approvisionnement en télécommandes de remplacement compatibles pour certaines motorisations de portail Nice.",
+        description: "Assistance à la compatibilité pour certaines références de télécommandes Nice, avec vérification du modèle, validation des échantillons et fourniture sous marque privée.",
+        buyerIntents: [
+          "Remplacement de télécommandes de portail Nice",
+          "Télécommandes compatibles avec Nice",
+          "Fournisseur de télécommandes de garage Nice",
+        ],
+        models: [
+          {
+            model: "Références FLO2R-S",
+            frequency: "Références 433.92 MHz",
+            codeType: "Références à code tournant",
+            note: "Confirmez le modèle et la région avant la recherche de compatibilité.",
+          },
+          {
+            model: "Références ON / ON-E",
+            frequency: "Selon la version du marché",
+            codeType: "Références à code tournant",
+            note: "La version du récepteur peut influer sur la compatibilité.",
+          },
+          {
+            model: "Références à code fixe",
+            frequency: "Selon l’étiquette",
+            codeType: "Références à code fixe",
+            note: "Envoyez des photos de la télécommande et du récepteur pour vérification.",
+          },
+        ],
+        checks: [
+          "Modèle de la télécommande imprimé sur le boîtier ou l’étiquette",
+          "Marquage de fréquence",
+          "Étiquette de la carte du récepteur ou du moteur",
+          "Nombre de boutons et photo du boîtier",
+          "Quantité d’échantillons et besoins OEM",
+        ],
+      },
+      bft: {
+        shortDescription: "Télécommandes de remplacement de type BFT et assistance à la vérification RF.",
+        description: "Vérification de télécommandes de remplacement pour certains systèmes de portail BFT, axée sur les vérifications de l’acheteur, les essais sur échantillons et l’approvisionnement en gros.",
+        buyerIntents: [
+          "Remplacement de télécommandes BFT",
+          "Télécommandes compatibles avec BFT MITTO",
+          "Fournisseur de télécommandes de portail BFT",
+        ],
+        models: [
+          {
+            model: "Références MITTO 2",
+            frequency: "Références 433.92 MHz",
+            codeType: "Références à code tournant",
+            note: "Vérifiez selon le modèle, la version du récepteur et la région du marché.",
+          },
+          {
+            model: "Références MITTO 4",
+            frequency: "Références 433.92 MHz",
+            codeType: "Références à code tournant",
+            note: "Confirmez le nombre de boutons et la photo de la télécommande d’origine.",
+          },
+          {
+            model: "Références régionales",
+            frequency: "Selon la région",
+            codeType: "Selon le protocole",
+            note: "Une confirmation technique est nécessaire pour les commandes en gros.",
+          },
+        ],
+        checks: [
+          "Photo de la télécommande d’origine",
+          "Référence du modèle ou de la gamme",
+          "Étiquette du récepteur",
+          "Fréquence et version du marché",
+          "Emballage ou marquage souhaités",
+        ],
+      },
+      doorhan: {
+        shortDescription: "Vérification de télécommandes de remplacement DoorHan pour certains systèmes de portail et de garage.",
+        description: "Assistance pour certaines demandes de remplacement de télécommandes DoorHan, avec vérification du modèle, confirmation de la fréquence et validation des échantillons.",
+        buyerIntents: [
+          "Remplacement de télécommandes DoorHan",
+          "Télécommandes compatibles avec DoorHan",
+          "Fournisseur de télécommandes de portail DoorHan",
+        ],
+        models: [
+          {
+            model: "Références de télécommandes à 2 boutons",
+            frequency: "Références 433.92 MHz",
+            codeType: "Selon le protocole",
+            note: "Confirmez le boîtier, le récepteur et la version régionale.",
+          },
+          {
+            model: "Références de télécommandes à 4 boutons",
+            frequency: "Selon l’étiquette",
+            codeType: "Selon le protocole",
+            note: "Envoyez des photos de la télécommande avant de sélectionner un échantillon.",
+          },
+          {
+            model: "Références de motorisations de garage",
+            frequency: "Selon la version du marché",
+            codeType: "Selon le récepteur",
+            note: "L’étiquette du récepteur est importante pour la vérification.",
+          },
+        ],
+        checks: [
+          "Photo du boîtier de la télécommande",
+          "Étiquette de fréquence",
+          "Étiquette du récepteur ou de la motorisation",
+          "Nombre de boutons",
+          "Pays ou version du marché",
+        ],
+      },
+      came: {
+        shortDescription: "Références de télécommandes de remplacement compatibles pour certains systèmes de portail CAME.",
+        description: "Assistance à l’approvisionnement en télécommandes de remplacement pour certaines références CAME, avec comparaison des modèles, essais sur échantillons et options d’emballage OEM.",
+        buyerIntents: [
+          "Remplacement de télécommandes CAME",
+          "Télécommandes compatibles pour portails CAME",
+          "Fournisseur de télécommandes CAME 433.92 MHz",
+        ],
+        models: [
+          {
+            model: "Références de la série TOP",
+            frequency: "Références 433.92 MHz",
+            codeType: "Références à code fixe ou tournant",
+            note: "Confirmez le modèle exact et le codage avant la recherche de compatibilité.",
+          },
+          {
+            model: "Références TAM / TWIN",
+            frequency: "Selon l’étiquette",
+            codeType: "Selon le protocole",
+            note: "Envoyez les détails de la télécommande et du récepteur.",
+          },
+          {
+            model: "Références à plusieurs boutons",
+            frequency: "Selon la version du marché",
+            codeType: "Selon le récepteur",
+            note: "Des essais sur échantillons sont recommandés.",
+          },
+        ],
+        checks: [
+          "Gamme exacte du modèle",
+          "Étiquette de la télécommande et photo du boîtier",
+          "Photo de la carte du récepteur",
+          "Marquage de fréquence",
+          "Exigences de commande en gros et de marquage",
+        ],
+      },
+      liftmaster: {
+        shortDescription: "Remplacement de certaines télécommandes compatibles avec LiftMaster et assistance aux achats en gros.",
+        description: "Assistance au remplacement de télécommandes pour certaines références de motorisations de garage et de portail LiftMaster, avec vérification attentive de la fréquence et du protocole.",
+        buyerIntents: [
+          "Remplacement de télécommandes LiftMaster",
+          "Télécommandes compatibles avec LiftMaster",
+          "Télécommandes de garage en gros",
+        ],
+        models: [
+          {
+            model: "Références 893MAX",
+            frequency: "Selon le récepteur et la région",
+            codeType: "Références Security+ / Security+ 2.0",
+            note: "Confirmez la génération de la motorisation, la fréquence et la région avant la recherche de compatibilité.",
+          },
+          {
+            model: "Références 315 MHz",
+            frequency: "Références 315 MHz",
+            codeType: "Selon le protocole",
+            note: "Vérifiez le modèle d’origine et l’étiquette du récepteur.",
+          },
+          {
+            model: "Références 390 MHz",
+            frequency: "Références 390 MHz",
+            codeType: "Selon le protocole",
+            note: "Les systèmes anciens nécessitent une confirmation du modèle.",
+          },
+        ],
+        checks: [
+          "Modèle de la télécommande d’origine",
+          "Étiquette de la motorisation ou du récepteur",
+          "Marquage de fréquence ou de protocole",
+          "Couleur des boutons ou photo du boîtier",
+          "Pays ou version du marché",
+        ],
+      },
+    },
+    faqItems: [
+      {
+        question: "Comment confirmer la compatibilité avec {brand} ?",
+        answer: "Le nom de la marque ne suffit pas à confirmer la compatibilité. Pour {brand}, il faut vérifier le modèle, la fréquence, la version du récepteur, la puce, le protocole de codage et la version régionale.",
+      },
+      {
+        question: "Quelles informations envoyer pour vérifier une télécommande {brand} ?",
+        answer: "Envoyez des photos recto et verso de la télécommande d’origine, l’étiquette du modèle ou de la fréquence, l’étiquette du récepteur ou de la motorisation, le nombre de boutons et le pays de destination ou la version du marché.",
+      },
+      {
+        question: "Puis-je demander un emballage OEM pour une télécommande compatible avec {brand} ?",
+        answer: "Le logo OEM, les options de boîtier sous marque privée et l’emballage peuvent être discutés après confirmation de la référence de compatibilité et des exigences d’échantillons.",
+      },
+    ],
+    supportItems: [
+      "Essais sur échantillons avant commande en gros",
+      "Options de logo OEM et d’emballage",
+      "Confirmation du récepteur et de la fréquence",
+      "Assistance à l’approvisionnement en gros",
+    ],
     breadcrumb: { home: "Accueil", compatibility: "Compatibilité" },
   },
   risk: {
@@ -327,7 +566,7 @@ export default {
       facilityTitle: "Processus visible, revendications contrôlées.",
     },
     catalog: {
-      metaTitle: "Demander un catalogue de compatibilité grossiste | GateRemoteSource",
+      metaTitle: "Catalogue grossiste | GateRemoteSource",
       metaDescription: "Demandez un catalogue de gros de télécommandes compatibles, récepteurs et solutions RF. Indiquez la catégorie, le pays de destination et la quantité estimée.",
       eyebrow: "Catalogue de gros",
       title: "Demander un catalogue de compatibilité grossiste",
@@ -420,6 +659,9 @@ export default {
     compatibilityReferences: "Références de compatibilité",
   },
   blog: {
+    archiveTitle: "Tous les guides d’achat",
+    archiveDescription: "Consultez tous les guides de compatibilité et d’achat. Les guides complets sont actuellement en anglais ; les liens ouvrent le texte original anglais.",
+    englishLabel: "En anglais",
     sectionLabel: 'Base de connaissances',
     title: 'Blog et guides de compatibilité',
     subtitle: 'Guides pratiques sur la correspondance de fréquences, les protocoles de code tournant, le développement OEM et ce que les acheteurs doivent savoir avant de demander des vérifications de compatibilité RF.',
@@ -469,3 +711,5 @@ export default {
     contactUs: "Nous contacter",
   },
 };
+
+export default fr;

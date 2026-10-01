@@ -106,10 +106,10 @@ export const popularGuides = [
 export const blogPosts: BlogPostMeta[] = [
   {
     title: 'Same Shell, Same Product? The Hidden Downgrade in Electronics Manufacturing',
-    seoTitle: 'Same Shell, Different Inside: RF Remote Manufacturing Quality Guide',
+    seoTitle: 'RF Remote Quality: What the Shell Hides',
     category: 'oem-odm',
     excerpt:
-      'Two remotes can share the same plastic shell but fail very differently because PCB material, component choices, SMT quality, conformal coating, and functional testing decide real product life.',
+      'Identical remote shells can hide different PCB materials, components, assembly quality, and testing. Learn what to check before choosing a supplier.',
     slug: 'same-shell-hidden-downgrade-remote-manufacturing-quality',
     author: 'Eric Huang',
     publishedAt: '2026-05-10',
@@ -124,10 +124,10 @@ export const blogPosts: BlogPostMeta[] = [
   },
   {
     title: "Build Your Own RF Remote Control: A Beginner's Guide to Wireless Magic",
-    seoTitle: 'Build Your Own 433MHz RF Remote Control Beginner Guide',
+    seoTitle: 'Build a 433MHz RF Remote: Beginner Guide',
     category: 'rf-engineering',
     excerpt:
-      'A beginner-friendly RF remote project uses a transmitter, receiver, relay module, power supply, and antenna to demonstrate how wireless control works from button press to relay click.',
+      'Build a beginner RF remote project with a transmitter, receiver, relay, power supply, and antenna. Follow the signal from a button press to relay control.',
     slug: 'build-your-own-rf-remote-control-beginner-guide',
     author: 'Eric Huang',
     publishedAt: '2026-05-10',
@@ -142,7 +142,7 @@ export const blogPosts: BlogPostMeta[] = [
   },
   {
     title: 'Why Pairing a Third-Party RF Remote to a Brand-Name Receiver Is Harder Than It Looks',
-    seoTitle: 'Why Third-Party RF Remotes Fail to Pair with Brand Receivers',
+    seoTitle: 'Third-Party RF Remote Pairing Failures',
     category: 'compatibility',
     excerpt:
       'Pairing a third-party RF remote to a brand-name gate or garage receiver can fail at the frequency, modulation, rolling-code, hardware, firmware, or environment layer.',
@@ -160,7 +160,7 @@ export const blogPosts: BlogPostMeta[] = [
   },
   {
     title: 'Wi-Fi Switch Protocols Explained: Which One Actually Belongs in Your Smart Home?',
-    seoTitle: 'Wi-Fi Switch Protocols: Wi-Fi, Zigbee, Z-Wave, Matter, Tuya, Thread, Bluetooth',
+    seoTitle: 'Smart Switch Protocols: Wi-Fi, Matter and More',
     category: 'buyer-checklist',
     excerpt:
       'Smart switch protocol choice affects setup, reliability, scale, offline control, ecosystem compatibility, and long-term upgrade flexibility.',
@@ -178,10 +178,10 @@ export const blogPosts: BlogPostMeta[] = [
   },
   {
     title: 'RF Remote Range: 10 Meters, 30 Meters, or 100 Meters?',
-    seoTitle: 'RF Remote Range Test Data and 5 Ways to Improve It',
+    seoTitle: 'RF Remote Range Tests and 5 Improvements',
     category: 'rf-engineering',
     excerpt:
-      'RF remote range depends on transmitter power, modulation, antenna design, receiver sensitivity, building materials, and same-frequency interference, so open-field range and indoor range can be very different.',
+      'Compare open-field and indoor RF remote range. See how power, antennas, receiver sensitivity, walls, and interference affect distance and reliability.',
     slug: 'rf-remote-range-real-world-test-data',
     author: 'Eric Huang',
     publishedAt: '2026-05-10',
@@ -196,10 +196,10 @@ export const blogPosts: BlogPostMeta[] = [
   },
   {
     title: 'Is Your Garage Door Actually Secure? A Clear-Eyed Guide to Remote Control Cloning',
-    seoTitle: 'Garage Door Remote Cloning: Fixed Code vs Rolling Code Security',
+    seoTitle: 'Garage Remote Cloning: Fixed vs Rolling Code',
     category: 'rolling-code',
     excerpt:
-      'Garage door remote security depends mainly on whether the system uses fixed code or rolling code. Fixed code can be copied easily; properly implemented rolling code defeats normal replay attacks.',
+      'Understand garage door remote cloning, fixed code, and rolling code. Learn why replay attacks work on some systems and what proper rolling code protects.',
     slug: 'garage-door-remote-cloning-security-guide',
     author: 'Eric Huang',
     publishedAt: '2026-05-10',
@@ -214,10 +214,10 @@ export const blogPosts: BlogPostMeta[] = [
   },
   {
     title: "Stop Blaming the Battery: Your Car Key's Short Range Might Be the Window Tint",
-    seoTitle: 'Car Key Remote Short Range: Battery, Window Tint, EMI, and Antenna Checks',
+    seoTitle: 'Car Key Short Range: Tint, Battery and EMI',
     category: 'troubleshooting',
     excerpt:
-      'Car key remote short range is not always a weak coin cell. Metallic tint, same-frequency interference, metal key cases, rolling-code sync, and receiver antenna placement can all reduce usable range.',
+      'Diagnose short car key remote range by checking battery load, metallic window tint, interference, key cases, synchronization, and receiver antennas.',
     slug: 'car-key-short-range-window-tint',
     author: 'Eric Huang',
     publishedAt: '2026-05-10',
@@ -235,7 +235,7 @@ export const blogPosts: BlogPostMeta[] = [
     seoTitle: 'RF + Wi-Fi Dual-Mode Smart Switch Design Guide',
     category: 'rf-engineering',
     excerpt:
-      'RF + Wi-Fi dual-mode smart switches solve the two problems Wi-Fi-only products struggle with most: local control when the network fails and cloud control when the user needs automation.',
+      'Explore RF + Wi-Fi smart switch design for local control during network failures and cloud automation, with practical reliability and integration tradeoffs.',
     slug: 'rf-wifi-dual-mode-smart-switch',
     author: 'Eric Huang',
     publishedAt: '2026-05-10',
@@ -250,10 +250,10 @@ export const blogPosts: BlogPostMeta[] = [
   },
   {
     title: "What Is Really Behind the Wholesale Price of an RF Remote?",
-    seoTitle: 'RF Remote Wholesale Price: 4 Factory Cost Drivers',
+    seoTitle: 'RF Remote Wholesale Price: 4 Cost Drivers',
     category: 'buyer-checklist',
     excerpt:
-      'Two RF remotes can look almost identical but cost very different amounts because chipset choice, materials, manufacturing control, and compliance all sit inside the price.',
+      'Compare the four cost drivers behind RF remote wholesale prices: chipsets, materials, manufacturing control, and compliance. Look beyond identical shells.',
     slug: 'rf-remote-wholesale-price-cost-drivers',
     author: 'Eric Huang',
     publishedAt: '2026-05-10',
@@ -268,10 +268,10 @@ export const blogPosts: BlogPostMeta[] = [
   },
   {
     title: 'Same Batch of 433MHz Remotes: One Opens Instantly, One Plays Dead',
-    seoTitle: '433MHz Remote Short Range: Check Battery, Antenna, and EMI First',
+    seoTitle: '433MHz Remote Range: Battery, Antenna and EMI',
     category: 'troubleshooting',
     excerpt:
-      'When two identical 433MHz remotes behave differently on site, the fastest diagnosis starts with battery voltage under load, antenna placement, and electromagnetic interference.',
+      'Diagnose inconsistent 433MHz remote range with battery voltage under load, antenna placement, and interference checks before replacing components.',
     slug: '433mhz-remote-short-range-diagnostics',
     author: 'Eric Huang',
     publishedAt: '2026-05-10',
@@ -304,10 +304,10 @@ export const blogPosts: BlogPostMeta[] = [
   },
   {
     title: '10 Real-World Application Scenarios: How RF Remotes and Controllers Actually Deliver Wireless Control',
-    seoTitle: '10 RF Remote and Controller Application Scenarios',
+    seoTitle: '10 RF Remote and Controller Applications',
     category: 'buyer-checklist',
     excerpt:
-      'RF remotes and controllers work best when the scenario, control logic, load type, installation environment, interference risk, and after-sales management are matched before the product is selected.',
+      'Explore ten RF remote and controller applications. Match control logic, loads, installation conditions, interference, and service needs before selecting hardware.',
     slug: 'rf-remote-controller-application-scenarios',
     author: 'Eric Huang',
     publishedAt: '2026-05-10',
@@ -325,7 +325,7 @@ export const blogPosts: BlogPostMeta[] = [
     seoTitle: 'EU CE Requirements for Wi-Fi Switches',
     category: 'buyer-checklist',
     excerpt:
-      'For Wi-Fi switches and smart plugs, CE is not a single certificate. It is a compliance loop covering RED, RoHS, technical documentation, labeling, instructions, DoC, economic operator details, and market obligations.',
+      'Review EU CE requirements for Wi-Fi switches: RED, RoHS, technical files, labels, instructions, declarations of conformity, and economic operator obligations.',
     slug: 'exporting-wifi-switches-eu-ce-requirements',
     author: 'Eric Huang',
     publishedAt: '2026-05-10',
@@ -340,10 +340,10 @@ export const blogPosts: BlogPostMeta[] = [
   },
   {
     title: 'How Can a Single CR2032 Keep an RF Remote Running for Years?',
-    seoTitle: 'How CR2032 Batteries Power RF Remotes for Years',
+    seoTitle: 'CR2032 Battery Life in RF Remotes',
     category: 'rf-engineering',
     excerpt:
-      'A CR2032 can keep an RF remote alive for years only when the whole circuit treats standby current, RF pulses, GPIO leakage, LEDs, and wake-up timing as one fragile energy budget.',
+      'Learn how standby current, RF pulses, GPIO leakage, LEDs, and wake-up timing determine CR2032 battery life in an RF remote.',
     slug: 'cr2032-rf-remote-battery-life',
     author: 'Eric Huang',
     publishedAt: '2026-05-10',
@@ -376,7 +376,7 @@ export const blogPosts: BlogPostMeta[] = [
     seoTitle: 'OEM vs ODM: Which Path Should You Choose',
     category: 'oem-odm',
     excerpt:
-      'For hardware startups, OEM and ODM are not just production labels. They decide who controls the product, the certification path, and the future leverage in the supply chain.',
+      'Compare OEM and ODM for hardware projects, including product control, certification, supplier dependence, and long-term development choices.',
     slug: 'oem-odm-hardware-future',
     author: 'Eric Huang',
     publishedAt: '2026-05-01',
@@ -387,10 +387,10 @@ export const blogPosts: BlogPostMeta[] = [
   },
   {
     title: 'RF Remote Concurrency and Collision Avoidance: From the Physical Layer to the Protocol Layer',
-    seoTitle: 'RF Remote Concurrency and Collision Avoidance Explained',
+    seoTitle: 'RF Remote Concurrency and Collision Avoidance',
     category: 'rf-engineering',
     excerpt:
-      'When many RF remotes share the same channel, reliability depends on how the system handles shared spectrum, interference, timing, hidden terminals, acknowledgments, and recovery.',
+      'Understand RF remote collisions on shared channels, including interference, timing, hidden terminals, acknowledgments, and recovery strategies.',
     slug: 'rf-remote-control-concurrency-anti-collision',
     author: 'Eric Huang',
     publishedAt: '2026-05-10',
@@ -404,7 +404,7 @@ export const blogPosts: BlogPostMeta[] = [
     seoTitle: 'Why Clone Remotes Show Success But Still Fail',
     category: 'troubleshooting',
     excerpt:
-      'Most clone remote failures are not user mistakes. They come from frequency mismatch, incompatible code type, rolling-code security, proprietary protocol logic, or weak RF hardware.',
+      'Troubleshoot clone remotes that report success but fail to open the door. Check frequency, code type, rolling-code security, proprietary protocols, and RF hardware.',
     slug: 'why-universal-remote-cannot-copy',
     author: 'Eric Huang',
     publishedAt: '2026-05-10',
