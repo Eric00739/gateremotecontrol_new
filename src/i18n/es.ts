@@ -1,3 +1,5 @@
+const inquiryCta = 'Iniciar una consulta';
+
 const es = {
   meta: {
     title: 'Mandos para portones al por mayor | GateRemoteSource',
@@ -5,7 +7,7 @@ const es = {
   },
   announcement: {
     text: 'MANDOS DE REPUESTO COMPATIBLES PARA LOS PRINCIPALES SISTEMAS DE PORTONES Y GARAJES | OEM / ODM / VENTA AL POR MAYOR',
-    cta: 'HABLE CON UN INGENIERO',
+    cta: inquiryCta,
   },
   header: {
     products: 'Productos',
@@ -14,18 +16,18 @@ const es = {
     factory: 'Fábrica',
     blog: 'Blog',
     contact: 'Contacto',
-    quote: 'Solicitar presupuesto',
-    modelDetails: 'Enviar Modelo',
+    quote: inquiryCta,
+    modelDetails: inquiryCta,
     factoryQuality: 'Proceso de calidad',
     tagline: 'SOLUCIONES DE CONTROL RF OEM / ODM',
   },
   hero: {
-    tagline: 'Venta al por mayor | OEM | Marca privada',
-    title: 'Mandos compatibles, receptores y soluciones RF',
-    subtitle: 'Suministro independiente de posventa para instaladores, cerrajeros y distribuidores. Explore mandos compatibles para portones y garajes y confirme la compatibilidad por modelo, frecuencia, protocolo y mercado.',
-    modelDetailsCta: 'Envíenos los Detalles del Modelo',
-    unknownModelCta: '¿No sabe el modelo? Consúltenos',
-    supportedBrandsCta: 'Ver Marcas Compatibles',
+    tagline: 'Mandos y receptores para compradores profesionales',
+    title: 'Compruebe la compatibilidad antes de comprar al por mayor.',
+    subtitle: 'Envíe una foto del mando o los detalles del sistema. Ayudamos a instaladores y distribuidores a comprobar el modelo, la frecuencia y el receptor antes de probar muestras o hacer pedidos al por mayor.',
+    modelDetailsCta: inquiryCta,
+    unknownModelCta: '¿No tiene el número de modelo? Empiece con una foto o una descripción del sistema.',
+    supportedBrandsCta: 'Ver guías de compatibilidad',
     trustBadge: 'Compatible de postventa - No es marca original',
     caption: 'Fotos solo como referencia. La correspondencia debe confirmarse por modelo, frecuencia y protocolo.',
     trustItems: [
@@ -52,13 +54,13 @@ const es = {
     sectionLabel: 'Compatibilidad',
     title: 'Guía de mandos de repuesto compatibles',
     subtitle: 'Páginas de referencia de marca para instaladores, cerrajeros y distribuidores que necesitan encontrar mandos compatibles para portones y puertas de garaje sin marca original.',
-    cta: 'Enviar solicitud de compatibilidad',
+    cta: inquiryCta,
     checklistLabel: 'Lista de verificación del comprador',
     browseLabel: 'Ver referencias por marca',
     verificationTitle: 'Verificación primero',
     verificationSubtitle: 'Qué debe enviar el comprador',
     needModelChecked: '¿Necesita verificar un modelo?',
-    sendModelDetails: 'Enviar detalles del modelo',
+    sendModelDetails: inquiryCta,
     unlistedModelNote: 'Las referencias públicas cubren una selección limitada. Si su modelo no aparece, envíenos los datos que tenga para revisarlo.',
     verificationItems: [
       { title: 'Fotos del mando original', description: 'Fotos del frente y reverso del mando original, incluidos los detalles de la etiqueta.' },
@@ -88,6 +90,7 @@ const es = {
     disclaimer: 'La tabla es una referencia de compatibilidad de ejemplo. La correspondencia final depende del modelo, frecuencia, tipo de chip, versión de PCB, protocolo de codificación y versión regional.',
   },
   brandPage: {
+    independentNote: 'Proveedor independiente de posventa. Sin afiliación ni respaldo de las marcas mencionadas.',
     backLink: 'Volver a compatibilidad',
     title: 'Referencia de compatibilidad de marca',
     referenceTitle: 'Referencias de correspondencia',
@@ -360,7 +363,7 @@ const es = {
     sectionLabel: 'Productos',
     title: 'Categorías de productos',
     subtitle: 'Cada artículo debe confirmarse por marca, modelo, frecuencia, tipo de código y versión de mercado antes de solicitar muestras o pedidos al por mayor.',
-    sendInquiry: 'ENVIAR CONSULTA',
+    sendInquiry: inquiryCta,
   },
   buyerPaths: {
     sectionLabel: 'Rutas de compra',
@@ -397,8 +400,8 @@ const es = {
       oemVal: 'Etiqueta / Empaquetado',
     },
     duplicators: {
-      title: 'Duplicadores de mandos',
-      description: 'Copie y clone mandos para protocolos y frecuencias seleccionados.',
+      title: 'Mandos con aprendizaje de código',
+      description: 'Mandos con funciones de aprendizaje de código para determinados sistemas. Confirme los requisitos del protocolo y del receptor antes de utilizarlos en un sistema propio o para cuyo mantenimiento tenga autorización.',
       frequencyVal: 'Opciones multifrecuencia',
       codeTypeVal: 'Fijo / Flotante seleccionado',
       batteryVal: 'CR2032 / 27A',
@@ -435,7 +438,7 @@ const es = {
     sectionLabel: 'Proceso de verificación',
     title: 'Cómo verifican los compradores la compatibilidad antes de comprar',
     subtitle: 'Envíe primero detalles claros del producto y luego pruebe muestras cuando la compatibilidad dependa de código flotante, versión del receptor o protocolo regional.',
-    requestCta: 'Enviar solicitud de compatibilidad',
+    requestCta: inquiryCta,
     sendTitle: 'Qué debe enviar el comprador',
     sendSubtitle: 'Estos campos nos ayudan a verificar la frecuencia, el protocolo, la versión del receptor y los requisitos OEM antes de la prueba de muestras.',
   },
@@ -489,9 +492,9 @@ const es = {
   },
   cta: {
     sectionLabel: 'Empezar',
-    title: '¿Necesita ayuda para encontrar un mando compatible de forma segura?',
-    subtitle: 'Envíenos fotos del modelo, detalles de frecuencia y cantidades. Nuestro equipo confirmará la compatibilidad antes de la muestra.',
-    button: 'Obtener soporte de compatibilidad',
+    title: 'Compruebe la compatibilidad antes de su próximo pedido',
+    subtitle: 'Comparta una foto del mando o los detalles del sistema, su mercado objetivo y la cantidad estimada. Puede empezar sin número de modelo si no lo tiene.',
+    button: inquiryCta,
   },
   resources: {
     sectionLabel: 'Últimas guías',
@@ -549,7 +552,7 @@ const es = {
       eyebrow: 'Calidad y verificación',
       title: 'Controles de calidad antes de pedidos en volumen',
       subtitle: 'Revise cómo puede verificarse un pedido de mandos RF mediante muestras, pruebas funcionales, control de empaque y preparación del envío.',
-      primaryCta: 'Enviar modelo para verificación',
+      primaryCta: inquiryCta,
       secondaryCta: 'Solicitar catálogo mayorista',
       processLabel: 'Flujo de verificación',
       processTitle: 'Controles de calidad que el comprador puede solicitar',
@@ -578,7 +581,7 @@ const es = {
       requirementHeading: 'Empiece con sus necesidades de compra.',
       requirementSubtitle: 'Unos datos básicos nos ayudan a proponer opciones relevantes. El modelo y la frecuencia son opcionales en la primera consulta.',
       requirements: [
-        { title: 'Categoría de producto', description: 'Mandos de repuesto, receptores, duplicadores, controladores, accesorios o un proyecto OEM.' },
+        { title: 'Categoría de producto', description: 'Mandos de repuesto, receptores, mandos con aprendizaje de código, controladores, accesorios o un proyecto OEM.' },
         { title: 'País / mercado de destino', description: 'Dónde venderá o instalará los productos y el idioma de embalaje que prefiere.' },
         { title: 'Cantidad estimada', description: 'Rango de cantidad para muestras o compra mayorista. Puede dejarlo por definir.' },
         { title: 'Detalles técnicos (opcionales)', description: 'Marca, modelo, frecuencia o descripción del sistema, si los conoce. Adjunte fotos en WhatsApp o correo; revisaremos los datos juntos.' },
@@ -594,7 +597,7 @@ const es = {
     },
   },
   leadModal: {
-    title: 'Enviar consulta',
+    title: inquiryCta,
     nameLabel: 'Nombre (opcional)',
     namePlaceholder: 'Su nombre',
     contactDetailsLabel: 'Datos de contacto (opcionales)',
@@ -692,11 +695,11 @@ const es = {
     brandIndex: { title: 'Índice de compatibilidad de marcas', viewGuides: 'Ver guías', viewAllBrands: 'Ver todas las marcas' },
     latest: { title: 'Últimos artículos', allArticles: 'Todos los artículos', clearFilters: 'Limpiar filtros', resultsCount: 'resultados' },
     sidebar: { title: 'Filtrar y navegar', search: 'Buscar', categories: 'Categorías', popularTopics: 'Temas populares', brandIndex: 'Índice de marcas', buyerResources: 'Recursos para compradores' },
-    topics: { frequency: '433,92 MHz', rollingVsFixed: 'Flotante vs. fijo', faacGuide: 'Guía FAAC', codeCloning: 'Copia y clonación', security: 'Seguridad y cifrado' },
+    topics: { frequency: '433,92 MHz', rollingVsFixed: 'Flotante vs. fijo', faacGuide: 'Guía FAAC', codeCloning: 'Límites del aprendizaje y la vinculación', security: 'Seguridad y cifrado' },
     buyerResources: { requestChecklist: 'Lista de verificación', sampleGuide: 'Guía de pruebas', faq: 'FAQ del comprador', viewAllResources: 'Ver todos los recursos' },
     helpTitle: '¿Necesita ayuda con una pregunta de compatibilidad?',
     helpSubtitle: 'Envíenos marca, modelo, frecuencia, foto del chip o muestra del mando. Nuestro equipo verificará la compatibilidad antes de ordenar.',
-    helpCta: 'Obtener soporte de compatibilidad',
+    helpCta: inquiryCta,
     categories: { all: 'Todo', compatibility: 'Compatibilidad', rollingCode: 'Código flotante', oemOdm: 'OEM/ODM', buyerChecklist: 'Lista del comprador', troubleshooting: 'Solución de problemas' },
     loadMore: 'Cargar más',
     pagination: { prev: 'Anterior', next: 'Siguiente' },
@@ -708,7 +711,7 @@ const es = {
     checklistItems: ['Fotos del mando original', 'Etiqueta de frecuencia o modelo', 'Detalles del receptor o motor', 'Mercado objetivo y cantidad'],
     needHelp: '¿Necesita ayuda ahora?',
     needHelpSubtitle: 'Envíenos su pregunta de compatibilidad y le responderemos directamente.',
-    contactUs: 'Contáctenos',
+    contactUs: inquiryCta,
   },
 };
 

@@ -33,7 +33,7 @@ export const factoryQualityPage = {
   title: 'Quality Checks Before Bulk Orders',
   subtitle:
     'Review how an RF remote order can be verified through samples, functional checks, packaging review, and shipment preparation.',
-  primaryCta: 'Send Model for Verification',
+  primaryCta: 'Start an Inquiry',
   secondaryCta: 'Request Wholesale Catalog',
   processLabel: 'Verification workflow',
   processTitle: 'Quality checks buyers can request',
@@ -70,7 +70,7 @@ export const catalogPage = {
   requirements: [
     {
       title: 'Product Category',
-      description: 'Replacement remotes, receivers, duplicators, controllers, accessories, or an OEM project.',
+      description: 'Replacement remotes, receivers, code-learning remotes, controllers, accessories, or an OEM project.',
     },
     {
       title: 'Target Country / Market',

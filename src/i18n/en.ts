@@ -1,3 +1,5 @@
+const inquiryCta = 'Start an Inquiry';
+
 const en = {
   meta: {
     title: 'Wholesale Gate Remotes & Receivers | GateRemoteSource',
@@ -5,7 +7,7 @@ const en = {
   },
   announcement: {
     text: 'COMPATIBLE REPLACEMENT REMOTES FOR MAJOR GATE & GARAGE SYSTEMS  |  OEM / ODM / WHOLESALE',
-    cta: 'TALK TO AN ENGINEER',
+    cta: inquiryCta,
   },
   header: {
     products: 'Products',
@@ -14,18 +16,18 @@ const en = {
     factory: 'Factory',
     blog: 'Blog',
     contact: 'Contact',
-    quote: 'Get a Quote',
-    modelDetails: 'Send Model Details',
+    quote: inquiryCta,
+    modelDetails: inquiryCta,
     factoryQuality: 'Quality Process',
     tagline: 'OEM / ODM RF CONTROL SOLUTIONS',
   },
   hero: {
-    tagline: 'Wholesale | OEM | Private Label',
-    title: 'Compatible Gate Remotes, Receivers & RF Solutions',
-    subtitle: 'Independent aftermarket supply for installers, locksmiths, and distributors. Explore compatible gate and garage door remotes, then confirm the match by model, frequency, protocol, and market.',
-    modelDetailsCta: 'Send Us Your Model Details',
-    unknownModelCta: 'Not sure of the model? Ask us',
-    supportedBrandsCta: 'Check Supported Brands',
+    tagline: 'Gate Remotes & Receivers for Trade Buyers',
+    title: 'Check the Match Before You Buy in Bulk.',
+    subtitle: 'Send a remote photo or system details. We help installers and distributors check the model, frequency and receiver before sample testing or bulk orders.',
+    modelDetailsCta: inquiryCta,
+    unknownModelCta: 'No model number? Start with a photo or system description.',
+    supportedBrandsCta: 'Browse Compatibility Guides',
     trustBadge: 'Aftermarket Compatible — Not Original Brand',
     caption: 'Photos for reference only. Matching must be confirmed by model, frequency, and protocol.',
     trustItems: [
@@ -52,13 +54,13 @@ const en = {
     sectionLabel: 'Compatibility',
     title: 'Compatible Replacement Remote Guides',
     subtitle: 'Brand reference pages for installers, locksmiths, and distributors who need to match gate and garage door remotes without original branding.',
-    cta: 'Send Compatibility Request',
+    cta: inquiryCta,
     checklistLabel: 'Buyer checklist',
     browseLabel: 'Browse Brand References',
     verificationTitle: 'Verification First',
     verificationSubtitle: 'What Buyers Should Send',
     needModelChecked: 'Need a model checked?',
-    sendModelDetails: 'Send Model Details',
+    sendModelDetails: inquiryCta,
     unlistedModelNote: 'Our public references cover a limited selection. If your model is not listed, send the details you have so we can review it.',
     verificationItems: [
       { title: 'Original Remote Photos', description: 'Front and back photos of the original remote, including label details.' },
@@ -88,6 +90,7 @@ const en = {
     disclaimer: 'The table is a sample compatibility reference. Final matching depends on model, frequency, chip type, PCB version, coding protocol, and regional version.',
   },
   brandPage: {
+    independentNote: 'Independent aftermarket supplier. Not affiliated with or endorsed by the referenced brands.',
     backLink: 'Back to compatibility',
     title: 'Brand Compatibility Reference',
     referenceTitle: 'Matching References',
@@ -360,7 +363,7 @@ const en = {
     sectionLabel: 'Products',
     title: 'Product Categories',
     subtitle: 'Each item should be confirmed by brand, model, frequency, code type, and market version before sample or bulk order.',
-    sendInquiry: 'SEND INQUIRY',
+    sendInquiry: inquiryCta,
   },
   buyerPaths: {
     sectionLabel: 'Buyer paths',
@@ -397,8 +400,8 @@ const en = {
       oemVal: 'Label / Packaging',
     },
     duplicators: {
-      title: 'Remote Duplicators',
-      description: 'Copy and clone remotes for selected protocols and frequencies.',
+      title: 'Code-Learning Remotes',
+      description: 'Remotes with code-learning functions for selected systems. Confirm protocol and receiver requirements before use on a system you own or are authorized to service.',
       frequencyVal: 'Multi-frequency options',
       codeTypeVal: 'Fixed / Selected rolling',
       batteryVal: 'CR2032 / 27A',
@@ -435,7 +438,7 @@ const en = {
     sectionLabel: 'Verification Process',
     title: 'How Buyers Verify Compatibility Before Ordering',
     subtitle: 'Send clear product details first, then test samples when compatibility depends on rolling code, receiver version, or regional protocol.',
-    requestCta: 'Send Compatibility Request',
+    requestCta: inquiryCta,
     sendTitle: 'What Buyers Should Send',
     sendSubtitle: 'These fields help us check frequency, protocol, receiver version, and OEM requirements before sample testing.',
   },
@@ -489,9 +492,9 @@ const en = {
   },
   cta: {
     sectionLabel: 'Get Started',
-    title: 'Need Help Matching a Brand Remote Safely?',
-    subtitle: 'Send us model photos, frequency details, and quantity needs. Our team will confirm compatibility before sample.',
-    button: 'Get Compatibility Support',
+    title: 'Check the Match Before Your Next Order',
+    subtitle: 'Share a remote photo or system details, your target market and estimated quantity. Start without a model number if you do not have one.',
+    button: inquiryCta,
   },
   resources: {
     sectionLabel: 'Latest Guides',
@@ -549,7 +552,7 @@ const en = {
       eyebrow: 'Quality & Verification',
       title: 'Quality Checks Before Bulk Orders',
       subtitle: 'Review how an RF remote order can be verified through samples, functional checks, packaging review, and shipment preparation.',
-      primaryCta: 'Send Model for Verification',
+      primaryCta: inquiryCta,
       secondaryCta: 'Request Wholesale Catalog',
       processLabel: 'Verification workflow',
       processTitle: 'Quality checks buyers can request',
@@ -578,7 +581,7 @@ const en = {
       requirementHeading: 'Start with your purchasing needs.',
       requirementSubtitle: 'A few basic details help us suggest relevant options. Model and frequency details are optional for the first inquiry.',
       requirements: [
-        { title: 'Product Category', description: 'Replacement remotes, receivers, duplicators, controllers, accessories, or an OEM project.' },
+        { title: 'Product Category', description: 'Replacement remotes, receivers, code-learning remotes, controllers, accessories, or an OEM project.' },
         { title: 'Target Country / Market', description: 'Where you will sell or install the products, and your preferred packaging language.' },
         { title: 'Estimated Quantity', description: 'Your sample or wholesale quantity range. It is fine if the quantity is not decided yet.' },
         { title: 'Technical Details (optional)', description: 'Brand, model, frequency, or system description if known. Attach photos in WhatsApp or email; we can check the details together.' },
@@ -594,7 +597,7 @@ const en = {
     },
   },
   leadModal: {
-    title: 'Send Inquiry',
+    title: inquiryCta,
     nameLabel: 'Name (optional)',
     namePlaceholder: 'Your name',
     contactDetailsLabel: 'Contact details (optional)',
@@ -715,7 +718,7 @@ const en = {
       frequency: '433.92 MHz',
       rollingVsFixed: 'Rolling vs Fixed Code',
       faacGuide: 'FAAC Compatibility',
-      codeCloning: 'Copy & Clone Methods',
+      codeCloning: 'Learning & Pairing Limits',
       security: 'Security & Encryption',
     },
     buyerResources: {
@@ -726,7 +729,7 @@ const en = {
     },
     helpTitle: 'Need help with a compatibility question?',
     helpSubtitle: 'Send us the brand, model, frequency, chip photo, or remote sample. Our team can help check compatibility before ordering.',
-    helpCta: 'Get Compatibility Support',
+    helpCta: inquiryCta,
     categories: {
       all: 'All',
       compatibility: 'Compatibility',
@@ -748,7 +751,7 @@ const en = {
     checklistItems: ['Original remote photos', 'Frequency or model label', 'Receiver or opener details', 'Target market and quantity'],
     needHelp: 'Need help now?',
     needHelpSubtitle: 'Send us your compatibility question and we\'ll respond directly.',
-    contactUs: 'Contact Us',
+    contactUs: inquiryCta,
   },
 };
 

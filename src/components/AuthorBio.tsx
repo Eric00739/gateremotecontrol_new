@@ -4,6 +4,7 @@ import Image from 'next/image';
 import { ArrowRight } from 'lucide-react';
 import { authorProfile } from '@/data/author';
 import LeadModalTrigger from './LeadModalTrigger';
+import { useDict } from '@/i18n';
 
 type AuthorBioProps = {
   variant?: 'article' | 'compact' | 'footer';
@@ -11,6 +12,7 @@ type AuthorBioProps = {
 };
 
 export default function AuthorBio({ variant = 'article', className = '' }: AuthorBioProps) {
+  const dict = useDict();
   if (variant === 'footer') {
     return (
       <div className={`flex items-center gap-3 ${className}`}>
@@ -93,7 +95,7 @@ export default function AuthorBio({ variant = 'article', className = '' }: Autho
               prefillType="support"
               className="mt-4 inline-flex items-center gap-2 rounded-lg bg-[#FF8A1F] px-4 py-2 text-sm font-bold text-[#062748] transition-colors hover:bg-[#F97316]"
             >
-              Ask Eric a question <ArrowRight className="h-4 w-4" />
+              {dict.blogPost.contactUs} <ArrowRight className="h-4 w-4" />
             </LeadModalTrigger>
           </div>
         </div>

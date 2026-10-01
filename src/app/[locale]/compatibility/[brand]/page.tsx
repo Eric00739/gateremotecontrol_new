@@ -118,13 +118,16 @@ export default async function BrandCompatibilityPage({
             <p className="mt-5 max-w-2xl text-[#C7D7E8] leading-relaxed">
               {localizedBrand.description}
             </p>
+            <p className="mt-3 max-w-2xl text-sm text-[#C7D7E8]">
+              {dict.brandPage.independentNote}
+            </p>
             <div className="mt-8 flex flex-wrap gap-3">
               <LeadModalTrigger
                 prefillType="compatibility"
                 inquiryContext={{ modelReference: brand.name }}
                 className="btn-glow inline-flex items-center justify-center rounded-lg bg-[#FF8A1F] px-6 py-3 text-sm font-bold text-[#062748] transition-colors hover:bg-[#F97316]"
               >
-                {dict.compatibility.cta} {brand.name}
+                {dict.compatibility.cta}
               </LeadModalTrigger>
               <Link href="/en/blog/why-universal-remote-cannot-copy" className="inline-flex items-center gap-2 rounded-lg border border-[#2A587C] px-6 py-3 text-sm font-semibold text-[#C7D7E8] transition-colors hover:border-[#FF8A1F]/50 hover:text-[#F7FBFF]">
                 {dict.compatibility.checklistLabel}
@@ -195,7 +198,7 @@ export default async function BrandCompatibilityPage({
               inquiryContext={{ modelReference: brand.name }}
               className="btn-glow mt-6 inline-flex w-full items-center justify-center rounded-lg bg-[#FF8A1F] px-5 py-3 text-sm font-bold text-[#062748] transition-colors hover:bg-[#F97316]"
             >
-              {dict.brandPage.checklist} {brand.name}
+              {dict.compatibility.cta}
             </LeadModalTrigger>
           </aside>
         </div>

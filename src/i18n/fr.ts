@@ -1,3 +1,5 @@
+const inquiryCta = "Démarrer une demande";
+
 const fr = {
   meta: {
     title: "Télécommandes de portail en gros | GateRemoteSource",
@@ -5,7 +7,7 @@ const fr = {
   },
   announcement: {
     text: "TÉLÉCOMMANDES DE REMPLACEMENT COMPATIBLES POUR LES PRINCIPAUX SYSTÈMES DE PORTAILS ET GARAGES  |  OEM / ODM / GROS",
-    cta: "PARLER À UN INGÉNIEUR",
+    cta: inquiryCta,
   },
   header: {
     products: "Produits",
@@ -14,18 +16,18 @@ const fr = {
     factory: "Usine",
     blog: "Blog",
     contact: "Contact",
-    quote: "Demander un devis",
-    modelDetails: "Envoyer le modèle",
+    quote: inquiryCta,
+    modelDetails: inquiryCta,
     factoryQuality: "Processus qualité",
     tagline: "SOLUTIONS RF OEM / ODM",
   },
   hero: {
-    tagline: "Gros | OEM | Marque blanche",
-    title: "Télécommandes, récepteurs et solutions RF compatibles",
-    subtitle: "Fourniture indépendante de pièces de remplacement pour installateurs, serruriers et distributeurs. Découvrez des télécommandes compatibles pour portails et garages, puis confirmez la correspondance selon le modèle, la fréquence, le protocole et le marché.",
-    modelDetailsCta: "Envoyez-nous les détails du modèle",
-    unknownModelCta: "Vous ne connaissez pas le modèle ? Contactez-nous",
-    supportedBrandsCta: "Voir les marques prises en charge",
+    tagline: "Télécommandes de portail et récepteurs pour les professionnels",
+    title: "Vérifiez la compatibilité avant d’acheter en gros.",
+    subtitle: "Envoyez une photo de la télécommande ou les détails du système. Nous aidons les installateurs et les distributeurs à vérifier le modèle, la fréquence et le récepteur avant les tests d’échantillons ou les commandes en gros.",
+    modelDetailsCta: inquiryCta,
+    unknownModelCta: "Pas de référence de modèle ? Commencez par une photo ou une description du système.",
+    supportedBrandsCta: "Consulter les guides de compatibilité",
     trustBadge: "Compatible aftermarket — Non original",
     caption: "Photos pour référence uniquement. La correspondance doit être confirmée par modèle, fréquence et protocole.",
     trustItems: [
@@ -52,13 +54,13 @@ const fr = {
     sectionLabel: "Compatibilité",
     title: "Guides de télécommandes de remplacement compatibles",
     subtitle: "Pages de référence par marque pour les installateurs, serruriers et distributeurs qui doivent trouver des télécommandes de portail et de garage sans marquage d'origine.",
-    cta: "Envoyer une demande de compatibilité",
+    cta: inquiryCta,
     checklistLabel: "Liste de vérification acheteur",
     browseLabel: "Parcourir les références par marque",
     verificationTitle: "Vérification d'abord",
     verificationSubtitle: "Ce que les acheteurs doivent envoyer",
     needModelChecked: "Besoin de vérifier un modèle ?",
-    sendModelDetails: "Envoyer les détails du modèle",
+    sendModelDetails: inquiryCta,
     unlistedModelNote: "Nos références publiques couvrent une sélection limitée. Si votre modèle ne figure pas dans la liste, envoyez les informations dont vous disposez pour que nous les examinions.",
     verificationItems: [
       { title: "Photos de la télécommande d'origine", description: "Photos recto et verso de la télécommande d'origine, y compris les détails de l'étiquette." },
@@ -88,6 +90,7 @@ const fr = {
     disclaimer: "Le tableau est une référence de compatibilité exemple. La correspondance finale dépend du modèle, de la fréquence, du type de puce, de la version du PCB, du protocole de codage et de la version régionale.",
   },
   brandPage: {
+    independentNote: "Fournisseur indépendant de pièces de remplacement compatibles. Aucun lien avec les marques citées ni approbation de leur part.",
     backLink: "Retour à la compatibilité",
     title: "Référence de compatibilité par marque",
     referenceTitle: "Références de correspondance",
@@ -360,7 +363,7 @@ const fr = {
     sectionLabel: "Produits",
     title: "Catégories de produits",
     subtitle: "Chaque article doit être confirmé par marque, modèle, fréquence, type de code et version du marché avant commande d'échantillon ou en gros.",
-    sendInquiry: "ENVOYER UNE DEMANDE",
+    sendInquiry: inquiryCta,
   },
   buyerPaths: {
     sectionLabel: "Parcours d’achat",
@@ -397,8 +400,8 @@ const fr = {
       oemVal: "Étiquette / Emballage",
     },
     duplicators: {
-      title: "Duplicateurs de télécommandes",
-      description: "Copiez et clonez des télécommandes pour certains protocoles et fréquences.",
+      title: "Télécommandes à apprentissage de code",
+      description: "Télécommandes avec des fonctions d’apprentissage de code pour certains systèmes. Vérifiez les exigences de protocole et de récepteur avant de les utiliser sur un système qui vous appartient ou sur lequel vous êtes autorisé à intervenir.",
       frequencyVal: "Options multi-fréquences",
       codeTypeVal: "Fixe / Tournant sélectionné",
       batteryVal: "CR2032 / 27A",
@@ -435,7 +438,7 @@ const fr = {
     sectionLabel: "Processus de vérification",
     title: "Comment les acheteurs vérifient la compatibilité avant de commander",
     subtitle: "Envoyez d'abord des détails clairs sur le produit, puis testez des échantillons lorsque la compatibilité dépend d'un code tournant, d'une version de récepteur ou d'un protocole régional.",
-    requestCta: "Envoyer une demande de compatibilité",
+    requestCta: inquiryCta,
     sendTitle: "Ce que les acheteurs doivent envoyer",
     sendSubtitle: "Ces champs nous aident à vérifier la fréquence, le protocole, la version du récepteur et les exigences OEM avant le test d'échantillon.",
   },
@@ -489,9 +492,9 @@ const fr = {
   },
   cta: {
     sectionLabel: "Commencer",
-    title: "Besoin d'aide pour trouver une télécommande compatible en toute sécurité ?",
-    subtitle: "Envoyez-nous des photos du modèle, des détails de fréquence et vos quantités. Notre équipe confirmera la compatibilité avant l'échantillon.",
-    button: "Obtenir un support de compatibilité",
+    title: "Vérifiez la compatibilité avant votre prochaine commande",
+    subtitle: "Partagez une photo de la télécommande ou les détails du système, votre marché cible et la quantité estimée. Vous pouvez commencer sans référence de modèle si vous ne l’avez pas.",
+    button: inquiryCta,
   },
   resources: {
     sectionLabel: "Derniers guides",
@@ -549,7 +552,7 @@ const fr = {
       eyebrow: "Qualité et vérification",
       title: "Contrôles qualité avant les commandes en volume",
       subtitle: "Examinez comment une commande de télécommandes RF peut être vérifiée par échantillons, tests fonctionnels, contrôle d'emballage et préparation d'expédition.",
-      primaryCta: "Envoyer le modèle pour vérification",
+      primaryCta: inquiryCta,
       secondaryCta: "Demander le catalogue grossiste",
       processLabel: "Processus de vérification",
       processTitle: "Contrôles qualité que l'acheteur peut demander",
@@ -578,7 +581,7 @@ const fr = {
       requirementHeading: "Commencez par vos besoins d’achat.",
       requirementSubtitle: "Quelques informations de base nous aident à proposer des options pertinentes. Le modèle et la fréquence sont facultatifs lors de la première demande.",
       requirements: [
-        { title: "Catégorie de produit", description: "Télécommandes de remplacement, récepteurs, duplicateurs, contrôleurs, accessoires ou projet OEM." },
+        { title: "Catégorie de produit", description: "Télécommandes de remplacement, récepteurs, télécommandes à apprentissage de code, contrôleurs, accessoires ou projet OEM." },
         { title: "Pays / marché de destination", description: "Lieu de vente ou d’installation des produits et langue d’emballage souhaitée." },
         { title: "Quantité estimée", description: "Fourchette de quantité pour les échantillons ou l’achat en gros. Elle peut rester à définir." },
         { title: "Détails techniques (facultatifs)", description: "Marque, modèle, fréquence ou description du système, si connus. Joignez les photos dans WhatsApp ou par e-mail ; nous vérifierons les détails ensemble." },
@@ -594,7 +597,7 @@ const fr = {
     },
   },
   leadModal: {
-    title: "Envoyer une demande",
+    title: inquiryCta,
     nameLabel: "Nom (facultatif)",
     namePlaceholder: "Votre nom",
     contactDetailsLabel: "Coordonnées (facultatives)",
@@ -692,11 +695,11 @@ const fr = {
     brandIndex: { title: 'Index de Compatibilité des Marques', viewGuides: 'Voir les Guides', viewAllBrands: 'Voir Toutes les Marques' },
     latest: { title: 'Derniers Articles', allArticles: 'Tous les Articles', clearFilters: 'Effacer les Filtres', resultsCount: 'résultats' },
     sidebar: { title: 'Filtrer et Naviguer', search: 'Rechercher', categories: 'Catégories', popularTopics: 'Sujets Populaires', brandIndex: 'Index des Marques', buyerResources: 'Ressources Acheteur' },
-    topics: { frequency: '433,92 MHz', rollingVsFixed: 'Tournant vs Fixe', faacGuide: 'Guide FAAC', codeCloning: 'Copie et Clonage', security: 'Sécurité et Chiffrement' },
+    topics: { frequency: '433,92 MHz', rollingVsFixed: 'Tournant vs Fixe', faacGuide: 'Guide FAAC', codeCloning: 'Limites de l’apprentissage et de l’appairage', security: 'Sécurité et Chiffrement' },
     buyerResources: { requestChecklist: 'Liste de Vérification', sampleGuide: 'Guide de Tests', faq: 'FAQ Acheteur', viewAllResources: 'Voir Toutes les Ressources' },
     helpTitle: 'Besoin d\'aide sur une question de compatibilité ?',
     helpSubtitle: 'Envoyez-nous la marque, le modèle, la fréquence, une photo de la puce ou un échantillon. Notre équipe vérifiera la compatibilité avant commande.',
-    helpCta: 'Obtenir un support de compatibilité',
+    helpCta: inquiryCta,
     categories: { all: 'Tout', compatibility: 'Compatibilité', rollingCode: 'Code tournant', oemOdm: 'OEM/ODM', buyerChecklist: 'Liste de vérification acheteur', troubleshooting: 'Dépannage' },
     loadMore: 'Charger Plus',
     pagination: { prev: 'Précédent', next: 'Suivant' },
@@ -708,7 +711,7 @@ const fr = {
     checklistItems: ["Photos de la télécommande d'origine", "Fréquence ou étiquette du modèle", "Détails du récepteur ou de l'ouvre-portail", "Marché cible et quantité"],
     needHelp: "Besoin d'aide maintenant ?",
     needHelpSubtitle: "Envoyez-nous votre question de compatibilité et nous répondrons directement.",
-    contactUs: "Nous contacter",
+    contactUs: inquiryCta,
   },
 };
 

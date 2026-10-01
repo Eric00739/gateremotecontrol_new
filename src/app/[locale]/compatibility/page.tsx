@@ -138,13 +138,6 @@ export default async function CompatibilityPage({
                 <ArrowRight className="w-4 h-4 text-[#94A3B8] transition-transform group-hover:translate-x-1 group-hover:text-[#FF8A1F]" />
               </div>
               <p className="text-sm leading-relaxed text-[#64748B]">{getLocalizedBrandCopy(dict, brand.slug).shortDescription}</p>
-              <div className="mt-5 flex flex-wrap gap-2">
-                {getLocalizedBrandCopy(dict, brand.slug).buyerIntents.map((item) => (
-                  <span key={item} className="rounded-md bg-[#F8FAFC] px-2.5 py-1 text-[11px] font-semibold text-[#64748B]">
-                    {item}
-                  </span>
-                ))}
-              </div>
             </Link>
           ))}
         </div>

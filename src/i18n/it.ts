@@ -1,3 +1,5 @@
+const inquiryCta = 'Avvia una richiesta';
+
 const it = {
   meta: {
     title: 'Telecomandi per cancelli all’ingrosso | GateRemoteSource',
@@ -5,7 +7,7 @@ const it = {
   },
   announcement: {
     text: 'TELECOMANDI DI RICAMBIO COMPATIBILI PER I PRINCIPALI SISTEMI DI CANCELLI E GARAGE | OEM / ODM / INGROSSO',
-    cta: 'PARLA CON UN TECNICO',
+    cta: inquiryCta,
   },
   header: {
     products: 'Prodotti',
@@ -14,18 +16,18 @@ const it = {
     factory: 'Fabbrica',
     blog: 'Blog',
     contact: 'Contatti',
-    quote: 'Richiedi Preventivo',
-    modelDetails: 'Invia Modello',
+    quote: inquiryCta,
+    modelDetails: inquiryCta,
     factoryQuality: 'Processo qualit\u00e0',
     tagline: 'SOLUZIONI RF OEM / ODM',
   },
   hero: {
-    tagline: 'Ingrosso | OEM | Marchio Privato',
-    title: 'Telecomandi Compatibili, Ricevitori e Soluzioni RF',
-    subtitle: 'Fornitura indipendente di ricambi per installatori, fabbri e distributori. Scoprite telecomandi compatibili per cancelli e garage, quindi confermate la compatibilità per modello, frequenza, protocollo e mercato.',
-    modelDetailsCta: 'Inviaci i Dettagli del Modello',
-    unknownModelCta: 'Non conoscete il modello? Contattateci',
-    supportedBrandsCta: 'Controlla Marchi Supportati',
+    tagline: 'Telecomandi per cancelli e ricevitori per acquirenti professionali',
+    title: 'Verifica la compatibilità prima di acquistare all’ingrosso.',
+    subtitle: 'Invia una foto del telecomando o i dettagli del sistema. Aiutiamo installatori e distributori a verificare il modello, la frequenza e il ricevitore prima dei test sui campioni o degli ordini all’ingrosso.',
+    modelDetailsCta: inquiryCta,
+    unknownModelCta: 'Non hai il numero del modello? Inizia con una foto o una descrizione del sistema.',
+    supportedBrandsCta: 'Consulta le guide di compatibilità',
     trustBadge: 'Compatibile Aftermarket \u2014 Non Originale',
     caption: 'Foto solo a scopo di riferimento. La corrispondenza deve essere confermata per modello, frequenza e protocollo.',
     trustItems: [
@@ -52,13 +54,13 @@ const it = {
     sectionLabel: 'Compatibilit\u00e0',
     title: 'Guide per Telecomandi di Ricambio Compatibili',
     subtitle: 'Pagine di riferimento per installatori, fabbri e distributori che necessitano di abbinare telecomandi per cancelli e porte da garage senza marchio originale.',
-    cta: 'Invia Richiesta Compatibilit\u00e0',
+    cta: inquiryCta,
     checklistLabel: 'Checklist acquirente',
     browseLabel: 'Sfoglia Riferimenti per Marchio',
     verificationTitle: 'Verifica Prima',
     verificationSubtitle: 'Cosa Devono Inviare gli Acquirenti',
     needModelChecked: 'Devi verificare un modello?',
-    sendModelDetails: 'Invia Dettagli Modello',
+    sendModelDetails: inquiryCta,
     unlistedModelNote: 'I riferimenti pubblici coprono una selezione limitata. Se il vostro modello non è elencato, inviate i dettagli disponibili per una verifica.',
     verificationItems: [
       { title: 'Foto del Telecomando Originale', description: 'Foto fronte e retro del telecomando originale, compresi i dettagli dell\'etichetta.' },
@@ -88,6 +90,7 @@ const it = {
     disclaimer: 'La tabella è un riferimento di compatibilità campione. La corrispondenza finale dipende da modello, frequenza, tipo di chip, versione PCB, protocollo di codifica e versione regionale.',
   },
   brandPage: {
+    independentNote: 'Fornitore aftermarket indipendente. Senza affiliazione o approvazione da parte dei marchi citati.',
     backLink: 'Torna alla compatibilit\u00e0',
     title: 'Riferimento Compatibilit\u00e0 Marca',
     referenceTitle: 'Riferimenti di Corrispondenza',
@@ -360,7 +363,7 @@ const it = {
     sectionLabel: 'Prodotti',
     title: 'Categorie di prodotti',
     subtitle: 'Ogni articolo deve essere confermato per marca, modello, frequenza, tipo codice e versione di mercato prima dell\'ordine campione o all\'ingrosso.',
-    sendInquiry: 'INVIA RICHIESTA',
+    sendInquiry: inquiryCta,
   },
   buyerPaths: {
     sectionLabel: 'Percorsi per l’acquirente',
@@ -397,8 +400,8 @@ const it = {
       oemVal: 'Etichetta / Packaging',
     },
     duplicators: {
-      title: 'Duplicatori di Telecomandi',
-      description: 'Copia e clonazione telecomandi per protocolli e frequenze selezionati.',
+      title: 'Telecomandi con apprendimento del codice',
+      description: 'Telecomandi con funzioni di apprendimento del codice per determinati sistemi. Verifica i requisiti del protocollo e del ricevitore prima di utilizzarli su un sistema di tua proprietà o per la cui manutenzione sei autorizzato.',
       frequencyVal: 'Opzioni multifrequenza',
       codeTypeVal: 'Fisso / Rolling selezionato',
       batteryVal: 'CR2032 / 27A',
@@ -435,7 +438,7 @@ const it = {
     sectionLabel: 'Processo di Verifica',
     title: 'Come gli Acquirenti Verificano la Compatibilit\u00e0 Prima di Ordinare',
     subtitle: 'Invia prima i dettagli del prodotto, quindi testa i campioni quando la compatibilit\u00e0 dipende da rolling code, versione ricevitore o protocollo regionale.',
-    requestCta: 'Invia Richiesta Compatibilit\u00e0',
+    requestCta: inquiryCta,
     sendTitle: 'Cosa Devono Inviare gli Acquirenti',
     sendSubtitle: 'Questi campi ci aiutano a verificare frequenza, protocollo, versione ricevitore e requisiti OEM prima del test campione.',
   },
@@ -489,9 +492,9 @@ const it = {
   },
   cta: {
     sectionLabel: 'Inizia Ora',
-    title: 'Serve Aiuto per Abbinare un Telecomando in Modo Sicuro?',
-    subtitle: 'Inviaci foto del modello, dettagli sulla frequenza e quantit\u00e0 necessarie. Il nostro team confermer\u00e0 la compatibilit\u00e0 prima del campione.',
-    button: 'Ottieni Supporto Compatibilit\u00e0',
+    title: 'Verifica la compatibilità prima del prossimo ordine',
+    subtitle: 'Condividi una foto del telecomando o i dettagli del sistema, il mercato di destinazione e la quantità stimata. Puoi iniziare senza il numero del modello, se non lo hai.',
+    button: inquiryCta,
   },
   resources: {
     sectionLabel: 'Ultime Guide',
@@ -549,7 +552,7 @@ const it = {
       eyebrow: 'Qualit\u00e0 e verifica',
       title: 'Controlli qualit\u00e0 prima degli ordini in volume',
       subtitle: 'Verifica come un ordine di telecomandi RF pu\u00f2 essere controllato con campioni, test funzionali, revisione packaging e preparazione spedizione.',
-      primaryCta: 'Invia Modello per Verifica',
+      primaryCta: inquiryCta,
       secondaryCta: 'Richiedi Catalogo Wholesale',
       processLabel: 'Flusso di verifica',
       processTitle: 'Controlli qualit\u00e0 che gli acquirenti possono richiedere',
@@ -578,7 +581,7 @@ const it = {
       requirementHeading: 'Iniziate dalle vostre esigenze di acquisto.',
       requirementSubtitle: 'Pochi dati di base ci aiutano a proporre opzioni pertinenti. Modello e frequenza sono facoltativi nella prima richiesta.',
       requirements: [
-        { title: 'Categoria di prodotto', description: 'Telecomandi di ricambio, ricevitori, duplicatori, controller, accessori o un progetto OEM.' },
+        { title: 'Categoria di prodotto', description: 'Telecomandi di ricambio, ricevitori, telecomandi con apprendimento del codice, controller, accessori o un progetto OEM.' },
         { title: 'Paese / mercato di destinazione', description: 'Dove venderete o installerete i prodotti e la lingua preferita per l’imballaggio.' },
         { title: 'Quantità stimata', description: 'Intervallo di quantità per campioni o acquisto all’ingrosso. Può restare da definire.' },
         { title: 'Dettagli tecnici (facoltativi)', description: 'Marca, modello, frequenza o descrizione del sistema, se noti. Allegate le foto su WhatsApp o via e-mail; verificheremo insieme i dettagli.' },
@@ -594,7 +597,7 @@ const it = {
     },
   },
   leadModal: {
-    title: 'Invia Richiesta',
+    title: inquiryCta,
     nameLabel: 'Nome (facoltativo)',
     namePlaceholder: 'Il tuo nome',
     contactDetailsLabel: 'Dati di contatto (facoltativi)',
@@ -692,11 +695,11 @@ const it = {
     brandIndex: { title: 'Indice di Compatibilit\u00e0 dei Marchi', viewGuides: 'Visualizza Guide', viewAllBrands: 'Vedi Tutti i Marchi' },
     latest: { title: 'Ultimi Articoli', allArticles: 'Tutti gli Articoli', clearFilters: 'Cancella Filtri', resultsCount: 'risultati' },
     sidebar: { title: 'Filtra e Naviga', search: 'Cerca', categories: 'Categorie', popularTopics: 'Argomenti Popolari', brandIndex: 'Indice Marchi', buyerResources: 'Risorse Acquirente' },
-    topics: { frequency: '433,92 MHz', rollingVsFixed: 'Rolling vs Fisso', faacGuide: 'Guida FAAC', codeCloning: 'Copia e Clonazione', security: 'Sicurezza e Crittografia' },
+    topics: { frequency: '433,92 MHz', rollingVsFixed: 'Rolling vs Fisso', faacGuide: 'Guida FAAC', codeCloning: 'Limiti di apprendimento e abbinamento', security: 'Sicurezza e Crittografia' },
     buyerResources: { requestChecklist: 'Lista di Verifica', sampleGuide: 'Guida ai Test', faq: 'FAQ Acquirente', viewAllResources: 'Vedi Tutte le Risorse' },
     helpTitle: 'Serve aiuto con una domanda di compatibilit\u00e0?',
     helpSubtitle: 'Inviaci marca, modello, frequenza, foto del chip o campione del telecomando. Il nostro team verificher\u00e0 la compatibilit\u00e0 prima dell\'ordine.',
-    helpCta: 'Ottieni Supporto Compatibilit\u00e0',
+    helpCta: inquiryCta,
     categories: { all: 'Tutti', compatibility: 'Compatibilit\u00e0', rollingCode: 'Rolling Code', oemOdm: 'OEM/ODM', buyerChecklist: 'Lista Acquirente', troubleshooting: 'Risoluzione Problemi' },
     loadMore: 'Carica Altro',
     pagination: { prev: 'Precedente', next: 'Successiva' },
@@ -708,7 +711,7 @@ const it = {
     checklistItems: ['Foto telecomando originale', 'Etichetta frequenza o modello', 'Dettagli ricevitore o automatismo', 'Mercato target e quantit\u00e0'],
     needHelp: 'Serve aiuto ora?',
     needHelpSubtitle: 'Inviaci la tua domanda di compatibilit\u00e0 e ti risponderemo direttamente.',
-    contactUs: 'Contattaci',
+    contactUs: inquiryCta,
   },
 };
 

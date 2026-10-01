@@ -14,7 +14,7 @@ export default function Header() {
   const currentLocale = useLocale();
   const pathname = usePathname();
   const router = useRouter();
-  const modelDetailsLabel = dict.header.modelDetails || dict.hero.modelDetailsCta || 'Send Model Details';
+  const inquiryLabel = dict.header.modelDetails;
   const factoryQualityLabel = dict.header.factoryQuality || `${dict.header.factory} & Quality`;
 
   const navItems = [
@@ -65,13 +65,13 @@ export default function Header() {
                 {item.label}
               </Link>
             ))}
-            <LeadModalTrigger
-              prefillType="support"
+            <a
+              href="#contact"
               className="text-[12px] text-[#153A5C] hover:text-[#FF8A1F] transition-colors font-semibold tracking-wide px-3 py-2 rounded-lg hover:bg-[#FF8A1F]/8 cursor-pointer"
               style={{ fontFamily: "var(--font-dm-sans), sans-serif" }}
             >
               {dict.header.contact}
-            </LeadModalTrigger>
+            </a>
           </nav>
 
           {/* Right Actions */}
@@ -128,7 +128,7 @@ export default function Header() {
               className="bg-[#FF8A1F] hover:bg-[#F97316] text-[#062748] text-[12px] font-bold px-5 py-2 rounded-lg transition-all btn-glow shadow-sm shadow-orange-500/20"
               style={{ fontFamily: "var(--font-dm-sans), sans-serif" }}
             >
-              {modelDetailsLabel}
+              {inquiryLabel}
             </LeadModalTrigger>
 
             {/* Mobile menu button */}
@@ -159,13 +159,13 @@ export default function Header() {
                   {item.label}
                 </Link>
               ))}
-              <LeadModalTrigger
-                prefillType="support"
+              <a
+                href="#contact"
                 className="text-sm text-[#153A5C] hover:text-[#FF8A1F] font-semibold py-2 px-3 rounded-lg hover:bg-[#FF8A1F]/8 cursor-pointer"
                 onClick={() => setMobileOpen(false)}
               >
                 {dict.header.contact}
-              </LeadModalTrigger>
+              </a>
               {/* Mobile Language Switcher */}
               <div className="flex flex-wrap gap-1 px-3 py-1">
                 {locales.map((locale) => (
@@ -189,7 +189,7 @@ export default function Header() {
                 className="bg-[#FF8A1F] hover:bg-[#F97316] text-[#062748] text-sm font-bold py-2.5 px-5 rounded-lg text-center mt-1"
                 onClick={() => setMobileOpen(false)}
               >
-                {modelDetailsLabel}
+                {inquiryLabel}
               </LeadModalTrigger>
             </div>
           </nav>

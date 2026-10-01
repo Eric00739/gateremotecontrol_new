@@ -105,8 +105,8 @@ export const products = [
     ],
   },
   {
-    title: 'Remote Duplicators',
-    description: 'Copy and clone remotes for selected protocols and frequencies.',
+    title: 'Code-Learning Remotes',
+    description: 'Remotes with code-learning functions for selected systems. Confirm protocol and receiver requirements before use on a system you own or are authorized to service.',
     image: basePath + '/images/product-duplicator.png',
     specs: [
       { label: 'Frequency', value: 'Multi-frequency options' },

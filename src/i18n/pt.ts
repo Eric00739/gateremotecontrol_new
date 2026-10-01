@@ -1,3 +1,5 @@
+const inquiryCta = 'Iniciar uma consulta';
+
 const pt = {
   meta: {
     title: 'Controles para portões no atacado | GateRemoteSource',
@@ -5,7 +7,7 @@ const pt = {
   },
   announcement: {
     text: 'CONTROLES REMOTOS COMPATÍVEIS PARA PRINCIPAIS SISTEMAS DE PORTÕES E GARAGENS  |  OEM / ODM / ATACADO',
-    cta: 'FALE COM UM ENGENHEIRO',
+    cta: inquiryCta,
   },
   header: {
     products: 'Produtos',
@@ -14,18 +16,18 @@ const pt = {
     factory: 'Fábrica',
     blog: 'Blog',
     contact: 'Contato',
-    quote: 'Solicitar Orçamento',
-    modelDetails: 'Enviar Modelo',
+    quote: inquiryCta,
+    modelDetails: inquiryCta,
     factoryQuality: 'Processo de qualidade',
     tagline: 'SOLUÇÕES RF OEM / ODM',
   },
   hero: {
-    tagline: 'Atacado | OEM | Marca Própria',
-    title: 'Controles Remotos, Receptores e Soluções RF Compatíveis',
-    subtitle: 'Fornecimento independente de reposição para instaladores, chaveiros e distribuidores. Conheça controles compatíveis para portões e garagens e confirme a compatibilidade por modelo, frequência, protocolo e mercado.',
-    modelDetailsCta: 'Envie os Detalhes do Modelo',
-    unknownModelCta: 'Não sabe o modelo? Fale conosco',
-    supportedBrandsCta: 'Ver Marcas Suportadas',
+    tagline: 'Controles para portões e receptores para compradores profissionais',
+    title: 'Verifique a compatibilidade antes de comprar no atacado.',
+    subtitle: 'Envie uma foto do controle ou os detalhes do sistema. Ajudamos instaladores e distribuidores a verificar o modelo, a frequência e o receptor antes de testar amostras ou fazer pedidos no atacado.',
+    modelDetailsCta: inquiryCta,
+    unknownModelCta: 'Não tem o número do modelo? Comece com uma foto ou uma descrição do sistema.',
+    supportedBrandsCta: 'Ver guias de compatibilidade',
     trustBadge: 'Compatível de Reposição — Não é Marca Original',
     caption: 'Fotos apenas para referência. A correspondência deve ser confirmada por modelo, frequência e protocolo.',
     trustItems: [
@@ -52,13 +54,13 @@ const pt = {
     sectionLabel: 'Compatibilidade',
     title: 'Guias de Controles Remotos Compatíveis de Reposição',
     subtitle: 'Páginas de referência de marca para instaladores, chaveiros e distribuidores que precisam combinar controles de portões e portas de garagem sem a marca original.',
-    cta: 'Enviar Solicitação de Compatibilidade',
+    cta: inquiryCta,
     checklistLabel: 'Lista de verificação do comprador',
     browseLabel: 'Navegar por Referências de Marca',
     verificationTitle: 'Verificação Primeiro',
     verificationSubtitle: 'O que os Compradores Devem Enviar',
     needModelChecked: 'Precisa verificar um modelo?',
-    sendModelDetails: 'Enviar Detalhes do Modelo',
+    sendModelDetails: inquiryCta,
     unlistedModelNote: 'As referências públicas cobrem uma seleção limitada. Se o seu modelo não estiver na lista, envie as informações disponíveis para análise.',
     verificationItems: [
       { title: 'Fotos do Controle Original', description: 'Fotos da frente e do verso do controle original, incluindo detalhes da etiqueta.' },
@@ -88,6 +90,7 @@ const pt = {
     disclaimer: 'A tabela é uma referência de compatibilidade de exemplo. A correspondência final depende de modelo, frequência, tipo de chip, versão PCB, protocolo de codificação e versão regional.',
   },
   brandPage: {
+    independentNote: 'Fornecedor independente de reposição. Sem vínculo ou endosso das marcas mencionadas.',
     backLink: 'Voltar para compatibilidade',
     title: 'Referência de Compatibilidade de Marca',
     referenceTitle: 'Referências de Correspondência',
@@ -360,7 +363,7 @@ const pt = {
     sectionLabel: 'Produtos',
     title: 'Categorias de produtos',
     subtitle: 'Cada item deve ser confirmado por marca, modelo, frequência, tipo de código e versão de mercado antes do pedido de amostra ou em grande quantidade.',
-    sendInquiry: 'ENVIAR CONSULTA',
+    sendInquiry: inquiryCta,
   },
   buyerPaths: {
     sectionLabel: 'Caminhos do comprador',
@@ -397,8 +400,8 @@ const pt = {
       oemVal: 'Etiqueta / Embalagem',
     },
     duplicators: {
-      title: 'Duplicadores de Controle Remoto',
-      description: 'Copie e clone controles remotos para protocolos e frequências selecionados.',
+      title: 'Controles com aprendizagem de código',
+      description: 'Controles com funções de aprendizagem de código para determinados sistemas. Confirme os requisitos do protocolo e do receptor antes de usá-los em um sistema próprio ou cuja manutenção você esteja autorizado a realizar.',
       frequencyVal: 'Opções multifrequência',
       codeTypeVal: 'Fixo / Rolante selecionado',
       batteryVal: 'CR2032 / 27A',
@@ -435,7 +438,7 @@ const pt = {
     sectionLabel: 'Processo de Verificação',
     title: 'Como os Compradores Verificam a Compatibilidade Antes de Comprar',
     subtitle: 'Envie detalhes claros do produto primeiro e depois teste amostras quando a compatibilidade depender de código rolante, versão do receptor ou protocolo regional.',
-    requestCta: 'Enviar Solicitação de Compatibilidade',
+    requestCta: inquiryCta,
     sendTitle: 'O que os Compradores Devem Enviar',
     sendSubtitle: 'Esses campos nos ajudam a verificar frequência, protocolo, versão do receptor e requisitos OEM antes do teste de amostras.',
   },
@@ -489,9 +492,9 @@ const pt = {
   },
   cta: {
     sectionLabel: 'Comece Agora',
-    title: 'Precisa de Ajuda para Correspondência Segura de Controle por Marca?',
-    subtitle: 'Envie-nos fotos do modelo, detalhes de frequência e quantidade necessária. Nossa equipe confirmará a compatibilidade antes da amostra.',
-    button: 'Obter Suporte de Compatibilidade',
+    title: 'Verifique a compatibilidade antes do próximo pedido',
+    subtitle: 'Compartilhe uma foto do controle ou os detalhes do sistema, seu mercado de destino e a quantidade estimada. Você pode começar sem o número do modelo, caso não o tenha.',
+    button: inquiryCta,
   },
   resources: {
     sectionLabel: 'Últimos Guias',
@@ -549,7 +552,7 @@ const pt = {
       eyebrow: 'Qualidade e verificação',
       title: 'Controles de qualidade antes de pedidos em volume',
       subtitle: 'Veja como um pedido de controles RF pode ser verificado com amostras, testes funcionais, revisão de embalagem e preparação do envio.',
-      primaryCta: 'Enviar Modelo para Verificacao',
+      primaryCta: inquiryCta,
       secondaryCta: 'Solicitar Catalogo Atacado',
       processLabel: 'Fluxo de verificação',
       processTitle: 'Controles de qualidade que os compradores podem solicitar',
@@ -578,7 +581,7 @@ const pt = {
       requirementHeading: 'Comece pelas suas necessidades de compra.',
       requirementSubtitle: 'Algumas informações básicas nos ajudam a sugerir opções relevantes. Modelo e frequência são opcionais na primeira consulta.',
       requirements: [
-        { title: 'Categoria de produto', description: 'Controles de reposição, receptores, duplicadores, controladores, acessórios ou um projeto OEM.' },
+        { title: 'Categoria de produto', description: 'Controles de reposição, receptores, controles com aprendizagem de código, controladores, acessórios ou um projeto OEM.' },
         { title: 'País / mercado de destino', description: 'Onde venderá ou instalará os produtos e o idioma de embalagem que prefere.' },
         { title: 'Quantidade estimada', description: 'Faixa de quantidade para amostras ou compra no atacado. Pode ficar a definir.' },
         { title: 'Detalhes técnicos (opcionais)', description: 'Marca, modelo, frequência ou descrição do sistema, se conhecidos. Anexe fotos no WhatsApp ou e-mail; podemos verificar os detalhes juntos.' },
@@ -594,7 +597,7 @@ const pt = {
     },
   },
   leadModal: {
-    title: 'Enviar Consulta',
+    title: inquiryCta,
     nameLabel: 'Nome (opcional)',
     namePlaceholder: 'Seu nome',
     contactDetailsLabel: 'Dados de contato (opcionais)',
@@ -692,11 +695,11 @@ const pt = {
     brandIndex: { title: 'Índice de Compatibilidade de Marcas', viewGuides: 'Ver Guias', viewAllBrands: 'Ver Todas as Marcas' },
     latest: { title: 'Últimos Artigos', allArticles: 'Todos os Artigos', clearFilters: 'Limpar Filtros', resultsCount: 'resultados' },
     sidebar: { title: 'Filtrar e Navegar', search: 'Buscar', categories: 'Categorias', popularTopics: 'Tópicos Populares', brandIndex: 'Índice de Marcas', buyerResources: 'Recursos para Compradores' },
-    topics: { frequency: '433,92 MHz', rollingVsFixed: 'Rolante vs Fixo', faacGuide: 'Guia FAAC', codeCloning: 'Cópia e Clonagem', security: 'Segurança e Criptografia' },
+    topics: { frequency: '433,92 MHz', rollingVsFixed: 'Rolante vs Fixo', faacGuide: 'Guia FAAC', codeCloning: 'Limites de aprendizagem e pareamento', security: 'Segurança e Criptografia' },
     buyerResources: { requestChecklist: 'Lista de Verificação', sampleGuide: 'Guia de Testes', faq: 'FAQ do Comprador', viewAllResources: 'Ver Todos os Recursos' },
     helpTitle: 'Precisa de ajuda com uma pergunta de compatibilidade?',
     helpSubtitle: 'Envie-nos a marca, modelo, frequência, foto do chip ou amostra do controle. Nossa equipe verificará a compatibilidade antes do pedido.',
-    helpCta: 'Obter Suporte de Compatibilidade',
+    helpCta: inquiryCta,
     categories: { all: 'Todos', compatibility: 'Compatibilidade', rollingCode: 'Código Rolante', oemOdm: 'OEM/ODM', buyerChecklist: 'Lista do Comprador', troubleshooting: 'Solução de Problemas' },
     loadMore: 'Carregar Mais',
     pagination: { prev: 'Anterior', next: 'Próximo' },
@@ -708,7 +711,7 @@ const pt = {
     checklistItems: ['Fotos do controle original', 'Etiqueta de frequência ou modelo', 'Detalhes do receptor ou acionador', 'Mercado alvo e quantidade'],
     needHelp: 'Precisa de ajuda agora?',
     needHelpSubtitle: 'Envie-nos sua pergunta de compatibilidade e responderemos diretamente.',
-    contactUs: 'Fale Conosco',
+    contactUs: inquiryCta,
   },
 };
 
