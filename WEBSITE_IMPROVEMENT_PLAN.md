@@ -1,6 +1,6 @@
 # GateRemoteSource 网站改造执行计划
 
-状态（2026-10-01）：第一阶段与 C01–C03 已发布；本轮 SEO 优化已实施并通过本地验收，见第 14 节。B04、B05、B08、B09 与 C04 等待真实资料或决策。
+状态（2026-10-01）：第一阶段与 C01–C03 已发布；本轮 SEO 提交 `91a614e` 已发布，90 个收录页面线上复核及三个页面 SEO 复测通过，见第 14 节。B04、B05、B08、B09 与 C04 等待真实资料或决策。
 
 当前技术事实见第 2 节，第二阶段规划见第 11 节，实施与发布凭证见第 12 节，知识收尾见第 13 节，SEO 改动与验收见第 14 节。第 0 节是历史检查点；已完成批次的规格仅作验收参考，不重新实施。
 
@@ -765,4 +765,10 @@ C02 规划时的缺陷（已修复）：产品分类按钮只传 `prefillType="q
 
 ### 修改范围
 
-六语词典、两个兼容性页面、博客索引组件、博客元数据、SEO 日期函数、两份 sitemap、导出校验脚本、README 和本计划；未改依赖、托管配置、文章正文或媒体文件。发布及线上复测结果在 GitHub 同步后记录。
+六语词典、两个兼容性页面、博客索引组件、博客元数据、SEO 日期函数、两份 sitemap、导出校验脚本、README 和本计划；未改依赖、托管配置、文章正文或媒体文件。
+
+### GitHub 发布与线上复测
+
+业务提交 [`91a614e`](https://github.com/Eric00739/gateremotecontrol_new/commit/91a614e25208112064a61e8d970be6f5f6fd8e85) 已推送到 `main`；[Pages 运行 36807872863](https://github.com/Eric00739/gateremotecontrol_new/actions/runs/36807872863) 的 build/deploy 成功，2026-10-01 10:53（Asia/Shanghai）完成。90 个正式收录 URL 均为 HTTP 200，标题、全部元标签、语言、单一 H1、canonical 和 hreflang 与本地验收产物一致；正式 sitemap 地址及 lastmod 与本地一致，六语博客完整目录各含 18 条英文文章链接。
+
+Lighthouse `13.5.0` 于 2026-10-01 10:55（Asia/Shanghai）仅复测 SEO 类别：`/en`、`/pt/compatibility/faac`、`/es/blog` 三页均为 100，无失败项、运行警告或 runtime error。未重新测量 Performance、Core Web Vitals、真实收录量或业务转化。未翻译的非英文文章保留必要的 noindex，不通过撤销收录保护来凑分。
