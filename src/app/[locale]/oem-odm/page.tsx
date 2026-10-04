@@ -3,7 +3,6 @@ import Link from 'next/link';
 import { ArrowRight, Box, FileText, Package, Palette, Radio, Settings } from 'lucide-react';
 import LeadModalTrigger from '@/components/LeadModalTrigger';
 import GeneratedImage from '@/components/GeneratedImage';
-import { oemSteps } from '@/data/homepage';
 import { oemPage } from '@/data/servicePages';
 import { type Locale, locales } from '@/i18n';
 import { getDictSync } from '@/i18n/dictionaries';
@@ -138,16 +137,16 @@ export default async function OemOdmPage({ params }: { params: Promise<{ locale:
         </div>
 
         <div className="grid grid-cols-2 gap-4 lg:grid-cols-4">
-          {oemSteps.map((step, index) => {
+          {dict.oem.steps.map((step, index) => {
             const Icon = iconMap[index] || Settings;
             return (
-              <div key={step.step} className="rounded-lg border border-[#E2E8F0] bg-white p-5">
+              <div key={step.title} className="rounded-lg border border-[#E2E8F0] bg-white p-5">
                 <div className="mb-5 flex items-center justify-between gap-3">
                   <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-[#FF8A1F]/10 text-[#FF8A1F]">
                     <Icon className="h-5 w-5" />
                   </div>
                   <span className="text-[11px] font-bold text-[#94A3B8]" style={{ fontFamily: 'var(--font-jetbrains-mono), monospace' }}>
-                    0{step.step}
+                    {String(index + 1).padStart(2, '0')}
                   </span>
                 </div>
                 <h3 className="text-sm font-bold text-[#0F172A]" style={{ fontFamily: 'var(--font-outfit), sans-serif' }}>

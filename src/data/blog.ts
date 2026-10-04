@@ -111,8 +111,8 @@ export const popularGuides = [
 
 export const blogPosts: BlogPostMeta[] = [
   {
-    title: 'Same Shell, Same Product? The Hidden Downgrade in Electronics Manufacturing',
-    seoTitle: 'RF Remote Quality: What the Shell Hides',
+    title: 'How to Compare Gate Remotes with Similar Housings',
+    seoTitle: 'Gate Remote Quality: Compare Similar Housings',
     category: 'oem-odm',
     excerpt:
       'Identical remote shells can hide different PCB materials, components, assembly quality, and testing. Learn what to check before choosing a supplier.',
@@ -147,8 +147,8 @@ export const blogPosts: BlogPostMeta[] = [
     ],
   },
   {
-    title: 'Why Pairing a Third-Party RF Remote to a Brand-Name Receiver Is Harder Than It Looks',
-    seoTitle: 'Third-Party RF Remote Pairing Failures',
+    title: 'What to Check Before Pairing a Replacement Remote',
+    seoTitle: 'Replacement Remote Pairing: What to Check',
     category: 'compatibility',
     excerpt:
       'Pairing a third-party RF remote to a brand-name gate or garage receiver can fail at the frequency, modulation, rolling-code, hardware, firmware, or environment layer.',
@@ -183,11 +183,11 @@ export const blogPosts: BlogPostMeta[] = [
     ],
   },
   {
-    title: 'RF Remote Range: 10 Meters, 30 Meters, or 100 Meters?',
-    seoTitle: 'RF Remote Range Tests and 5 Improvements',
+    title: 'RF Remote Range: How to Test It with Your Receiver',
+    seoTitle: 'RF Remote Range: Test Conditions and Troubleshooting',
     category: 'rf-engineering',
     excerpt:
-      'Compare open-field and indoor RF remote range. See how power, antennas, receiver sensitivity, walls, and interference affect distance and reliability.',
+      'Learn how to plan a range test with your receiver and installation. Review antennas, battery condition, interference and the records needed to compare samples.',
     slug: 'rf-remote-range-real-world-test-data',
     author: 'Eric Huang',
     publishedAt: '2026-05-10',
@@ -291,8 +291,8 @@ export const blogPosts: BlogPostMeta[] = [
     ],
   },
   {
-    title: 'Your Remote Control Has a Hearing Problem: How Receiver Sensitivity Decides RF Range',
-    seoTitle: 'Receiver Sensitivity and RF Remote Range Specs',
+    title: 'Receiver Sensitivity: What to Check When RF Range Is Short',
+    seoTitle: 'Receiver Sensitivity and Short RF Range',
     category: 'rf-engineering',
     excerpt:
       'Receiver sensitivity is the spec that tells you how weak a signal the receiver can still decode, and it often matters more for usable RF range than louder transmit power.',
@@ -363,8 +363,8 @@ export const blogPosts: BlogPostMeta[] = [
     ],
   },
   {
-    title: 'Circuits Don\'t Act: Why I Hate "Good Enough" Transmitter Modules More and More',
-    seoTitle: 'Why Cheap RF Transmitter Modules Fail',
+    title: 'RF Transmitter Quality: What Buyers Should Check',
+    seoTitle: 'RF Transmitter Quality: A Buyer’s Checklist',
     category: 'rf-engineering',
     excerpt:
       'A transmitter module is not reliable just because it can send a signal. Real quality depends on stability, clean output, tuning margin, and repeatable mass production.',
@@ -378,8 +378,8 @@ export const blogPosts: BlogPostMeta[] = [
     relatedSlugs: ['rf-remote-control-concurrency-anti-collision', 'oem-odm-hardware-future'],
   },
   {
-    title: 'OEM or ODM? You Think You\'re Choosing a Production Method, But You\'re Actually Choosing Your Future',
-    seoTitle: 'OEM vs ODM: Which Path Should You Choose',
+    title: 'OEM or ODM for RF Remotes: Compare Scope, Cost and Control',
+    seoTitle: 'OEM vs ODM RF Remotes: Scope, Cost and Control',
     category: 'oem-odm',
     excerpt:
       'Compare OEM and ODM for hardware projects, including product control, certification, supplier dependence, and long-term development choices.',

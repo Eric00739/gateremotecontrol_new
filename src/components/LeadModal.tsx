@@ -95,6 +95,7 @@ function LeadModalContent() {
 
   const requestTypeOptions: { value: PrefillType; label: string }[] = [
     { value: 'quote', label: dict.leadModal.requestTypes.quote },
+    { value: 'catalog', label: dict.leadModal.requestTypes.catalog },
     { value: 'compatibility', label: dict.leadModal.requestTypes.compatibility },
     { value: 'oem', label: dict.leadModal.requestTypes.oem },
     { value: 'sample', label: dict.leadModal.requestTypes.sample },
@@ -147,6 +148,7 @@ function LeadModalContent() {
     }
 
     if (!copied) {
+      const previousFocus = document.activeElement instanceof HTMLElement ? document.activeElement : null;
       const textarea = document.createElement('textarea');
       textarea.value = text;
       textarea.setAttribute('readonly', '');
@@ -160,6 +162,7 @@ function LeadModalContent() {
         // Keep the idle label; never claim success that did not happen.
       } finally {
         document.body.removeChild(textarea);
+        previousFocus?.focus({ preventScroll: true });
       }
     }
 

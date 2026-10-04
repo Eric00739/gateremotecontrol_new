@@ -54,28 +54,28 @@ export const compatibilityRows = [
 
 export const riskCards = [
   {
-    title: 'Compatibility-Based Description',
-    description: 'We describe products by compatible systems and technical specifications, not by brand ownership.',
+    title: 'Identify the System',
+    description: 'Start with the original remote and receiver details to narrow down replacement options.',
   },
   {
-    title: 'No Misleading Brand Association',
-    description: 'We do not imply affiliation with any brand owner. Brand names are used for compatibility reference only.',
+    title: 'Independent Aftermarket Supply',
+    description: 'Brand names identify compatibility references. Confirm the product and supplier details for your order.',
   },
   {
-    title: 'Model / Frequency Verification',
-    description: 'Compatibility must be confirmed by model, frequency, IC/chip, PCB layout, and coding protocol.',
+    title: 'Review the Technical Match',
+    description: 'Check the model, receiver and market version; add frequency or PCB details when needed.',
   },
   {
-    title: 'Engineering Sample Testing',
-    description: 'Samples are tested on actual systems when possible to validate function, signal range, and stability.',
+    title: 'Agree Sample Checks',
+    description: 'Agree the receiver, pairing procedure and test conditions before evaluating samples.',
   },
   {
-    title: 'Private Label Packaging',
-    description: 'OEM / ODM branding, custom manuals, neutral packaging, and private label solutions are supported.',
+    title: 'Confirm Private-Label Options',
+    description: 'Review logo, packaging, label and manual requirements for the selected product.',
   },
   {
-    title: 'Documentation & Compliance Support',
-    description: 'We provide technical information, export documents, and product details for smooth international trade.',
+    title: 'Request Product Documentation',
+    description: 'Tell us which documents your market requires so we can confirm what is available for the selected item.',
   },
 ];
 
@@ -155,41 +155,41 @@ export const products = [
 export const workflowSteps = [
   {
     step: 1,
-    title: 'Share Brand / Model Photos',
-    description: 'Send clear photos of the remote, receiver, motor label, or system label.',
+    title: 'Send a Remote Photo',
+    description: 'Share front and back photos of your remote, plus the country where the system is used.',
   },
   {
     step: 2,
-    title: 'Confirm Frequency & Coding',
-    description: 'Provide frequency, rolling code or fixed code, DIP settings, and region.',
+    title: 'Identify the System',
+    description: 'We review the model, frequency and receiver details with you. Add label photos if available.',
   },
   {
     step: 3,
-    title: 'Check IC / Chip / PCB',
-    description: 'Share PCB photos or IC/chip markings when needed.',
+    title: 'Review Technical Details',
+    description: 'If needed, we’ll ask for PCB photos or chip markings to narrow down the options.',
   },
   {
     step: 4,
-    title: 'Engineering Match or Develop',
-    description: 'Our engineers match existing solutions or develop a compatible option.',
+    title: 'Review Replacement Options',
+    description: 'Discuss possible solutions and whether custom development needs to be assessed.',
   },
   {
     step: 5,
-    title: 'Sample Test',
-    description: 'Test samples with your system to confirm function and signal range.',
+    title: 'Test a Sample',
+    description: 'Check pairing, operation and signal range with your receiver before a bulk order.',
   },
   {
     step: 6,
-    title: 'Bulk Production & Private Label',
-    description: 'Start mass production with custom branding, packaging, and quality control.',
+    title: 'Confirm the Bulk Order',
+    description: 'After sample approval, agree the quantity, packaging and any private-label requirements.',
   },
 ];
 
 export const verificationFields = [
   { field: 'Brand / Model', description: 'Remote, receiver, or gate operator model number.' },
-  { field: 'Frequency', description: 'For example 433.92 MHz, 868 MHz, or regional label information.' },
+  { field: 'Frequency', description: 'Frequency or regional label information, if available.' },
   { field: 'Remote Photos', description: 'Front and back photos of the original remote.' },
-  { field: 'PCB Photo', description: 'PCB and IC/chip markings if available.' },
+  { field: 'PCB Photo', description: 'PCB photos or chip markings, if requested.' },
   { field: 'Receiver / Motor', description: 'Receiver board, motor label, or control box information.' },
   { field: 'Market Version', description: 'Country or market version to avoid regional mismatch.' },
   { field: 'Sample Quantity', description: 'Quantity needed for compatibility testing.' },
@@ -214,7 +214,7 @@ export const oemSteps = [
   { step: 5, title: 'PCB Tuning', description: 'RF performance optimization and protocol tuning.' },
   { step: 6, title: 'Packaging', description: 'Box, blister, bag, or special packaging.' },
   { step: 7, title: 'Manual / Label', description: 'User manual and label in your language.' },
-  { step: 8, title: 'Mass Production', description: 'Strict QC and on-time delivery worldwide.' },
+  { step: 8, title: 'Production Planning', description: 'Agree production checks, packaging and delivery requirements before confirming the order.' },
 ];
 
 export const factoryItems = [
@@ -253,27 +253,27 @@ export const resources = [
 
 export const faqs = [
   {
-    question: 'Are these original brand products?',
-    answer: 'No. We provide independent aftermarket compatible replacement solutions. Brand names are used only for compatibility reference.',
+    question: 'Can I start without a model number?',
+    answer: 'Yes. Send front and back photos of the remote and tell us the country where it is used. Add a receiver or label photo if available; further details can be checked together.',
   },
   {
-    question: 'Can all models be replaced?',
-    answer: 'Not all. Compatibility depends on model, frequency, IC/chip, coding protocol, and regional version.',
+    question: 'How is compatibility checked?',
+    answer: 'We review the remote model, receiver, frequency or coding details, and market version. Sample testing with the intended system helps confirm fit before a bulk order.',
   },
   {
-    question: 'Can you print our brand or logo?',
-    answer: 'Yes. We support OEM, private label, neutral packaging, custom manuals, and brand packaging.',
+    question: 'How should I test a sample?',
+    answer: 'Agree the intended receiver and test conditions first, then check pairing, normal operation and signal range. Record any issues before confirming a bulk order.',
   },
   {
-    question: 'Do you support sample testing?',
-    answer: 'Yes. We recommend sample testing before bulk orders, especially for rolling code or regional systems.',
+    question: 'What should I send for a wholesale inquiry?',
+    answer: 'Share the product category, target market, estimated quantity and packaging needs. Add model or system details when the order involves a replacement match.',
   },
   {
-    question: 'What information do you need to check compatibility?',
-    answer: 'Please send remote photos, PCB photos, model number, frequency, chip marking, receiver information, and target market.',
+    question: 'Can I request my own logo or packaging?',
+    answer: 'Share the branding, label, manual and packaging changes you need. Available options and sample requirements depend on the selected product.',
   },
   {
-    question: 'Do you support international shipping?',
-    answer: 'Yes. We support global shipping and can help prepare export packaging and product information.',
+    question: 'Are these original-brand products?',
+    answer: 'We supply independent aftermarket replacement options. Brand names are used to identify compatibility references, not brand affiliation.',
   },
 ];

@@ -83,7 +83,7 @@ export default async function RequestCatalogPage({ params }: { params: Promise<{
               <p className="text-[#C7D7E8] leading-relaxed max-w-2xl">{page.subtitle}</p>
               <div className="mt-8 flex flex-wrap gap-3">
                 <LeadModalTrigger
-                  prefillType="quote"
+                  prefillType="catalog"
                   className="btn-glow inline-flex items-center justify-center rounded-lg bg-[#FF8A1F] px-6 py-3 text-sm font-bold text-[#062748] transition-colors hover:bg-[#F97316]"
                 >
                   {page.primaryCta}

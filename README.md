@@ -20,7 +20,7 @@ npm run lint
 npm run build
 ```
 
-`npm run build` 完成 Next.js 构建、旧 URL 重定向生成、HTML 语言标记修正，以及 sitemap、canonical、博客完整目录和重定向目标校验。任何校验失败都会令构建失败。
+`npm run build` 完成 Next.js 构建、旧 URL 重定向生成、HTML 语言标记修正，以及 sitemap、canonical、博客完整目录和重定向目标校验。还会检查六套词典的键与数组结构、OEM 页面本地化、FAQ 正文与结构化数据的一致性，并防止已撤下的无依据宣传陈述恢复。任何校验失败都会令构建失败。
 
 项目使用 Next.js `output: 'export'`，不要运行 `next start`。完整的本地交互检查使用 `npm run dev`；直接查看构建产物可运行：
 
@@ -45,11 +45,13 @@ GitHub Actions 工作流 [`.github/workflows/deploy.yml`](.github/workflows/depl
 - `src/data/generated-visuals.ts`：产品、应用、服务页与博客的 AI 示意图配置；提示词、原图校验和与处理方式见 `public/images/generated/`。
 - `scripts/generate-static-redirects.mjs`：旧 URL 重定向和导出 HTML 的语言标记修正。
 - `scripts/legacy-redirects.mjs`：旧 URL 重定向数据。
-- `scripts/verify-export.mjs`：静态导出、sitemap、canonical、六语博客目录和重定向目标校验。
+- `scripts/verify-export.mjs`：静态导出、媒体、sitemap、canonical、六语内容、FAQ 和重定向目标校验。
 
 ## 询盘与内容边界
 
 这是纯静态站点。询盘支持打开 WhatsApp、本机邮件草稿，或复制询盘内容；网站不会接收表单数据或上传附件。产品、品牌和无匹配搜索词会带入需求；同一页面和需求上下文的编辑在当前 Provider 生命周期内保留，刷新后丢失，不写入浏览器存储。WhatsApp 不要求姓名或邮箱；邮件草稿要求有效邮箱。打开外部应用不代表已经发送或收到。
+
+目录申请使用独立的 `catalog` 需求类型，编辑产品后仍能保留目录意图；OEM 和其他产品询盘分别保留自己的需求上下文。浏览器禁用 Clipboard API 时使用备用复制，成功或失败后均恢复弹窗内的原焦点；复制失败不显示成功。
 
 接入真实表单、附件上传、CRM、统计或其他第三方服务前，需要先确认托管、隐私和密钥方案。
 
@@ -57,7 +59,7 @@ GitHub Actions 工作流 [`.github/workflows/deploy.yml`](.github/workflows/depl
 
 2026-10-03 的配图来自所有者指定的首页视频，只描述画面中可见的电路、设备、工位和 PCB，不作为公司归属或检测能力证明。源视频为 1280×726，图片保留自然颜色，无生成、补绘或放大。首页视频及质量页保留这组来源；旧素材、博客正文技术解释图与作者头像继续保留。
 
-2026-10-04 按所有者要求新增 25 张摄影风格 AI 示意图，覆盖六类产品、七种应用和十二个技术主题；共 75 个响应式 WebP。产品、应用、OEM、目录、兼容性与博客使用对应图片，六语页面标明生成图用途。它们不代表真实 SKU、客户现场、公司工厂或检测结果。最终提示词与原图 SHA-256 见 `public/images/generated/prompts.json`，转换脚本为 `scripts/prepare-generated-images.mjs`；验证仍需的真实资料以执行计划为准。
+2026-10-04 按所有者要求新增 25 张摄影风格 AI 示意图，覆盖六类产品、七种应用和十二个技术主题；共 75 个响应式 WebP。产品、应用、OEM、目录、兼容性与博客使用对应图片，六语图片说明使用产品、场景、技术与包装示意描述。它们不代表真实 SKU、客户现场、公司工厂或检测结果。最终提示词与原图 SHA-256 见 `public/images/generated/prompts.json`，转换脚本为 `scripts/prepare-generated-images.mjs`；验证仍需的真实资料以执行计划为准。
 
 同日对抗检查后，兼容性六步流程加入 96×64 像素的小图区域，复用五张生成图与一张原视频帧。手机产品和应用区域采用两列小图，博客正文保留完整 3:2 比例。按所有者后续要求，生成图角标已移除，六语配图说明和 alt 使用产品、场景、技术与包装示意描述，不标注 AI。导出校验防止旧角标和 AI 配图标注重新出现；测量与验收记录见执行计划第 18–20 节。
 

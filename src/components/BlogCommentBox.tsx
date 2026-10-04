@@ -4,7 +4,7 @@ import { FormEvent, useState } from 'react';
 import { MessageSquare, Send } from 'lucide-react';
 
 export default function BlogCommentBox({ articleTitle }: { articleTitle: string }) {
-  const [status, setStatus] = useState('This opens an email draft. Your question is not submitted on this website.');
+  const [status, setStatus] = useState('');
 
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -29,7 +29,7 @@ export default function BlogCommentBox({ articleTitle }: { articleTitle: string 
     mailto.searchParams.set('subject', `RF question: ${articleTitle}`);
     mailto.searchParams.set('body', body);
     window.location.href = mailto.toString();
-    setStatus('Email draft requested. If no mail app opened, use sales@gateremotesource.com. Nothing has been submitted on this website.');
+    setStatus('Email draft requested. Review and send it in your email app. If no app opened, email sales@gateremotesource.com directly.');
   };
 
   return (
@@ -53,14 +53,14 @@ export default function BlogCommentBox({ articleTitle }: { articleTitle: string 
             className="mt-2 break-words text-xl font-bold leading-tight text-[#0F172A] sm:text-2xl"
             style={{ fontFamily: 'var(--font-outfit), sans-serif' }}
           >
-            Email Eric an RF question
+            Ask Eric About Your Remote or Receiver
           </h2>
           <p className="mt-2 text-sm leading-7 text-[#475569]">
-            Share your unstable range, batch consistency, matching, filtering, case effect, or export production question. Eric will review the details and reply directly.
+            Describe your remote or receiver, the issue and what you have already tried. Add model details and your country if available.
           </p>
         </div>
         <p className="w-full rounded-md border border-[#FFE0B8] bg-[#FFF7ED] px-3 py-2 text-xs leading-5 text-[#9A3412] sm:max-w-[220px]">
-          This is not a public comment system. It opens your email app so you can review the message before sending.
+          Opens a draft in your email app. Review it, attach any photos and send your message.
         </p>
       </div>
 
@@ -104,7 +104,7 @@ export default function BlogCommentBox({ articleTitle }: { articleTitle: string 
             name="message"
             required
             rows={4}
-            placeholder="What unstable RF problem did you meet?"
+            placeholder="Describe your system, the problem and what you have already tried."
             className="w-full resize-y rounded-lg border border-[#CBD5E1] bg-white px-3 py-2.5 text-sm leading-6 text-[#0F172A] placeholder:text-[#94A3B8] focus:border-[#FF8A1F] focus:outline-none"
           />
         </label>

@@ -7,10 +7,17 @@ import ImageSourceLabel from './ImageSourceLabel';
 import { blogPosts } from '@/data/blog';
 import { defaultLocale, useDict, useLocale } from '@/i18n';
 
+const buyingGuideSlugs = [
+  'same-shell-hidden-downgrade-remote-manufacturing-quality',
+  'third-party-rf-remote-brand-receiver-pairing',
+  'rf-remote-wholesale-price-cost-drivers',
+  'why-universal-remote-cannot-copy',
+];
+
 export default function ResourcesSection() {
   const dict = useDict();
   const locale = useLocale();
-  const displayPosts = blogPosts.slice(0, 4);
+  const displayPosts = blogPosts.filter((post) => buyingGuideSlugs.includes(post.slug));
 
   if (displayPosts.length === 0) return null;
 

@@ -14,7 +14,7 @@ const pageUpdatedAt: Partial<Record<string, string>> = {
   '/compatibility/came': '2026-10-04',
   '/compatibility/liftmaster': '2026-10-04',
   '/oem-odm': '2026-10-04',
-  '/factory-quality': '2026-10-03',
+  '/factory-quality': '2026-10-04',
   '/request-catalog': '2026-10-04',
   '/blog': '2026-10-04',
 };

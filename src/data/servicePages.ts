@@ -6,22 +6,22 @@ export const oemPage = {
   eyebrow: 'OEM / ODM',
   title: 'Private-Label RF Remote Development',
   subtitle:
-    'Build a controlled product line around verified frequency, protocol, packaging, and market requirements instead of public brand-style catalog claims.',
+    'Discuss logo, packaging, manual and technical options for your RF remote project. Share the target market, system requirements and quantity to review the scope and sample requirements.',
   primaryCta: 'Discuss OEM Project',
-  secondaryCta: 'Request Catalog Access',
+  secondaryCta: 'Request Wholesale Catalog',
   supportTitle: 'What can be customized',
-  supportHeading: 'Build around your market, not public product copying.',
+  supportHeading: 'Branding, Packaging & Technical Options',
   supportSubtitle:
-    'The work starts after model matching, sample requirements, and target market details are clear.',
+    'Start with the product and changes you need. We’ll review the scope before discussing samples or production.',
   highlights: [
-    'Private-label logo, packaging, label, and manual support',
-    'Frequency, PCB, button layout, and protocol tuning for target markets',
-    'Neutral presentation for distributors who need safer wholesale supply',
+    'Logo, label, packaging and manual options for your brand.',
+    'Review frequency, housing, button layout and PCB requirements for the selected product.',
+    'Discuss packaging language and product information for your sales channels.',
   ],
-  workflowLabel: 'Controlled workflow',
-  detailTitle: 'From matching request to controlled production',
+  workflowLabel: 'Customization Options',
+  detailTitle: 'Options to Review for Your Project',
   detailSubtitle:
-    'Each project is scoped around compatibility evidence, sample testing, and export-ready production details.',
+    'Choose the options relevant to your product. Confirm the scope, sample checks and production requirements together.',
 };
 
 export const factoryQualityPage = {
@@ -32,13 +32,13 @@ export const factoryQualityPage = {
   eyebrow: 'Quality & Verification',
   title: 'Quality Checks Before Bulk Orders',
   subtitle:
-    'Review how an RF remote order can be verified through samples, functional checks, packaging review, and shipment preparation.',
+    'Define what needs to be checked for your product, receiver and target market. Confirm sample test conditions and which supporting records are available before ordering.',
   primaryCta: 'Start an Inquiry',
   secondaryCta: 'Request Wholesale Catalog',
   processLabel: 'Verification workflow',
-  processTitle: 'Quality checks buyers can request',
+  processTitle: 'Checks to Agree Before Ordering',
   processSubtitle:
-    'Confirm the required checks and available supporting records with sales before placing an order.',
+    'Discuss the required checks and available supporting records for your product and market.',
   checks: [
     'Incoming material and PCB inspection',
     'Frequency and signal range testing',
@@ -53,15 +53,15 @@ export const factoryQualityPage = {
 
 export const catalogPage = {
   path: '/request-catalog',
-  metaTitle: 'Request Wholesale Compatibility Catalog | GateRemoteSource',
+  metaTitle: 'Request Wholesale Catalog | GateRemoteSource',
   metaDescription:
     'Request a wholesale catalog for compatible remotes, receivers, and RF solutions. Start with product category, target country, and estimated quantity.',
   eyebrow: 'Wholesale Catalog',
-  title: 'Request a Wholesale Compatibility Catalog',
+  title: 'Request a Wholesale Catalog',
   subtitle:
-    'Tell us what you need, where you sell, and your estimated quantity. You can start without a model or frequency; technical matching follows before samples or an order.',
+    'Tell us the product category, market and quantity to discuss relevant options, specifications and sample requirements. Model details can follow if a replacement match is needed.',
   primaryCta: 'Request Wholesale Catalog',
-  secondaryCta: 'Check Supported Brands',
+  secondaryCta: 'Browse Brand References',
   cardNote: 'Start with your category, market, and quantity.',
   requirementTitle: 'What to send first',
   requirementHeading: 'Start with your purchasing needs.',
@@ -85,11 +85,11 @@ export const catalogPage = {
       description: 'Brand, model, frequency, or system description if known. Attach photos in WhatsApp or email; we can check the details together.',
     },
   ],
-  scopeLabel: 'Private scope',
-  scopeTitle: 'What the private catalog can cover',
+  scopeLabel: 'Product Options',
+  scopeTitle: 'Product Options for Your Market',
   scopeItems: [
     'Compatible replacement remote options',
-    'Universal receivers and controller solutions',
+    'External and plug-in receiver options',
     'Private-label packaging and manual options',
     'Sample testing plan before bulk production',
   ],

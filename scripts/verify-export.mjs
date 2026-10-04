@@ -1,5 +1,7 @@
 import { readFile, readdir, stat } from 'node:fs/promises';
 import path from 'node:path';
+import vm from 'node:vm';
+import ts from 'typescript';
 import sharp from 'sharp';
 import { outputDir, redirects, siteUrl, supportedLocales } from './legacy-redirects.mjs';
 
@@ -30,6 +32,56 @@ async function readTextIfExists(filePath) {
 }
 
 const problems = [];
+
+function visibleText(html) {
+  return html
+    .replace(/<(script|style)\b[^>]*>[\s\S]*?<\/\1>/gi, '')
+    .replace(/<[^>]+>/g, ' ')
+    .replace(/&(#x[\da-f]+|#\d+|amp|lt|gt|quot|apos);/gi, (entity, code) => {
+      if (code.startsWith('#')) {
+        return String.fromCodePoint(code[1].toLowerCase() === 'x' ? parseInt(code.slice(2), 16) : Number(code.slice(1)));
+      }
+      return { amp: '&', lt: '<', gt: '>', quot: '"', apos: "'" }[code.toLowerCase()] ?? entity;
+    })
+    .replace(/\s+/g, ' ')
+    .trim();
+}
+
+function dictionaryShape(value) {
+  if (Array.isArray(value)) return value.map(dictionaryShape);
+  if (value && typeof value === 'object') {
+    return Object.fromEntries(Object.keys(value).sort().map((key) => [key, dictionaryShape(value[key])]));
+  }
+  return typeof value;
+}
+
+const dictionaries = new Map();
+for (const locale of supportedLocales) {
+  const source = await readFile(`src/i18n/${locale}.ts`, 'utf8');
+  const compiled = ts.transpileModule(source, { compilerOptions: { module: ts.ModuleKind.CommonJS } });
+  const dictionaryModule = { exports: {} };
+  vm.runInNewContext(compiled.outputText, { module: dictionaryModule, exports: dictionaryModule.exports }, { timeout: 1000 });
+  dictionaries.set(locale, dictionaryModule.exports.default);
+}
+
+const baselineShape = JSON.stringify(dictionaryShape(dictionaries.get('en')));
+for (const [locale, dictionary] of dictionaries) {
+  if (JSON.stringify(dictionaryShape(dictionary)) !== baselineShape) {
+    problems.push(`Dictionary key or array shape mismatch: ${locale}`);
+  }
+  if (!dictionary.leadModal.requestTypes.catalog?.trim()) {
+    problems.push(`Missing catalog inquiry label: ${locale}`);
+  }
+  const oemHtml = (await readTextIfExists(pathToHtmlFile(`/${locale}/oem-odm`))) ?? '';
+  const headings = [...oemHtml.matchAll(/<h3\b[^>]*>([\s\S]*?)<\/h3>/gi)].map((match) => visibleText(match[1]));
+  const oemText = visibleText(oemHtml);
+  const expectedSteps = dictionary.oem.steps;
+  if (headings.length !== expectedSteps.length || expectedSteps.some((step, index) => headings[index] !== step.title || !oemText.includes(step.description))) {
+    problems.push(`OEM options do not match the selected locale: ${locale}`);
+  }
+}
+
+let faqCount = 0;
 
 // 1. Core files exist.
 for (const file of ['robots.txt', 'sitemap.xml']) {
@@ -115,6 +167,20 @@ const mediaPaths = new Set();
 for (const file of await readdir(outputDir, { recursive: true })) {
   if (!file.endsWith('.html')) continue;
   const html = await readFile(path.join(outputDir, file), 'utf8');
+  const text = visibleText(html);
+  if (/50 retail-style production units|Built for Every Access Environment|Strict QC and on-time delivery worldwide\.|10\+ years in RF remote controls|guaranteed local-control layer/i.test(text)) {
+    problems.push(`Unsupported public claim restored in ${file}`);
+  }
+  for (const script of html.matchAll(/<script\b[^>]*type="application\/ld\+json"[^>]*>([\s\S]*?)<\/script>/gi)) {
+    const data = JSON.parse(script[1]);
+    if (data['@type'] !== 'FAQPage') continue;
+    for (const entry of data.mainEntity ?? []) {
+      faqCount += 1;
+      if (!text.includes(visibleText(entry.name)) || !text.includes(visibleText(entry.acceptedAnswer.text))) {
+        problems.push(`FAQ structured data differs from visible copy in ${file}`);
+      }
+    }
+  }
   const generatedSourceCount = [...html.matchAll(/data-image-source-label="generated"/g)].length;
   if (generatedSourceCount > 0) {
     problems.push(`Unexpected generated-image badge in ${file}`);
@@ -183,4 +249,4 @@ if (problems.length > 0) {
   process.exit(1);
 }
 
-console.log(`verify-export: ${sitemapUrls.length} sitemap URLs, ${redirects.length} legacy redirects, ${mediaPaths.size} media assets — all checks passed.`);
+console.log(`verify-export: ${sitemapUrls.length} sitemap URLs, ${redirects.length} legacy redirects, ${mediaPaths.size} media assets, ${dictionaries.size} dictionaries and localized OEM pages, ${faqCount} FAQ entries — all checks passed.`);

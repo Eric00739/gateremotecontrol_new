@@ -3,7 +3,7 @@
 import { createContext, useCallback, useContext, useEffect, useState, type ReactNode } from 'react';
 import LeadModal from './LeadModal';
 
-export type PrefillType = 'quote' | 'compatibility' | 'oem' | 'sample' | 'support';
+export type PrefillType = 'quote' | 'catalog' | 'compatibility' | 'oem' | 'sample' | 'support';
 
 export type InquiryContext = {
   productInterest?: string;
