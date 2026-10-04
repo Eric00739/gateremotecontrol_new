@@ -115,10 +115,12 @@ const mediaPaths = new Set();
 for (const file of await readdir(outputDir, { recursive: true })) {
   if (!file.endsWith('.html')) continue;
   const html = await readFile(path.join(outputDir, file), 'utf8');
-  const generatedImageCount = [...html.matchAll(/<img\b[^>]*\bsrc="\/images\/generated\/[^\"]+"/g)].length;
   const generatedSourceCount = [...html.matchAll(/data-image-source-label="generated"/g)].length;
-  if (generatedImageCount !== generatedSourceCount) {
-    problems.push(`Generated image source-label count mismatch in ${file}: ${generatedImageCount} images, ${generatedSourceCount} labels`);
+  if (generatedSourceCount > 0) {
+    problems.push(`Unexpected generated-image badge in ${file}`);
+  }
+  if (/(?:AI(?:-generated)?\s+(?:illustration|product|application|technical|packaging)|(?:Ilustración|Illustration|Illustrazione|Ilustração)\s+IA|ИИ-иллюстрац|(?:generadas con|générées par|generate con|geradas por)\s+IA|созданы с помощью ИИ)/i.test(html)) {
+    problems.push(`Unexpected AI image annotation in ${file}`);
   }
   for (const tag of html.matchAll(/<(?:img|source|video)\b[^>]*>/gi)) {
     for (const attribute of tag[0].matchAll(/\b(?:src|poster|srcset)="([^"]+)"/gi)) {

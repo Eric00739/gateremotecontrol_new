@@ -40,9 +40,9 @@ function blogIllustration(visual: GeneratedVisualId, imageAlt: string) {
   return {
     image: generatedPhoto(visual),
     thumbnail: generatedPhoto(visual, 320),
-    imageAlt: `AI-generated illustration: ${imageAlt}`,
+    imageAlt: `Illustration: ${imageAlt}`,
     imageSrcSet: generatedSrcSet(visual),
-    imageCaption: 'AI-generated illustration of the article topic; not a product specification, customer installation or test record.',
+    imageCaption: 'Illustration of the article topic.',
   };
 }
 

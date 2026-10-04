@@ -1,4 +1,6 @@
 export default function ImageSourceLabel({ label, source = 'generated', small = false }: { label: string; source?: 'generated' | 'video'; small?: boolean }) {
+  if (source === 'generated') return null;
+
   return (
     <span
       aria-hidden="true"
