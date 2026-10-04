@@ -1,3 +1,5 @@
+import { illustratedBlogPhotos } from './generated-visuals';
+
 import type { BlogPostContentBlock } from './blog';
 import { blogPosts } from './blog';
 import type { BlogPostMeta } from './blog';
@@ -27,10 +29,10 @@ export const blogContentBySlug: Record<string, BlogPostContentBlock[]> = {
     },
     {
       type: 'image',
-      src: '/images/blog/same-shell-hidden-downgrade-remote-manufacturing-quality/hero.webp',
-      alt: 'Same shell remote controls with low-grade and industrial-grade internal PCB manufacturing differences',
-      caption:
-        'The outside can be identical. The inside decides whether the remote lasts six months or several years.',
+      src: illustratedBlogPhotos['same-shell-hidden-downgrade-remote-manufacturing-quality'].image,
+      srcSet: illustratedBlogPhotos['same-shell-hidden-downgrade-remote-manufacturing-quality'].imageSrcSet,
+      alt: illustratedBlogPhotos['same-shell-hidden-downgrade-remote-manufacturing-quality'].imageAlt,
+      caption: illustratedBlogPhotos['same-shell-hidden-downgrade-remote-manufacturing-quality'].imageCaption,
     },
     {
       type: 'heading',
@@ -297,10 +299,10 @@ export const blogContentBySlug: Record<string, BlogPostContentBlock[]> = {
     },
     {
       type: 'image',
-      src: '/images/blog/build-your-own-rf-remote-control-beginner-guide/hero.webp',
-      alt: 'Beginner DIY 433MHz RF remote control project with transmitter receiver relay and antenna',
-      caption:
-        'The simplest RF control project is a transmitter, a receiver, a relay, and a safe low-voltage load.',
+      src: illustratedBlogPhotos['build-your-own-rf-remote-control-beginner-guide'].image,
+      srcSet: illustratedBlogPhotos['build-your-own-rf-remote-control-beginner-guide'].imageSrcSet,
+      alt: illustratedBlogPhotos['build-your-own-rf-remote-control-beginner-guide'].imageAlt,
+      caption: illustratedBlogPhotos['build-your-own-rf-remote-control-beginner-guide'].imageCaption,
     },
     {
       type: 'heading',
@@ -531,10 +533,10 @@ export const blogContentBySlug: Record<string, BlogPostContentBlock[]> = {
     },
     {
       type: 'image',
-      src: '/images/blog/third-party-rf-remote-brand-receiver-pairing/hero.webp',
-      alt: 'Third-party RF remote pairing with brand receiver showing frequency protocol security and receiver compatibility layers',
-      caption:
-        'A third-party remote can match one layer and still fail at another. Frequency match alone is not compatibility.',
+      src: illustratedBlogPhotos['third-party-rf-remote-brand-receiver-pairing'].image,
+      srcSet: illustratedBlogPhotos['third-party-rf-remote-brand-receiver-pairing'].imageSrcSet,
+      alt: illustratedBlogPhotos['third-party-rf-remote-brand-receiver-pairing'].imageAlt,
+      caption: illustratedBlogPhotos['third-party-rf-remote-brand-receiver-pairing'].imageCaption,
     },
     {
       type: 'heading',
@@ -761,10 +763,10 @@ export const blogContentBySlug: Record<string, BlogPostContentBlock[]> = {
     },
     {
       type: 'image',
-      src: '/images/blog/wifi-switch-protocols-smart-home-guide/hero.webp',
-      alt: 'Smart switch protocol comparison showing Wi-Fi Zigbee Z-Wave Matter Tuya Thread and Bluetooth',
-      caption:
-        'A smart switch is not defined only by the front glass panel. The protocol underneath decides how it behaves in the home.',
+      src: illustratedBlogPhotos['wifi-switch-protocols-smart-home-guide'].image,
+      srcSet: illustratedBlogPhotos['wifi-switch-protocols-smart-home-guide'].imageSrcSet,
+      alt: illustratedBlogPhotos['wifi-switch-protocols-smart-home-guide'].imageAlt,
+      caption: illustratedBlogPhotos['wifi-switch-protocols-smart-home-guide'].imageCaption,
     },
     {
       type: 'heading',
@@ -982,10 +984,10 @@ export const blogContentBySlug: Record<string, BlogPostContentBlock[]> = {
     },
     {
       type: 'image',
-      src: '/images/blog/rf-remote-range-real-world-test-data/hero.webp',
-      alt: 'RF remote control range test showing 10 meters 30 meters and 100 meters in real use',
-      caption:
-        'Open-field range and indoor range are not the same specification. Walls, antennas, receiver sensitivity, and noise decide what the user actually gets.',
+      src: illustratedBlogPhotos['rf-remote-range-real-world-test-data'].image,
+      srcSet: illustratedBlogPhotos['rf-remote-range-real-world-test-data'].imageSrcSet,
+      alt: illustratedBlogPhotos['rf-remote-range-real-world-test-data'].imageAlt,
+      caption: illustratedBlogPhotos['rf-remote-range-real-world-test-data'].imageCaption,
     },
     {
       type: 'heading',
@@ -1204,10 +1206,10 @@ export const blogContentBySlug: Record<string, BlogPostContentBlock[]> = {
     },
     {
       type: 'image',
-      src: '/images/blog/garage-door-remote-cloning-security-guide/hero.webp',
-      alt: 'Garage door remote cloning security comparison showing fixed code replay and rolling code protection',
-      caption:
-        'Fixed code repeats the same value. Rolling code changes on every press, which is why ordinary replay cloning fails.',
+      src: illustratedBlogPhotos['garage-door-remote-cloning-security-guide'].image,
+      srcSet: illustratedBlogPhotos['garage-door-remote-cloning-security-guide'].imageSrcSet,
+      alt: illustratedBlogPhotos['garage-door-remote-cloning-security-guide'].imageAlt,
+      caption: illustratedBlogPhotos['garage-door-remote-cloning-security-guide'].imageCaption,
     },
     {
       type: 'paragraph',
@@ -1435,10 +1437,10 @@ export const blogContentBySlug: Record<string, BlogPostContentBlock[]> = {
     },
     {
       type: 'image',
-      src: '/images/blog/car-key-short-range-window-tint/hero.webp',
-      alt: 'Car key remote short range caused by metallic window film EMI battery voltage and antenna placement',
-      caption:
-        'A new coin cell is only one part of the range story. Metallic film, EMI, shielding, and antenna placement can be just as important.',
+      src: illustratedBlogPhotos['car-key-short-range-window-tint'].image,
+      srcSet: illustratedBlogPhotos['car-key-short-range-window-tint'].imageSrcSet,
+      alt: illustratedBlogPhotos['car-key-short-range-window-tint'].imageAlt,
+      caption: illustratedBlogPhotos['car-key-short-range-window-tint'].imageCaption,
     },
     {
       type: 'heading',
@@ -1678,9 +1680,10 @@ export const blogContentBySlug: Record<string, BlogPostContentBlock[]> = {
     },
     {
       type: 'image',
-      src: '/images/blog/rf-wifi-dual-mode-smart-switch/hero.webp',
-      alt: 'RF and Wi-Fi dual-mode smart switch showing local RF backup and cloud app control',
-      caption: 'RF handles local reliability. Wi-Fi handles app, cloud, scene, and voice control. The value is in keeping both paths independent.',
+      src: illustratedBlogPhotos['rf-wifi-dual-mode-smart-switch'].image,
+      srcSet: illustratedBlogPhotos['rf-wifi-dual-mode-smart-switch'].imageSrcSet,
+      alt: illustratedBlogPhotos['rf-wifi-dual-mode-smart-switch'].imageAlt,
+      caption: illustratedBlogPhotos['rf-wifi-dual-mode-smart-switch'].imageCaption,
     },
     {
       type: 'heading',
@@ -1960,9 +1963,10 @@ export const blogContentBySlug: Record<string, BlogPostContentBlock[]> = {
     },
     {
       type: 'image',
-      src: '/images/blog/rf-remote-wholesale-price-cost-drivers/hero.webp',
-      alt: 'RF remote wholesale pricing factors including chipset, materials, production, and compliance',
-      caption: 'Similar-looking remotes can hide very different chipsets, materials, test processes, and certification costs.',
+      src: illustratedBlogPhotos['rf-remote-wholesale-price-cost-drivers'].image,
+      srcSet: illustratedBlogPhotos['rf-remote-wholesale-price-cost-drivers'].imageSrcSet,
+      alt: illustratedBlogPhotos['rf-remote-wholesale-price-cost-drivers'].imageAlt,
+      caption: illustratedBlogPhotos['rf-remote-wholesale-price-cost-drivers'].imageCaption,
     },
     {
       type: 'heading',
@@ -2192,9 +2196,10 @@ export const blogContentBySlug: Record<string, BlogPostContentBlock[]> = {
     },
     {
       type: 'image',
-      src: '/images/blog/433mhz-remote-short-range-diagnostics/hero.webp',
-      alt: '433MHz remote control range troubleshooting showing battery, antenna, and EMI checks',
-      caption: 'Same product, different site result. In the field, range problems usually start with battery, antenna, or interference.',
+      src: illustratedBlogPhotos['433mhz-remote-short-range-diagnostics'].image,
+      srcSet: illustratedBlogPhotos['433mhz-remote-short-range-diagnostics'].imageSrcSet,
+      alt: illustratedBlogPhotos['433mhz-remote-short-range-diagnostics'].imageAlt,
+      caption: illustratedBlogPhotos['433mhz-remote-short-range-diagnostics'].imageCaption,
     },
     {
       type: 'heading',
@@ -2446,9 +2451,10 @@ export const blogContentBySlug: Record<string, BlogPostContentBlock[]> = {
     },
     {
       type: 'image',
-      src: '/images/blog/rf-receiver-sensitivity-range-spec/hero.webp',
-      alt: 'RC remote control receiver sensitivity comparison showing signal strength and usable distance',
-      caption: 'In RF control, the receiver side often decides whether a weak command still becomes a reliable action.',
+      src: illustratedBlogPhotos['rf-receiver-sensitivity-range-spec'].image,
+      srcSet: illustratedBlogPhotos['rf-receiver-sensitivity-range-spec'].imageSrcSet,
+      alt: illustratedBlogPhotos['rf-receiver-sensitivity-range-spec'].imageAlt,
+      caption: illustratedBlogPhotos['rf-receiver-sensitivity-range-spec'].imageCaption,
     },
     {
       type: 'heading',
@@ -2708,10 +2714,10 @@ export const blogContentBySlug: Record<string, BlogPostContentBlock[]> = {
     },
     {
       type: 'image',
-      src: '/images/blog/rf-remote-controller-application-scenarios/hero.webp',
-      alt: 'Ten typical RF remote and controller applications including garage doors access gates roller shutters curtains lighting irrigation ventilation actuators industrial control and stage control',
-      caption:
-        'RF control is not one product for every job. Each scenario needs the right control logic, load margin, installation method, and after-sales plan.',
+      src: illustratedBlogPhotos['rf-remote-controller-application-scenarios'].image,
+      srcSet: illustratedBlogPhotos['rf-remote-controller-application-scenarios'].imageSrcSet,
+      alt: illustratedBlogPhotos['rf-remote-controller-application-scenarios'].imageAlt,
+      caption: illustratedBlogPhotos['rf-remote-controller-application-scenarios'].imageCaption,
     },
     { type: 'heading', text: 'Map the System Link First' },
     {
@@ -3018,10 +3024,10 @@ export const blogContentBySlug: Record<string, BlogPostContentBlock[]> = {
     },
     {
       type: 'image',
-      src: '/images/blog/exporting-wifi-switches-eu-ce-requirements/hero.webp',
-      alt: 'Wi-Fi switch and smart plug with CE compliance loop for RED RoHS WEEE DoC cybersecurity label and technical documentation',
-      caption:
-        'For a connected electrical product, CE is a loop of product classification, testing, documents, labels, instructions, and market responsibilities.',
+      src: illustratedBlogPhotos['exporting-wifi-switches-eu-ce-requirements'].image,
+      srcSet: illustratedBlogPhotos['exporting-wifi-switches-eu-ce-requirements'].imageSrcSet,
+      alt: illustratedBlogPhotos['exporting-wifi-switches-eu-ce-requirements'].imageAlt,
+      caption: illustratedBlogPhotos['exporting-wifi-switches-eu-ce-requirements'].imageCaption,
     },
     { type: 'heading', text: 'CE Is Not a Certificate' },
     {
@@ -3260,10 +3266,10 @@ export const blogContentBySlug: Record<string, BlogPostContentBlock[]> = {
     },
     {
       type: 'image',
-      src: '/images/blog/cr2032-rf-remote-battery-life/hero.webp',
-      alt: 'CR2032 coin cell powering a low-power RF remote control with short transmit bursts and deep sleep',
-      caption:
-        'A long-standby RF remote is not powered by one magic component. It is powered by careful control of every microamp and every transmit pulse.',
+      src: illustratedBlogPhotos['cr2032-rf-remote-battery-life'].image,
+      srcSet: illustratedBlogPhotos['cr2032-rf-remote-battery-life'].imageSrcSet,
+      alt: illustratedBlogPhotos['cr2032-rf-remote-battery-life'].imageAlt,
+      caption: illustratedBlogPhotos['cr2032-rf-remote-battery-life'].imageCaption,
     },
     { type: 'heading', text: 'The CR2032 Is Not a Miniature Power Bank' },
     {
@@ -3527,6 +3533,13 @@ export const blogContentBySlug: Record<string, BlogPostContentBlock[]> = {
     },
     ],
   'circuits-dont-act-good-enough-transmitter-modules': [
+    {
+      type: 'image',
+      src: illustratedBlogPhotos['circuits-dont-act-good-enough-transmitter-modules'].image,
+      srcSet: illustratedBlogPhotos['circuits-dont-act-good-enough-transmitter-modules'].imageSrcSet,
+      alt: illustratedBlogPhotos['circuits-dont-act-good-enough-transmitter-modules'].imageAlt,
+      caption: illustratedBlogPhotos['circuits-dont-act-good-enough-transmitter-modules'].imageCaption,
+    },
     {
       type: 'image',
       src: '/images/blog/circuits-dont-act/circuits-dont-act-cover.webp',
@@ -3931,6 +3944,13 @@ export const blogContentBySlug: Record<string, BlogPostContentBlock[]> = {
     ],
   'oem-odm-hardware-future': [
     {
+      type: 'image',
+      src: illustratedBlogPhotos['oem-odm-hardware-future'].image,
+      srcSet: illustratedBlogPhotos['oem-odm-hardware-future'].imageSrcSet,
+      alt: illustratedBlogPhotos['oem-odm-hardware-future'].imageAlt,
+      caption: illustratedBlogPhotos['oem-odm-hardware-future'].imageCaption,
+    },
+    {
       type: 'quote',
       text:
         'You may think you are choosing a production method, but in hardware you are often choosing a completely different future.',
@@ -4151,6 +4171,13 @@ export const blogContentBySlug: Record<string, BlogPostContentBlock[]> = {
     },
     ],
   'rf-remote-control-concurrency-anti-collision': [
+    {
+      type: 'image',
+      src: illustratedBlogPhotos['rf-remote-control-concurrency-anti-collision'].image,
+      srcSet: illustratedBlogPhotos['rf-remote-control-concurrency-anti-collision'].imageSrcSet,
+      alt: illustratedBlogPhotos['rf-remote-control-concurrency-anti-collision'].imageAlt,
+      caption: illustratedBlogPhotos['rf-remote-control-concurrency-anti-collision'].imageCaption,
+    },
     {
       type: 'quote',
       text:
@@ -4407,6 +4434,13 @@ export const blogContentBySlug: Record<string, BlogPostContentBlock[]> = {
     },
     ],
   'why-universal-remote-cannot-copy': [
+    {
+      type: 'image',
+      src: illustratedBlogPhotos['why-universal-remote-cannot-copy'].image,
+      srcSet: illustratedBlogPhotos['why-universal-remote-cannot-copy'].imageSrcSet,
+      alt: illustratedBlogPhotos['why-universal-remote-cannot-copy'].imageAlt,
+      caption: illustratedBlogPhotos['why-universal-remote-cannot-copy'].imageCaption,
+    },
     {
       type: 'paragraph',
       text:

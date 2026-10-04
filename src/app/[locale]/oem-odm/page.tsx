@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 import { ArrowRight, Box, FileText, Package, Palette, Radio, Settings } from 'lucide-react';
 import LeadModalTrigger from '@/components/LeadModalTrigger';
-import EditorialImage from '@/components/EditorialImage';
+import GeneratedImage from '@/components/GeneratedImage';
 import { oemSteps } from '@/data/homepage';
 import { oemPage } from '@/data/servicePages';
 import { type Locale, locales } from '@/i18n';
@@ -98,7 +98,7 @@ export default async function OemOdmPage({ params }: { params: Promise<{ locale:
               </div>
             </div>
 
-            <EditorialImage visual="engineering" copy={dict.visuals} preload />
+            <GeneratedImage visual="oemKit" alt={dict.generatedVisuals.oemAlt} copy={dict.generatedVisuals} kind="packaging" eager dark />
           </div>
         </div>
       </section>

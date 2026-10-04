@@ -3,6 +3,7 @@ import Link from 'next/link';
 import { ArrowRight, CheckCircle2, FlaskConical, PackageCheck, RadioTower, ShieldCheck } from 'lucide-react';
 import LeadModalTrigger from '@/components/LeadModalTrigger';
 import EditorialImage from '@/components/EditorialImage';
+import ProductionScenes from '@/components/ProductionScenes';
 import { factoryQualityPage } from '@/data/servicePages';
 import { type Locale, locales } from '@/i18n';
 import { getDictSync } from '@/i18n/dictionaries';
@@ -94,10 +95,12 @@ export default async function FactoryQualityPage({ params }: { params: Promise<{
               </div>
             </div>
 
-            <EditorialImage visual="engineering" copy={dict.visuals} preload />
+            <EditorialImage visual="handling" copy={dict.visuals} preload />
           </div>
         </div>
       </section>
+
+      <ProductionScenes />
 
       <section className="bg-white">
         <div className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8 py-14 lg:py-16">

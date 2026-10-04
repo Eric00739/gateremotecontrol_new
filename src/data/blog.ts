@@ -1,3 +1,5 @@
+import { illustratedBlogPhotos } from './generated-visuals';
+
 export type BlogInlineLink = {
   text: string;
   href: string;
@@ -9,7 +11,7 @@ export type BlogPostContentBlock =
   | { type: 'list'; items: string[] }
   | { type: 'callout'; title?: string; text: string }
   | { type: 'quote'; text: string }
-  | { type: 'image'; src: string; alt: string; caption?: string };
+  | { type: 'image'; src: string; alt: string; caption?: string; srcSet?: string };
 
 export type BlogPostMeta = {
   title: string;
@@ -23,6 +25,10 @@ export type BlogPostMeta = {
   featured?: boolean;
   readTime?: string;
   image?: string;
+  imageAlt?: string;
+  thumbnail?: string;
+  imageSrcSet?: string;
+  imageCaption?: string;
   relatedSlugs?: string[];
 };
 
@@ -115,7 +121,7 @@ export const blogPosts: BlogPostMeta[] = [
     publishedAt: '2026-05-10',
     updatedAt: '2026-05-10',
     readTime: '10 min read',
-    image: '/images/blog/same-shell-hidden-downgrade-remote-manufacturing-quality/hero.webp',
+    ...illustratedBlogPhotos['same-shell-hidden-downgrade-remote-manufacturing-quality'],
     relatedSlugs: [
       'rf-remote-wholesale-price-cost-drivers',
       '433mhz-remote-short-range-diagnostics',
@@ -133,7 +139,7 @@ export const blogPosts: BlogPostMeta[] = [
     publishedAt: '2026-05-10',
     updatedAt: '2026-05-10',
     readTime: '9 min read',
-    image: '/images/blog/build-your-own-rf-remote-control-beginner-guide/hero.webp',
+    ...illustratedBlogPhotos['build-your-own-rf-remote-control-beginner-guide'],
     relatedSlugs: [
       'rf-remote-range-real-world-test-data',
       '433mhz-remote-short-range-diagnostics',
@@ -151,7 +157,7 @@ export const blogPosts: BlogPostMeta[] = [
     publishedAt: '2026-05-10',
     updatedAt: '2026-05-10',
     readTime: '10 min read',
-    image: '/images/blog/third-party-rf-remote-brand-receiver-pairing/hero.webp',
+    ...illustratedBlogPhotos['third-party-rf-remote-brand-receiver-pairing'],
     relatedSlugs: [
       'why-universal-remote-cannot-copy',
       'garage-door-remote-cloning-security-guide',
@@ -169,7 +175,7 @@ export const blogPosts: BlogPostMeta[] = [
     publishedAt: '2026-05-10',
     updatedAt: '2026-05-10',
     readTime: '9 min read',
-    image: '/images/blog/wifi-switch-protocols-smart-home-guide/hero.webp',
+    ...illustratedBlogPhotos['wifi-switch-protocols-smart-home-guide'],
     relatedSlugs: [
       'rf-wifi-dual-mode-smart-switch',
       'exporting-wifi-switches-eu-ce-requirements',
@@ -187,7 +193,7 @@ export const blogPosts: BlogPostMeta[] = [
     publishedAt: '2026-05-10',
     updatedAt: '2026-05-10',
     readTime: '10 min read',
-    image: '/images/blog/rf-remote-range-real-world-test-data/hero.webp',
+    ...illustratedBlogPhotos['rf-remote-range-real-world-test-data'],
     relatedSlugs: [
       'rf-receiver-sensitivity-range-spec',
       '433mhz-remote-short-range-diagnostics',
@@ -205,7 +211,7 @@ export const blogPosts: BlogPostMeta[] = [
     publishedAt: '2026-05-10',
     updatedAt: '2026-05-10',
     readTime: '9 min read',
-    image: '/images/blog/garage-door-remote-cloning-security-guide/hero.webp',
+    ...illustratedBlogPhotos['garage-door-remote-cloning-security-guide'],
     relatedSlugs: [
       'why-universal-remote-cannot-copy',
       '433mhz-remote-short-range-diagnostics',
@@ -223,7 +229,7 @@ export const blogPosts: BlogPostMeta[] = [
     publishedAt: '2026-05-10',
     updatedAt: '2026-05-10',
     readTime: '9 min read',
-    image: '/images/blog/car-key-short-range-window-tint/hero.webp',
+    ...illustratedBlogPhotos['car-key-short-range-window-tint'],
     relatedSlugs: [
       '433mhz-remote-short-range-diagnostics',
       'rf-receiver-sensitivity-range-spec',
@@ -241,7 +247,7 @@ export const blogPosts: BlogPostMeta[] = [
     publishedAt: '2026-05-10',
     updatedAt: '2026-05-10',
     readTime: '10 min read',
-    image: '/images/blog/rf-wifi-dual-mode-smart-switch/hero.webp',
+    ...illustratedBlogPhotos['rf-wifi-dual-mode-smart-switch'],
     relatedSlugs: [
       'exporting-wifi-switches-eu-ce-requirements',
       'rf-remote-controller-application-scenarios',
@@ -259,7 +265,7 @@ export const blogPosts: BlogPostMeta[] = [
     publishedAt: '2026-05-10',
     updatedAt: '2026-05-10',
     readTime: '9 min read',
-    image: '/images/blog/rf-remote-wholesale-price-cost-drivers/hero.webp',
+    ...illustratedBlogPhotos['rf-remote-wholesale-price-cost-drivers'],
     relatedSlugs: [
       '433mhz-remote-short-range-diagnostics',
       'rf-receiver-sensitivity-range-spec',
@@ -277,7 +283,7 @@ export const blogPosts: BlogPostMeta[] = [
     publishedAt: '2026-05-10',
     updatedAt: '2026-05-10',
     readTime: '10 min read',
-    image: '/images/blog/433mhz-remote-short-range-diagnostics/hero.webp',
+    ...illustratedBlogPhotos['433mhz-remote-short-range-diagnostics'],
     relatedSlugs: [
       'rf-receiver-sensitivity-range-spec',
       'cr2032-rf-remote-battery-life',
@@ -295,7 +301,7 @@ export const blogPosts: BlogPostMeta[] = [
     publishedAt: '2026-05-10',
     updatedAt: '2026-05-10',
     readTime: '9 min read',
-    image: '/images/blog/rf-receiver-sensitivity-range-spec/hero.webp',
+    ...illustratedBlogPhotos['rf-receiver-sensitivity-range-spec'],
     relatedSlugs: [
       'rf-remote-control-concurrency-anti-collision',
       'cr2032-rf-remote-battery-life',
@@ -313,7 +319,7 @@ export const blogPosts: BlogPostMeta[] = [
     publishedAt: '2026-05-10',
     updatedAt: '2026-05-10',
     readTime: '12 min read',
-    image: '/images/blog/rf-remote-controller-application-scenarios/hero.webp',
+    ...illustratedBlogPhotos['rf-remote-controller-application-scenarios'],
     relatedSlugs: [
       'rf-remote-control-concurrency-anti-collision',
       'why-universal-remote-cannot-copy',
@@ -331,7 +337,7 @@ export const blogPosts: BlogPostMeta[] = [
     publishedAt: '2026-05-10',
     updatedAt: '2026-05-10',
     readTime: '11 min read',
-    image: '/images/blog/exporting-wifi-switches-eu-ce-requirements/hero.webp',
+    ...illustratedBlogPhotos['exporting-wifi-switches-eu-ce-requirements'],
     relatedSlugs: [
       'oem-odm-hardware-future',
       'circuits-dont-act-good-enough-transmitter-modules',
@@ -349,7 +355,7 @@ export const blogPosts: BlogPostMeta[] = [
     publishedAt: '2026-05-10',
     updatedAt: '2026-05-10',
     readTime: '12 min read',
-    image: '/images/blog/cr2032-rf-remote-battery-life/hero.webp',
+    ...illustratedBlogPhotos['cr2032-rf-remote-battery-life'],
     relatedSlugs: [
       'circuits-dont-act-good-enough-transmitter-modules',
       'rf-remote-control-concurrency-anti-collision',
@@ -368,7 +374,7 @@ export const blogPosts: BlogPostMeta[] = [
     updatedAt: '2026-05-02',
     readTime: '14 min read',
     featured: true,
-    image: '/images/blog/circuits-dont-act/circuits-dont-act-cover.webp',
+    ...illustratedBlogPhotos['circuits-dont-act-good-enough-transmitter-modules'],
     relatedSlugs: ['rf-remote-control-concurrency-anti-collision', 'oem-odm-hardware-future'],
   },
   {
@@ -382,7 +388,7 @@ export const blogPosts: BlogPostMeta[] = [
     publishedAt: '2026-05-01',
     updatedAt: '2026-05-02',
     readTime: '7 min read',
-    image: '/images/blog/oem-odm-hardware-future/oem-vs-odm-path.webp',
+    ...illustratedBlogPhotos['oem-odm-hardware-future'],
     relatedSlugs: ['circuits-dont-act-good-enough-transmitter-modules', 'rf-remote-control-concurrency-anti-collision'],
   },
   {
@@ -396,7 +402,7 @@ export const blogPosts: BlogPostMeta[] = [
     publishedAt: '2026-05-10',
     updatedAt: '2026-05-10',
     readTime: '13 min read',
-    image: '/images/blog/rf-remote-control-concurrency-anti-collision/collision-scenarios.webp',
+    ...illustratedBlogPhotos['rf-remote-control-concurrency-anti-collision'],
     relatedSlugs: ['circuits-dont-act-good-enough-transmitter-modules', 'oem-odm-hardware-future'],
   },
   {
@@ -410,7 +416,7 @@ export const blogPosts: BlogPostMeta[] = [
     publishedAt: '2026-05-10',
     updatedAt: '2026-05-10',
     readTime: '11 min read',
-    image: '/images/blog/why-universal-remote-cannot-copy/clone-remotes-show-success.webp',
+    ...illustratedBlogPhotos['why-universal-remote-cannot-copy'],
     relatedSlugs: ['rf-remote-control-concurrency-anti-collision', 'circuits-dont-act-good-enough-transmitter-modules'],
   },
 ];

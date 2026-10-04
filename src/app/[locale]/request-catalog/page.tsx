@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 import { ArrowRight, Camera, Globe2, ListChecks, PackageSearch } from 'lucide-react';
 import LeadModalTrigger from '@/components/LeadModalTrigger';
-import EditorialImage from '@/components/EditorialImage';
+import GeneratedImage from '@/components/GeneratedImage';
 import { catalogPage } from '@/data/servicePages';
 import { type Locale, locales } from '@/i18n';
 import { getDictSync } from '@/i18n/dictionaries';
@@ -95,7 +95,7 @@ export default async function RequestCatalogPage({ params }: { params: Promise<{
             </div>
 
             <div>
-              <EditorialImage visual="packaging" copy={dict.visuals} preload />
+              <GeneratedImage visual="remotes" alt={dict.generatedVisuals.remotesAlt} copy={dict.generatedVisuals} eager dark />
               <p className="mt-4 text-xs leading-relaxed text-[#C7D7E8]">
                 {page.cardNote}
               </p>

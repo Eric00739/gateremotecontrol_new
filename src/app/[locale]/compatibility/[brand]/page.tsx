@@ -3,6 +3,7 @@ import Link from 'next/link';
 import { ArrowLeft, ArrowRight, CheckCircle2 } from 'lucide-react';
 import { notFound } from 'next/navigation';
 import LeadModalTrigger from '@/components/LeadModalTrigger';
+import GeneratedImage from '@/components/GeneratedImage';
 import { compatibilityBrands, getCompatibilityBrand } from '@/data/compatibility';
 import { type Locale, locales } from '@/i18n';
 import { getDictSync, type Dictionary } from '@/i18n/dictionaries';
@@ -108,33 +109,36 @@ export default async function BrandCompatibilityPage({
       <section className="relative overflow-hidden bg-[#062748]">
         <div className="absolute inset-0 tech-grid" />
         <div className="relative max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8 py-16 lg:py-24">
-          <div className="max-w-3xl">
-            <p className="text-[11px] font-bold uppercase tracking-[0.2em] text-[#FF8A1F]" style={{ fontFamily: 'var(--font-jetbrains-mono), monospace' }}>
-              {dict.brandPage.title}
-            </p>
-            <h1 className="mt-4 text-3xl lg:text-5xl font-bold leading-tight text-[#F7FBFF]" style={{ fontFamily: 'var(--font-outfit), sans-serif' }}>
-              {brand.name} {dict.brandPage.referenceTitle}
-            </h1>
-            <p className="mt-5 max-w-2xl text-[#C7D7E8] leading-relaxed">
-              {localizedBrand.description}
-            </p>
-            <p className="mt-3 max-w-2xl text-sm text-[#C7D7E8]">
-              {dict.brandPage.independentNote}
-            </p>
-            <div className="mt-8 flex flex-wrap gap-3">
-              <LeadModalTrigger
-                prefillType="compatibility"
-                inquiryContext={{ modelReference: brand.name }}
-                className="btn-glow inline-flex items-center justify-center rounded-lg bg-[#FF8A1F] px-6 py-3 text-sm font-bold text-[#062748] transition-colors hover:bg-[#F97316]"
-              >
-                {dict.compatibility.cta}
-              </LeadModalTrigger>
-              <Link href="/en/blog/why-universal-remote-cannot-copy" className="inline-flex items-center gap-2 rounded-lg border border-[#2A587C] px-6 py-3 text-sm font-semibold text-[#C7D7E8] transition-colors hover:border-[#FF8A1F]/50 hover:text-[#F7FBFF]">
-                {dict.compatibility.checklistLabel}
-                {locale !== 'en' && <span className="text-xs font-normal">({dict.blog.englishLabel})</span>}
-                <ArrowRight className="w-4 h-4 text-[#FF8A1F]" />
-              </Link>
+          <div className="grid gap-10 lg:grid-cols-[1.1fr_0.9fr] lg:items-center">
+            <div>
+              <p className="text-[11px] font-bold uppercase tracking-[0.2em] text-[#FF8A1F]" style={{ fontFamily: 'var(--font-jetbrains-mono), monospace' }}>
+                {dict.brandPage.title}
+              </p>
+              <h1 className="mt-4 text-3xl lg:text-5xl font-bold leading-tight text-[#F7FBFF]" style={{ fontFamily: 'var(--font-outfit), sans-serif' }}>
+                {brand.name} {dict.brandPage.referenceTitle}
+              </h1>
+              <p className="mt-5 max-w-2xl text-[#C7D7E8] leading-relaxed">
+                {localizedBrand.description}
+              </p>
+              <p className="mt-3 max-w-2xl text-sm text-[#C7D7E8]">
+                {dict.brandPage.independentNote}
+              </p>
+              <div className="mt-8 flex flex-wrap gap-3">
+                <LeadModalTrigger
+                  prefillType="compatibility"
+                  inquiryContext={{ modelReference: brand.name }}
+                  className="btn-glow inline-flex items-center justify-center rounded-lg bg-[#FF8A1F] px-6 py-3 text-sm font-bold text-[#062748] transition-colors hover:bg-[#F97316]"
+                >
+                  {dict.compatibility.cta}
+                </LeadModalTrigger>
+                <Link href="/en/blog/why-universal-remote-cannot-copy" className="inline-flex items-center gap-2 rounded-lg border border-[#2A587C] px-6 py-3 text-sm font-semibold text-[#C7D7E8] transition-colors hover:border-[#FF8A1F]/50 hover:text-[#F7FBFF]">
+                  {dict.compatibility.checklistLabel}
+                  {locale !== 'en' && <span className="text-xs font-normal">({dict.blog.englishLabel})</span>}
+                  <ArrowRight className="w-4 h-4 text-[#FF8A1F]" />
+                </Link>
+              </div>
             </div>
+            <GeneratedImage visual="matching" alt={dict.generatedVisuals.matchingAlt} copy={dict.generatedVisuals} kind="editorial" eager dark />
           </div>
         </div>
       </section>

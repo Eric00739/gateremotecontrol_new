@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import type { ReactNode } from 'react';
 import Image from 'next/image';
+import ImageSourceLabel from '@/components/ImageSourceLabel';
 import Link from 'next/link';
 import { ArrowLeft, ArrowRight, ChevronDown, Clock, ListChecks, MessageSquare } from 'lucide-react';
 import { blogCategories, blogPosts, type BlogInlineLink, type BlogPostContentBlock, type BlogPostMeta } from '@/data/blog';
@@ -367,15 +368,19 @@ function renderBlock(block: BlogPostContentBlock, index: number, locale: Locale,
     case 'image':
       return (
         <figure key={`${block.type}-${index}`} className="mt-9">
-          <div className="relative aspect-[16/9] overflow-hidden rounded-lg border border-[#E2E8F0] bg-[#F8FAFC] shadow-sm">
-            <Image
-              src={block.src}
-              alt={block.alt}
-              fill
-              sizes="(max-width: 1024px) 100vw, 760px"
-              loading={index === 0 ? 'eager' : 'lazy'}
-              className="object-cover"
-            />
+          <div className="relative">
+            <picture className={`relative block overflow-hidden rounded-lg border border-[#E2E8F0] bg-[#F8FAFC] ${block.src.startsWith('/images/generated/') ? 'aspect-[3/2]' : 'aspect-[16/9]'}`}>
+              {block.srcSet && <source srcSet={block.srcSet} sizes="(max-width: 1024px) calc(100vw - 32px), 760px" />}
+              <Image
+                src={block.src}
+                alt={block.alt}
+                fill
+                sizes="(max-width: 1024px) 100vw, 760px"
+                loading={index === 0 ? 'eager' : 'lazy'}
+                className="object-contain"
+              />
+            </picture>
+            {block.src.startsWith('/images/generated/') && <ImageSourceLabel label={getDictSync(locale).generatedVisuals.illustrationLabel} />}
           </div>
           {block.caption && (
             <figcaption className="mt-3 text-[13px] leading-6 text-[#64748B]">

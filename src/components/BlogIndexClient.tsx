@@ -2,6 +2,7 @@
 
 import { useMemo, useState } from 'react';
 import Image from 'next/image';
+import ImageSourceLabel from './ImageSourceLabel';
 import Link from 'next/link';
 import { ArrowRight, ChevronLeft, ChevronRight, Clock, FileText, MessageSquare, Radio, Search, UserRound } from 'lucide-react';
 import { authorProfile } from '@/data/author';
@@ -211,13 +212,14 @@ export default function BlogIndexClient() {
             <p className="mt-5 max-w-2xl text-base leading-8 text-[#475569]">
               {dict.blog.subtitle}
             </p>
+            <p className="mt-3 text-xs leading-relaxed text-[#64748B]">{dict.generatedVisuals.editorialNote}</p>
             {locale !== defaultLocale && (
               <p className="mt-3 text-sm font-medium text-[#64748B]">
                 {dict.blog.archiveDescription}
               </p>
             )}
             {sortedBlogPosts.length > 0 && (
-              <Link href="#blog-guide-archive" className="mt-4 inline-flex items-center gap-2 text-sm font-semibold text-[#C45A00] hover:text-[#F97316]">
+              <Link href="#blog-guide-archive" className="mt-4 inline-flex items-center gap-2 text-sm font-semibold text-[#9A3F00] hover:text-[#C2410C]">
                 {dict.blog.archiveTitle} <ArrowRight className="h-4 w-4" aria-hidden="true" />
               </Link>
             )}
@@ -313,19 +315,23 @@ export default function BlogIndexClient() {
                       <div className="mt-5">
                         <ArticleMeta post={featuredPost} />
                       </div>
-                      <span className="mt-6 inline-flex items-center gap-2 text-sm font-bold text-[#FF8A1F] transition-all group-hover:gap-3">
+                      <span className="mt-6 inline-flex items-center gap-2 text-sm font-bold text-[#9A3F00] transition-all group-hover:gap-3">
                         {dict.blog.readMore} <ArrowRight className="h-4 w-4" />
                       </span>
                     </div>
                     {featuredPost.image && (
-                      <div className="relative min-h-[220px] border-t border-[#D7E2EE] bg-[#062748] md:border-l md:border-t-0">
-                        <Image
-                          src={featuredPost.image}
-                          alt={featuredPost.title}
-                          fill
-                          sizes="(max-width: 768px) 100vw, 280px"
-                          className="object-cover"
-                        />
+                      <div className="relative self-center">
+                        <picture className="relative block aspect-[3/2] overflow-hidden border-t border-[#D7E2EE] bg-[#F1F5F9] md:border-l md:border-t-0">
+                          <source srcSet={featuredPost.imageSrcSet} sizes="(max-width: 768px) 100vw, 280px" />
+                          <Image
+                            src={featuredPost.image}
+                            alt={featuredPost.imageAlt || featuredPost.title}
+                            fill
+                            sizes="(max-width: 768px) 100vw, 280px"
+                            className="object-cover"
+                          />
+                        </picture>
+                        <ImageSourceLabel label={dict.generatedVisuals.illustrationLabel} />
                       </div>
                     )}
                   </Link>
@@ -355,14 +361,18 @@ export default function BlogIndexClient() {
                             className="group flex flex-col gap-4 px-4 py-4 transition-colors hover:bg-[#F8FAFC] sm:flex-row sm:items-start"
                           >
                             {post.image && (
-                              <div className="relative h-24 w-full shrink-0 overflow-hidden rounded-md bg-[#062748] sm:w-32">
-                                <Image
-                                  src={post.image}
-                                  alt={post.title}
-                                  fill
-                                  sizes="(max-width: 640px) 100vw, 128px"
-                                  className="object-cover transition-transform duration-300 group-hover:scale-105"
-                                />
+                              <div className="relative w-full shrink-0 sm:w-40">
+                                <picture className="relative block aspect-[3/2] overflow-hidden rounded-md bg-[#F1F5F9]">
+                                  <source srcSet={post.imageSrcSet} sizes="(max-width: 639px) calc(100vw - 64px), 160px" />
+                                  <Image
+                                    src={post.thumbnail || post.image}
+                                    alt={post.imageAlt || post.title}
+                                    fill
+                                    sizes="(max-width: 640px) 100vw, 160px"
+                                    className="object-cover"
+                                  />
+                                </picture>
+                                <ImageSourceLabel label={dict.generatedVisuals.illustrationLabel} small />
                               </div>
                             )}
                             <div className="min-w-0 flex-1">
@@ -386,7 +396,7 @@ export default function BlogIndexClient() {
                                 <ArticleMeta post={post} />
                               </div>
                             </div>
-                            <span className="inline-flex shrink-0 items-center gap-2 self-start text-sm font-bold text-[#FF8A1F] transition-all group-hover:gap-3 sm:mt-2">
+                            <span className="inline-flex shrink-0 items-center gap-2 self-start text-sm font-bold text-[#9A3F00] transition-all group-hover:gap-3 sm:mt-2">
                               {dict.blog.readMore} <ArrowRight className="h-4 w-4" />
                             </span>
                           </Link>

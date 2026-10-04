@@ -41,7 +41,8 @@ GitHub Actions 工作流 [`.github/workflows/deploy.yml`](.github/workflows/depl
 - `src/i18n/`：六种语言词典；以 `en.ts` 为键结构基准。
 - `src/data/`：兼容性、博客、服务页和站点数据。博客索引使用 `blog.ts` 的元数据，正文独立在 `blog-content.ts`；正文完整性在构建时检查。
 - `public/`：静态图片和视频；素材存在不代表公司归属或场景已核验。
-- `src/data/visuals.ts`：三个服务页的图片路径、来源类型和本地化 alt 键；现用素材为参考配图，真实来源仍待核验。
+- `src/data/visuals.ts`：首页与质量页的视频帧配置、时间点、本地化 alt 键及响应式图片路径；来源记录见 `public/images/video/README.md`。
+- `src/data/generated-visuals.ts`：产品、应用、服务页与博客的 AI 示意图配置；提示词、原图校验和与处理方式见 `public/images/generated/`。
 - `scripts/generate-static-redirects.mjs`：旧 URL 重定向和导出 HTML 的语言标记修正。
 - `scripts/legacy-redirects.mjs`：旧 URL 重定向数据。
 - `scripts/verify-export.mjs`：静态导出、sitemap、canonical、六语博客目录和重定向目标校验。
@@ -53,6 +54,14 @@ GitHub Actions 工作流 [`.github/workflows/deploy.yml`](.github/workflows/depl
 接入真实表单、附件上传、CRM、统计或其他第三方服务前，需要先确认托管、隐私和密钥方案。
 
 不要把未经站点所有者确认的公司身份、工厂关系、SKU、MOQ、认证、交期、客户案例或图片场景写成事实。真实产品和工厂图片到位前，不重新启用“工厂证据”图库。
+
+2026-10-03 的配图来自所有者指定的首页视频，只描述画面中可见的电路、设备、工位和 PCB，不作为公司归属或检测能力证明。源视频为 1280×726，图片保留自然颜色，无生成、补绘或放大。首页视频及质量页保留这组来源；旧素材、博客正文技术解释图与作者头像继续保留。
+
+2026-10-04 按所有者要求新增 25 张摄影风格 AI 示意图，覆盖六类产品、七种应用和十二个技术主题；共 75 个响应式 WebP。产品、应用、OEM、目录、兼容性与博客使用对应图片，六语页面标明生成图用途。它们不代表真实 SKU、客户现场、公司工厂或检测结果。最终提示词与原图 SHA-256 见 `public/images/generated/prompts.json`，转换脚本为 `scripts/prepare-generated-images.mjs`；验证仍需的真实资料以执行计划为准。
+
+同日对抗检查后，兼容性六步流程加入 96×64 像素的小图区域，复用五张生成图与一张原视频帧。手机产品和应用区域采用两列小图；生成图叠加六语来源标记，博客正文保留完整 3:2 比例。导出校验同时检查生成图与来源标记数量，具体测量和验收记录见执行计划第 18 节。
+
+重新提取图片使用 `node scripts/extract-video-photos.mjs`，需要本机 `ffmpeg` 和项目现有的 `sharp`。`npm run build` 会检查导出 HTML 中全部本地图片、视频、poster 和响应式图片候选是否存在且非空。
 
 当前可执行改造与仍需所有者输入的事项见 [WEBSITE_IMPROVEMENT_PLAN.md](WEBSITE_IMPROVEMENT_PLAN.md)。
 

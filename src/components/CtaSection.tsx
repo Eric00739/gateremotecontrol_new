@@ -1,7 +1,6 @@
 'use client';
 
-import Image from 'next/image';
-import { basePath } from '@/data/homepage';
+import GeneratedImage from './GeneratedImage';
 import LeadModalTrigger from './LeadModalTrigger';
 import { useDict } from '@/i18n';
 
@@ -44,16 +43,8 @@ export default function CtaSection() {
             </LeadModalTrigger>
           </div>
 
-          {/* Right: Product image */}
-          <div className="flex justify-center">
-            <div className="w-full max-w-md aspect-[4/3] bg-[#08345F] border border-[#123D63] rounded-lg flex items-center justify-center relative overflow-hidden">
-              <Image
-                src={basePath + '/images/product-remotes.png'}
-                alt="Compatible replacement remotes"
-                fill
-                className="object-contain p-8"
-              />
-            </div>
+          <div className="w-full max-w-lg lg:justify-self-end">
+            <GeneratedImage visual="matching" alt={dict.generatedVisuals.matchingAlt} copy={dict.generatedVisuals} kind="editorial" dark />
           </div>
         </div>
       </div>

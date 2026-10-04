@@ -1,11 +1,13 @@
 'use client';
 
-import { Camera, Radio, Cpu, Users, FlaskConical, Factory } from 'lucide-react';
 import { verificationFields, workflowSteps } from '@/data/homepage';
 import LeadModalTrigger from './LeadModalTrigger';
 import { useDict } from '@/i18n';
+import GeneratedImage from './GeneratedImage';
+import EditorialImage from './EditorialImage';
+import ImageSourceLabel from './ImageSourceLabel';
 
-const iconMap = [Camera, Radio, Cpu, Users, FlaskConical, Factory];
+const stepVisuals = ['matching', 'learning', 'rfModule', null, 'garage', 'oemKit'] as const;
 
 export default function CompatibilityWorkflowSection() {
   const dict = useDict();
@@ -13,7 +15,7 @@ export default function CompatibilityWorkflowSection() {
   const fields = dict.verificationFields || verificationFields;
 
   return (
-    <section className="bg-white">
+    <section id="verification" className="scroll-mt-20 bg-white">
       <div className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8 py-16 lg:py-24">
         {/* Section label */}
         <div className="flex items-center gap-3 mb-4">
@@ -26,35 +28,40 @@ export default function CompatibilityWorkflowSection() {
         <h2 className="text-3xl lg:text-4xl font-bold text-[#0F172A] mb-4 max-w-2xl" style={{ fontFamily: "var(--font-outfit), sans-serif" }}>
           {dict.workflow.title}
         </h2>
-        <p className="text-[#64748B] mb-14 max-w-xl">
+        <p className="text-[#64748B] mb-4 max-w-xl">
           {dict.workflow.subtitle}
         </p>
+        <p className="mb-10 max-w-2xl text-xs leading-relaxed text-[#64748B]">{dict.generatedVisuals.workflowNote}</p>
 
         {/* Horizontal timeline */}
         <div className="relative">
           {/* Connecting dotted line (desktop) */}
-          <div className="hidden lg:block absolute top-7 left-[8%] right-[8%] h-[2px] border-t-2 border-dashed border-[#E2E8F0]" />
+          <div className="hidden lg:block absolute top-8 left-[8%] right-[8%] h-[2px] border-t-2 border-dashed border-[#E2E8F0]" />
 
           <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-6 lg:gap-4">
             {steps.map((step: { step?: number; title: string; description: string }, i: number) => {
-              const Icon = iconMap[i];
+              const visual = stepVisuals[i];
               const stepNumber = step.step || i + 1;
               return (
-                <div key={stepNumber} className="text-center relative">
-                  {/* Numbered circle with icon */}
-                  <div className="relative z-10 mb-4">
-                    <div className="w-14 h-14 mx-auto bg-[#F8FAFC] rounded-full flex items-center justify-center border-2 border-[#E2E8F0] group-hover:border-[#FF8A1F] transition-colors">
-                      <Icon className="w-6 h-6 text-[#FF8A1F]" />
-                    </div>
+                <div key={stepNumber} className="relative min-w-0 text-center">
+                  <div className="relative z-10 mx-auto mb-4 h-16 w-24">
+                    {visual ? (
+                      <GeneratedImage visual={visual} alt={step.title} copy={dict.generatedVisuals} kind={visual === 'oemKit' ? 'packaging' : 'editorial'} compact caption={false} sizes="96px" smallLabel />
+                    ) : (
+                      <>
+                        <div className="pt-1"><EditorialImage visual="engineering" copy={dict.visuals} compact sizes="96px" /></div>
+                        <ImageSourceLabel label={dict.generatedVisuals.videoLabel} source="video" small />
+                      </>
+                    )}
                     {/* Step number badge */}
-                    <div className="absolute -top-1 -right-1 w-6 h-6 bg-[#FF8A1F] rounded-full flex items-center justify-center shadow-lg shadow-amber-500/20">
-                      <span className="text-white text-[10px] font-bold" style={{ fontFamily: "var(--font-jetbrains-mono), monospace" }}>
+                    <div className="absolute -top-2 -right-2 z-20 w-6 h-6 bg-[#FF8A1F] rounded-full flex items-center justify-center">
+                      <span className="text-[#062748] text-[10px] font-bold" style={{ fontFamily: "var(--font-jetbrains-mono), monospace" }}>
                         {stepNumber}
                       </span>
                     </div>
                   </div>
                   <h3 className="text-[13px] font-bold text-[#0F172A] mb-1.5 leading-snug" style={{ fontFamily: "var(--font-outfit), sans-serif" }}>{step.title}</h3>
-                  <p className="text-[11px] text-[#64748B] leading-relaxed">{step.description}</p>
+                  <p className="text-xs text-[#64748B] leading-relaxed">{step.description}</p>
                 </div>
               );
             })}
@@ -73,7 +80,7 @@ export default function CompatibilityWorkflowSection() {
             </div>
             <LeadModalTrigger
               prefillType="compatibility"
-              className="inline-flex items-center justify-center rounded-lg bg-[#FF8A1F] px-5 py-2.5 text-sm font-bold text-[#062748] transition-colors hover:bg-[#F97316]"
+              className="inline-flex min-h-11 items-center justify-center rounded-lg bg-[#FF8A1F] px-5 py-2.5 text-sm font-bold text-[#062748] transition-colors hover:bg-[#F97316] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#C2410C]"
             >
               {dict.workflow.requestCta}
             </LeadModalTrigger>

@@ -7,17 +7,21 @@ import CapabilityHighlightsSection from '@/components/CapabilityHighlightsSectio
 import ApplicationScenariosSection from '@/components/ApplicationScenariosSection';
 import FaqSection from '@/components/FaqSection';
 import CtaSection from '@/components/CtaSection';
+import ProductionScenes from '@/components/ProductionScenes';
+import ResourcesSection from '@/components/ResourcesSection';
 
 export default function HomePage() {
   return (
     <>
       <HeroSection />
       <ProductCategoriesSection />
+      <ProductionScenes />
       <CapabilityHighlightsSection />
       <BrandCompatibilitySection />
       <CompatibilityWorkflowSection />
       <ApplicationScenariosSection />
       <RiskControlSection />
+      <ResourcesSection />
       <FaqSection />
       <CtaSection />
     </>

@@ -1,5 +1,6 @@
-import { readFile } from 'node:fs/promises';
+import { readFile, readdir, stat } from 'node:fs/promises';
 import path from 'node:path';
+import sharp from 'sharp';
 import { outputDir, redirects, siteUrl, supportedLocales } from './legacy-redirects.mjs';
 
 // Build-time assertions for the static export. These encode the invariants the
@@ -109,10 +110,75 @@ for (const [sourcePath, destinationPath] of redirects) {
   }
 }
 
+// 5. Every local image and responsive candidate in exported HTML is present.
+const mediaPaths = new Set();
+for (const file of await readdir(outputDir, { recursive: true })) {
+  if (!file.endsWith('.html')) continue;
+  const html = await readFile(path.join(outputDir, file), 'utf8');
+  const generatedImageCount = [...html.matchAll(/<img\b[^>]*\bsrc="\/images\/generated\/[^\"]+"/g)].length;
+  const generatedSourceCount = [...html.matchAll(/data-image-source-label="generated"/g)].length;
+  if (generatedImageCount !== generatedSourceCount) {
+    problems.push(`Generated image source-label count mismatch in ${file}: ${generatedImageCount} images, ${generatedSourceCount} labels`);
+  }
+  for (const tag of html.matchAll(/<(?:img|source|video)\b[^>]*>/gi)) {
+    for (const attribute of tag[0].matchAll(/\b(?:src|poster|srcset)="([^"]+)"/gi)) {
+      for (const candidate of attribute[1].split(',')) {
+        const assetPath = candidate.trim().split(/\s+/)[0];
+        if (assetPath.startsWith('/images/') || assetPath.startsWith('/videos/')) {
+          mediaPaths.add(assetPath);
+        }
+      }
+    }
+  }
+}
+for (const assetPath of mediaPaths) {
+  try {
+    const asset = await stat(path.join(outputDir, assetPath));
+    if (!asset.isFile() || asset.size === 0) problems.push(`Empty media asset: ${assetPath}`);
+  } catch {
+    problems.push(`Missing media asset: ${assetPath}`);
+  }
+}
+
+// Generated illustrations must remain traceable and ship at every declared size.
+const generatedManifestPath = path.join(outputDir, 'images/generated/prompts.json');
+const generatedManifestText = await readTextIfExists(generatedManifestPath);
+if (generatedManifestText) {
+  const manifest = JSON.parse(generatedManifestText);
+  const knownGeneratedPaths = new Set();
+  const ids = new Set();
+  for (const asset of manifest.assets) {
+    if (ids.has(asset.id)) problems.push(`Duplicate generated image ID: ${asset.id}`);
+    ids.add(asset.id);
+    if (!asset.prompt || !/^[a-f0-9]{64}$/.test(asset.sourceSha256)) {
+      problems.push(`Missing generated image provenance: ${asset.id}`);
+    }
+    for (const width of [1280, 640, 320]) {
+      const assetPath = `/images/generated/${asset.id}${width === 1280 ? '' : `-${width}`}.webp`;
+      knownGeneratedPaths.add(assetPath);
+      try {
+        const metadata = await sharp(path.join(outputDir, assetPath)).metadata();
+        if (metadata.format !== 'webp' || metadata.width !== width || metadata.height !== Math.round(width * 2 / 3)) {
+          problems.push(`Incorrect generated image dimensions or format: ${assetPath}`);
+        }
+      } catch {
+        problems.push(`Missing or unreadable generated image: ${assetPath}`);
+      }
+    }
+  }
+  for (const assetPath of mediaPaths) {
+    if (assetPath.startsWith('/images/generated/') && !knownGeneratedPaths.has(assetPath)) {
+      problems.push(`Generated image absent from source manifest: ${assetPath}`);
+    }
+  }
+} else if ([...mediaPaths].some((assetPath) => assetPath.startsWith('/images/generated/'))) {
+  problems.push('Generated illustrations have no source manifest');
+}
+
 if (problems.length > 0) {
   console.error(`verify-export: ${problems.length} problem(s) found:`);
   for (const problem of problems) console.error(`  - ${problem}`);
   process.exit(1);
 }
 
-console.log(`verify-export: ${sitemapUrls.length} sitemap URLs, ${redirects.length} legacy redirects — all checks passed.`);
+console.log(`verify-export: ${sitemapUrls.length} sitemap URLs, ${redirects.length} legacy redirects, ${mediaPaths.size} media assets — all checks passed.`);

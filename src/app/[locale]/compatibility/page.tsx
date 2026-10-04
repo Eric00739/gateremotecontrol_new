@@ -3,6 +3,7 @@ import Link from 'next/link';
 import { ArrowRight, Camera, Cpu, Radio, ShieldCheck } from 'lucide-react';
 import { notFound } from 'next/navigation';
 import LeadModalTrigger from '@/components/LeadModalTrigger';
+import GeneratedImage from '@/components/GeneratedImage';
 import { compatibilityBrands } from '@/data/compatibility';
 import { type Locale, locales } from '@/i18n';
 import { getDictSync, type Dictionary } from '@/i18n/dictionaries';
@@ -85,26 +86,29 @@ export default async function CompatibilityPage({
               {dict.compatibility.sectionLabel}
             </span>
           </div>
-          <div className="max-w-3xl">
-            <h1 className="text-3xl lg:text-5xl font-bold text-[#F7FBFF] leading-tight mb-5" style={{ fontFamily: 'var(--font-outfit), sans-serif' }}>
-              {dict.compatibility.title}
-            </h1>
-            <p className="text-[#C7D7E8] leading-relaxed max-w-2xl">
-              {dict.compatibility.subtitle}
-            </p>
-            <div className="mt-8 flex flex-wrap gap-3">
-              <LeadModalTrigger
-                prefillType="compatibility"
-                className="btn-glow inline-flex items-center justify-center rounded-lg bg-[#FF8A1F] px-6 py-3 text-sm font-bold text-[#062748] transition-colors hover:bg-[#F97316]"
-              >
-                {dict.compatibility.cta}
-              </LeadModalTrigger>
-              <Link href="/en/blog/why-universal-remote-cannot-copy" className="inline-flex items-center gap-2 rounded-lg border border-[#2A587C] px-6 py-3 text-sm font-semibold text-[#C7D7E8] transition-colors hover:border-[#FF8A1F]/50 hover:text-[#F7FBFF]">
-                {dict.compatibility.checklistLabel}
-                {locale !== 'en' && <span className="text-xs font-normal">({dict.blog.englishLabel})</span>}
-                <ArrowRight className="w-4 h-4 text-[#FF8A1F]" />
-              </Link>
+          <div className="grid gap-10 lg:grid-cols-[1.1fr_0.9fr] lg:items-center">
+            <div>
+              <h1 className="text-3xl lg:text-5xl font-bold text-[#F7FBFF] leading-tight mb-5" style={{ fontFamily: 'var(--font-outfit), sans-serif' }}>
+                {dict.compatibility.title}
+              </h1>
+              <p className="text-[#C7D7E8] leading-relaxed max-w-2xl">
+                {dict.compatibility.subtitle}
+              </p>
+              <div className="mt-8 flex flex-wrap gap-3">
+                <LeadModalTrigger
+                  prefillType="compatibility"
+                  className="btn-glow inline-flex items-center justify-center rounded-lg bg-[#FF8A1F] px-6 py-3 text-sm font-bold text-[#062748] transition-colors hover:bg-[#F97316]"
+                >
+                  {dict.compatibility.cta}
+                </LeadModalTrigger>
+                <Link href="/en/blog/why-universal-remote-cannot-copy" className="inline-flex items-center gap-2 rounded-lg border border-[#2A587C] px-6 py-3 text-sm font-semibold text-[#C7D7E8] transition-colors hover:border-[#FF8A1F]/50 hover:text-[#F7FBFF]">
+                  {dict.compatibility.checklistLabel}
+                  {locale !== 'en' && <span className="text-xs font-normal">({dict.blog.englishLabel})</span>}
+                  <ArrowRight className="w-4 h-4 text-[#FF8A1F]" />
+                </Link>
+              </div>
             </div>
+            <GeneratedImage visual="matching" alt={dict.generatedVisuals.matchingAlt} copy={dict.generatedVisuals} kind="editorial" eager dark />
           </div>
         </div>
       </section>
