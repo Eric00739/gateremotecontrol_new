@@ -861,3 +861,5 @@ D6 仅解除已指定视频中的场景来源依赖。视频不含遥控器成�
 lint、TypeScript 与静态构建通过，216 个页面、276 个导出 HTML、90 条 sitemap URL、43 条重定向和 103 项媒体正常；六语词典键、类型与数组结构一致。现有导出校验改为拒绝生成图角标及旧 AI 配图说明。向临时构建产物加入旧角标和 `AI illustration` 后，校验按预期退出 1，分别报告角标与标注错误；随后逐字节恢复构建产物。
 
 修改文件：`src/components/ImageSourceLabel.tsx`、`src/data/generated-visuals.ts`、六套词典、`scripts/verify-export.mjs`、README、图片来源 README 与本计划。发布沿用现有 `main` 与 GitHub Pages；部署后复核正式页面。
+
+业务提交 [`0b7896b`](https://github.com/Eric00739/gateremotecontrol_new/commit/0b7896b6d02ca28327c6a0962121b90ceeacf4af) 已上传。[Pages 运行 37205362377](https://github.com/Eric00739/gateremotecontrol_new/actions/runs/37205362377) 的 build/deploy 成功，2026-10-04 21:23（Asia/Shanghai）完成。线上 90 个收录页面的生成图角标和旧 AI 配图标注均为 0，元信息、语言和图片 alt 与本地产物一致（比较内容集合，不依赖 Next.js 输出标签的顺序）。六语首页手机／桌面和六语博客手机共 18 个浏览器案例、390 次图片实例通过：无残留标注、坏图、横向溢出或运行异常，流程图尺寸不变，正式桌面截图已审阅。后续同步此记录不改变页面行为。
