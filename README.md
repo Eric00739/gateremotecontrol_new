@@ -61,6 +61,16 @@ GitHub Actions 工作流 [`.github/workflows/deploy.yml`](.github/workflows/depl
 
 2026-10-04 按所有者要求新增 25 张摄影风格 AI 示意图，覆盖六类产品、七种应用和十二个技术主题；共 75 个响应式 WebP。产品、应用、OEM、目录、兼容性与博客使用对应图片，六语图片说明使用产品、场景、技术与包装示意描述。它们不代表真实 SKU、客户现场、公司工厂或检测结果。最终提示词与原图 SHA-256 见 `public/images/generated/prompts.json`，转换脚本为 `scripts/prepare-generated-images.mjs`；验证仍需的真实资料以执行计划为准。
 
+2026-10-05 新增售后汽车遥控器近景及灯光、灌溉、安防、窗帘／百叶、遮阳、通风、物料升降和工业马达场景，共 10 张原图、30 个 WebP；当前合计 35 张、105 个响应式文件。其中摄像头图仅作为保留素材，不在首页场景展示。首页应用合并重复门控场景，扩为 12 种用途，各配一句接口或匹配说明，保持手机两列、桌面四列的小图布局。工业与灌溉三类另标工程评估，升降明确核对动作、限位、停止及互锁；不将普通门控接收器称为可直接使用的工业控制器。第五类产品为售后汽车遥控器，询盘及目录说明同步。所有者指定的原视频标题改为六语“工厂实拍”，不增加公司归属或检测结论。
+
+场景取舍按设备动作及接收接口，而不是有无“远程”字样：[Somfy](https://www.somfy.co.uk/help-me-choose/rts-products) 的无线应用包含室内窗饰及室外遮阳；[SONOFF 4CHPRO](https://sonoff.tech/en-uk/products/sonoff-4chr3-4chpror3-4-gang-wi-fi-smart-switch-with-rf-control) 的继电器应用涉及灯光、泵和电动设备；[HBC](https://www.hbc-radiomatic.com/en/products/transmitters/overview.html) 和 [Tele Radio 设备说明](https://www.tele-radio.com/app/uploads/IM-PN-RX107-ENv06-1.pdf) 展示专门的工业／升降无线控制及设备评估要求。这些是应用成立的依据，不证明本站可供产品的适用性。[Axis PTZ 文档](https://developer.axis.com/vapix/network-video/pantiltzoom-api/) 所述网络摄像头控制不能等同于普通 RF 遥控适配，因此撤下主场景的摄像头卡片。
+
+品牌询盘参考由 `src/data/brandReferences.ts` 统一管理，首页、兼容目录和页脚展示 42 个原系统名称；其中 8 个为巴西市场参考。新增参考只预填兼容性询盘，不增加未经验证的兼容型号或品牌详情页。现有六个品牌指南的 URL 保留。列表旁明确独立售后替代、非原装、无关联／授权／背书以及型号、接收器和样品核对要求；名称以文字展示，不用作产品标识或合作标识。
+
+本轮巴西品牌核对来源：[Rossi](https://www.rossiportoes.com.br/produtos/placas-e-acessorios)、[PPA](https://www.ppa.com.br/brasil/segments/industrias)、[Garen](https://garen.com.br/produtos/)、[Peccinin / Nice](https://www.niceforyou.com/pt-br/quem-somos)、[Intelbras](https://apploja.intelbras.com.br/controle-de-acesso/automatizadores-de-portao)、[AGL](https://loja.aglbrasil.com/)、[JFL 官方产品资料](https://jflalarmes.com.br/wp-content/uploads/dlm_uploads/2024/01/portfolio-ed-9-2.pdf)、[RCG](https://rcg.com.br/?id=74&pg=Produto)。请求中的 ECHO 暂按 GENIUS 的 ECHO 系列呈现，待所有者澄清；[GENIUS 原厂说明书副本](https://www.intelligentsecurity.org/resources/access-control/Genius-Echo-TX4-Remote-Control.pdf) 将 ECHO TX4 标为 GENIUS 产品。其他新增重点参考：[CENTURION](https://www.centurionsystems.co.za/smart-ecosystems/)、[Hörmann](https://www.hormann.co.uk/media-centre/)、[SOMMER](https://shop.sommer.eu/en/radio-technology/transmitters)、[Marantec](https://www.marantec.com/en/faq)、[Ditec](https://www.ditecautomations.com/en/products/automatic-pedestrian-doors/accessories/controls/remote-controls)。这些来源确认原系统标识，不证明本站替代产品已兼容。
+
+品牌表述参考[巴西《工业产权法》第 131–132 条](https://planalto.gov.br/ccivil_03/leis/l9279.htm)：广告中的商标也受保护，附件制造商用名称说明用途的例外仍有公平竞争条件。当前采用减少误认的展示方式，不将免责声明或品牌名称的公开可见性当作各市场的法律许可；D5 法律文本审核仍未完成。
+
 同日对抗检查后，兼容性六步流程加入 96×64 像素的小图区域，复用五张生成图与一张原视频帧。手机产品和应用区域采用两列小图，博客正文保留完整 3:2 比例。按所有者后续要求，生成图角标已移除，六语配图说明和 alt 使用产品、场景、技术与包装示意描述，不标注 AI。导出校验防止旧角标和 AI 配图标注重新出现；测量与验收记录见执行计划第 18–20 节。
 
 重新提取图片使用 `node scripts/extract-video-photos.mjs`，需要本机 `ffmpeg` 和项目现有的 `sharp`。`npm run build` 会检查导出 HTML 中全部本地图片、视频、poster 和响应式图片候选是否存在且非空。

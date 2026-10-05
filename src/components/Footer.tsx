@@ -3,15 +3,7 @@
 import Link from 'next/link';
 import LeadModalTrigger from './LeadModalTrigger';
 import { useDict, useLocale } from '@/i18n';
-
-const compatibilityBrands = [
-  { label: 'FAAC', href: '/compatibility/faac' },
-  { label: 'Nice', href: '/compatibility/nice' },
-  { label: 'BFT', href: '/compatibility/bft' },
-  { label: 'DoorHan', href: '/compatibility/doorhan' },
-  { label: 'CAME', href: '/compatibility/came' },
-  { label: 'LiftMaster', href: '/compatibility/liftmaster' },
-];
+import BrandReferences from './BrandReferences';
 
 export default function Footer() {
   const dict = useDict();
@@ -56,18 +48,7 @@ export default function Footer() {
               {dict.footer.description}
             </p>
 
-            <div className="mt-5">
-              <p className="text-[10px] font-semibold uppercase tracking-[0.18em] text-[#FF8A1F]" style={{ fontFamily: 'var(--font-jetbrains-mono), monospace' }}>
-                {dict.footer.compatibilityReferences}
-              </p>
-              <div className="mt-2 flex flex-wrap gap-2">
-                {compatibilityBrands.map((brand) => (
-                  <Link key={brand.href} href={`/${locale}${brand.href}`} className="rounded-md border border-[#123D63] px-2.5 py-1 text-xs text-[#C7D7E8] transition-colors hover:border-[#FF8A1F]/50 hover:text-[#FF8A1F]">
-                    {brand.label}
-                  </Link>
-                ))}
-              </div>
-            </div>
+            <BrandReferences compact />
           </div>
 
           {/* Explore */}

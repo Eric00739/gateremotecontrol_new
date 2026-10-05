@@ -70,7 +70,7 @@ export const catalogPage = {
   requirements: [
     {
       title: 'Product Category',
-      description: 'Replacement remotes, receivers, code-learning remotes, controllers, accessories, or an OEM project.',
+      description: 'Replacement remotes, receivers, code-learning remotes, controllers, aftermarket car remotes, or an OEM project.',
     },
     {
       title: 'Target Country / Market',

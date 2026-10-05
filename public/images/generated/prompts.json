@@ -161,6 +161,76 @@
       "sourceFile": "exec-09e26a42-c6d2-4ac8-ade1-a7eebacfdfd7.png",
       "sourceSha256": "92dad896bc9146657acef2b99fe82ffaac5aeaf56224a2dea746dbe86eb4d1fe",
       "prompt": "Use case: photorealistic-natural. Asset type: technical editorial illustration for a B2B RF gate remote website. Create ONE landscape photograph, 3:2 aspect approximately 1536x1024. Restrained documentary commercial photography, natural diffuse light, tactile real materials, matte ABS plastic, green circuit boards, gray worktop and subtle navy background, believable scale, clean but not sterile, normal shadows. Composition centered with all primary objects visible and generous margin for a 16:9 crop. This is a fictional educational illustration, not company evidence or a verified SKU. No brand names, readable product markings, text overlays, watermarks, fake certification, test values, glowing circuitry, sci-fi beams, collage or borders. Subject: A still life of three separate plain gate remotes, one black, one navy and one gray, lying on a gray tabletop in a gentle semicircle around a small receiver enclosure. No illuminated LEDs, hands or abstract wireless waves, no implication of simultaneous control or successful compatibility."
+    },
+    {
+      "id": "car-remotes",
+      "createdAt": "2026-10-05",
+      "sourceFile": "exec-ef1cfe62-5936-4961-a6ea-969b3c3cebf4.png",
+      "sourceSha256": "e398bcfa841691541a0a5d11e6e2cd3eb98b4e19c619d5a05b1b7552d47f7f49",
+      "prompt": "Use case: product-mockup. Asset type: aftermarket car remote category photo illustration for an existing navy-and-gray B2B website. Create ONE photographic landscape 3:2 image, 1536x1024. Two clearly automotive unbranded replacement remote key fobs, one compact matte black three-button fob with simple lock and unlock pictograms, one charcoal rounded two-button alarm-style fob with a small metal key ring, separated on a pale cool gray worktop with subtle navy background. No exposed key blade. Close-up three-quarter camera view, products occupy central 70%, entirely in frame. Soft diffuse window light, tactile rubber buttons, honest plastic molding seams and realistic small dimensions, natural contact shadows, restrained commercial photography rather than glossy CGI. Generic category illustration, not a real SKU or compatibility claim. No logos, model markings, frequency text, certificates, packaging, spare batteries, people, phones, text overlays, watermark or collage."
+    },
+    {
+      "id": "lighting-control",
+      "createdAt": "2026-10-05",
+      "sourceFile": "exec-7544e7ee-fe3c-456b-b73f-3c38542db9f5.png",
+      "sourceSha256": "6dd025f89da5c541f45ebeab34818b6de00c48ec60888177fa3f402218605276",
+      "prompt": "Use case: photorealistic-natural. Asset type: an application illustration for the eight-card RF remote control section of an existing navy, gray and white B2B website. Create ONE landscape 3:2 image, 1536x1024. Restrained documentary photography, ordinary believable installation, natural surfaces and contact shadows, physically plausible mounting and wiring, clear main subject understandable at small card size, no collage. This depicts a generic illustrative setting, not an actual company or customer site. No people, logos, brand identifiers, readable model numbers, test values, status claims, text overlays, watermarks, promotional badges, wireless beams or dramatic CGI effects. Subject: A modest residential patio at early dusk, neutral stucco wall, two simple warm-white outdoor wall lamps and a few low garden path lights visibly illuminating an ordinary walkway. Lamp fixtures and lit path are the main subject; realistic cables concealed within normal installation. Keep the scene practical and naturally exposed, no luxury house, neon colors or extreme night contrast."
+    },
+    {
+      "id": "irrigation-control",
+      "createdAt": "2026-10-05",
+      "sourceFile": "exec-11c60d07-997d-460a-8a15-7877bc5f003e.png",
+      "sourceSha256": "3e1f62daf333cb2ec9f3489d917878945b4340d6c29444a92244546a0ccfb3e0",
+      "prompt": "Use case: photorealistic-natural. Asset type: an application illustration for the eight-card RF remote control section of an existing navy, gray and white B2B website. Create ONE landscape 3:2 image, 1536x1024. Restrained documentary photography, ordinary believable installation, natural surfaces and contact shadows, physically plausible mounting and wiring, clear main subject understandable at small card size, no collage. This depicts a generic illustrative setting, not an actual company or customer site. No people, logos, brand identifiers, readable model numbers, test values, status claims, text overlays, watermarks, promotional badges, wireless beams or dramatic CGI effects. Subject: Practical agricultural irrigation at the edge of a small cultivated field. In the foreground a plausible irrigation valve manifold with black supply pipe and drip lines leading neatly into planted crop rows; a closed weatherproof neutral gray control box mounted on a short post beside the manifold. Show the relationship between valves, water lines and field. Soft overcast daylight, real soil texture and restrained green vegetation, correct pipe connections, no exposed electrical terminals or industrial factory scale."
+    },
+    {
+      "id": "camera-control",
+      "createdAt": "2026-10-05",
+      "sourceFile": "exec-d6c93a3c-a5e7-4499-aaf9-71f050f00467.png",
+      "sourceSha256": "606223d4cf5cfc0a70b100d92eff988f4373490d6a2dc6bc31f7caea8a10ea13",
+      "prompt": "Use case: photorealistic-natural. Asset type: an application illustration for the eight-card RF remote control section of an existing navy, gray and white B2B website. Create ONE landscape 3:2 image, 1536x1024. Restrained documentary photography, ordinary believable installation, natural surfaces and contact shadows, physically plausible mounting and wiring, clear main subject understandable at small card size, no collage. This depicts a generic illustrative setting, not an actual company or customer site. No people, logos, brand identifiers, readable model numbers, test values, status claims, text overlays, watermarks, promotional badges, wireless beams or dramatic CGI effects. Subject: One unbranded compact outdoor bullet surveillance camera correctly mounted on a neutral stucco wall at an ordinary small-business entrance, angled toward the nearby entry path. A modest closed junction box and realistic short protected cable route are visible. Close-enough framing so the camera is clearly identifiable, soft daylight, gray metal and matte white casing, no monitor, readable display or implied video streaming through the remote."
+    },
+    {
+      "id": "security-alarm",
+      "createdAt": "2026-10-05",
+      "sourceFile": "exec-4e550277-5fa9-436a-a01b-8499656fbc07.png",
+      "sourceSha256": "41156547c64842d258b848fe60fe1cba048c9bed4806e2bd83880aafde17382b",
+      "prompt": "Use case: photorealistic-natural. Asset type: an application illustration for the eight-card RF remote control section of an existing navy, gray and white B2B website. Create ONE landscape 3:2 image, 1536x1024. Restrained documentary photography, ordinary believable installation, natural surfaces and contact shadows, physically plausible mounting and wiring, clear main subject understandable at small card size, no collage. This depicts a generic illustrative setting, not an actual company or customer site. No people, logos, brand identifiers, readable model numbers, test values, status claims, text overlays, watermarks, promotional badges, wireless beams or dramatic CGI effects. Subject: A modest indoor entryway with a simple unbranded security alarm keypad on the wall and a small PIR motion sensor mounted high near the corner; a correctly aligned two-piece door contact on the adjacent closed door and frame. Everyday white and gray finishes, soft natural light, clear focus on the alarm equipment, screen blank with no armed/disarmed status claim. No surveillance camera, luxury interior or emergency event."
+    },
+    {
+      "id": "curtains-blinds",
+      "createdAt": "2026-10-05",
+      "sourceFile": "exec-d575e21c-c9bd-4642-9d73-4be8a88c7e43.png",
+      "sourceSha256": "b61c62456efa5d252c24e8a0be430a4b76a3c03aa9fdccd9359d0aba28eae005",
+      "prompt": "Use case: photorealistic-natural. Asset type: an application illustration for a compact RF remote control section of an existing navy, gray and white B2B website. Create ONE landscape 3:2 image, 1536x1024. Restrained documentary photography, ordinary believable installation, natural materials and contact shadows, physically plausible machinery and mounting, clear main subject understandable at small card size. This depicts a generic illustrative setting, not an actual company or customer installation. No people, logos, brand identifiers, readable model numbers, test values, status claims, text overlays, watermarks, wireless beams, collage, luxury showroom or dramatic CGI. Subject: An ordinary bright living room with a large window and a clean horizontal roller blind halfway lowered, plus a simple ceiling-mounted curtain track with neutral curtains neatly drawn to the sides. Show practical window shading equipment clearly, believable mounting brackets, soft daylight, white walls and gray fabrics. No dangling hand-pull cord; leave the blind area prominent in the composition, not a remote product closeup."
+    },
+    {
+      "id": "awning-control",
+      "createdAt": "2026-10-05",
+      "sourceFile": "exec-57f3dc87-0d69-4b26-a83a-2aea1688b715.png",
+      "sourceSha256": "dc474e0e111c63f52c6184a0b558829d7ec4b9f816a614c735872f166e1e13a1",
+      "prompt": "Use case: photorealistic-natural. Asset type: an application illustration for a compact RF remote control section of an existing navy, gray and white B2B website. Create ONE landscape 3:2 image, 1536x1024. Restrained documentary photography, ordinary believable installation, natural materials and contact shadows, physically plausible machinery and mounting, clear main subject understandable at small card size. This depicts a generic illustrative setting, not an actual company or customer installation. No people, logos, brand identifiers, readable model numbers, test values, status claims, text overlays, watermarks, wireless beams, collage, luxury showroom or dramatic CGI. Subject: A modest building patio with a realistically mounted retractable fabric awning, halfway extended over a simple outdoor table. Show the wall cassette, two articulated support arms and fabric canopy with plausible geometry, no pergola built into it. Pale gray fabric, quiet white masonry, natural soft daylight, a little ordinary greenery, straightforward side three-quarter view. Practical installation, no giant resort or glamorous architecture."
+    },
+    {
+      "id": "ventilation-control",
+      "createdAt": "2026-10-05",
+      "sourceFile": "exec-7b03a08d-dd26-4044-8a39-fcb9962137f3.png",
+      "sourceSha256": "0f9741c6ccba19a24ec08cf882c3f07de69bed5bc3dab160b90a96d505f9a87d",
+      "prompt": "Use case: photorealistic-natural. Asset type: an application illustration for a compact RF remote control section of an existing navy, gray and white B2B website. Create ONE landscape 3:2 image, 1536x1024. Restrained documentary photography, ordinary believable installation, natural materials and contact shadows, physically plausible machinery and mounting, clear main subject understandable at small card size. This depicts a generic illustrative setting, not an actual company or customer installation. No people, logos, brand identifiers, readable model numbers, test values, status claims, text overlays, watermarks, wireless beams, collage, luxury showroom or dramatic CGI. Subject: A modest small workshop exterior wall with a properly installed circular industrial axial ventilation fan in a square wall mounting frame, clearly visible blades behind a protective grille, a short covered cable route to a closed plain control enclosure. Show a normal ventilation opening, fan guards and plausible motor housing, neutral gray concrete and galvanized metal, soft daylight. No dangerous unguarded moving parts or invented control displays."
+    },
+    {
+      "id": "industrial-hoist",
+      "createdAt": "2026-10-05",
+      "sourceFile": "exec-0116e0f1-7961-4750-9085-47ba5ee3f192.png",
+      "sourceSha256": "1436152431f9ad70fba7be0ab4f71c126a3d2deee6cf63c5ba51f401633ffa72",
+      "prompt": "Use case: photorealistic-natural. Asset type: an application illustration for a compact RF remote control section of an existing navy, gray and white B2B website. Create ONE landscape 3:2 image, 1536x1024. Restrained documentary photography, ordinary believable installation, natural materials and contact shadows, physically plausible machinery and mounting, clear main subject understandable at small card size. This depicts a generic illustrative setting, not an actual company or customer installation. No people, logos, brand identifiers, readable model numbers, test values, status claims, text overlays, watermarks, wireless beams, collage, luxury showroom or dramatic CGI. Subject: A compact genuine-looking electric chain hoist mounted on a trolley on a yellow overhead I-beam inside an ordinary clean industrial workshop. Show the hoist body, realistic loop of load chain into a chain bag, one vertical chain ending in a correctly shaped unloaded hook with a safety latch. No lifted load and no people. A modest plain rugged handheld industrial control unit with prominent red mushroom stop button rests on a nearby workbench; do not show a small consumer gate key fob controlling the hoist. Real machinery proportions, natural diffuse workshop light."
+    },
+    {
+      "id": "industrial-motor",
+      "createdAt": "2026-10-05",
+      "sourceFile": "exec-646913ef-0e78-4848-9d29-f5d3831e24be.png",
+      "sourceSha256": "fa9a81f3b4dfa6ce82963226acaa14afc558ce5c880926bd4b635acba9482ca9",
+      "prompt": "Use case: photorealistic-natural. Asset type: an application illustration for a compact RF remote control section of an existing navy, gray and white B2B website. Create ONE landscape 3:2 image, 1536x1024. Restrained documentary photography, ordinary believable installation, natural materials and contact shadows, physically plausible machinery and mounting, clear main subject understandable at small card size. This depicts a generic illustrative setting, not an actual company or customer installation. No people, logos, brand identifiers, readable model numbers, test values, status claims, text overlays, watermarks, wireless beams, collage, luxury showroom or dramatic CGI. Subject: An ordinary industrial motor drive installation on a solid base: one compact horizontally mounted electric motor, a small gearbox driving a short conveyor via a fully enclosed coupling guard. Proper conduit runs from the motor to a closed gray control cabinet nearby. Clearly distinguish motor, guarded drive and conveyor, restrained gray and navy tones, natural diffuse workshop light. No open electrical panels, exposed live contacts, loose unsafe wires, readable specifications or running-status claims."
     }
   ]
 }

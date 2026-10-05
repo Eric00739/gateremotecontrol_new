@@ -1,14 +1,5 @@
 export const basePath = '';
 
-export const brands = [
-  'LiftMaster', 'Chamberlain', 'FAAC', 'BFT', 'Nice', 'CAME',
-  'BENINCA', 'Hormann', 'Marantec', 'Somfy', 'Sommer', 'DEA',
-  'Roger', 'V2', 'Ditec', 'Fadini', 'Merlin', 'Centurion',
-  'Aprimatic', 'Allmatic', 'Key Automation', 'GIBIDI', 'Norton',
-  'Linear', 'Genie', 'Cardin', 'Erreka', 'Tousek', 'King Gates',
-  'SEA', 'RIB', 'Life', 'Tau', 'Cobra',
-];
-
 export const stats = [
   { value: '~1,000', label: 'SKU Range' },
   { value: 'Multi', label: 'Market Support' },
@@ -129,11 +120,11 @@ export const products = [
     ],
   },
   {
-    title: 'Accessories & Parts',
-    description: 'Antennas, batteries, keypads, cables, and installation parts.',
-    image: basePath + '/images/product-accessories.png',
+    title: 'Aftermarket Car Remotes',
+    description: 'Replacement remotes for vehicle locks and alarm systems. Confirm vehicle, original remote and programming requirements.',
+    image: basePath + '/images/generated/car-remotes.webp',
     specs: [
-      { label: 'Items', value: 'Antennas / Keypads / Batteries' },
+      { label: 'Items', value: 'Vehicle lock / Alarm remotes' },
       { label: 'Fitment', value: 'Model dependent' },
       { label: 'MOQ', value: 'By item' },
       { label: 'OEM', value: 'Neutral packaging' },
@@ -197,14 +188,19 @@ export const verificationFields = [
 ];
 
 export const applications = [
-  { name: 'Sliding Gates', image: basePath + '/images/app-sliding-gate.jpg' },
-  { name: 'Swing Gates', image: basePath + '/images/app-swing-gate.jpg' },
-  { name: 'Garage Doors', image: basePath + '/images/app-garage-door.jpg' },
-  { name: 'Roller Shutters', image: basePath + '/images/app-roller-shutter.jpg' },
-  { name: 'Access Control', image: basePath + '/images/app-access-control.jpg' },
-  { name: 'Commercial Entrances', image: basePath + '/images/app-commercial.jpg' },
-  { name: 'Warehouses', image: basePath + '/images/app-warehouse.jpg' },
-];
+  { visual: 'slidingGate' },
+  { visual: 'shutter' },
+  { visual: 'commercial' },
+  { visual: 'lightingControl' },
+  { visual: 'curtainsBlinds' },
+  { visual: 'awningControl' },
+  { visual: 'ventilationControl' },
+  { visual: 'securityAlarm' },
+  { visual: 'carWindow' },
+  { visual: 'irrigationControl', engineering: true },
+  { visual: 'industrialHoist', engineering: true },
+  { visual: 'industrialMotor', engineering: true },
+] as const;
 
 export const oemSteps = [
   { step: 1, title: 'Branding', description: 'Logo printing, custom design, and colors.' },

@@ -3,9 +3,10 @@
 import Link from 'next/link';
 import { ArrowRight, Search } from 'lucide-react';
 import { useMemo, useState } from 'react';
-import { brands, compatibilityRows } from '@/data/homepage';
+import { compatibilityRows } from '@/data/homepage';
 import { useDict, useLocale } from '@/i18n';
 import LeadModalTrigger from './LeadModalTrigger';
+import BrandReferences from './BrandReferences';
 
 export default function BrandCompatibilitySection() {
   const dict = useDict();
@@ -155,16 +156,7 @@ export default function BrandCompatibilitySection() {
           </div>
         )}
 
-        <div className="flex flex-wrap gap-2.5 mb-6">
-          {brands.slice(0, 18).map((brand) => (
-            <span key={brand} className="rounded-lg border border-[#E2E8F0] bg-[#F8FAFC] px-3 py-2 text-[12px] font-semibold text-[#153A5C]">
-              {brand}
-            </span>
-          ))}
-          <span className="rounded-lg border border-[#FF8A1F]/25 bg-[#FF8A1F]/8 px-3 py-2 text-[12px] font-bold text-[#8A3600]">
-            {dict.compatibilityTable.andMore || 'And more...'}
-          </span>
-        </div>
+        <div className="mb-6"><BrandReferences /></div>
 
         <div className="flex items-start gap-3 bg-[#F8FAFC] border border-[#E2E8F0] rounded-lg px-5 py-4 max-w-3xl">
           <div className="w-5 h-5 rounded-full bg-[#FF8A1F]/10 flex items-center justify-center flex-shrink-0 mt-0.5">

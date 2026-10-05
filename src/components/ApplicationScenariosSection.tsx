@@ -4,14 +4,11 @@ import { applications } from '@/data/homepage';
 import { useDict } from '@/i18n';
 import GeneratedImage from './GeneratedImage';
 
-const applicationVisuals = ['slidingGate', 'swingGate', 'garage', 'shutter', 'access', 'commercial', 'warehouse'] as const;
-
 export default function ApplicationScenariosSection() {
   const dict = useDict();
-  const names = dict.applications.names || [];
 
   return (
-    <section className="bg-[#F8FAFC]">
+    <section id="applications" className="bg-[#F8FAFC]">
       <div className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8 py-16 lg:py-24">
         {/* Section label */}
         <div className="flex items-center gap-3 mb-4">
@@ -28,16 +25,16 @@ export default function ApplicationScenariosSection() {
         <p className="mb-8 text-xs leading-relaxed text-[#64748B]">{dict.generatedVisuals.sceneNote}</p>
         <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 sm:gap-5 lg:grid-cols-4">
           {applications.map((app, index) => {
-            const name = names[index] || app.name;
+            const name = dict.applications.names[index];
             return (
-            <div
-              key={app.name}
-              className="min-w-0 overflow-hidden"
-            >
-              <GeneratedImage visual={applicationVisuals[index]} alt={name} copy={dict.generatedVisuals} kind="scene" compact caption={false} sizes="(max-width: 639px) calc((100vw - 48px) / 2), (max-width: 1023px) calc((100vw - 88px) / 3), (max-width: 1279px) calc((100vw - 124px) / 4), 289px" />
-              <span className="mt-3 block text-[#153A5C] font-semibold text-[15px]" style={{ fontFamily: "var(--font-outfit), sans-serif" }}>{name}</span>
-            </div>
-          );})}
+              <div key={app.visual} className="min-w-0 overflow-hidden">
+                <GeneratedImage visual={app.visual} alt={name} copy={dict.generatedVisuals} kind="scene" compact caption={false} sizes="(max-width: 639px) calc((100vw - 48px) / 2), (max-width: 1023px) calc((100vw - 88px) / 3), (max-width: 1279px) calc((100vw - 124px) / 4), 289px" />
+                <h3 className="mt-3 text-[#153A5C] font-semibold text-[15px]" style={{ fontFamily: "var(--font-outfit), sans-serif" }}>{name}</h3>
+                <p className="mt-1.5 text-xs leading-relaxed text-[#475569]">{dict.applications.descriptions[index]}</p>
+                {'engineering' in app && <p className="mt-2 text-[10px] font-semibold text-[#9A3F00]">{dict.applications.engineeringLabel}</p>}
+              </div>
+            );
+          })}
         </div>
       </div>
     </section>

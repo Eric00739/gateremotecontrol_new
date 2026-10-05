@@ -10,7 +10,7 @@ const categories = [
   { key: 'universalReceivers', visual: 'receiver', altKey: 'receiverAlt' },
   { key: 'duplicators', visual: 'learning', altKey: 'learningAlt' },
   { key: 'controllers', visual: 'controller', altKey: 'controllerAlt' },
-  { key: 'accessories', visual: 'accessories', altKey: 'accessoriesAlt' },
+  { key: 'accessories', visual: 'carRemotes', altKey: 'accessoriesAlt' },
   { key: 'oemCustom', visual: 'oemKit', altKey: 'oemAlt' },
 ] as const;
 

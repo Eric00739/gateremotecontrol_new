@@ -8,6 +8,7 @@ import { compatibilityBrands } from '@/data/compatibility';
 import { type Locale, locales } from '@/i18n';
 import { getDictSync, type Dictionary } from '@/i18n/dictionaries';
 import { siteName } from '@/data/site';
+import BrandReferences from '@/components/BrandReferences';
 import { absoluteUrl, breadcrumbJsonLd, jsonLd, localizedAlternates } from '@/lib/seo';
 
 export function generateStaticParams() {
@@ -111,6 +112,10 @@ export default async function CompatibilityPage({
             <GeneratedImage visual="matching" alt={dict.generatedVisuals.matchingAlt} copy={dict.generatedVisuals} kind="editorial" eager dark />
           </div>
         </div>
+      </section>
+
+      <section className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8 pt-14 lg:pt-16">
+        <BrandReferences />
       </section>
 
       <section className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8 py-14 lg:py-16">

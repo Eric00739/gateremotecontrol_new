@@ -5,8 +5,8 @@ import { defaultLocale, locales, type Locale } from '@/i18n';
 
 // Record meaningful page changes explicitly; rebuilding does not update dates.
 const pageUpdatedAt: Partial<Record<string, string>> = {
-  '': '2026-10-04',
-  '/compatibility': '2026-10-04',
+  '': '2026-10-05',
+  '/compatibility': '2026-10-05',
   '/compatibility/faac': '2026-10-04',
   '/compatibility/nice': '2026-10-04',
   '/compatibility/bft': '2026-10-04',
@@ -14,8 +14,8 @@ const pageUpdatedAt: Partial<Record<string, string>> = {
   '/compatibility/came': '2026-10-04',
   '/compatibility/liftmaster': '2026-10-04',
   '/oem-odm': '2026-10-04',
-  '/factory-quality': '2026-10-04',
-  '/request-catalog': '2026-10-04',
+  '/factory-quality': '2026-10-05',
+  '/request-catalog': '2026-10-05',
   '/blog': '2026-10-04',
 };
 

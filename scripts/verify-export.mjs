@@ -65,6 +65,15 @@ for (const locale of supportedLocales) {
 }
 
 const baselineShape = JSON.stringify(dictionaryShape(dictionaries.get('en')));
+const referenceSource = await readFile('src/data/brandReferences.ts', 'utf8');
+const referenceCompiled = ts.transpileModule(referenceSource, { compilerOptions: { module: ts.ModuleKind.CommonJS } });
+const referenceModule = { exports: {} };
+vm.runInNewContext(referenceCompiled.outputText, { module: referenceModule, exports: referenceModule.exports }, { timeout: 1000 });
+const referenceBrands = referenceModule.exports.brandReferences;
+if (new Set(referenceBrands.map((brand) => brand.name)).size !== referenceBrands.length) {
+  problems.push('Duplicate brand inquiry references');
+}
+
 for (const [locale, dictionary] of dictionaries) {
   if (JSON.stringify(dictionaryShape(dictionary)) !== baselineShape) {
     problems.push(`Dictionary key or array shape mismatch: ${locale}`);
@@ -78,6 +87,48 @@ for (const [locale, dictionary] of dictionaries) {
   const expectedSteps = dictionary.oem.steps;
   if (headings.length !== expectedSteps.length || expectedSteps.some((step, index) => headings[index] !== step.title || !oemText.includes(step.description))) {
     problems.push(`OEM options do not match the selected locale: ${locale}`);
+  }
+
+  const homeHtml = (await readTextIfExists(pathToHtmlFile(`/${locale}`))) ?? '';
+  const applications = homeHtml.match(/<section\b[^>]*\bid="applications"[^>]*>([\s\S]*?)<\/section>/)?.[1] ?? '';
+  const applicationHeadings = [...applications.matchAll(/<h3\b[^>]*>([\s\S]*?)<\/h3>/gi)].map((match) => visibleText(match[1]));
+  const applicationImages = [...applications.matchAll(/<img\b[^>]*\bsrc="([^"]+)"/gi)].map((match) => match[1]);
+  if (applicationHeadings.length !== 12 || applicationImages.length !== 12 || new Set(applicationImages).size !== 12 ||
+      dictionary.applications.names.some((name, index) => visibleText(name) !== applicationHeadings[index]) ||
+      dictionary.applications.descriptions.some((description) => !visibleText(applications).includes(visibleText(description))) ||
+      visibleText(applications).split(visibleText(dictionary.applications.engineeringLabel)).length - 1 !== 3) {
+    problems.push(`Application cards are missing, repeated or incorrectly localized: ${locale}`);
+  }
+  const productCards = homeHtml.match(/<section\b[^>]*\bid="products"[^>]*>([\s\S]*?)<\/section>/)?.[1] ?? '';
+  if (!visibleText(productCards).includes(visibleText(dictionary.product.accessories.title)) || !productCards.includes('/images/generated/car-remotes-640.webp')) {
+    problems.push(`Aftermarket car category or image missing: ${locale}`);
+  }
+  for (const pagePath of ['', '/factory-quality']) {
+    const footageHtml = pagePath === '' ? homeHtml : (await readTextIfExists(pathToHtmlFile(`/${locale}${pagePath}`))) ?? '';
+    if (!visibleText(footageHtml).includes(visibleText(dictionary.visuals.footageTitle))) {
+      problems.push(`Factory footage label missing: ${locale}${pagePath}`);
+    }
+  }
+  for (const pagePath of ['', '/compatibility']) {
+    const referenceHtml = pagePath === '' ? homeHtml : (await readTextIfExists(pathToHtmlFile(`/${locale}${pagePath}`))) ?? '';
+    const directory = referenceHtml.match(/<div\b[^>]*\bdata-brand-references="directory"[^>]*>([\s\S]*?)<\/section>/)?.[1] ?? '';
+    const referenceText = visibleText(directory);
+    if (referenceBrands.some((brand) => !referenceText.includes(brand.name)) ||
+        ['subtitle', 'independentNote', 'trademarkNote', 'verificationNote'].some((key) => !referenceText.includes(visibleText(dictionary.brandReferences[key])))) {
+      problems.push(`Brand directory or independent aftermarket explanation missing: ${locale}${pagePath}`);
+    }
+  }
+  const footer = homeHtml.match(/<footer\b[^>]*>([\s\S]*?)<\/footer>/)?.[1] ?? '';
+  const footerText = visibleText(footer);
+  if (referenceBrands.some((brand) => !footerText.includes(brand.name)) ||
+      ['independentNote', 'footerNote'].some((key) => !footerText.includes(visibleText(dictionary.brandReferences[key])))) {
+    problems.push(`Footer brand references or aftermarket explanation missing: ${locale}`);
+  }
+  for (const brand of referenceBrands.filter((entry) => entry.guideSlug)) {
+    const guidePath = `/${locale}/compatibility/${brand.guideSlug}`;
+    if (!footer.includes(`href="${guidePath}"`) || !(await readTextIfExists(pathToHtmlFile(guidePath)))) {
+      problems.push(`Existing brand guide link changed or broken: ${guidePath}`);
+    }
   }
 }
 
@@ -249,4 +300,4 @@ if (problems.length > 0) {
   process.exit(1);
 }
 
-console.log(`verify-export: ${sitemapUrls.length} sitemap URLs, ${redirects.length} legacy redirects, ${mediaPaths.size} media assets, ${dictionaries.size} dictionaries and localized OEM pages, ${faqCount} FAQ entries — all checks passed.`);
+console.log(`verify-export: ${sitemapUrls.length} sitemap URLs, ${redirects.length} legacy redirects, ${mediaPaths.size} media assets, ${dictionaries.size} dictionaries and localized OEM pages, ${faqCount} FAQ entries, 12 distinct applications and ${referenceBrands.length} aftermarket brand references — all checks passed.`);
