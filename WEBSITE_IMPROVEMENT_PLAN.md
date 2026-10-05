@@ -993,4 +993,12 @@ lint、TypeScript 与静态构建通过，216 个页面、276 个导出 HTML、9
 
 共 20 个发布文件：`src/data/{blog,blog-content}.ts`、`src/app/[locale]/blog/[slug]/page.tsx`、`src/components/{BlogIndexClient,BlogCommentBox}.tsx`、`src/lib/seo.ts`、`scripts/verify-export.mjs`、README、本计划、BLOG_CONTENT_REVIEW，以及 9 张 `-reviewed.webp` 和一个图片来源记录。一次性检查记录不进入提交。
 
-本次是文章及页面核验，未声称实际 RF/安全测试、产品符合性、母语审核、搜索排名或询盘转化提升。所有者事实资料依赖仍见 D1–D6/C04。发布结果在目标提交的 Actions 完成并核对正式页面后记录。
+本次是文章及页面核验，未声称实际 RF/安全测试、产品符合性、母语审核、搜索排名或询盘转化提升。所有者事实资料依赖仍见 D1–D6/C04。
+
+### 已发布与线上复测
+
+业务提交 [`490a855`](https://github.com/Eric00739/gateremotecontrol_new/commit/490a85525289599679241d6844c45d33c59a7751) 已推送到 `main`。[Pages 运行 37302050806](https://github.com/Eric00739/gateremotecontrol_new/actions/runs/37302050806) 的 build 和 deploy 均成功，于 2026-10-05 19:19（Asia/Shanghai）完成部署。
+
+19:20–19:23 的正式站复测：18 篇文章及六语目录共 24 个页面均为 HTTP 200，可见正文、全部元标签、canonical/hreflang 和单一 H1 与本地产物一致；9 张新图 SHA-256 与来源记录一致。18 篇文章的 320 像素、六语目录的 320/1440 像素，以及双模式/碰撞文章的桌面检查共 32 组、207 次首轮图片实例通过，无横向溢出、坏图或运行异常，文章样式对比一致。
+
+六语正式目录的分页、CR2032 搜索和无结果状态正常；手机/桌面的旧评论锚点及桌面提问入口跳转可见对应区域，未发送测试邮件或询盘。英文手机首屏和正式碰撞文章桌面图示截图已审阅。发布之后的记录同步只改文档，不改变页面行为。
