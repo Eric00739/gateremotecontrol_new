@@ -13,21 +13,28 @@ export default function BrandReferences({ compact = false }: { compact?: boolean
   if (compact) {
     const className = 'inline-flex min-h-11 items-center rounded-md border border-[#2A587C] px-2.5 py-1 text-xs text-[#C7D7E8] transition-colors hover:border-[#FF8A1F] hover:text-[#FF8A1F] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#FF8A1F]';
     return (
-      <div className="mt-5" data-brand-references="footer">
-        <p className="text-[10px] font-semibold uppercase tracking-[0.18em] text-[#FF8A1F]" style={{ fontFamily: 'var(--font-jetbrains-mono), monospace' }}>
-          {dict.footer.compatibilityReferences}
-        </p>
-        <p className="mt-2 text-xs font-semibold leading-relaxed text-[#F7FBFF]">{copy.independentNote}</p>
-        <div className="mt-3 flex flex-wrap gap-2">
-          {brandReferences.map((brand) => brand.guideSlug ? (
-            <Link key={brand.name} href={`/${locale}/compatibility/${brand.guideSlug}`} className={className}>{brand.name}</Link>
-          ) : (
-            <LeadModalTrigger key={brand.name} prefillType="compatibility" inquiryContext={{ modelReference: brand.modelReference }} className={className}>
-              {brand.name}
-            </LeadModalTrigger>
-          ))}
-        </div>
-        <p className="mt-3 text-xs leading-relaxed text-[#C7D7E8]">{copy.footerNote}</p>
+      <div className="mt-6 border-t border-[#123D63] pt-2" data-brand-references="footer">
+        <details className="group" data-footer-brands>
+          <summary className="flex min-h-11 cursor-pointer list-none items-center justify-between gap-3 rounded-md py-2 text-sm font-semibold text-[#F7FBFF] transition-colors hover:text-[#FF8A1F] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#FF8A1F] [&::-webkit-details-marker]:hidden">
+            <span>
+              <span>{dict.footer.compatibilityReferences} <span className="ml-1 text-xs font-normal text-[#7F9AB7]">({brandReferences.length})</span></span>
+              <span className="mt-1 block text-xs font-normal leading-relaxed text-[#C7D7E8]">{copy.independentNote}</span>
+            </span>
+            <svg className="h-4 w-4 shrink-0 transition-transform group-open:rotate-180" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true">
+              <path d="m6 9 6 6 6-6" />
+            </svg>
+          </summary>
+          <div className="mt-2 flex flex-wrap gap-2">
+            {brandReferences.map((brand) => brand.guideSlug ? (
+              <Link key={brand.name} href={`/${locale}/compatibility/${brand.guideSlug}`} className={className}>{brand.name}</Link>
+            ) : (
+              <LeadModalTrigger key={brand.name} prefillType="compatibility" inquiryContext={{ modelReference: brand.modelReference }} className={className}>
+                {brand.name}
+              </LeadModalTrigger>
+            ))}
+          </div>
+          <p className="mt-3 mb-3 max-w-4xl text-xs leading-relaxed text-[#C7D7E8]">{copy.footerNote}</p>
+        </details>
       </div>
     );
   }

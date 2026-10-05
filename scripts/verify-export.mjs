@@ -124,6 +124,13 @@ for (const [locale, dictionary] of dictionaries) {
       ['independentNote', 'footerNote'].some((key) => !footerText.includes(visibleText(dictionary.brandReferences[key])))) {
     problems.push(`Footer brand references or aftermarket explanation missing: ${locale}`);
   }
+  const brandDisclosure = footer.match(/<details\b([^>]*\bdata-footer-brands[^>]*)>([\s\S]*?)<\/details>/);
+  if (!brandDisclosure || /\sopen(?:\s|=|$)/.test(brandDisclosure[1]) ||
+      !/<summary\b/.test(brandDisclosure[2]) ||
+      referenceBrands.some((brand) => !visibleText(brandDisclosure[2]).includes(brand.name)) ||
+      !visibleText(brandDisclosure[2].match(/<summary\b[^>]*>([\s\S]*?)<\/summary>/)?.[1] ?? '').includes(visibleText(dictionary.brandReferences.independentNote))) {
+    problems.push(`Footer brands must be expandable, initially closed and retain a visible aftermarket note: ${locale}`);
+  }
   for (const brand of referenceBrands.filter((entry) => entry.guideSlug)) {
     const guidePath = `/${locale}/compatibility/${brand.guideSlug}`;
     if (!footer.includes(`href="${guidePath}"`) || !(await readTextIfExists(pathToHtmlFile(guidePath)))) {

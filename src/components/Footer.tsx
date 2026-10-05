@@ -21,11 +21,11 @@ export default function Footer() {
 
   return (
     <footer id="contact" className="bg-[#062748] text-[#F7FBFF] border-t border-[#123D63]">
-      <div className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8 py-10 lg:py-12">
-        <div className="grid gap-9 lg:grid-cols-[1.45fr_0.7fr_0.9fr] lg:items-start">
+      <div className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8 py-7 lg:py-8">
+        <div className="grid gap-6 md:grid-cols-[1.3fr_0.8fr_1fr] md:items-start">
           {/* Brand */}
           <div className="max-w-xl">
-            <div className="flex items-center gap-3 mb-4">
+            <div className="flex items-center gap-3 mb-3">
               <div className="w-9 h-9 bg-[#FF8A1F] rounded-lg flex items-center justify-center">
                 <span className="text-[#062748] font-bold text-sm" style={{ fontFamily: 'var(--font-jetbrains-mono), monospace' }}>
                   GR
@@ -47,16 +47,14 @@ export default function Footer() {
             <p className="text-sm leading-relaxed text-[#C7D7E8] max-w-md">
               {dict.footer.description}
             </p>
-
-            <BrandReferences compact />
           </div>
 
           {/* Explore */}
           <div>
-            <p className="text-sm font-semibold text-[#F7FBFF] mb-4" style={{ fontFamily: 'var(--font-outfit), sans-serif' }}>
+            <p className="text-sm font-semibold text-[#F7FBFF] mb-3" style={{ fontFamily: 'var(--font-outfit), sans-serif' }}>
               {dict.footer.company}
             </p>
-            <nav className="grid grid-cols-2 gap-x-6 gap-y-2 lg:grid-cols-1">
+            <nav className="grid grid-cols-2 gap-x-6 gap-y-2 md:grid-cols-1">
               {exploreLinks.map((link) => (
                 <Link key={link.label} href={link.href} className="text-sm text-[#C7D7E8] hover:text-[#FF8A1F] transition-colors">
                   {link.label}
@@ -67,11 +65,11 @@ export default function Footer() {
 
           {/* Contact */}
           <div>
-            <p className="text-sm font-semibold text-[#F7FBFF] mb-4" style={{ fontFamily: 'var(--font-outfit), sans-serif' }}>
+            <p className="text-sm font-semibold text-[#F7FBFF] mb-3" style={{ fontFamily: 'var(--font-outfit), sans-serif' }}>
               {dict.footer.sendModelList}
             </p>
             <div className="space-y-2 text-sm text-[#C7D7E8]">
-              <a href="mailto:sales@gateremotesource.com" className="block hover:text-[#FF8A1F] transition-colors">
+              <a href="mailto:sales@gateremotesource.com" className="block break-words hover:text-[#FF8A1F] transition-colors">
                 sales@gateremotesource.com
               </a>
               <a href="https://wa.me/8615899648898" target="_blank" rel="noopener noreferrer" className="block hover:text-[#FF8A1F] transition-colors">
@@ -83,14 +81,16 @@ export default function Footer() {
             </div>
             <LeadModalTrigger
               prefillType="compatibility"
-              className="mt-5 inline-flex items-center justify-center rounded-lg bg-[#FF8A1F] px-5 py-2.5 text-sm font-bold text-[#062748] transition-colors hover:bg-[#F97316] btn-glow"
+              className="mt-4 inline-flex min-h-11 items-center justify-center rounded-lg bg-[#FF8A1F] px-5 py-2.5 text-sm font-bold text-[#062748] transition-colors hover:bg-[#F97316] btn-glow"
             >
               {dict.hero.modelDetailsCta}
             </LeadModalTrigger>
           </div>
         </div>
 
-        <div className="mt-9 border-t border-[#123D63] pt-5 flex flex-col gap-3 text-xs text-[#7F9AB7] sm:flex-row sm:items-center sm:justify-between">
+        <BrandReferences compact />
+
+        <div className="mt-4 border-t border-[#123D63] pt-4 flex flex-col gap-2 text-xs text-[#7F9AB7] sm:flex-row sm:items-center sm:justify-between">
           <p className="max-w-3xl leading-relaxed">
             {dict.footer.disclaimer}
           </p>
