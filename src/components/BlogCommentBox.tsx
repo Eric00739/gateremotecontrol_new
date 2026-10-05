@@ -39,7 +39,7 @@ export default function BlogCommentBox({ articleTitle }: { articleTitle: string 
       className="mt-10 w-full scroll-mt-24 rounded-lg border border-[#D7E2EE] bg-[#F8FAFC] p-5 shadow-sm shadow-[#0F172A]/5 sm:p-6"
       aria-labelledby="rf-question-title"
     >
-      <div className="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
+      <div id="comments" className="flex scroll-mt-24 flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
         <div className="min-w-0">
           <p
             className="inline-flex items-center gap-2 text-[11px] font-semibold uppercase tracking-[0.2em] text-[#C45A00]"

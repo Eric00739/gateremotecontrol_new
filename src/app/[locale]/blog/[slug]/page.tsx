@@ -47,7 +47,7 @@ function buildArticleSections(content: BlogPostContentBlock[]) {
   return content.reduce<ArticleSection[]>((sections, block, blockIndex) => {
     if (block.type !== 'heading') return sections;
 
-    const baseSlug = slugifyHeading(block.text) || `section-${blockIndex + 1}`;
+    const baseSlug = block.id || slugifyHeading(block.text) || `section-${blockIndex + 1}`;
     const count = slugCounts.get(baseSlug) || 0;
     slugCounts.set(baseSlug, count + 1);
 
@@ -298,10 +298,10 @@ function ArticleSectionsNav({
       </nav>
       <div className="border-t border-[#E2E8F0] p-4">
         <a
-          href="#comments"
+          href="#rf-question"
           className="inline-flex w-full items-center justify-center gap-2 rounded-lg border border-[#F7C88B] bg-[#FFF7ED] px-4 py-2.5 text-xs font-bold text-[#C45A00] transition-colors hover:border-[#FF8A1F] hover:bg-[#FFE8CC]"
         >
-          Comments <MessageSquare className="h-4 w-4" />
+          RF question <MessageSquare className="h-4 w-4" />
         </a>
       </div>
     </section>

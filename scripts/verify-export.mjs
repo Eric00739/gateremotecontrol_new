@@ -205,6 +205,60 @@ if (articlePaths.length > 0) {
   }
 }
 
+// Article links must survive the structured-text renderer; edited headings
+// retain explicit anchors so existing reading-map and shared URLs still work.
+const articleModules = new Map();
+for (const name of ['generated-visuals', 'blog', 'blog-content']) {
+  const source = await readFile(`src/data/${name}.ts`, 'utf8');
+  const compiled = ts.transpileModule(source, { compilerOptions: { module: ts.ModuleKind.CommonJS } });
+  const articleModule = { exports: {} };
+  vm.runInNewContext(compiled.outputText, {
+    module: articleModule,
+    exports: articleModule.exports,
+    require: (specifier) => {
+      const dependency = articleModules.get(specifier.replace(/^\.\//, ''));
+      if (!dependency) throw new Error(`Unexpected article data dependency: ${specifier}`);
+      return dependency;
+    },
+  }, { timeout: 1000 });
+  articleModules.set(name, articleModule.exports);
+}
+const articleData = articleModules.get('blog-content');
+articleData.assertBlogContentIntegrity();
+for (const post of articleData.getAllBlogPosts()) {
+  const headings = post.content.filter((block) => block.type === 'heading');
+  const anchorIds = headings.map((block) => block.id);
+  if (anchorIds.some((id) => !id || !/^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(id)) || new Set(anchorIds).size !== anchorIds.length) {
+    problems.push(`Missing or duplicate stable article anchors: ${post.slug}`);
+  }
+  const links = post.content.flatMap((block) => block.type === 'paragraph' ? block.links ?? [] : []);
+  if (!links.some((link) => link.href.startsWith('https://'))) {
+    problems.push(`Article has no linked technical references: ${post.slug}`);
+  }
+  for (const block of post.content.filter((entry) => entry.type === 'paragraph')) {
+    let cursor = 0;
+    for (const link of block.links ?? []) {
+      const start = block.text.indexOf(link.text, cursor);
+      if (!link.text || start < 0 || !/^(https:\/\/|\/|#)/.test(link.href)) {
+        problems.push(`Article link text or URL cannot be rendered: ${post.slug}: ${link.text}`);
+      }
+      cursor = start + link.text.length;
+    }
+  }
+  for (const locale of supportedLocales) {
+    const articleHtml = (await readTextIfExists(pathToHtmlFile(`/${locale}/blog/${post.slug}`))) ?? '';
+    const articleBody = articleHtml.match(/<article\b[^>]*>([\s\S]*?)<\/article>/)?.[1] ?? '';
+    const renderedLinks = new Set([...articleBody.matchAll(/<a\b[^>]*\bhref="([^"]+)"/g)].map((match) => visibleText(match[1])));
+    if (anchorIds.some((id) => !articleBody.includes(`id="${id}"`)) ||
+        links.filter((link) => link.href.startsWith('https://')).some((link) => !renderedLinks.has(link.href))) {
+      problems.push(`Article references or stable anchors missing in export: ${locale}/${post.slug}`);
+    }
+    if (!articleHtml.includes('href="#rf-question"') || !articleHtml.includes('id="rf-question"') || !articleHtml.includes('id="comments"')) {
+      problems.push(`Article RF question link or legacy comments anchor missing: ${locale}/${post.slug}`);
+    }
+  }
+}
+
 // 4. Every legacy redirect has its stub and a real destination.
 for (const [sourcePath, destinationPath] of redirects) {
   for (const stubPath of stubPathsForSource(sourcePath)) {

@@ -83,4 +83,6 @@ GitHub Actions 工作流 [`.github/workflows/deploy.yml`](.github/workflows/depl
 
 博客目前只发布英文正文。六语目录链接到英文原文，保留的非英文文章 URL 继续 `noindex,follow` 并 canonical 到英文。全文翻译完成后再调整收录和 hreflang。
 
+2026-10-05 完成 18 篇英文博客的内容与事实修订，保留原布局、字体、发布日期、URL 和旧章节锚点。逐篇主要修正、资料入口及验证记录见 [BLOG_CONTENT_REVIEW.md](BLOG_CONTENT_REVIEW.md)；9 张修订概念图的提示词与校验和见 [reviewed-visuals.json](public/images/blog/reviewed-visuals.json)。导出检查覆盖正文资料链接、稳定锚点和邮件提问入口。
+
 `src/lib/seo.ts` 的 `pageUpdatedAt` 按页面路径记录实质修改日期，构建不会自动刷新日期。修改同一页面的六语内容时一起更新对应记录；各语言更新日不同时应拆开登记。未知日期的页面或文章省略 lastmod，不修改原发布日期制造更新。

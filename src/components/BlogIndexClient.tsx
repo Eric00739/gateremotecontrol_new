@@ -61,12 +61,12 @@ export default function BlogIndexClient() {
   };
 
   const topicDescriptions: Record<string, string> = {
-    'rf-engineering': 'Circuit stability, range, tuning, filtering, and real product reliability.',
-    compatibility: 'Frequency, chip, brand, receiver, and replacement matching references.',
-    'rolling-code': 'Fixed code, rolling code, security, and protocol decisions.',
-    'oem-odm': 'Product control, factory choice, certification, and long-term supply chain strategy.',
-    'buyer-checklist': 'What to prepare before samples, quotations, or compatibility checks.',
-    troubleshooting: 'Practical causes behind unstable range, pairing failure, and batch variation.',
+    'rf-engineering': 'Transmitters, receivers, antennas, power budgets and repeatable bench checks.',
+    compatibility: 'Identify a remote and check it against the receiver and regional version.',
+    'rolling-code': 'What fixed and changing codes mean for enrollment and replacement.',
+    'oem-odm': 'Define the design, private-label work, approvals and records for an order.',
+    'buyer-checklist': 'Compare requirements, quotations, samples and supporting documents.',
+    troubleshooting: 'Separate battery, radio-link and pairing faults before replacing hardware.',
   };
 
   const sortedBlogPosts = useMemo(() => sortPostsNewestFirst(blogPosts), []);
@@ -347,7 +347,7 @@ export default function BlogIndexClient() {
                         Article index
                       </p>
                       <p className="text-xs text-[#64748B]">
-                        Compact view for larger content libraries
+                        Choose a guide by the problem you need to solve.
                       </p>
                     </div>
                     <div className="divide-y divide-[#E2E8F0]">
@@ -541,7 +541,7 @@ export default function BlogIndexClient() {
                         className="text-sm font-bold text-[#0F172A]"
                         style={{ fontFamily: 'var(--font-outfit), sans-serif' }}
                       >
-                        Popular guides
+                        Selected guides
                       </h2>
                       <div className="mt-4 grid gap-3">
                         {popularPosts.map((post) => (
@@ -580,7 +580,7 @@ export default function BlogIndexClient() {
                       </div>
                     </div>
                     <p className="mt-4 text-xs leading-6 text-[#C7D7E8]">
-                      Send the model, frequency, chip photo, or project target. Eric can help check the right technical path before sampling.
+                      Send the remote and receiver models, your country, and what you need to replace or develop.
                     </p>
                     <LeadModalTrigger
                       prefillType="support"
@@ -601,10 +601,10 @@ export default function BlogIndexClient() {
                 className="mt-6 text-2xl font-bold text-[#0F172A]"
                 style={{ fontFamily: 'var(--font-outfit), sans-serif' }}
               >
-                Articles are being prepared
+                No articles published yet
               </h2>
               <p className="mx-auto mt-3 max-w-md text-sm leading-7 text-[#64748B]">
-                The previous placeholder articles have been removed. New technical articles will appear here after your own content is added.
+                Browse the other resources, or send your remote and receiver details for a compatibility check.
               </p>
             </div>
           )}
