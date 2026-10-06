@@ -5340,19 +5340,19 @@ export const blogContentBySlug: Record<string, BlogPostContentBlock[]> = {
   'cr2032-rf-remote-battery-life': [
     {
       type: 'paragraph',
-      text: 'A coin-cell remote can draw almost no current between presses yet fail during transmission. Battery life has two separate limits: charge consumed over time and voltage available during a burst.'
+      text: 'While reviewing low-power RF design notes, I started with a deceptively simple question: how can one CR2032 keep a small garage-door remote working for years? And why might another design begin missing commands much sooner?'
     },
     {
       type: 'paragraph',
-      text: 'When specifying a CR2032 remote, start with the usage pattern. Presses per day, time held down, temperature and the minimum operating voltage can change the replacement interval.'
+      text: 'It is tempting to put the whole difference down to the battery. Cell quality matters, but that answer leaves out the circuit that spends the charge: the standby load, the radio burst, the LED and everything the firmware forgets to turn off.'
     },
     {
       type: 'paragraph',
-      text: 'Battery brand and quality matter, but a capacity figure cannot answer those questions alone. Obtain the datasheet for the actual cell and measure the completed remote.'
+      text: 'Think of the coin cell as an account with a useful balance and a limited ability to make a large withdrawal at once. A low average current can stretch the balance. A demanding transmit pulse can still pull the voltage below what the electronics need.'
     },
     {
       type: 'paragraph',
-      text: 'A credible life estimate needs a current profile and a pulse-voltage test. The first accounts for consumption; the second checks whether the remaining charge is usable by the radio.'
+      text: 'That gives us two questions to answer separately: how much charge does the complete remote use over time, and can the battery deliver each command without a damaging voltage dip? Years of service require both.'
     },
     {
       type: 'image',
@@ -5397,6 +5397,17 @@ export const blogContentBySlug: Record<string, BlogPostContentBlock[]> = {
       ]
     },
     {
+      type: 'image',
+      src: '/images/blog/cr2032-rf-remote-battery-life/charge-budget.webp',
+      srcSet: '/images/blog/cr2032-rf-remote-battery-life/charge-budget-320.webp 320w, /images/blog/cr2032-rf-remote-battery-life/charge-budget-640.webp 640w, /images/blog/cr2032-rf-remote-battery-life/charge-budget.webp 1280w',
+      alt: 'Diagram: An ideal 225 mAh budget gives an average current of 8.56 microamps for three years or 5.14 microamps for five years',
+      caption: 'Ideal arithmetic using 365 days per year. The averages include every electrical load and are not service-life predictions.'
+    },
+    {
+      type: 'paragraph',
+      text: 'This is where the design becomes unforgiving. An extra 1 µA running continuously uses 8.76 mAh in a 365-day year. A small leakage path is small on the bench, but it keeps collecting charge every hour the remote sits unused.'
+    },
+    {
       type: 'paragraph',
       text: 'Measure standby current at the battery terminals after the product has settled into its normal idle state. A low MCU sleep figure excludes the regulator, radio, LED paths and board leakage.'
     },
@@ -5425,6 +5436,10 @@ export const blogContentBySlug: Record<string, BlogPostContentBlock[]> = {
     },
     {
       type: 'paragraph',
+      text: '“How long will it last?” deserves a clear answer, but a single number hides the usage model. A remote used a few times a day and one carried with a button held down in a bag are drawing from very different accounts. State the conditions before offering the estimate.'
+    },
+    {
+      type: 'paragraph',
       text: 'For a daily estimate, Qday = 24 × Isleep + N × Σ[(Ij − Isleep) × tj] / 3600. Use current in mA, each active-state duration tj in seconds, and N commands per day; the result is mAh/day. Subtracting Isleep avoids counting the same time twice.'
     },
     {
@@ -5442,7 +5457,7 @@ export const blogContentBySlug: Record<string, BlogPostContentBlock[]> = {
       links: [
         {
           text: 'Energizer’s CR2032 datasheet',
-          href: 'https://energizer.com/wp-content/uploads/2024/09/cr2032.pdf'
+          href: 'https://data.energizer.com/pdfs/cr2032.pdf'
         }
       ]
     },
@@ -5460,7 +5475,7 @@ export const blogContentBySlug: Record<string, BlogPostContentBlock[]> = {
       links: [
         {
           text: 'Nordic Semiconductor/Energizer pulse-load study',
-          href: 'https://devzone.nordicsemi.com/cfs-file/__key/support-attachments/beef5d1b77644c448dabff31668f3a47-5efe7ef27bdd4a7eb1a5fc7b38051495/High-pulse-drain-impact-on-CR2032-coin-cell-battery-capacity.pdf'
+          href: 'https://devzone.nordicsemi.com/cfs-file/__key/support-attachments/beef5d1b77644c448dabff31668f3a47-5b7d8d80e28e45e1b49265aac13a54a3/High-pulse-drain-impact-on-CR2032-coin-cell-battery-capacity.pdf'
         }
       ]
     },
@@ -5481,13 +5496,20 @@ export const blogContentBySlug: Record<string, BlogPostContentBlock[]> = {
       text: 'Test new and partly discharged cells, cold conditions within the product rating, rapid presses and a held button. A new cell at room temperature is only one operating condition.'
     },
     {
+      type: 'image',
+      src: '/images/blog/cr2032-rf-remote-battery-life/pulse-voltage.webp',
+      srcSet: '/images/blog/cr2032-rf-remote-battery-life/pulse-voltage-320.webp 320w, /images/blog/cr2032-rf-remote-battery-life/pulse-voltage-640.webp 640w, /images/blog/cr2032-rf-remote-battery-life/pulse-voltage.webp 1280w',
+      alt: 'Diagram: A current pulse coincides with a supply-voltage dip below a conceptual operating threshold, followed by recovery when the pulse ends',
+      caption: 'Conceptual waveforms, not an RF capture or a battery measurement. Resting voltage alone cannot show whether the next burst will succeed.'
+    },
+    {
       type: 'heading',
       text: 'Shorten Active Time without Breaking the Command',
       id: 'the-core-design-philosophy'
     },
     {
       type: 'quote',
-      text: 'A completed command and prompt return to idle matter more than a low sleep figure in isolation.'
+      text: 'Sleep quietly. Wake promptly. Complete the command. Go straight back to sleep.'
     },
     {
       type: 'paragraph',
@@ -5521,6 +5543,16 @@ export const blogContentBySlug: Record<string, BlogPostContentBlock[]> = {
       text: 'Choose the radio architecture for compatibility, current, wake-up time and supply range. Integration can simplify the circuit, but remaining external leakage and firmware behavior still need measurement.'
     },
     {
+      type: 'paragraph',
+      text: 'A low-power design still needs enough RF output to complete its job. Microchip’s RF Basics Design Guide describes the MICRF112, a 300–450 MHz ASK/FSK transmitter capable of +10 dBm output and operation down to 1.8 V. Those capabilities do not establish the current of your finished remote or its permitted output in a destination market.',
+      links: [
+        {
+          text: 'Microchip’s RF Basics Design Guide',
+          href: 'https://www.microchip.com/content/dam/mchp/documents/OTH/ProductDocuments/SupportingCollateral/RF_PG.pdf'
+        }
+      ]
+    },
+    {
       type: 'heading',
       text: 'Configure GPIO for the Selected Device',
       id: 'gpio-configuration-can-decide-the-battery-life'
@@ -5531,13 +5563,17 @@ export const blogContentBySlug: Record<string, BlogPostContentBlock[]> = {
       links: [
         {
           text: 'ST’s AN4899',
-          href: 'https://www.st.com/resource/en/application_note/an4899-stm32-microcontroller-gpio-hardware-settings-and-lowpower-consumption-stmicroelectronics.pdf'
+          href: 'https://www.st.com/resource/en/application_note/DM00315319-.pdf'
         }
       ]
     },
     {
       type: 'paragraph',
       text: 'A pull resistor can itself spend the idle budget when a switch or another device holds the opposite level. Check current paths, external pin voltages and back-powering, not just the register setting.'
+    },
+    {
+      type: 'paragraph',
+      text: 'The unglamorous checks matter here: debug interfaces, enabled clocks, regulator quiescent current and peripherals that remain powered. More integration can remove some paths, but an additional component only costs standby current if the circuit gives it a path to draw it.'
     },
     {
       type: 'heading',
@@ -5586,6 +5622,10 @@ export const blogContentBySlug: Record<string, BlogPostContentBlock[]> = {
     {
       type: 'paragraph',
       text: 'For illustration, 2 mA for 300 ms costs 0.000167 mAh; reducing that to 30 ms cuts this particular contribution tenfold. Check that the shorter indication remains useful and that the firmware implements the intended timing.'
+    },
+    {
+      type: 'paragraph',
+      text: 'There is no universal 30 ms rule. The light needs to be visible in the intended conditions, and it must not imply that the door moved when it only indicates local transmission. Spend enough charge to give useful feedback, then turn it off.'
     },
     {
       type: 'heading',
@@ -5644,6 +5684,10 @@ export const blogContentBySlug: Record<string, BlogPostContentBlock[]> = {
       text: 'For buyers, the strongest answer is a measured profile, a defined usage model and evidence that the burst voltage remains adequate over the planned service interval.'
     },
     {
+      type: 'paragraph',
+      text: 'That brings us back to the little remote waiting on a key ring. The user does not see the GPIO settings, the current trace or the careful return to sleep. They press the button and expect a response. Low-power engineering earns that trust in all the quiet hours between commands.'
+    },
+    {
       type: 'heading',
       text: 'Primary Documents Used Here',
       id: 'references'
@@ -5655,7 +5699,8 @@ export const blogContentBySlug: Record<string, BlogPostContentBlock[]> = {
         'Energizer CR2032: capacity conditions and a specified background-plus-pulse curve.',
         'Nordic Semiconductor/Energizer study: pulse-voltage effects and functional cutoff.',
         'Silicon Labs Si4010-C2: mode-specific typical currents and GPIO conditions.',
-        'STMicroelectronics AN4899: device-specific GPIO and low-power configuration.'
+        'STMicroelectronics AN4899: device-specific GPIO and low-power configuration.',
+        'Microchip RF Basics Design Guide: transmitter architecture, output and supply range.'
       ]
     },
   ],

@@ -510,15 +510,15 @@ export const blogPosts: BlogPostMeta[] = [
     ],
   },
   {
-    title: 'CR2032 Remote Battery Life: Charge and Pulse Voltage',
+    title: 'How Can One CR2032 Keep an RF Remote Working for Years?',
     seoTitle: 'CR2032 RF Remote Battery Life: Current and Pulse Load',
     category: 'rf-engineering',
     excerpt:
-      'Estimate charge from standby and complete commands, then test whether the cell stays above the radio’s operating voltage during a burst.',
+      'Follow the microamp budget, the transmit pulse and the small design details that determine whether a coin-cell remote still responds years later.',
     slug: 'cr2032-rf-remote-battery-life',
     author: 'Eric Huang',
     publishedAt: '2026-05-10',
-    updatedAt: '2026-10-05',
+    updatedAt: '2026-10-06',
     readTime: '9 min read',
     ...illustratedBlogPhotos['cr2032-rf-remote-battery-life'],
     relatedSlugs: [

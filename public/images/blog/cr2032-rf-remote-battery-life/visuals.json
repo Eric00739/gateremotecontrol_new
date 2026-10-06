@@ -1,0 +1,67 @@
+{
+  "slug": "cr2032-rf-remote-battery-life",
+  "createdAt": "2026-10-06",
+  "tool": "Code-authored SVG; baoyu-diagram guidance; sharp rasterization",
+  "usage": "Explanatory diagrams, not product measurements, current profiles or battery-life guarantees.",
+  "processing": "16:9; 1280/640/320-pixel WebP at quality 90; SVG and 2x PNG retained as local artifacts.",
+  "assets": [
+    {
+      "id": "charge-budget",
+      "sourceFile": "charge-budget.svg",
+      "sourceSha256": "eb3e4c5d3f027337977ea0247476340a01e68259c464e8b2eae0f8c8ad5ee782",
+      "designIntent": "Ideal charge arithmetic with total-load averages; no promise of service life.",
+      "files": [
+        {
+          "file": "charge-budget.webp",
+          "width": 1280,
+          "height": 720,
+          "bytes": 56150,
+          "sha256": "9ee4810e41512ada8bdbc078d1791ba6fa76f5ac93343a60701a400fe5dc0760"
+        },
+        {
+          "file": "charge-budget-640.webp",
+          "width": 640,
+          "height": 360,
+          "bytes": 24308,
+          "sha256": "0570388c18eb09d2373d26b132c53541e7c3d9735a69ac18a2501e3a666ae883"
+        },
+        {
+          "file": "charge-budget-320.webp",
+          "width": 320,
+          "height": 180,
+          "bytes": 9502,
+          "sha256": "dfe008ad39e25bb90abc57db19f1d4d4afd9f42dbc1ec7f122673dcfc178241c"
+        }
+      ]
+    },
+    {
+      "id": "pulse-voltage",
+      "sourceFile": "pulse-voltage.svg",
+      "sourceSha256": "809c2a2a95cd90a22be015184d6155ea3bc7d492fc052b393b26e7cf81fcebf1",
+      "designIntent": "Conceptual coincident current burst and voltage dip crossing a functional threshold; no measured scale.",
+      "files": [
+        {
+          "file": "pulse-voltage.webp",
+          "width": 1280,
+          "height": 720,
+          "bytes": 43830,
+          "sha256": "9c790d2b367ef271a62a6a5c26174833795d7a6010d0fc5a462414a18e32c446"
+        },
+        {
+          "file": "pulse-voltage-640.webp",
+          "width": 640,
+          "height": 360,
+          "bytes": 19150,
+          "sha256": "4a20f8a2d56129eaf1bb80abeb8935a8a7ff77f2d253aa42153e6cfb3181babb"
+        },
+        {
+          "file": "pulse-voltage-320.webp",
+          "width": 320,
+          "height": 180,
+          "bytes": 7482,
+          "sha256": "30f3f17c1edecc74b9881a53c218853e2c59cb4b9401fbabd6e23aa7deacbee8"
+        }
+      ]
+    }
+  ]
+}
