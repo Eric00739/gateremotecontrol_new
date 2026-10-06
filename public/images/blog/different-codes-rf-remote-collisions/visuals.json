@@ -1,0 +1,96 @@
+{
+  "slug": "different-codes-rf-remote-collisions",
+  "createdAt": "2026-10-06",
+  "tool": "image_gen.imagegen (built-in)",
+  "processing": "Original 3:2 composition preserved; resized without enlargement using sharp at WebP quality 82 to 1280, 640 and 320 px.",
+  "usage": "Generic technical illustrations; no real SKU, company premises, test results or demonstrated protocol capabilities.",
+  "assets": [
+    {
+      "id": "two-remotes-one-channel",
+      "sourceFile": "exec-cd10190f-6b9e-4179-83d8-7e28bdddaf66.png",
+      "sourceSha256": "a1bd61fba40c7f58abcdf94159fe0cb3d39745c2b6c9062666c5179a9c473b0b",
+      "prompt": "Use case: photorealistic-natural. Asset type: technical editorial illustration for an established B2B RF remote-control blog. ONE landscape image 3:2 aspect ratio, 1536x1024. Restrained documentary commercial photography on a cool gray textured electronics workbench with a subtle dark navy background, natural diffuse window light, honest matte ABS plastic and green PCB textures, realistic scales and natural shadows. Primary objects entirely in central 75 percent with generous margins. Generic fictional technical illustration, not a real SKU or company premises. No people, logos, readable brand names, text overlay, certification marks, numeric measurements, waveforms, wireless beams, glowing circuitry, borders, collage, or watermark. Subject: Two distinct unbranded four-button gate remotes, one black and one dark gray, side by side in the foreground with equal visual prominence. Behind them, a single compact generic receiver board inside an open plain gray enclosure, with a terminal block and one short antenna. No buttons depressed, no LEDs lit, no wires or probes connecting the remotes to the receiver. Straightforward composition establishing that two separate remote identities can share one receiving channel; do not depict successful or failed commands.",
+      "files": [
+        {
+          "file": "two-remotes-one-channel.webp",
+          "width": 1280,
+          "height": 853,
+          "bytes": 101528,
+          "sha256": "8e6fd27e180b63558fae382a6ebbb1bab7a2be9b5ea1ce16327f67ad992e26ea"
+        },
+        {
+          "file": "two-remotes-one-channel-320.webp",
+          "width": 320,
+          "height": 213,
+          "bytes": 9724,
+          "sha256": "0445701bf574e1e9345c60ab3c9fa0cfdacd8f1ec51739bd76c832ba3de7d2bf"
+        },
+        {
+          "file": "two-remotes-one-channel-640.webp",
+          "width": 640,
+          "height": 426,
+          "bytes": 28578,
+          "sha256": "2b4ae7cd464f4db69ef2753369a2a6a7f80fe7acd8a9b34c6895fbaeaf648652"
+        }
+      ]
+    },
+    {
+      "id": "airtime-and-repeated-frames",
+      "sourceFile": "exec-ab759f59-8741-4be8-8d6e-baec26b8141b.png",
+      "sourceSha256": "327868fed149cc972febd225b424f77c42a789a30962d4b772b8e38e9357e46f",
+      "prompt": "Use case: photorealistic-natural. Asset type: technical editorial illustration for an established B2B RF remote-control blog. ONE landscape image 3:2 aspect ratio, 1536x1024. Restrained documentary commercial photography on a cool gray textured electronics workbench with a subtle dark navy background, natural diffuse window light, honest matte ABS plastic and green PCB textures, realistic scales and natural shadows. Primary objects entirely in central 75 percent with generous margins. Generic fictional technical illustration, not a real SKU or company premises. No people, logos, readable brand names, text overlay, certification marks, numeric measurements, waveforms, wireless beams, glowing circuitry, borders, collage, or watermark. Subject: Two unbranded compact RF remote circuit boards placed beside their separate black plastic housings on a workbench, with a small bench oscilloscope in the soft-focus background. Oscilloscope screen completely dark, powered off, no plotted traces, no numbers. Two insulated probes resting separately and disconnected beside the boards. Each board includes plausible small controller and radio parts, not a circuit diagram. This is a prepared bench for investigating transmission timing, not evidence of a particular test or result.",
+      "files": [
+        {
+          "file": "airtime-and-repeated-frames.webp",
+          "width": 1280,
+          "height": 853,
+          "bytes": 117006,
+          "sha256": "e4ef70b25adb4a2c177809014c94f66784b33309f8d30517710ab278bea6cfe8"
+        },
+        {
+          "file": "airtime-and-repeated-frames-320.webp",
+          "width": 320,
+          "height": 213,
+          "bytes": 11966,
+          "sha256": "edaef7aea2a6aede0c7a90b0777a88a21efc795097e0d41dab2d09ab43b1409b"
+        },
+        {
+          "file": "airtime-and-repeated-frames-640.webp",
+          "width": 640,
+          "height": 426,
+          "bytes": 36242,
+          "sha256": "aecb72af910f2b78fe84f3e3ca347363b8e86c44d62a7f3c5d439e73b10453cc"
+        }
+      ]
+    },
+    {
+      "id": "two-way-radio-hardware",
+      "sourceFile": "exec-5918414b-012d-472c-be94-c162c8bb8c80.png",
+      "sourceSha256": "efa95d61e2bb813410168a24206914194a2b63eac38350c5f8cdf48f7bd02b17",
+      "prompt": "Use case: photorealistic-natural. Asset type: technical editorial illustration for an established B2B RF remote-control blog. ONE landscape image 3:2 aspect ratio, 1536x1024. Restrained documentary commercial photography on a cool gray textured electronics workbench with a subtle dark navy background, natural diffuse window light, honest matte ABS plastic and green PCB textures, realistic scales and natural shadows. Primary objects entirely in central 75 percent with generous margins. Generic fictional technical illustration, not a real SKU or company premises. No people, logos, readable brand names, text overlay, certification marks, numeric measurements, waveforms, wireless beams, glowing circuitry, borders, collage, or watermark. Subject: Two generic small sub-GHz transceiver development modules laid side by side, each on its own green PCB with a small shielded radio area, realistic supporting components, a pin header and a short black antenna. A separate compact receiver/control board in an open plain gray enclosure sits farther back. No integrated brand or model text, no test displays, no connections or action indicators. Show that listening and return acknowledgments require suitable radio hardware, without suggesting that the photograph proves protocol features.",
+      "files": [
+        {
+          "file": "two-way-radio-hardware.webp",
+          "width": 1280,
+          "height": 853,
+          "bytes": 135394,
+          "sha256": "6bf4dcfd3184ac43def9a273e9398765ee7e2ac7b20e089069f22f3e4359ea0d"
+        },
+        {
+          "file": "two-way-radio-hardware-320.webp",
+          "width": 320,
+          "height": 213,
+          "bytes": 11410,
+          "sha256": "83cd448e3fc138c2b2c82aca5ca68893f76661b37616cea0f4b92e2af8265ecb"
+        },
+        {
+          "file": "two-way-radio-hardware-640.webp",
+          "width": 640,
+          "height": 426,
+          "bytes": 39720,
+          "sha256": "6e53a6a4987ef291b43f611c0fce70390081a13d41bcd50492f008e5b1b21072"
+        }
+      ]
+    }
+  ]
+}

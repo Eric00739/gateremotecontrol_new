@@ -111,6 +111,28 @@ export const popularGuides = [
 
 export const blogPosts: BlogPostMeta[] = [
   {
+    title: 'Different Codes, Same Channel: Why RF Remotes Can Collide',
+    seoTitle: 'RF Remote Collisions: Why Different Codes Do Not Help',
+    category: 'rf-engineering',
+    excerpt:
+      'Separate remote identity from radio access, then check how overlapping frames, airtime, repeat timing and two-way protocols affect command delivery.',
+    slug: 'different-codes-rf-remote-collisions',
+    author: 'Eric Huang',
+    publishedAt: '2026-09-11',
+    updatedAt: '2026-10-06',
+    readTime: '8 min read',
+    image: '/images/blog/different-codes-rf-remote-collisions/two-remotes-one-channel.webp',
+    thumbnail: '/images/blog/different-codes-rf-remote-collisions/two-remotes-one-channel-320.webp',
+    imageAlt: 'Illustration: Two distinct RF remotes beside one receiver board on a workbench',
+    imageSrcSet: '/images/blog/different-codes-rf-remote-collisions/two-remotes-one-channel-320.webp 320w, /images/blog/different-codes-rf-remote-collisions/two-remotes-one-channel-640.webp 640w, /images/blog/different-codes-rf-remote-collisions/two-remotes-one-channel.webp 1280w',
+    imageCaption: 'Separate remote identities can use the same receiving channel.',
+    relatedSlugs: [
+      'rf-remote-control-concurrency-anti-collision',
+      'rf-receiver-sensitivity-range-spec',
+      'garage-door-remote-cloning-security-guide',
+    ],
+  },
+  {
     title: 'RF Remote Buttons Not Working: Check the Battery, Buttons and MCU',
     seoTitle: 'RF Remote Buttons Not Working: Troubleshooting Order',
     category: 'troubleshooting',
@@ -425,7 +447,7 @@ export const blogPosts: BlogPostMeta[] = [
     updatedAt: '2026-10-05',
     readTime: '7 min read',
     ...illustratedBlogPhotos['rf-remote-control-concurrency-anti-collision'],
-    relatedSlugs: ['circuits-dont-act-good-enough-transmitter-modules', 'oem-odm-hardware-future'],
+    relatedSlugs: ['different-codes-rf-remote-collisions', 'circuits-dont-act-good-enough-transmitter-modules', 'oem-odm-hardware-future'],
   },
   {
     title: 'Why a Copy Remote Reports Success but Does Not Work',

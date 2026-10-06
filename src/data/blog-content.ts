@@ -11,6 +11,265 @@ export type BlogPost = BlogPostMeta & {
 /** Full article bodies, keyed by slug. Split from blog.ts so client list pages
  * ship only metadata instead of every article's full text. */
 export const blogContentBySlug: Record<string, BlogPostContentBlock[]> = {
+  'different-codes-rf-remote-collisions': [
+    {
+      type: 'paragraph',
+      text: 'Two cars reach an entrance almost together. Both drivers press a 433.92 MHz remote. Which command does the receiver hear?'
+    },
+    {
+      type: 'paragraph',
+      text: 'A common assumption is that different remote codes prevent a conflict. Each transmitter has its own identity, so the receiver should be able to tell them apart. The missing step is recovering enough of the radio message to read that identity in the first place.'
+    },
+    {
+      type: 'paragraph',
+      text: 'An address identifies a sender. A channel-access method governs when it transmits. Those are separate jobs. Understanding the difference explains why two legitimate remotes can work individually yet miss a command when pressed together.'
+    },
+    {
+      type: 'image',
+      src: '/images/blog/different-codes-rf-remote-collisions/two-remotes-one-channel.webp',
+      srcSet: '/images/blog/different-codes-rf-remote-collisions/two-remotes-one-channel-320.webp 320w, /images/blog/different-codes-rf-remote-collisions/two-remotes-one-channel-640.webp 640w, /images/blog/different-codes-rf-remote-collisions/two-remotes-one-channel.webp 1280w',
+      alt: 'Illustration: Two distinct four-button RF remotes beside a single receiver in an open enclosure',
+      caption: 'Different transmitter identities do not assign separate airtime on a shared channel.'
+    },
+    {
+      type: 'heading',
+      text: 'Why Different Codes Still Share a Channel',
+      id: 'different-codes-shared-channel'
+    },
+    {
+      type: 'paragraph',
+      text: 'A typical remote assembles data such as its identifier and button command; a rolling-code design also includes changing security-related data. The transmitter carries that message using a modulation scheme such as OOK, a form of ASK, or FSK. The exact frame format depends on the system.'
+    },
+    {
+      type: 'paragraph',
+      text: 'At the receiver, signal detection, synchronization and data recovery make later address and security checks possible. Address filtering does not remove an interfering signal before the receiver has recovered the relevant bits.'
+    },
+    {
+      type: 'paragraph',
+      text: 'When transmissions arrive within the same receive channel and overlap in time, their waveforms superimpose at the antenna. They do not physically crash into one another in the air. The combined input can disrupt synchronization, amplitude decisions or bit timing, leaving no valid frame to identify.'
+    },
+    {
+      type: 'callout',
+      title: 'Keep three requirements separate',
+      text: 'Identity tells the receiver which transmitter a recovered frame claims to come from. Authentication and replay handling determine whether it should be trusted. Channel access determines when a transmitter attempts to use the radio channel.'
+    },
+    {
+      type: 'paragraph',
+      text: 'Rolling code does not schedule that access. Microchip\'s HCS301 documentation describes changing code data and receiver synchronization, not a mechanism that senses another transmitter before sending. Protection against replay depends on the implemented security and state handling; a changing code alone is not a complete security guarantee.',
+      links: [
+        {
+          text: 'Microchip\'s HCS301 documentation',
+          href: 'https://ww1.microchip.com/downloads/en/devicedoc/21143c.pdf'
+        }
+      ]
+    },
+    {
+      type: 'heading',
+      text: 'What a Receiver Can Recover from Overlap',
+      id: 'receiver-overlap-outcomes'
+    },
+    {
+      type: 'paragraph',
+      text: 'Simultaneous button presses do not guarantee that both commands fail. The actual overlap depends on wake-up delay, frame duration, repeat timing and propagation. Button timing is only the start of the experiment.'
+    },
+    {
+      type: 'paragraph',
+      text: 'With substantial overlap and similar received powers, neither frame may be recovered. Under other conditions, the receiver may recover one transmission despite the other. A power difference can favor the stronger signal, but there is no universal rule that the strongest remote always wins.'
+    },
+    {
+      type: 'paragraph',
+      text: 'For OOK/ASK in particular, the result depends on receiver architecture, synchronization, automatic gain control, interference timing and the relative powers. Capture behavior must be checked on the intended receiver and protocol. Moving one remote closer is a useful test variation, but distance alone does not determine received power; antenna orientation, obstructions and reflections also matter.'
+    },
+    {
+      type: 'paragraph',
+      text: 'Describe the observation precisely: neither frame accepted, one accepted, or a later repeat accepted. A gate opening shows that an actionable command reached the control system; it does not show that the first radio frames were free of overlap.'
+    },
+    {
+      type: 'heading',
+      text: 'Repeated Frames Help When Timing Separates',
+      id: 'repeat-frames-and-airtime'
+    },
+    {
+      type: 'paragraph',
+      text: 'Many one-way remote protocols send a short burst of repeated frames for one button press. If early frames overlap but a later frame arrives cleanly, the receiver may recover the command and the user sees normal operation.'
+    },
+    {
+      type: 'paragraph',
+      text: 'That is another opportunity, not delivery confirmation. Two transmitters with similar fixed repeat intervals can keep overlapping through the burst. Any benefit from accidental timing separation depends on the actual protocol and timing; it should not be assumed from a repeat-count specification.'
+    },
+    {
+      type: 'paragraph',
+      text: 'Adding repeats also adds channel use. Excessive repetition can make a busy channel harder for everyone to use. Define a bounded burst, permitted timing variation and receiver duplicate handling. One press should not unexpectedly become several toggle actions because several copies were received.'
+    },
+    {
+      type: 'paragraph',
+      text: 'A transmitter-only handheld can repeat a command without knowing whether it arrived. It cannot perform radio-based listen-before-talk or receive an ACK unless receive-capable hardware is present.'
+    },
+    {
+      type: 'image',
+      src: '/images/blog/different-codes-rf-remote-collisions/airtime-and-repeated-frames.webp',
+      srcSet: '/images/blog/different-codes-rf-remote-collisions/airtime-and-repeated-frames-320.webp 320w, /images/blog/different-codes-rf-remote-collisions/airtime-and-repeated-frames-640.webp 640w, /images/blog/different-codes-rf-remote-collisions/airtime-and-repeated-frames.webp 1280w',
+      alt: 'Illustration: Two remote circuit boards and disconnected probes prepared for a timing investigation',
+      caption: 'Measure frame duration, spacing and the complete burst. The instruments in this illustration show no test result.'
+    },
+    {
+      type: 'heading',
+      text: 'Enrollment Capacity Is Not Concurrent Capacity',
+      id: 'enrollment-versus-concurrency'
+    },
+    {
+      type: 'paragraph',
+      text: 'If a receiver specification says it can enroll 400 remotes, check what that number counts: transmitters, credentials or button assignments. It describes enrollment capacity, not evidence that the receiver can decode 400 simultaneous transmissions.'
+    },
+    {
+      type: 'paragraph',
+      text: 'For collisions, the useful starting points are how often devices transmit, how long their frames and bursts occupy the channel, and whether those attempts cluster in time. Include retries and, on two-way links, acknowledgment traffic.'
+    },
+    {
+      type: 'paragraph',
+      text: 'A large enrolled population can generate little traffic when most devices remain silent. A smaller group that sends long or frequent bursts can create much more contention. A shift change or a queue arriving at one entrance can produce a concentrated burst of activity even when daily average traffic is low.'
+    },
+    {
+      type: 'paragraph',
+      text: 'Airtime is therefore useful, but it is not the only predictor. Relative power, frame timing, receive bandwidth, receiver recovery and unrelated interference affect the outcome. Traffic estimates should use the intended busy period and be checked against observed command success and delay.'
+    },
+    {
+      type: 'heading',
+      text: 'Listen-Before-Talk Needs Hardware and a Protocol',
+      id: 'cca-lbt-and-backoff'
+    },
+    {
+      type: 'paragraph',
+      text: 'Clear channel assessment, CCA, estimates whether the channel is busy. A listen-before-talk procedure uses that assessment to decide when to attempt a transmission. A typical contention rule is to transmit after an acceptable clear assessment, defer when busy, then reassess after a defined wait.'
+    },
+    {
+      type: 'paragraph',
+      text: 'TI\'s CC1101 datasheet documents RSSI, programmable carrier sense and CCA support. These are radio capabilities that firmware can use. They do not by themselves specify a complete access protocol or prove that a finished remote implements one.',
+      links: [
+        {
+          text: 'TI\'s CC1101 datasheet',
+          href: 'https://www.ti.com/lit/ds/symlink/cc1101.pdf'
+        }
+      ]
+    },
+    {
+      type: 'paragraph',
+      text: 'The implementation must define the sensing threshold, observation time, valid radio state, receive-to-transmit transition and busy-channel response. The chosen method must notice the traffic of concern, including its modulation and gaps. A register setting copied from another product is not a coexistence test.'
+    },
+    {
+      type: 'paragraph',
+      text: 'Two nodes can both sense an idle channel and start transmitting together. Hidden nodes create another limit: two remotes may not hear each other even though both reach the same receiver. A clear assessment at the transmitter is not proof that the receiver has an interference-free channel.'
+    },
+    {
+      type: 'paragraph',
+      text: 'Random backoff reduces the chance that competing devices repeatedly retry in step. The protocol still needs a backoff rule, a fresh assessment, limits on attempts and a maximum command age. Randomization reduces contention; it does not guarantee a delivery time under arbitrary interference.'
+    },
+    {
+      type: 'image',
+      src: '/images/blog/different-codes-rf-remote-collisions/two-way-radio-hardware.webp',
+      srcSet: '/images/blog/different-codes-rf-remote-collisions/two-way-radio-hardware-320.webp 320w, /images/blog/different-codes-rf-remote-collisions/two-way-radio-hardware-640.webp 640w, /images/blog/different-codes-rf-remote-collisions/two-way-radio-hardware.webp 1280w',
+      alt: 'Illustration: Two generic radio development modules with antennas beside a separate control board',
+      caption: 'Listening and return acknowledgments need suitable hardware and protocol support at the participating nodes.'
+    },
+    {
+      type: 'heading',
+      text: 'Define What an ACK Actually Confirms',
+      id: 'ack-and-command-completion'
+    },
+    {
+      type: 'paragraph',
+      text: 'A two-way link can send an acknowledgment after reception and retry when the expected ACK is absent. Both ends must support the return exchange, including turnaround timing, an ACK receive window and retry handling.'
+    },
+    {
+      type: 'paragraph',
+      text: 'An absent ACK does not prove that the original command was lost. The receiver may have received it while the return ACK was lost. Retries therefore need transaction identification and duplicate suppression, especially for commands that toggle an output.'
+    },
+    {
+      type: 'paragraph',
+      text: 'Nordic\'s Enhanced ShockBurst guide documents acknowledgment, retransmission and duplicate handling in a particular two-way radio protocol. It is an example of those mechanisms working together, not a feature that can be assumed on an ordinary one-way gate remote.',
+      links: [
+        {
+          text: 'Nordic\'s Enhanced ShockBurst guide',
+          href: 'https://docs.nordicsemi.com/r/bundle/nrf5_sdk_v17.0.2/page/esb_users_guide.html'
+        }
+      ]
+    },
+    {
+      type: 'paragraph',
+      text: 'Specify the acknowledgment stage: packet received, command authenticated, command accepted, or action completed. A radio-level ACK alone does not confirm relay operation or gate position. Physical completion requires the relevant equipment feedback.'
+    },
+    {
+      type: 'paragraph',
+      text: 'Listening, waiting and unsuccessful retries use energy and add delay. A better design for the application balances command success, latency, battery use and cost. Adding ACKs does not by itself make a control system suitable for safety-related machinery.'
+    },
+    {
+      type: 'heading',
+      text: 'Europe: Frequency Is Only Part of the Specification',
+      id: 'european-spectrum-requirements'
+    },
+    {
+      type: 'paragraph',
+      text: 'For a European-market product, asking whether a radio can operate at 868 MHz leaves important requirements unanswered. Select the exact permitted band and device category, then assess radiated power, occupied bandwidth and the applicable channel-access and occupation rules.'
+    },
+    {
+      type: 'paragraph',
+      text: 'ETSI EN 300 220-2 V3.3.1 sets out technical requirements for non-specific short-range radio equipment, including band-dependent duty-cycle or polite-access provisions. A chip with CCA capability is not proof that the complete product meets the applicable sensing and timing requirements.',
+      links: [
+        {
+          text: 'ETSI EN 300 220-2 V3.3.1',
+          href: 'https://www.etsi.org/deliver/etsi_en/300200_300299/30022002/03.03.01_60/en_30022002v030301p.pdf'
+        }
+      ]
+    },
+    {
+      type: 'paragraph',
+      text: 'The EU short-range-device spectrum decision is another relevant starting point. Check current national implementation and the assessment requirements for the destination and equipment. Do not apply one duty-cycle or power figure to every product described as 868 MHz.',
+      links: [
+        {
+          text: 'EU short-range-device spectrum decision',
+          href: 'https://eur-lex.europa.eu/eli/dec_impl/2025/105/oj/eng'
+        }
+      ]
+    },
+    {
+      type: 'heading',
+      text: 'Test Command Delivery in the Intended Installation',
+      id: 'test-overlap-and-delivery'
+    },
+    {
+      type: 'paragraph',
+      text: 'Return to the two drivers at the entrance. Their different codes can help the receiver distinguish valid messages once recovered. Whether both commands arrive in time depends on the radio conditions and protocol.'
+    },
+    {
+      type: 'list',
+      items: [
+        'Establish a baseline with each registered remote operating alone at the intended positions.',
+        'Vary the delay between presses, including near-simultaneous starts, overlapping bursts and repeated attempts.',
+        'Vary orientation and relative received power; include close/far and similar-power cases.',
+        'Record accepted commands, missed commands, duplicates and time to response during a representative busy period.',
+        'For two-way links, separate lost commands from lost ACKs and check retry limits, stale-command rejection and duplicate suppression.',
+        'Observe the controller output and equipment state separately when physical completion matters.'
+      ]
+    },
+    {
+      type: 'paragraph',
+      text: 'For a broader comparison of repetition, frequency separation, time slots, hopping and carrier sensing, see our RF collision hardware and protocol guide. Receiver sensitivity and security claims should also be checked independently of a concurrency claim.',
+      links: [
+        {
+          text: 'RF collision hardware and protocol guide',
+          href: '/en/blog/rf-remote-control-concurrency-anti-collision'
+        }
+      ]
+    },
+    {
+      type: 'paragraph',
+      text: 'At Dongguan Fengxian Electronics Technology Co., Ltd., the useful question is how the complete link delivers commands in its intended environment. For development or sourcing discussions, include the receiver model, market, traffic pattern, response deadline and supported link direction. These details are more useful than a rolling-code label or enrollment count alone.'
+    },
+    {
+      type: 'quote',
+      text: 'Different identities can share the same channel. Reliable command delivery needs a radio and protocol designed for the traffic that actually uses it.'
+    },
+  ],
   'rf-remote-buttons-not-working': [
     {
       type: 'paragraph',
