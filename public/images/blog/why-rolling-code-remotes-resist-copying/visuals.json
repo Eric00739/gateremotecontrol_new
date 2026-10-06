@@ -1,0 +1,96 @@
+{
+  "slug": "why-rolling-code-remotes-resist-copying",
+  "createdAt": "2026-10-06",
+  "tool": "Code-authored SVG; baoyu-diagram guidance; sharp rasterization",
+  "usage": "Conceptual security diagrams, not RF captures, product evidence or recommended receiver settings.",
+  "processing": "16:9; 1280/640/320-pixel WebP at quality 90; SVG and 2x PNG retained as local artifacts.",
+  "assets": [
+    {
+      "id": "authentication-and-freshness",
+      "sourceFile": "authentication-and-freshness.svg",
+      "sourceSha256": "007bca32a7e9595b49ff63cae284350b2bbf56baecfcdb0d2caf70e4dd9da5dc",
+      "designIntent": "Separate authentication of an enrolled identity from acceptable sequence state; both are needed.",
+      "files": [
+        {
+          "file": "authentication-and-freshness.webp",
+          "width": 1280,
+          "height": 720,
+          "bytes": 49056,
+          "sha256": "2c23faa24195bb30dadbefeb2223cb59069247f6c21e5e08cc2d3760dcc6ee78"
+        },
+        {
+          "file": "authentication-and-freshness-640.webp",
+          "width": 640,
+          "height": 360,
+          "bytes": 22910,
+          "sha256": "58edab4429781313c6433098cf3ea833b5a9f4f7fe6892cb52340a06c4a97eee"
+        },
+        {
+          "file": "authentication-and-freshness-320.webp",
+          "width": 320,
+          "height": 180,
+          "bytes": 8710,
+          "sha256": "28f0ee6dff693749e958a31c49b4052d1a22d6adf0f0e109eaa5543280d6dc45"
+        }
+      ]
+    },
+    {
+      "id": "forward-window",
+      "sourceFile": "forward-window.svg",
+      "sourceSha256": "efb3922c6a7d03efd2ec8811c92d4aad3faa4b7d6db37c7d49153f698caab343",
+      "designIntent": "Illustrate blocked old sequence states, authenticated forward candidates and receiver-specific recovery, using fictional window width four.",
+      "files": [
+        {
+          "file": "forward-window.webp",
+          "width": 1280,
+          "height": 720,
+          "bytes": 65360,
+          "sha256": "44af340a5f4900db5a5e8718756b02ea0a687a0aad8e5a6cbede25cf1e9ab205"
+        },
+        {
+          "file": "forward-window-640.webp",
+          "width": 640,
+          "height": 360,
+          "bytes": 28608,
+          "sha256": "368bcf895784c1327c5feba543ca20b075daea22d5c712cf8e8291929772431e"
+        },
+        {
+          "file": "forward-window-320.webp",
+          "width": 320,
+          "height": 180,
+          "bytes": 11166,
+          "sha256": "5c4a3ba5a8af2c9f8d16dd382f0dbfc16ace2235bd247212cbe5f4a64f90d5a8"
+        }
+      ]
+    },
+    {
+      "id": "accepted-code-replay",
+      "sourceFile": "accepted-code-replay.svg",
+      "sourceSha256": "914a18432887e2b54b7f10e87096086e27de54177091eb71705c72b57dcf223d",
+      "designIntent": "Sequence view of receiving and consuming an authenticated command, then rejecting its later replay, assuming intact receiver state.",
+      "files": [
+        {
+          "file": "accepted-code-replay.webp",
+          "width": 1280,
+          "height": 720,
+          "bytes": 43772,
+          "sha256": "7e40af51c5812ebf9f619ac85b11be8d1d68e7c3d9525108ae115df187a1ca6a"
+        },
+        {
+          "file": "accepted-code-replay-640.webp",
+          "width": 640,
+          "height": 360,
+          "bytes": 19778,
+          "sha256": "de8df036a569ee22eeaa841eba23e31f09199f35a82c20451223f6d8525baf70"
+        },
+        {
+          "file": "accepted-code-replay-320.webp",
+          "width": 320,
+          "height": 180,
+          "bytes": 8066,
+          "sha256": "6edc52fbaee78430b38ad1ce6b2a3377a6ce8438e092822685e91147d6d1972e"
+        }
+      ]
+    }
+  ]
+}

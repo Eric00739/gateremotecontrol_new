@@ -11,6 +11,263 @@ export type BlogPost = BlogPostMeta & {
 /** Full article bodies, keyed by slug. Split from blog.ts so client list pages
  * ship only metadata instead of every article's full text. */
 export const blogContentBySlug: Record<string, BlogPostContentBlock[]> = {
+  'why-rolling-code-remotes-resist-copying': [
+    {
+      type: 'paragraph',
+      text: '“Can this remote be copied?” is a common question in RF projects. To answer it properly, separate three things: what changes in the transmission, how the receiver validates it, and whether a previously accepted message can still operate the equipment.',
+    },
+    {
+      type: 'paragraph',
+      text: 'Fixed-code and rolling-code remotes can look identical. The difference is in the message and the receiver’s decision. Recording a signal, replaying a command and providing a dependable replacement remote are different jobs.',
+    },
+    {
+      type: 'heading',
+      id: 'fixed-code-and-learning',
+      text: 'Fixed Code Repeats; Learning Enrolls',
+    },
+    {
+      type: 'paragraph',
+      text: 'A fixed code is like a key whose shape stays the same. For a given command, the relevant code remains static. In a system that accepts that code without additional protection, a compatible recording can potentially be replayed. Simplicity and cost may suit some applications, but neither proves resistance to unauthorized use.',
+    },
+    {
+      type: 'paragraph',
+      text: 'Learning describes how a receiver adds a transmitter to its accepted list. It does not define whether the transmitted code is static or changing. A learning receiver can enroll either kind, depending on its design. More identity combinations may reduce accidental overlap, but they do not make a captured static message fresh.',
+    },
+    {
+      type: 'paragraph',
+      text: 'Microchip’s TB003 explains the distinction between guessing a code and capturing one. Increasing the number of possible codes addresses guessing; preventing reuse requires another mechanism. These are separate questions when comparing products.',
+      links: [
+        {
+          text: 'Microchip’s TB003',
+          href: 'https://ww1.microchip.com/downloads/en/Appnotes/91002B.pdf',
+        },
+      ],
+    },
+    {
+      type: 'quote',
+      text: 'A receiver needs to know both that the command is authorized and that it is still valid to use.',
+    },
+    {
+      type: 'heading',
+      id: 'authentication-and-counter',
+      text: 'A Counter Adds Freshness, Not Identity by Itself',
+    },
+    {
+      type: 'paragraph',
+      text: 'In a counter-based rolling-code design, the transmitter advances stored synchronization state for a new activation. Secret-key processing protects changing data; the receiver checks the message against its own credentials and state. A visible counter that simply increments would be predictable. Changing a number is not enough to authenticate a command.',
+    },
+    {
+      type: 'paragraph',
+      text: 'Think of the decision as two checks. Authentication asks whether the message is valid for an enrolled transmitter. Freshness asks whether its synchronization state is acceptable now. Both must pass before the intended control action is allowed. This is a conceptual model, not a universal packet format.',
+    },
+    {
+      type: 'image',
+      src: '/images/blog/why-rolling-code-remotes-resist-copying/authentication-and-freshness.webp',
+      srcSet: '/images/blog/why-rolling-code-remotes-resist-copying/authentication-and-freshness-320.webp 320w, /images/blog/why-rolling-code-remotes-resist-copying/authentication-and-freshness-640.webp 640w, /images/blog/why-rolling-code-remotes-resist-copying/authentication-and-freshness.webp 1280w',
+      alt: 'Two receiver checks: valid enrolled identity and key, then acceptable synchronization state before a control action',
+      caption: 'Two questions, two checks. The diagram summarizes the decision; actual protocols and implementations differ.',
+    },
+    {
+      type: 'paragraph',
+      text: 'The HCS301 data sheet gives a concrete example: its message combines a hopping portion with a fixed portion, including a serial number. The receiver uses learned information, validates the decrypted data and evaluates synchronization. Not every field changes on every press.',
+      links: [
+        {
+          text: 'HCS301 data sheet',
+          href: 'https://ww1.microchip.com/downloads/en/devicedoc/21143c.pdf',
+        },
+      ],
+    },
+    {
+      type: 'paragraph',
+      text: 'A new button activation should not be confused with each RF frame. An activation can send repeated code words for reception reliability. Seeing repetition within a burst is therefore not, by itself, proof of fixed-code operation.',
+    },
+    {
+      type: 'paragraph',
+      text: '“Rolling code” is a family of approaches, not a single compatibility standard. Algorithm, provisioning, message format, receiver firmware and synchronization policy can differ. A chip name or a matching frequency does not establish that two products will work together.',
+    },
+    {
+      type: 'heading',
+      id: 'forward-synchronization-window',
+      text: 'Why Receivers Allow Some Forward Movement',
+    },
+    {
+      type: 'paragraph',
+      text: 'A remote can be pressed out of range. Its state advances, while the receiver hears nothing. Requiring the next message to be exactly one step ahead would make this ordinary event unnecessarily disruptive.',
+    },
+    {
+      type: 'paragraph',
+      text: 'A forward acceptance window gives the receiver some tolerance. The figure below uses a fictional last-accepted value of 100 and a four-step window. Values 101 through 104 are candidates for acceptance only if authentication also passes. After accepting 103, the receiver moves its stored state to 103; the acceptance range moves with it.',
+    },
+    {
+      type: 'image',
+      src: '/images/blog/why-rolling-code-remotes-resist-copying/forward-window.webp',
+      srcSet: '/images/blog/why-rolling-code-remotes-resist-copying/forward-window-320.webp 320w, /images/blog/why-rolling-code-remotes-resist-copying/forward-window-640.webp 640w, /images/blog/why-rolling-code-remotes-resist-copying/forward-window.webp 1280w',
+      alt: 'Illustrative counter window: old values through 100 blocked, values 101 to 104 eligible after authentication, later values require the documented recovery policy',
+      caption: 'Fictional values for explanation, not receiver settings. Every candidate must also pass authentication.',
+    },
+    {
+      type: 'paragraph',
+      text: 'The HCS301 documentation illustrates a short forward window and a separate resynchronization region requiring an additional sequential transmission. It explicitly describes this as a typical firmware implementation. Follow the actual receiver’s instructions rather than assume the same thresholds or recovery steps for every product.',
+      links: [
+        {
+          text: 'HCS301 documentation',
+          href: 'https://ww1.microchip.com/downloads/en/devicedoc/21143c.pdf',
+        },
+      ],
+    },
+    {
+      type: 'paragraph',
+      text: 'A wider window does not turn arbitrary transmissions into valid credentials. It does change how much authenticated forward movement the receiver tolerates. Evaluate that tolerance together with resynchronization, state storage and rejection rules. The useful question is how the complete acceptance policy handles both normal missed presses and abnormal input.',
+    },
+    {
+      type: 'paragraph',
+      text: 'Counters also have finite ranges. Overflow, resets and replacement of stored state need defined handling. “Always moves forward” is a useful picture of normal operation, not a claim that a hardware counter can increase forever.',
+    },
+    {
+      type: 'heading',
+      id: 'accepted-code-and-replay',
+      text: 'Why a Previously Accepted Code Normally Fails',
+    },
+    {
+      type: 'paragraph',
+      text: 'Consider the same simplified example. The receiver is at 100, accepts an authenticated command at 101 and stores 101. A later replay of that command is no longer ahead of the stored state. With correct rejection and state retention, it does not authorize another operation.',
+    },
+    {
+      type: 'image',
+      src: '/images/blog/why-rolling-code-remotes-resist-copying/accepted-code-replay.webp',
+      srcSet: '/images/blog/why-rolling-code-remotes-resist-copying/accepted-code-replay-320.webp 320w, /images/blog/why-rolling-code-remotes-resist-copying/accepted-code-replay-640.webp 640w, /images/blog/why-rolling-code-remotes-resist-copying/accepted-code-replay.webp 1280w',
+      alt: 'First reception of illustrative code 101 is accepted and saved; later replay of the same code is rejected because receiver state is already 101',
+      caption: 'The example assumes correct authentication, counter checking and persistent receiver state. It does not show a real RF frame.',
+    },
+    {
+      type: 'paragraph',
+      text: 'That protection depends on the receiver having accepted the command. A captured message that never reached the receiver has not necessarily been consumed. A one-way counter system may still accept it if it remains inside the allowed range. “Recorded” and “already used” are not interchangeable.',
+    },
+    {
+      type: 'paragraph',
+      text: 'Nor does a counter automatically impose a time limit. Whether an unused message expires after a period depends on additional protocol rules. Rolling-code freshness is usually about sequence state; it should not be advertised as a clock-based expiry without evidence.',
+    },
+    {
+      type: 'paragraph',
+      text: 'A recording also does not give an ordinary copier the credentials and state needed to keep generating valid future commands. A supported replacement may nevertheless be available through the system’s documented provisioning and enrollment process. Resistance to simple copying is not the same as a ban on adding another remote.',
+    },
+    {
+      type: 'quote',
+      text: 'The important boundary is not whether someone can observe the radio signal. It is what the receiver will still accept afterward.',
+    },
+    {
+      type: 'heading',
+      id: 'security-beyond-the-label',
+      text: 'Rolling Code Is a Mechanism, Not a Security Certificate',
+    },
+    {
+      type: 'paragraph',
+      text: 'Changing code is an improvement over unrestricted reuse of a static command, but the label alone does not establish the security of an installed system. Review key protection, enrollment permissions, authentication checks, synchronization recovery and retention of the receiver’s last accepted state.',
+    },
+    {
+      type: 'paragraph',
+      text: 'Samy Kamkar’s DEF CON 23 presentation introduced RollJam. At a high level, it combines interference with capture to retain a valid command that the receiver has not yet consumed. That challenges an unused-code boundary; it is not ordinary reuse of a command already accepted by a correctly advancing receiver.',
+      links: [
+        {
+          text: 'Samy Kamkar’s DEF CON 23 presentation',
+          href: 'https://sa.my/defcon2015/',
+        },
+      ],
+    },
+    {
+      type: 'paragraph',
+      text: 'Csikor and colleagues’ RollBack research, presented at Black Hat USA 2022, examined automotive remote keyless entry systems whose recovery behavior could make old captured commands acceptable again. Its findings concern the tested implementations. They do not demonstrate that every rolling-code garage-door or gate receiver has the same defect.',
+      links: [
+        {
+          text: 'RollBack research',
+          href: 'https://arxiv.org/abs/2210.11923',
+        },
+      ],
+    },
+    {
+      type: 'paragraph',
+      text: 'The practical lesson is to examine acceptance and recovery behavior, rather than assume that a changing waveform proves security. These research examples also do not mean a door-unlock command necessarily bypasses a vehicle’s separate start authorization.',
+    },
+    {
+      type: 'paragraph',
+      text: 'Interference can prevent a valid command from arriving. Authentication and availability are different properties: rolling code does not, on its own, make the radio link immune to jamming. Likewise, features such as logging, abnormal-attempt detection or firmware updates must be confirmed for the actual product.',
+    },
+    {
+      type: 'heading',
+      id: 'windchord-system-evaluation',
+      text: 'How WindChord Remote Approaches the Choice',
+    },
+    {
+      type: 'paragraph',
+      text: 'For Dongguan Fengxian Electronics Technology Co., Ltd., the useful starting point is the customer’s installed system and required outcome. Cost, replacement compatibility, radio performance and security need to be considered together. No single frequency, encoder marking or product label answers all four.',
+    },
+    {
+      type: 'paragraph',
+      text: 'For an access-control project, establish the receiver and controller model, the supported transmitter family and the authorized enrollment method. Then ask how the system handles a lost remote, missed presses and recovery after loss of power. Choose the documented mechanism that meets the application’s requirements, and verify operation on the actual receiver.',
+    },
+    {
+      type: 'list',
+      items: [
+        'Identify the installed receiver, firmware or hardware revision, and supported remote references.',
+        'Confirm who may enroll a remote and whether a lost remote can be revoked individually.',
+        'Request the documented synchronization and recovery behavior; avoid applying generic programming instructions.',
+        'Ask what security evidence supports the system’s claims and whether it covers the configuration being purchased.',
+        'Verify replacement compatibility and normal operation in the intended installation before a volume order.',
+      ],
+    },
+    {
+      type: 'paragraph',
+      text: 'The right answer to “Can it be copied?” is therefore more specific: can a captured static message be reused, can a captured but unaccepted command still work, and can a supported replacement be enrolled? Separating those questions makes the recommendation clearer and reduces avoidable pairing failures.',
+    },
+    {
+      type: 'quote',
+      text: 'A good control system opens the intended door for an authorized command and rejects a command that is no longer valid.',
+    },
+    {
+      type: 'paragraph',
+      text: 'Further reading: the manufacturer documents describe particular implementations; the research publications examine particular attack conditions. Neither is a universal programming guide or a security assessment of WindChord Remote products.',
+    },
+    {
+      type: 'paragraph',
+      text: 'Microchip TB003 — An Introduction to KEELOQ Code Hopping.',
+      links: [
+        {
+          text: 'Microchip TB003',
+          href: 'https://ww1.microchip.com/downloads/en/Appnotes/91002B.pdf',
+        },
+      ],
+    },
+    {
+      type: 'paragraph',
+      text: 'Microchip HCS301 — encoder operation, message fields and typical receiver synchronization.',
+      links: [
+        {
+          text: 'Microchip HCS301',
+          href: 'https://ww1.microchip.com/downloads/en/devicedoc/21143c.pdf',
+        },
+      ],
+    },
+    {
+      type: 'paragraph',
+      text: 'RollBack white paper — Csikor and colleagues, Black Hat USA 2022.',
+      links: [
+        {
+          text: 'RollBack white paper',
+          href: 'https://i.blackhat.com/USA-22/Thursday/US-22-Csikor-Rollback-A-New-Time-Agnostic-Replay-wp.pdf',
+        },
+      ],
+    },
+    {
+      type: 'paragraph',
+      text: 'Drive It Like You Hacked It — Samy Kamkar, DEF CON 23, 2015.',
+      links: [
+        {
+          text: 'Drive It Like You Hacked It',
+          href: 'https://sa.my/defcon2015/',
+        },
+      ],
+    },
+  ],
   'rf-receiver-module-selection-parameters': [
     {
       type: 'paragraph',

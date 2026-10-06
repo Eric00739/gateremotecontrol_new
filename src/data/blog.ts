@@ -111,6 +111,26 @@ export const popularGuides = [
 
 export const blogPosts: BlogPostMeta[] = [
   {
+    title: 'Why Rolling-Code Remotes Resist Simple Copying',
+    seoTitle: 'Rolling-Code Remote Security: Counters, Sync Windows and Replay',
+    category: 'rolling-code',
+    excerpt: 'Learn why an accepted rolling code normally cannot be reused, how synchronization windows work, and where simple copying protection ends.',
+    slug: 'why-rolling-code-remotes-resist-copying',
+    author: 'Eric Huang',
+    publishedAt: '2026-10-06',
+    readTime: '7 min read',
+    image: '/images/blog/why-rolling-code-remotes-resist-copying/authentication-and-freshness.webp',
+    thumbnail: '/images/blog/why-rolling-code-remotes-resist-copying/authentication-and-freshness-320.webp',
+    imageAlt: 'Diagram: Authentication and freshness checks before an RF receiver authorizes a control action',
+    imageSrcSet: '/images/blog/why-rolling-code-remotes-resist-copying/authentication-and-freshness-320.webp 320w, /images/blog/why-rolling-code-remotes-resist-copying/authentication-and-freshness-640.webp 640w, /images/blog/why-rolling-code-remotes-resist-copying/authentication-and-freshness.webp 1280w',
+    imageCaption: 'A changing counter needs authentication and correct receiver state.',
+    relatedSlugs: [
+      'garage-door-remote-cloning-security-guide',
+      'rf-remote-compatibility-beginner-guide',
+      'why-universal-remote-cannot-copy',
+    ],
+  },
+  {
     title: '10 Parameters to Confirm Before Choosing an RF Receiver Module',
     seoTitle: 'RF Receiver Module Selection: 10 Parameters to Check',
     category: 'buyer-checklist',
