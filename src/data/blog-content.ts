@@ -11,6 +11,226 @@ export type BlogPost = BlogPostMeta & {
 /** Full article bodies, keyed by slug. Split from blog.ts so client list pages
  * ship only metadata instead of every article's full text. */
 export const blogContentBySlug: Record<string, BlogPostContentBlock[]> = {
+  'wireless-receiver-controller-factory-testing': [
+    {
+      type: 'paragraph',
+      text: 'An assembled wireless receiver controller powers up. Its indicator lights, and a paired remote makes a relay operate. That is a useful first check, but it is only one operating point.',
+    },
+    {
+      type: 'paragraph',
+      text: 'Before shipment, the questions become more specific: does reception meet the model\'s requirement, does every defined control function work, and does operation remain stable during the specified powered test? A missed command, an incorrect mode or an intermittent reset needs a different investigation.',
+    },
+    {
+      type: 'paragraph',
+      text: 'The practical approach is to separate reception, control functions and extended operation, then keep the evidence from each stage. A unit should reach packaging because it passed the agreed release criteria.',
+    },
+    {
+      type: 'image',
+      src: '/images/blog/wireless-receiver-controller-factory-testing/receiver-controller-test-bench.webp',
+      srcSet: '/images/blog/wireless-receiver-controller-factory-testing/receiver-controller-test-bench-320.webp 320w, /images/blog/wireless-receiver-controller-factory-testing/receiver-controller-test-bench-640.webp 640w, /images/blog/wireless-receiver-controller-factory-testing/receiver-controller-test-bench.webp 1280w',
+      alt: 'Illustration: A generic wireless receiver controller, handheld remote and unpowered instruments on a workbench',
+      caption: 'A close-range response is an initial check; it does not establish the complete release result.',
+    },
+    {
+      type: 'heading',
+      id: 'define-release-conditions',
+      text: 'Define the Conditions Before Calling a Test Passed',
+    },
+    {
+      type: 'paragraph',
+      text: 'A useful workflow is assembly and basic power checks, reception checks, functional checks, a specified powered soak or burn-in, review and retest of exceptions, then release for packaging. The station order can vary; the required checks and release gates must remain clear.',
+    },
+    {
+      type: 'paragraph',
+      text: 'Start with the model, hardware revision, firmware and order specification. Define supply conditions, radio settings, antenna or enclosure configuration, output load where applicable, test duration or repetitions, and the result that counts as a pass. State which checks cover every unit and which are performed on samples.',
+    },
+    {
+      type: 'callout',
+      title: 'Three checks, three different questions',
+      text: 'Reception checks whether the radio message is recovered under defined conditions. Functional testing checks whether the controller executes it correctly. Extended powered operation checks whether that behavior stays stable over the specified observation period.',
+    },
+    {
+      type: 'paragraph',
+      text: 'Do not choose an acceptance limit after seeing the result. A borderline unit needs the prescribed disposition, and a doubtful fixture needs investigation before either a pass or a failure is assigned.',
+    },
+    {
+      type: 'heading',
+      id: 'reception-versus-sensitivity',
+      text: 'Separate Reception Screening from Sensitivity Measurement',
+    },
+    {
+      type: 'paragraph',
+      text: 'Use a compatible transmitter or test waveform for the model\'s frequency, modulation and coding. A signal at the correct frequency is not enough if the receiver cannot decode its format. Control the transmit sequence and count successful receptions over a defined number of attempts.',
+    },
+    {
+      type: 'paragraph',
+      text: 'Receiver sensitivity is the minimum input level that meets a specified error or reception criterion under specified conditions. The waveform, data rate, receiver bandwidth, packet or command format, supply and measurement reference matter. A single successful command at a weak signal level does not establish that threshold.',
+    },
+    {
+      type: 'paragraph',
+      text: 'TI\'s CC1101 datasheet illustrates this dependence by specifying sensitivity together with radio settings and a packet-error criterion. Its chip figures are not automatically the sensitivity of an assembled controller.',
+      links: [
+        {
+          text: 'TI\'s CC1101 datasheet',
+          href: 'https://www.ti.com/lit/ds/symlink/cc1101.pdf',
+        },
+      ],
+    },
+    {
+      type: 'paragraph',
+      text: 'For a conducted measurement, define the RF input reference plane and account for cable and attenuator loss. A calibrated radiated setup can assess the complete antenna and enclosure path, but it uses a different measurement reference. Keep those results distinct when reporting performance.',
+    },
+    {
+      type: 'paragraph',
+      text: 'A fixed-distance transmitter or a fixed attenuation fixture can be useful for production screening. Unless the applied signal and threshold method are characterized, describe the result as reception performance or consistency screening rather than a measured sensitivity value in dBm.',
+    },
+    {
+      type: 'paragraph',
+      text: 'Keep transmitter output, battery or supply condition, antenna orientation, spacing and fixture arrangement stable. Nearby interference, enclosure changes and worn connections can shift the result. Reference units and fixture checks help detect a changed test setup; a reference unit alone does not calibrate an absolute RF level.',
+    },
+    {
+      type: 'paragraph',
+      text: 'Keysight\'s receiver test guidance connects input level with a defined BER or PER limit. For the difference between a component specification and an installed link, see our receiver sensitivity guide.',
+      links: [
+        {
+          text: 'Keysight\'s receiver test guidance',
+          href: 'https://www.keysight.com/blogs/en/tech/rfmw/2019/08/25/how-to-configure-wireless-receiver-dynamic-range-tests',
+        },
+        {
+          text: 'receiver sensitivity guide',
+          href: '/en/blog/rf-receiver-sensitivity-range-spec',
+        },
+      ],
+    },
+    {
+      type: 'image',
+      src: '/images/blog/wireless-receiver-controller-factory-testing/controlled-rf-reception-check.webp',
+      srcSet: '/images/blog/wireless-receiver-controller-factory-testing/controlled-rf-reception-check-320.webp 320w, /images/blog/wireless-receiver-controller-factory-testing/controlled-rf-reception-check-640.webp 640w, /images/blog/wireless-receiver-controller-factory-testing/controlled-rf-reception-check.webp 1280w',
+      alt: 'Illustration: A receiver controller, RF accessory, disconnected coaxial lead and instrument with a dark display',
+      caption: 'Specify the stimulus and measurement reference. This illustrative setup contains no measured result.',
+    },
+    {
+      type: 'heading',
+      id: 'verify-functions-and-outputs',
+      text: 'Check Every Defined Function and the Actual Output',
+    },
+    {
+      type: 'paragraph',
+      text: 'Once a valid command can be received, follow it through the controller. Verify the intended channel, its timing and its final state. An indicator or a relay click alone does not establish that the output contacts switched correctly.',
+    },
+    {
+      type: 'paragraph',
+      text: 'Build the checklist from the model\'s actual features. Depending on the specification, this may include remote enrollment and deletion, momentary operation, latching, interlocking, delays, external inputs and custom logic. Do not assume every controller supports all of these.',
+    },
+    {
+      type: 'list',
+      items: [
+        'Exercise every defined channel and verify the actual output, not only the status indication.',
+        'Check entry into each supported mode and the resulting behavior on subsequent commands.',
+        'Verify enrollment, deletion and rejection of unauthorized or deleted credentials where specified.',
+        'Check repeat commands and transitions between outputs, including the specified interlock behavior.',
+        'Confirm power-up state, stored settings and recovery after a planned power cycle against the specification.',
+      ],
+    },
+    {
+      type: 'paragraph',
+      text: 'Use the specified load and an appropriate output measurement. Resistive, inductive and small-signal loads can place different demands on relay contacts. Testing without a load answers a different question from switching the intended load.',
+    },
+    {
+      type: 'paragraph',
+      text: 'OMRON\'s relay guidance explains that reliability depends on the switching conditions and load. Choose test cycles and loads within the component and product requirements; do not turn a release check into an uncontrolled endurance test.',
+      links: [
+        {
+          text: 'OMRON\'s relay guidance',
+          href: 'https://www.ia.omron.com/support/faq/answer/36/faq02147/',
+        },
+      ],
+    },
+    {
+      type: 'heading',
+      id: 'powered-soak-and-burn-in',
+      text: 'Define What Extended Powered Operation Is Meant to Find',
+    },
+    {
+      type: 'paragraph',
+      text: 'Some faults appear immediately; others emerge after sustained operation or repeated commands. Unstable connections, abnormal supply behavior and intermittent control faults may become visible during an extended test. A symptom alone does not identify the failed component.',
+    },
+    {
+      type: 'paragraph',
+      text: 'Set the duration, supply, ambient conditions, enclosure state, load and action cycle in the model\'s inspection plan. A powered soak at ordinary conditions and a deliberately stressed burn-in are different procedures. The test name should describe what was actually performed.',
+    },
+    {
+      type: 'paragraph',
+      text: 'Record resets, missed commands, unintended output changes and interruptions throughout the test, using suitable monitoring for the fault of interest. A lamp that remains on, or a successful command only at the end, can miss a brief fault in the middle.',
+    },
+    {
+      type: 'paragraph',
+      text: 'Specify whether repeated output switching is needed and how much is permitted. More hours or more relay cycles are not automatically better: inappropriate stress can consume contact life or create damage that the normal application would not cause.',
+    },
+    {
+      type: 'paragraph',
+      text: 'Passing a finite soak screens for problems detectable under those conditions. It does not prove service life, field interference tolerance or long-term reliability. Those questions require the appropriate design validation and qualification evidence.',
+    },
+    {
+      type: 'image',
+      src: '/images/blog/wireless-receiver-controller-factory-testing/powered-soak-preparation.webp',
+      srcSet: '/images/blog/wireless-receiver-controller-factory-testing/powered-soak-preparation-320.webp 320w, /images/blog/wireless-receiver-controller-factory-testing/powered-soak-preparation-640.webp 640w, /images/blog/wireless-receiver-controller-factory-testing/powered-soak-preparation.webp 1280w',
+      alt: 'Illustration: Three generic receiver controllers spaced apart on a ventilated shelf beside a disconnected supply',
+      caption: 'Duration, loading and monitoring belong in the test plan; the illustration shows preparation rather than an operating test.',
+    },
+    {
+      type: 'heading',
+      id: 'isolate-repair-and-retest',
+      text: 'Keep Exceptions on Hold Until Their Disposition Is Complete',
+    },
+    {
+      type: 'paragraph',
+      text: 'Separate a failed unit from released stock and record the symptom, unit or lot identity, firmware, fixture and test conditions. Check the setup as well as the product: a faulty transmitter, connector or supply can make several good units appear defective.',
+    },
+    {
+      type: 'paragraph',
+      text: 'After repair, repeat the failed test under the relevant conditions and cover other checks that the repair could affect. Work on the supply or firmware can affect reception, timing and stored settings, so repeating only one button press may be insufficient.',
+    },
+    {
+      type: 'paragraph',
+      text: 'For an intermittent fault, use the defined reproduction and observation procedure. If the cause remains unresolved, keep the unit on hold under the inspection plan. Repeating a test until one pass appears is not evidence that the original fault has been removed.',
+    },
+    {
+      type: 'paragraph',
+      text: 'If similar failures recur across a lot, investigate the shared cause and assess other potentially affected units. Correcting one board does not close a batch-level issue. Release requires the applicable retests and a recorded disposition.',
+    },
+    {
+      type: 'heading',
+      id: 'batch-consistency-and-records',
+      text: 'Make Batch Consistency Reviewable',
+    },
+    {
+      type: 'paragraph',
+      text: 'A good sample establishes a starting point. A shipment needs evidence that the agreed production checks were applied consistently. Comparable results need comparable fixtures, conditions, limits and revision control.',
+    },
+    {
+      type: 'list',
+      items: [
+        'Identify the model, hardware and firmware revisions, lot or unit, and test-plan version.',
+        'Record reception conditions and results without presenting a screening result as an absolute sensitivity measurement.',
+        'Record channel and mode coverage, output load, powered-test duration and monitored exceptions.',
+        'Keep repair history, retest outcomes and release status linked to the affected units.',
+        'Agree the test coverage and any customer-specific conditions before production.',
+      ],
+    },
+    {
+      type: 'paragraph',
+      text: 'At Dongguan Fengxian Electronics Technology Co., Ltd., this is the basis for discussing receiver-controller inspection requirements: what needs to be verified, under which conditions, and what evidence supports release. The exact method, duration and coverage should be confirmed for the selected model and order.',
+    },
+    {
+      type: 'paragraph',
+      text: 'The buyer\'s benefit is practical: fewer unexplained differences between units and clearer information when installation issues arise. Reception, functions and extended operation each contribute evidence; none substitutes for the other two.',
+    },
+    {
+      type: 'quote',
+      text: 'A controller is ready for shipment when its defined release checks are complete and exceptions are resolved with evidence.',
+    },
+  ],
   'different-codes-rf-remote-collisions': [
     {
       type: 'paragraph',

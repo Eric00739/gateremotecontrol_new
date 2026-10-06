@@ -111,6 +111,27 @@ export const popularGuides = [
 
 export const blogPosts: BlogPostMeta[] = [
   {
+    title: 'Wireless Receiver Controller Factory Tests: Sensitivity, Functions and Burn-In',
+    seoTitle: 'Wireless Receiver Controller Factory Testing Guide',
+    category: 'rf-engineering',
+    excerpt: 'Separate receiver sensitivity from production screening, verify every defined control function, and set clear powered-test and retest conditions before release.',
+    slug: 'wireless-receiver-controller-factory-testing',
+    author: 'Eric Huang',
+    publishedAt: '2026-10-06',
+    updatedAt: '2026-10-06',
+    readTime: '7 min read',
+    image: '/images/blog/wireless-receiver-controller-factory-testing/receiver-controller-test-bench.webp',
+    thumbnail: '/images/blog/wireless-receiver-controller-factory-testing/receiver-controller-test-bench-320.webp',
+    imageAlt: 'Illustration: A generic wireless receiver controller, remote and unpowered test instruments',
+    imageSrcSet: '/images/blog/wireless-receiver-controller-factory-testing/receiver-controller-test-bench-320.webp 320w, /images/blog/wireless-receiver-controller-factory-testing/receiver-controller-test-bench-640.webp 640w, /images/blog/wireless-receiver-controller-factory-testing/receiver-controller-test-bench.webp 1280w',
+    imageCaption: 'Reception, control functions and extended powered operation require separate checks.',
+    relatedSlugs: [
+      'rf-receiver-sensitivity-range-spec',
+      'same-shell-hidden-downgrade-remote-manufacturing-quality',
+      'different-codes-rf-remote-collisions',
+    ],
+  },
+  {
     title: 'Different Codes, Same Channel: Why RF Remotes Can Collide',
     seoTitle: 'RF Remote Collisions: Why Different Codes Do Not Help',
     category: 'rf-engineering',

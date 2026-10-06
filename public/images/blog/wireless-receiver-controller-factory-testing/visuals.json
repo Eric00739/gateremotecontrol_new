@@ -1,0 +1,96 @@
+{
+  "slug": "wireless-receiver-controller-factory-testing",
+  "createdAt": "2026-10-06",
+  "tool": "image_gen.imagegen (built-in)",
+  "processing": "Original 3:2 ratio preserved; sharp WebP quality 82; widths 1280, 640 and 320 px.",
+  "usage": "Generic technical illustrations, not company premises, real SKUs or evidence of tests.",
+  "assets": [
+    {
+      "id": "receiver-controller-test-bench",
+      "sourceFile": "exec-3dd1ba82-c300-4fa1-8c4e-a5ffd99182f1.png",
+      "sourceSha256": "05dc33e56386fb24510113b9b04591dbb45170898460c7b1381138a954d55a25",
+      "prompt": "Use case: photorealistic-natural. Asset type: editorial technical illustration for the existing B2B RF remote Blog. Generate ONE landscape 3:2 image, 1536x1024. Match established restrained cool-gray electronics workbench, dark navy soft background, matte gray enclosures, green PCB, diffuse natural light and realistic commercial photography. Generic fictional illustrative equipment, not a real company premises, SKU or evidence of tests. All main objects in central 75 percent with generous margins. No people, logos, readable text or numeric settings, certification marks, glowing signal beams, lit indicators, waveforms, collage or watermark. One compact wireless receiver controller in an open gray enclosure, with two plausible blue relay blocks, screw terminals, green PCB and a short black antenna, an unbranded black handheld RF remote alongside. Small unpowered bench supply and multimeter resting in background with dark screens. No wires attached to terminals. Clean modest prepared inspection bench, not a factory production line.",
+      "files": [
+        {
+          "file": "receiver-controller-test-bench.webp",
+          "width": 1280,
+          "height": 853,
+          "bytes": 90476,
+          "sha256": "f2d2e39ddd67c4358ba98196c587e31587f56ec383eac1c6ee87600263c21ad9"
+        },
+        {
+          "file": "receiver-controller-test-bench-640.webp",
+          "width": 640,
+          "height": 427,
+          "bytes": 27510,
+          "sha256": "d0f07d8e0aec6a83c0c714436eb72e73a54a3635b67628a26e4b10254f71f557"
+        },
+        {
+          "file": "receiver-controller-test-bench-320.webp",
+          "width": 320,
+          "height": 213,
+          "bytes": 9568,
+          "sha256": "689d6b01c5d7f951a0a23de326a9df994f105abda63d3c5e4ebd86760b7001b2"
+        }
+      ]
+    },
+    {
+      "id": "controlled-rf-reception-check",
+      "sourceFile": "exec-d7a37dee-5753-41af-992d-5d4ddac50c55.png",
+      "sourceSha256": "67ab9b353eb1b5a158060bba37149c33a1d3ebaa9fd3e5e4e089e4f2965798b2",
+      "prompt": "Use case: photorealistic-natural. Asset type: editorial technical illustration for the existing B2B RF remote Blog. Generate ONE landscape 3:2 image, 1536x1024. Match established restrained cool-gray electronics workbench, dark navy soft background, matte gray enclosures, green PCB, diffuse natural light and realistic commercial photography. Generic fictional illustrative equipment, not a real company premises, SKU or evidence of tests. All main objects in central 75 percent with generous margins. No people, logos, readable text or numeric settings, certification marks, glowing signal beams, lit indicators, waveforms, collage or watermark. One compact open wireless receiver controller with antenna beside a closed plain aluminum attenuator-like RF accessory and disconnected coaxial test lead with realistic connectors. Generic RF bench instrument in background, dark screen with no results or numbers. Depict equipment prepared for a controlled reception check, not an active or measured test. No inaccurate complex wiring, all leads disconnected.",
+      "files": [
+        {
+          "file": "controlled-rf-reception-check.webp",
+          "width": 1280,
+          "height": 853,
+          "bytes": 92670,
+          "sha256": "8b94449ad582fd658cdda761c2c48100a2fce713a045322ec2cfde19b5c1640f"
+        },
+        {
+          "file": "controlled-rf-reception-check-640.webp",
+          "width": 640,
+          "height": 427,
+          "bytes": 26848,
+          "sha256": "c6d2b02c6bf5456a0fae9a0629a218141ead87e39fa05dd5e4d5559446da0ba0"
+        },
+        {
+          "file": "controlled-rf-reception-check-320.webp",
+          "width": 320,
+          "height": 213,
+          "bytes": 8606,
+          "sha256": "be1a2df1ae379ee87736c1567f633518611f8437a363eb687ca5538ee7bb667b"
+        }
+      ]
+    },
+    {
+      "id": "powered-soak-preparation",
+      "sourceFile": "exec-df5cbbb1-7248-46ea-a4e3-c2e41aeb747d.png",
+      "sourceSha256": "0cf05a44b82e0d0e4d2b8f99b7dd82bd92f137d9ebf420f7a333e3e8fe8d8547",
+      "prompt": "Use case: photorealistic-natural. Asset type: editorial technical illustration for the existing B2B RF remote Blog. Generate ONE landscape 3:2 image, 1536x1024. Match established restrained cool-gray electronics workbench, dark navy soft background, matte gray enclosures, green PCB, diffuse natural light and realistic commercial photography. Generic fictional illustrative equipment, not a real company premises, SKU or evidence of tests. All main objects in central 75 percent with generous margins. No people, logos, readable text or numeric settings, certification marks, glowing signal beams, lit indicators, waveforms, collage or watermark. Three identical small wireless receiver controllers in separate open gray enclosures spaced apart on a simple ventilated gray shelf on the workbench, each with a green PCB, two blue relay blocks and screw terminals. A plain unpowered bench supply sits at side, leads coiled and disconnected. Modest setup prepared for powered-soak testing, not operating. No factory scene, no oven, no product scale claim or readings.",
+      "files": [
+        {
+          "file": "powered-soak-preparation.webp",
+          "width": 1280,
+          "height": 853,
+          "bytes": 77986,
+          "sha256": "33e29817c598849290841712ae36e27f1c27e434fbe586a509ab7d470370bc72"
+        },
+        {
+          "file": "powered-soak-preparation-640.webp",
+          "width": 640,
+          "height": 427,
+          "bytes": 27236,
+          "sha256": "fffa56e6de6a08464134422470d1ac1043bdd1808ebecbb8f0d4451527c4ac83"
+        },
+        {
+          "file": "powered-soak-preparation-320.webp",
+          "width": 320,
+          "height": 213,
+          "bytes": 9646,
+          "sha256": "73c16a317f3b24d978d69a34c21b6625442ac3fd556226eccfb445086e1e41ea"
+        }
+      ]
+    }
+  ]
+}
