@@ -1,6 +1,6 @@
 # WindChord Remote 全站更名与验收
 
-日期：2026-10-06（Asia/Shanghai）。本轮为本地实施与验证，未执行提交、推送或部署。连续性评估：CONTINUE；范围和事实来源明确。
+日期：2026-10-06（Asia/Shanghai）。本轮已提交、推送并完成 GitHub Pages 部署，业务提交 `32f1801`；发布凭证与线上复测见末尾。连续性评估：CONTINUE；范围和事实来源明确。
 
 ## 已完成
 
@@ -71,3 +71,13 @@
 修改后的六语首页与代表页面共 76 个视口组合（新增 639／640／767／1279 像素边界）通过，无溢出、品牌区重叠、Logo 加载失败或 JavaScript 运行异常。十二项导出副本测试均准确退出 1：旧品牌、错误公司、错误邮箱／WhatsApp、Organization／WebSite 缺失、重复／遗漏 URL、错误 hreflang、收录页 noindex、语言 sitemap 不一致、截断 favicon。临时副本已删除。
 
 新增文章 `dateModified`、带 alpha 通道但无透明像素的大图和显示图三个负例也准确退出 1。六语手机询盘草稿目标、Escape 焦点恢复和折叠菜单复查通过，WhatsApp 外部打开被拦截，没有发送消息。
+
+## 已发布与线上复测
+
+35 个业务／素材／记录文件已提交并推送到 `main`，提交为 [`32f1801`](https://github.com/Eric00739/gateremotecontrol_new/commit/32f180138cc64999042469e4c006eb0f9408a6d0)。[GitHub Pages 运行 37404030929](https://github.com/Eric00739/gateremotecontrol_new/actions/runs/37404030929) 的 build 与 deploy 均成功，2026-10-06 10:26（Asia/Shanghai）完成部署。
+
+正式站的 93 个 sitemap 页面及根首页均为 HTTP 200，标题、元标签、canonical／hreflang、结构化数据、H1 与验证后的导出一致；公司名称、邮箱及 WhatsApp 链接正确，无旧品牌残留。根及六语 sitemap/robots 共 14 个文件逐字节一致，83 项引用媒体（含两档 Logo、favicon 与首页视频）的 SHA-256 一致，43 条旧重定向均保留。全部 HTTP 检查失败与重试均为 0。
+
+正式六语首页和代表页面同一批 76 个视口组合复查通过，无横向溢出、页头重叠、Logo 加载失败或 JavaScript 运行异常。六语手机询盘草稿目标、Escape 焦点恢复和折叠菜单复查通过；外部 WhatsApp 打开被拦截，未发送测试询盘。英文桌面及俄语手机正式截图已审阅。
+
+本节发布记录同步只修改文档，不改变网站行为。搜索结果是否更新名称、Search Console 收录和实际转化仍由对应平台及后续数据确认。

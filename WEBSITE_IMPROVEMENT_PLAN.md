@@ -1,6 +1,6 @@
 # WindChord Remote 网站改造执行计划
 
-最新补充（2026-10-06）：已在本地完成全站 WindChord Remote 更名，正式公司名称为 Dongguan Fengxian Electronics Technology Co., Ltd.（东莞市风弦电子科技有限公司），域名、联系方式与地址保持不变。实施与验收见第 25 节；本轮尚未提交、推送或部署。下方 2026-10-05 的状态为此前批次的历史记录。
+最新状态（2026-10-06）：全站 WindChord Remote 更名及六语 sitemap/robots 修复已发布，业务提交 `32f1801` 的 GitHub Pages build/deploy 成功，正式站复查通过。正式公司名称为 Dongguan Fengxian Electronics Technology Co., Ltd.（东莞市风弦电子科技有限公司），域名、联系方式与地址保持不变。实施与发布凭证见第 25 节；下方 2026-10-05 的状态为此前批次的历史记录。
 
 状态（2026-10-05）：第一阶段与 C01–C03 已发布；SEO 提交 `91a614e` 的线上复核见第 14 节。CTA 与品牌表述见第 15 节，视频帧和整站配图见第 16–19 节，当前配图显示规则见第 20 节，已发布的采购文案与询盘优化见第 21 节。本轮工厂实拍标题、汽车遥控器、12 类场景及 42 个品牌入口已发布，验收见第 22 节。本地验证与发布凭证分别记录，不沿用旧版本分数。B04、B05、B08、B09 与 C04 等待真实资料或决策。
 
@@ -1026,3 +1026,11 @@ lint、TypeScript 与静态构建通过，216 个页面、276 个导出 HTML、9
 校验新增首页 Organization／WebSite 必须存在、统一实体 ID、真实透明像素、ICO 目录和帧边界及解码检查。`npm run lint`、`npm run build` 通过，76 个页面／视口组合与六语手机询盘复查通过；十二项临时副本破坏测试全部准确拒绝，新增文章修改日期、伪透明大图及伪透明显示图的三个负例也被拒绝。
 
 另一聊天的新文章 `wireless-receiver-controller-factory-testing` 已单独提交 `b33df15`，本轮不编辑其正文、日期或图片。最终整合构建：237 个静态生成入口、297 个 HTML、93 条 sitemap URL、43 条重定向、146 项引用媒体、230 个公共品牌页面。具体改动和验证见 `BRAND_UPDATE_REVIEW.md`；发布凭证在完成后追加。
+
+### 已发布与线上复测
+
+业务提交 [`32f1801`](https://github.com/Eric00739/gateremotecontrol_new/commit/32f180138cc64999042469e4c006eb0f9408a6d0) 已推送到 `main`，[Pages 运行 37404030929](https://github.com/Eric00739/gateremotecontrol_new/actions/runs/37404030929) 的 build/deploy 均成功，2026-10-06 10:26（Asia/Shanghai）完成部署。
+
+正式站 93 个 sitemap 页面及根首页均返回 200，元标签、canonical／hreflang、结构化数据与 H1 和本地一致；14 个根／六语 sitemap/robots 逐字节一致，83 项引用媒体 SHA-256 一致，43 条旧 URL 重定向正常，重试为 0。正式六语与代表页面 76 组视口、六语手机询盘目标／焦点恢复／折叠菜单复查通过，Logo 与公司名称正常，外部动作被拦截，未发送测试询盘。
+
+本批共 35 个发布文件，临时浏览器日志、截图和测试副本未进入提交。发布凭证同步只修改文档；详细文件清单与证据见 `BRAND_UPDATE_REVIEW.md`。Search Console 仍提交 `https://www.gateremotesource.com/sitemap.xml`；邮箱保持 `sales@gateremotesource.com`。

@@ -1,10 +1,10 @@
 # SEO 检查与 sitemap 更新
 
-检查日期：2026-10-06（Asia/Shanghai）。仓库为 `Eric00739/gateremotecontrol_new`，检查基线 `24da47b` 与 GitHub `main` 一致。本轮修改仅在本地，尚未提交、推送或部署。
+检查日期：2026-10-06（Asia/Shanghai）。仓库为 `Eric00739/gateremotecontrol_new`，首次检查基线为 `24da47b`。本轮 sitemap 修复随整站更名提交 `32f1801` 已发布，线上复查通过，凭证见末尾。
 
-最新本地状态：后续全站更名为 WindChord Remote 已完成，公司英文／中文名称已确认；验收见 [BRAND_UPDATE_REVIEW.md](BRAND_UPDATE_REVIEW.md)。同一工作区先后新增 `different-codes-rf-remote-collisions`、`wireless-receiver-controller-factory-testing`，上传前整合构建包含 93 条 sitemap URL（72 个主要页面和 21 篇英文文章）。下方 90／91 条检查结果记录各自阶段，未据此声称最新版本已上线。
+最终发布状态：全站品牌为 WindChord Remote，公司英文／中文名称已确认；验收见 [BRAND_UPDATE_REVIEW.md](BRAND_UPDATE_REVIEW.md)。同一工作区先后新增 `different-codes-rf-remote-collisions`、`wireless-receiver-controller-factory-testing`，正式根 sitemap 共 93 条 URL（72 个主要页面和 21 篇英文文章）。下方 90／91 条检查结果记录各自历史阶段。
 
-## 结论
+## 首次检查结论（发布前）
 
 根目录 sitemap 已存在，覆盖 72 个六语主要页面和 18 篇英文文章，共 90 个规范 URL。线上全部返回 HTTP 200；canonical、HTML/XML hreflang、页面语言、单一 H1、图片 alt 及标题/摘要去重检查通过。根 robots.txt 允许抓取并声明正确的 sitemap。
 
@@ -24,10 +24,10 @@ sitemap 修复阶段收尾时，同一工作区的聊天“翻译并发布遥控
 
 | 优先级 | 项目 | 下一步 |
 | --- | --- | --- |
-| P0 | 发布本轮静态文件修复 | 经所有者授权更新 GitHub；等待 Pages 部署成功，再复核根及六语 sitemap |
+| 已完成 | 发布本轮静态文件修复 | `32f1801` 部署成功，根及六语 sitemap/robots 线上复查通过 |
 | P1 | Search Console 收录与搜索表现 | 提交或检查根 sitemap 的读取状态；查看未收录原因、Google 选择的 canonical、实际搜索词和目标市场表现 |
 | P1 | 真实产品详情 | 按执行计划 D4/B05，先准备 3–5 个真实系列：编号、频率、协议、适用接收器、图片及确认过的商业条件，再建立详情页 |
-| P1 | 公司与作者身份 | 公司名称与品牌已落实，待发布；按 D1/D5/B04 补可公开核验的工厂关系、联系人、完整地址和审核过的法律文本，再扩充 About/Contact |
+| P1 | 公司与作者身份 | 公司名称与品牌已发布；按 D1/D5/B04 补可公开核验的工厂关系、联系人、完整地址和审核过的法律文本，再扩充 About/Contact |
 | P2 | 标题长度 | 16 页标题超过本次检查线索 65 字符，其中 14 篇文章、2 个法语品牌页；下一轮可精简文章品牌后缀或冗余词，保留主题与型号 |
 | P2 | 博客目录摘要 | 意大利语、葡萄牙语、西班牙语、俄语、法语目录的摘要为 174–203 字符；可压缩重复说明，并保持搜索与社交摘要同源 |
 | P2 | 尾斜杠旧链接 | `/en/` 当前返回 404；规范入口 `/en` 正常。先从 Search Console 或真实外链确认是否还有这类旧地址，再按现有静态重定向方式补具体路径 |
@@ -70,3 +70,11 @@ Google 使用可信的实际修改日期，并忽略 sitemap 的 `priority` 和 
 - `package.json`
 - `README.md`
 - `SEO_REVIEW.md`
+
+## 已发布与线上复测
+
+业务提交 [`32f1801`](https://github.com/Eric00739/gateremotecontrol_new/commit/32f180138cc64999042469e4c006eb0f9408a6d0) 已发布，[Pages 运行 37404030929](https://github.com/Eric00739/gateremotecontrol_new/actions/runs/37404030929) 的 build/deploy 成功，于 2026-10-06 10:26（Asia/Shanghai）完成部署。
+
+93 个 sitemap URL 和根首页均为 200；元数据、canonical／hreflang、结构化数据和 H1 与本地一致。根及六语 sitemap/robots 共 14 个文件逐字节一致，原文章日期策略及未翻译文章 noindex/canonical 策略保留；43 条旧 URL 重定向正常。83 项引用媒体校验和一致，HTTP 重试为 0。正式页面与询盘复测见更名验收记录。
+
+本次没有替所有者登录 Search Console 或提交表单；提交入口仍为 `https://www.gateremotesource.com/sitemap.xml`。正式文件可正常读取，不等于 Google 已完成抓取或收录。
