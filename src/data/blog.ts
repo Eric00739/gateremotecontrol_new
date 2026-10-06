@@ -111,6 +111,28 @@ export const popularGuides = [
 
 export const blogPosts: BlogPostMeta[] = [
   {
+    title: 'RF Remote Buttons Not Working: Check the Battery, Buttons and MCU',
+    seoTitle: 'RF Remote Buttons Not Working: Troubleshooting Order',
+    category: 'troubleshooting',
+    excerpt:
+      'Trace a missed command from battery voltage under load through button contacts, MCU operation and the RF link before replacing parts.',
+    slug: 'rf-remote-buttons-not-working',
+    author: 'Eric Huang',
+    publishedAt: '2026-10-06',
+    updatedAt: '2026-10-06',
+    readTime: '10 min read',
+    image: '/images/blog/rf-remote-buttons-not-working/battery-and-signal-chain.webp',
+    thumbnail: '/images/blog/rf-remote-buttons-not-working/battery-and-signal-chain-320.webp',
+    imageAlt: 'Illustration: An opened RF remote, coin cell, meter and separate receiver board on a workbench',
+    imageSrcSet: '/images/blog/rf-remote-buttons-not-working/battery-and-signal-chain-320.webp 320w, /images/blog/rf-remote-buttons-not-working/battery-and-signal-chain-640.webp 640w, /images/blog/rf-remote-buttons-not-working/battery-and-signal-chain.webp 1280w',
+    imageCaption: 'The battery, button assembly, control electronics and receiver are separate points to check.',
+    relatedSlugs: [
+      'cr2032-rf-remote-battery-life',
+      '433mhz-remote-short-range-diagnostics',
+      'third-party-rf-remote-brand-receiver-pairing',
+    ],
+  },
+  {
     title: 'Comparing Gate Remotes with the Same Housing',
     seoTitle: 'Gate Remote Quality: What to Verify',
     category: 'oem-odm',

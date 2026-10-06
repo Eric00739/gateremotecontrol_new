@@ -16,7 +16,7 @@ const pageUpdatedAt: Partial<Record<string, string>> = {
   '/oem-odm': '2026-10-04',
   '/factory-quality': '2026-10-05',
   '/request-catalog': '2026-10-05',
-  '/blog': '2026-10-05',
+  '/blog': '2026-10-06',
 };
 
 export function pageLastModified(path: string): string | undefined {

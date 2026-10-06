@@ -1,0 +1,79 @@
+{
+  "slug": "rf-remote-buttons-not-working",
+  "createdAt": "2026-10-06",
+  "tool": "image_gen.imagegen (built-in)",
+  "usage": "Generic technical illustrations; no claim of real product specifications, company premises or measured results.",
+  "assets": [
+    {
+      "id": "battery-and-signal-chain",
+      "sourceFile": "exec-eb882437-336c-4b25-a39b-329884721add.png",
+      "prompt": "Use case: photorealistic-natural. Asset type: technical editorial illustration for the established GateRemoteSource B2B RF blog. Create ONE landscape image, 3:2 aspect ratio, 1536x1024. Restrained documentary commercial photography: cool gray textured electronics workbench, subtle dark navy background, soft diffuse window light, natural shadows, believable scale, matte black ABS and green PCB textures, no glossy CGI. All primary objects fully visible within center 75%, ample margins for cropping. Fictional educational illustration, no company premises or product identity. No people, logos, readable markings, text overlay, borders, collage, watermarks, measurement results, glowing circuitry or radio beams. Subject: A neatly disassembled compact four-button RF gate remote, top housing and its small green PCB laid side by side, one plain silver coin cell and battery cover nearby. A separate small unbranded receiver board placed farther back. A handheld digital multimeter behind them with its screen blank and powered off; red and black insulated probes resting on the bench, tips separated and not touching circuitry. Remote PCB shows realistic small tactile switches, a small MCU package and a printed antenna trace. This still life introduces power, buttons, control electronics and receiver as separate troubleshooting stages.",
+      "files": [
+        {
+          "file": "battery-and-signal-chain-320.webp",
+          "bytes": 13260,
+          "sha256": "81ba5b99f4dec2d22136f8c753ad6fe430cbe46af7fb4c205193740bda0a8b99"
+        },
+        {
+          "file": "battery-and-signal-chain-640.webp",
+          "bytes": 44528,
+          "sha256": "789c6b16a38c257ad1567de0b3936a83acc12d9a09058086369847cba97502a1"
+        },
+        {
+          "file": "battery-and-signal-chain.webp",
+          "bytes": 152940,
+          "sha256": "7b445724c523ebe97e5d2591f3ec0e136ccbd2f68ce8a6c508ea5db2d92a019f"
+        }
+      ]
+    },
+    {
+      "id": "loaded-battery-check",
+      "sourceFile": "exec-294c544e-95de-423c-8039-d663acf86cde.png",
+      "prompt": "Use case: photorealistic-natural. Asset type: technical editorial illustration for the established GateRemoteSource B2B RF blog. Create ONE landscape image, 3:2 aspect ratio, 1536x1024. Restrained documentary commercial photography: cool gray textured electronics workbench, subtle dark navy background, soft diffuse window light, natural shadows, believable scale, matte black ABS and green PCB textures, no glossy CGI. All primary objects fully visible within center 75%, ample margins for cropping. Fictional educational illustration, no company premises or product identity. No people, logos, readable markings, text overlay, borders, collage, watermarks, measurement results, glowing circuitry or radio beams. Subject: Close editorial photograph of a compact open RF remote with a correctly seated plain silver coin cell in its holder, the detached battery cover beside it. A blank-screen handheld digital multimeter and a dark-screen small oscilloscope sit in the background. Two red and black insulated test probes rest on the worktop, disconnected from any board, with metal tips separated. Focus on battery holder spring contacts and clean realistic PCB assembly. This prepares a comparison of idle voltage and voltage during transmission, but depicts no live measurement, values or waveforms.",
+      "files": [
+        {
+          "file": "loaded-battery-check-320.webp",
+          "bytes": 12596,
+          "sha256": "2c7bd7743e582c2d2fa2f13c17052138010f29d9e691ddd4d022cab1c94b4a2d"
+        },
+        {
+          "file": "loaded-battery-check-640.webp",
+          "bytes": 40444,
+          "sha256": "4bd369aa7c4aa0019e2e34dc26216f6f220fdff85e265ba4a36e8aacd5efde5e"
+        },
+        {
+          "file": "loaded-battery-check.webp",
+          "bytes": 122354,
+          "sha256": "70629f4de6f82b87c51fc583579c9b553102564bfe4b6a9d49a3756ebd869392"
+        }
+      ]
+    },
+    {
+      "id": "button-contact-inspection",
+      "sourceFile": "exec-75972e76-9471-4f56-ae4d-d6b4e684851a.png",
+      "prompt": "Use case: photorealistic-natural. Asset type: technical editorial illustration for the established GateRemoteSource B2B RF blog. Create ONE landscape image, 3:2 aspect ratio, 1536x1024. Restrained documentary commercial photography: cool gray textured electronics workbench, subtle dark navy background, soft diffuse window light, natural shadows, believable scale, matte black ABS and green PCB textures, no glossy CGI. All primary objects fully visible within center 75%, ample margins for cropping. Fictional educational illustration, no company premises or product identity. No people, logos, readable markings, text overlay, borders, collage, watermarks, measurement results, glowing circuitry or radio beams. Subject: Macro still-life of a compact four-button remote opened for inspection: its gray silicone four-key membrane lies face down with four distinct black carbon contact pills clearly visible. Next to it, a small green PCB has four paired interdigitated dark contact pads aligned with the membrane and one small MCU package. The black housing front sits behind, with four button openings. An unconnected multimeter probe and a small white dry cotton swab rest alongside. Plausible simple keypad construction and correct relative scale; no cleaning liquid, corrosion claim, measurements or equipment branding.",
+      "files": [
+        {
+          "file": "button-contact-inspection-320.webp",
+          "bytes": 10846,
+          "sha256": "df030ea204a8b0f120fbf1969cfdd53be717c952cd83ba28287d73b502deb92d"
+        },
+        {
+          "file": "button-contact-inspection-640.webp",
+          "bytes": 36088,
+          "sha256": "ce312d96144c62119f027e2f65a05cac15d28409cec1ae9e98b75567f7cb6207"
+        },
+        {
+          "file": "button-contact-inspection.webp",
+          "bytes": 123392,
+          "sha256": "9204af506e720607d916e097d09d24d182c1f4aee5b7585744749f1acb6af284"
+        }
+      ]
+    }
+  ],
+  "companyName": {
+    "providedChinese": "东莞市风弦电子科技有限公司",
+    "translatedEnglish": "Dongguan Fengxian Electronics Technology Co., Ltd."
+  },
+  "processing": "Original 3:2 composition preserved; resized without enlargement and converted with sharp at WebP quality 82 to 1280, 640 and 320 px."
+}
