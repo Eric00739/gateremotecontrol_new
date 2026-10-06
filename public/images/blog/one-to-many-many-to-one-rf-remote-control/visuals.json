@@ -1,0 +1,67 @@
+{
+  "slug": "one-to-many-many-to-one-rf-remote-control",
+  "createdAt": "2026-10-06",
+  "tool": "image_gen.imagegen (built-in)",
+  "processing": "Original 16:9 ratio preserved; sharp WebP quality 82; widths 1280, 640 and 320 px.",
+  "usage": "Generic technical illustrations, not company premises, real SKUs or installation evidence.",
+  "assets": [
+    {
+      "id": "one-remote-many-receivers",
+      "sourceFile": "exec-f5a8b25a-b58c-4640-a29a-85c45c7f52e7.png",
+      "sourceSha256": "39ad1949513c926d44f9e50e379bc883675c7338d1b32571954229c18ce582b3",
+      "files": [
+        {
+          "file": "one-remote-many-receivers.webp",
+          "width": 1280,
+          "height": 720,
+          "bytes": 93786,
+          "sha256": "19a6cf6a21163fe05342c3eadbd3bf80b3e6a47b2ac4be1fa3f17cdea34b8022"
+        },
+        {
+          "file": "one-remote-many-receivers-640.webp",
+          "width": 640,
+          "height": 360,
+          "bytes": 30046,
+          "sha256": "7d03c80ac54f737f5469366641f02a0a234bc0ac57fcb5e1258066d2c31535b3"
+        },
+        {
+          "file": "one-remote-many-receivers-320.webp",
+          "width": 320,
+          "height": 180,
+          "bytes": 8898,
+          "sha256": "f47d63ccc76822a6f3853f6a4abd685be0717ac47c511cb9c38dd57e3cd91c89"
+        }
+      ],
+      "prompt": "Use case: photorealistic-natural. Asset type: technical editorial illustration for an RF remote-control blog. Generate ONE landscape 16:9 image, 1536x864. Subject: one generic black four-button handheld RF remote in the foreground and three separate small wireless receiver controllers in open matte gray enclosures arranged behind it; each controller has a plausible green PCB, two blue relay blocks, screw terminals and a short black antenna. Scene: restrained cool-gray electronics workbench, soft dark navy background. Diffuse natural studio light, realistic commercial photography texture, modest clear composition with all objects inside central 80 percent and generous margins. Illustrative fictional equipment, not actual company products or factory evidence. Controllers unpowered and disconnected, no operating machinery. No people, logos, readable text, numbers, glowing signal beams, active indicators, measurements, watermark, collage or split panels."
+    },
+    {
+      "id": "many-remotes-one-receiver",
+      "sourceFile": "exec-b6db42cd-86fb-4b52-9015-b4b4bfd726b1.png",
+      "sourceSha256": "329eac58d6949de304f9c4d197db7515f0a43d2d17fa9a517683d18575d5cf90",
+      "files": [
+        {
+          "file": "many-remotes-one-receiver.webp",
+          "width": 1280,
+          "height": 720,
+          "bytes": 78672,
+          "sha256": "79c7d44bd70c837ec54ce5c4bf51454ff291d4022f1d5588dff51cedd43a77a8"
+        },
+        {
+          "file": "many-remotes-one-receiver-640.webp",
+          "width": 640,
+          "height": 360,
+          "bytes": 22504,
+          "sha256": "fbb4a24bb36ae0601898c3bac1ed243cfb0fdf88f2d13cc994b9d930d9211491"
+        },
+        {
+          "file": "many-remotes-one-receiver-320.webp",
+          "width": 320,
+          "height": 180,
+          "bytes": 7296,
+          "sha256": "fc6042ef1af532a40531e0e1462aceb505f9da3baa4faf1d6c6633c007ce4ccf"
+        }
+      ],
+      "prompt": "Use case: photorealistic-natural. Asset type: technical editorial illustration for an RF remote-control blog. Generate ONE landscape 16:9 image, 1536x864. Subject: three distinct generic black handheld RF remotes arranged across foreground, and ONE compact wireless receiver controller in an open matte gray enclosure at rear center. Receiver has plausible green PCB, two blue relay blocks, screw terminals and a short black antenna. The remotes have slightly different plain housings and two or four buttons, no labels. Scene: restrained cool-gray electronics workbench and soft dark navy background. Diffuse natural studio light, realistic commercial photography texture, modest clean composition with objects within central 80 percent, generous margins. Fictional illustrative equipment, not actual company products or factory evidence. All devices unpowered and disconnected. No people, logos, readable text, numbers, glowing beams, lit indicators, measurements, watermark, collage or split panels."
+    }
+  ]
+}

@@ -111,6 +111,26 @@ export const popularGuides = [
 
 export const blogPosts: BlogPostMeta[] = [
   {
+    title: 'One Remote, Many Doors: How Shared RF Control Works',
+    seoTitle: 'One-to-Many and Many-to-One RF Remote Control',
+    category: 'rf-engineering',
+    excerpt: 'Understand how receivers recognize enrolled remotes, map buttons to groups, and manage shared access without confusing capacity with radio reliability.',
+    slug: 'one-to-many-many-to-one-rf-remote-control',
+    author: 'Eric Huang',
+    publishedAt: '2026-10-06',
+    readTime: '7 min read',
+    image: '/images/blog/one-to-many-many-to-one-rf-remote-control/one-remote-many-receivers.webp',
+    thumbnail: '/images/blog/one-to-many-many-to-one-rf-remote-control/one-remote-many-receivers-320.webp',
+    imageAlt: 'Illustration: One four-button RF remote beside three separate receiver controllers on a workbench',
+    imageSrcSet: '/images/blog/one-to-many-many-to-one-rf-remote-control/one-remote-many-receivers-320.webp 320w, /images/blog/one-to-many-many-to-one-rf-remote-control/one-remote-many-receivers-640.webp 640w, /images/blog/one-to-many-many-to-one-rf-remote-control/one-remote-many-receivers.webp 1280w',
+    imageCaption: 'One transmitter can be enrolled in several compatible receivers.',
+    relatedSlugs: [
+      'different-codes-rf-remote-collisions',
+      'third-party-rf-remote-brand-receiver-pairing',
+      '433mhz-remote-short-range-diagnostics',
+    ],
+  },
+  {
     title: 'Wireless Receiver Controller Factory Tests: Sensitivity, Functions and Burn-In',
     seoTitle: 'Wireless Receiver Controller Factory Testing Guide',
     category: 'rf-engineering',
