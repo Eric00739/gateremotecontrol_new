@@ -111,6 +111,26 @@ export const popularGuides = [
 
 export const blogPosts: BlogPostMeta[] = [
   {
+    title: '10 Parameters to Confirm Before Choosing an RF Receiver Module',
+    seoTitle: 'RF Receiver Module Selection: 10 Parameters to Check',
+    category: 'buyer-checklist',
+    excerpt: 'Compare receiver specifications under matching test conditions, then check the antenna, power supply, protocol and production requirements of the finished product.',
+    slug: 'rf-receiver-module-selection-parameters',
+    author: 'Eric Huang',
+    publishedAt: '2026-10-06',
+    readTime: '9 min read',
+    image: '/images/blog/rf-receiver-module-selection-parameters/receiver-selection.webp',
+    thumbnail: '/images/blog/rf-receiver-module-selection-parameters/receiver-selection-320.webp',
+    imageAlt: 'Illustration: Two generic RF receiver modules, a remote and a disconnected antenna on a gray workbench',
+    imageSrcSet: '/images/blog/rf-receiver-module-selection-parameters/receiver-selection-320.webp 320w, /images/blog/rf-receiver-module-selection-parameters/receiver-selection-640.webp 640w, /images/blog/rf-receiver-module-selection-parameters/receiver-selection.webp 1280w',
+    imageCaption: 'Compare the complete configuration rather than one headline specification.',
+    relatedSlugs: [
+      'rf-receiver-sensitivity-range-spec',
+      'wireless-receiver-controller-factory-testing',
+      'rf-remote-control-concurrency-anti-collision',
+    ],
+  },
+  {
     title: 'New to RF Remotes? Start with the System, Not the Frequency',
     seoTitle: 'RF Remote Compatibility, Coding and Pairing: A Beginner Guide',
     category: 'compatibility',

@@ -1,0 +1,71 @@
+{
+  "slug": "rf-receiver-module-selection-parameters",
+  "createdAt": "2026-10-06",
+  "tool": "image_gen.imagegen (built-in)",
+  "processing": "Original aspect ratio preserved; sharp WebP quality 82; widths 1280, 640 and 320 px.",
+  "usage": "Generic technical illustrations, not company premises, real SKUs, certifications or test evidence.",
+  "assets": [
+    {
+      "id": "receiver-selection",
+      "sourceFile": "exec-f63e48a9-04fe-4261-a313-62739decf13f.png",
+      "sourceWidth": 1672,
+      "sourceHeight": 941,
+      "sourceSha256": "04755f76b36a6432fac6a20ea8c313455caea7cb50b1ce1d6309133d7a6e11f9",
+      "prompt": "Use case: product-mockup. Asset type: technical editorial blog illustration. Generate one wide 16:9 photographic-style illustration matching understated electronics workbench imagery. Two generic compact RF receiver modules on green PCBs laid separately on a matte cool gray workbench, a small black RF keyfob beside them, and a disconnected short black whip antenna lying separately. Plausible shielded radio electronics and pin headers, generic unbranded fictional components. Soft dark navy background, diffuse natural studio lighting, realistic plastic, metal and PCB texture, generous breathing room, slightly elevated three-quarter view, all objects fully inside central 80 percent. Clean, restrained product comparison mood. Not a real company facility, real SKU, certification evidence or measurement. No people, logos, readable text, numbers, diagrams, labels, arrows, glowing signal beams, meters, operating machinery or watermark. Output 16:9.",
+      "files": [
+        {
+          "file": "receiver-selection.webp",
+          "width": 1280,
+          "height": 720,
+          "bytes": 98178,
+          "sha256": "3b20ade6e3662438255ae026affe112416fee35f277cdc25e8ce2775986af346"
+        },
+        {
+          "file": "receiver-selection-640.webp",
+          "width": 640,
+          "height": 360,
+          "bytes": 27128,
+          "sha256": "41ef449b360c3483165604056fd4820fbdabd90cc3d99253e238269618386bbd"
+        },
+        {
+          "file": "receiver-selection-320.webp",
+          "width": 320,
+          "height": 180,
+          "bytes": 6954,
+          "sha256": "dc7abdd1f7da74d70265d188821b9fb40d438c5cc55f5f393ac7c15987b6c162"
+        }
+      ]
+    },
+    {
+      "id": "antenna-integration",
+      "sourceFile": "exec-bf2fde93-d3c5-4c36-9507-e4896b97bf44.png",
+      "sourceWidth": 1672,
+      "sourceHeight": 941,
+      "sourceSha256": "d947bca05d465ef72a9704f2ad66b7dd1ce945cff08f7a5a187e5ef1bbad123d",
+      "prompt": "Use case: product-mockup. Asset type: RF receiver integration editorial illustration. Generate one wide 16:9 photographic-style illustration. On an understated matte cool-gray electronics workbench, arrange one small generic unbranded green RF receiver module with a metal shield and pin header, one short disconnected black whip antenna, and one open empty light-gray plastic enclosure with its removable lid neatly beside it. Everything separate and unpowered; an integration planning still life rather than an operating installation. Slightly elevated three-quarter view, realistic plastic and PCB textures, soft diffuse natural studio lighting, subdued dark navy background, generous margins with all objects inside central 80 percent. Match a clean technical RF remote-control blog's existing workbench imagery. No person, logo, readable text, labels, numbers, diagrams, arrows, gauges, cables attached to live circuits, glowing beams, factory scene or watermark. Generic fictional equipment, not an actual SKU or test evidence. Output 16:9.",
+      "files": [
+        {
+          "file": "antenna-integration.webp",
+          "width": 1280,
+          "height": 720,
+          "bytes": 76542,
+          "sha256": "fe24796526308135bc800b3b61532791153e8638bc1f54b3208697717202a6df"
+        },
+        {
+          "file": "antenna-integration-640.webp",
+          "width": 640,
+          "height": 360,
+          "bytes": 20478,
+          "sha256": "9cc502140eeae84dbdec7d1cef27342a5e0ad3596749fa2459824035d964aa90"
+        },
+        {
+          "file": "antenna-integration-320.webp",
+          "width": 320,
+          "height": 180,
+          "bytes": 5498,
+          "sha256": "08696e3d07fa4efa4fab918c8ca785e4098f577f6fcd889a1b7e4fd67d6ea3ed"
+        }
+      ]
+    }
+  ]
+}
