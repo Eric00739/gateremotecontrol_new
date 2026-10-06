@@ -3,7 +3,7 @@ import type { ReactNode } from 'react';
 import Image from 'next/image';
 import ImageSourceLabel from '@/components/ImageSourceLabel';
 import Link from 'next/link';
-import { ArrowLeft, ArrowRight, ChevronDown, Clock, ListChecks, MessageSquare } from 'lucide-react';
+import { ArrowLeft, ArrowRight, CalendarDays, ChevronDown, Clock, ListChecks, MessageSquare } from 'lucide-react';
 import { blogCategories, blogPosts, type BlogInlineLink, type BlogPostContentBlock, type BlogPostMeta } from '@/data/blog';
 import { assertBlogContentIntegrity, getBlogPost, type BlogPost } from '@/data/blog-content';
 import { notFound } from 'next/navigation';
@@ -33,6 +33,19 @@ function slugifyHeading(text: string) {
     .toLowerCase()
     .replace(/[^a-z0-9]+/g, '-')
     .replace(/^-+|-+$/g, '');
+}
+
+function formatPublishedDate(date?: string) {
+  if (!date) return null;
+  const parsed = new Date(`${date}T00:00:00.000Z`);
+  if (Number.isNaN(parsed.getTime())) return null;
+
+  return new Intl.DateTimeFormat('en', {
+    year: 'numeric',
+    month: 'long',
+    day: '2-digit',
+    timeZone: 'UTC',
+  }).format(parsed);
 }
 
 type ArticleSection = {
@@ -465,6 +478,7 @@ export default async function BlogPostPage({
       ? 'quote'
       : 'compatibility';
   const articleSections = buildArticleSections(post.content);
+  const publishedDateLabel = formatPublishedDate(post.publishedAt);
   const headingIdsByIndex = new Map(articleSections.map((section) => [section.blockIndex, section.id]));
   const isDefaultLocaleArticle = locale === defaultLocale;
   const articleJsonLd = blogPostingJsonLd({ post, locale: defaultLocale, categoryLabel });
@@ -511,6 +525,12 @@ export default async function BlogPostPage({
             </h1>
             <div className="mt-4 flex flex-wrap items-center gap-x-4 gap-y-2 text-xs text-[#9FB4CC] sm:text-sm">
               {post.author && <span>{post.author}</span>}
+              {publishedDateLabel && (
+                <time data-blog-published dateTime={post.publishedAt} className="inline-flex items-center gap-1.5">
+                  <CalendarDays className="h-4 w-4" aria-hidden="true" />
+                  {publishedDateLabel}
+                </time>
+              )}
               {post.readTime && (
                 <span className="inline-flex items-center gap-1.5">
                   <Clock className="h-4 w-4" />

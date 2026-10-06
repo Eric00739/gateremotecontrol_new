@@ -316,7 +316,25 @@ for (const name of ['generated-visuals', 'blog', 'blog-content']) {
 }
 const articleData = articleModules.get('blog-content');
 articleData.assertBlogContentIntegrity();
+function verifyPublishedDate(html, post, route) {
+  const date = post.publishedAt;
+  const parsed = new Date(`${date}T00:00:00.000Z`);
+  if (!/^\d{4}-\d{2}-\d{2}$/.test(date ?? '') || Number.isNaN(parsed.getTime()) || parsed.toISOString().slice(0, 10) !== date) {
+    problems.push(`Article publication date missing or invalid: ${post.slug}`);
+    return;
+  }
+  const header = html.match(/<section\b[^>]*>(?:(?!<\/section>)[\s\S])*<h1\b(?:(?!<\/section>)[\s\S])*<\/section>/)?.[0] ?? '';
+  const times = [...header.matchAll(/<time\b([^>]*)>([\s\S]*?)<\/time>/g)]
+    .filter((match) => 'data-blog-published' in attributes(match[1]));
+  const text = times.length === 1 ? visibleText(times[0][2]) : '';
+  if (times.length !== 1 || attributes(times[0][1]).datetime !== date ||
+      !text || Date.parse(`${text} UTC`) !== parsed.getTime()) {
+    problems.push(`Article header publication date missing or mismatched: ${route}`);
+  }
+}
+
 for (const post of articleData.getAllBlogPosts()) {
+  verifyPublishedDate((await readTextIfExists(pathToHtmlFile(`/blog/${post.slug}`))) ?? '', post, `/blog/${post.slug}`);
   const headings = post.content.filter((block) => block.type === 'heading');
   const anchorIds = headings.map((block) => block.id);
   if (anchorIds.some((id) => !id || !/^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(id)) || new Set(anchorIds).size !== anchorIds.length) {
@@ -338,6 +356,7 @@ for (const post of articleData.getAllBlogPosts()) {
   }
   for (const locale of supportedLocales) {
     const articleHtml = (await readTextIfExists(pathToHtmlFile(`/${locale}/blog/${post.slug}`))) ?? '';
+    verifyPublishedDate(articleHtml, post, `/${locale}/blog/${post.slug}`);
     const canonicalUrl = `${siteUrl}/en/blog/${post.slug}`;
     if (articleHtml.match(/<link rel="canonical" href="([^"]*)"/)?.[1] !== canonicalUrl ||
         (locale !== 'en' && (!hasNoindex(articleHtml) || sitemapUrlSet.has(`${siteUrl}/${locale}/blog/${post.slug}`)))) {
