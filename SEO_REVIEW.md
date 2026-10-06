@@ -12,7 +12,7 @@
 
 sitemap 修复阶段收尾时，同一工作区的聊天“翻译并发布遥控器故障排查文章”新增 `rf-remote-buttons-not-working`。该阶段本地构建已自动收录该篇，共 91 个 URL（72 个主要页面和 19 篇英文文章）。本轮没有编辑该文章或图片；线上检查的 90 个 URL 与本地数量分别记录，不混作同一版本。
 
-## 本地修改
+## sitemap 修复实施（发布前阶段）
 
 - 两个 sitemap 路由使用 `src/lib/sitemap.ts`，后续新增页面只维护一份生成逻辑。
 - 构建后通过 `scripts/generate-static-metadata.mjs` 生成六种语言的 `sitemap.xml` 和 `robots.txt`。语言 sitemap 与根文件完全一致，保留既有路径设计；根 robots.txt 不变。
@@ -28,9 +28,9 @@ sitemap 修复阶段收尾时，同一工作区的聊天“翻译并发布遥控
 | P1 | Search Console 收录与搜索表现 | 提交或检查根 sitemap 的读取状态；查看未收录原因、Google 选择的 canonical、实际搜索词和目标市场表现 |
 | P1 | 真实产品详情 | 按执行计划 D4/B05，先准备 3–5 个真实系列：编号、频率、协议、适用接收器、图片及确认过的商业条件，再建立详情页 |
 | P1 | 公司与作者身份 | 公司名称与品牌已发布；按 D1/D5/B04 补可公开核验的工厂关系、联系人、完整地址和审核过的法律文本，再扩充 About/Contact |
-| P2 | 标题长度 | 16 页标题超过本次检查线索 65 字符，其中 14 篇文章、2 个法语品牌页；下一轮可精简文章品牌后缀或冗余词，保留主题与型号 |
-| P2 | 博客目录摘要 | 意大利语、葡萄牙语、西班牙语、俄语、法语目录的摘要为 174–203 字符；可压缩重复说明，并保持搜索与社交摘要同源 |
-| P2 | 尾斜杠旧链接 | `/en/` 当前返回 404；规范入口 `/en` 正常。先从 Search Console 或真实外链确认是否还有这类旧地址，再按现有静态重定向方式补具体路径 |
+| P2 | 标题长度 | 首次检查旧品牌版本有 16 页超过 65 字符线索；更名后需重新测量，不能沿用旧计数。后续保留主题与型号，按实际展示评估冗余词 |
+| P2 | 博客目录摘要 | 首次检查的五种非英文目录摘要为 174–203 字符，是历史测量。后续复核当前摘要，压缩重复说明并保持搜索与社交摘要同源 |
+| P2 | 尾斜杠旧链接 | 首次检查 `/en/` 返回 404，规范 `/en` 正常。先从 Search Console 或真实外链确认需求，并重新核对正式响应，再补具体重定向；本轮未做迁移 |
 | P2 | 多语言文章 | 当前正文只有英文；非英文文章入口保留 `noindex,follow` 并 canonical 到英文。完整翻译及审核前不加入 sitemap 或文章 hreflang |
 | P2 | 性能与搜索结果展示 | 发布后测代表页面的移动性能，并用 Rich Results Test 检查文章；本次未运行新的 Lighthouse 或取得 Search Console 数据 |
 
@@ -38,7 +38,7 @@ sitemap 修复阶段收尾时，同一工作区的聊天“翻译并发布遥控
 
 本轮保留已完成的博客事实修订和六语目录工作，不重复执行历史批次。资料依赖与实施边界仍以 `WEBSITE_IMPROVEMENT_PLAN.md` 为准。
 
-## 验证与边界
+## sitemap 修复阶段验收（历史）
 
 `npm run lint` 和 `npm run build` 均通过。新增文章后的最后一次构建验证包含 223 个静态页面、283 个 HTML、91 条 sitemap URL、六语 sitemap/robots、43 条旧重定向、127 项引用媒体，以及既有词典、FAQ 和文章检查。
 
@@ -73,8 +73,6 @@ Google 使用可信的实际修改日期，并忽略 sitemap 的 `priority` 和 
 
 ## 已发布与线上复测
 
-业务提交 [`32f1801`](https://github.com/Eric00739/gateremotecontrol_new/commit/32f180138cc64999042469e4c006eb0f9408a6d0) 已发布，[Pages 运行 37404030929](https://github.com/Eric00739/gateremotecontrol_new/actions/runs/37404030929) 的 build/deploy 成功，于 2026-10-06 10:26（Asia/Shanghai）完成部署。
-
-93 个 sitemap URL 和根首页均为 200；元数据、canonical／hreflang、结构化数据和 H1 与本地一致。根及六语 sitemap/robots 共 14 个文件逐字节一致，原文章日期策略及未翻译文章 noindex/canonical 策略保留；43 条旧 URL 重定向正常。83 项引用媒体校验和一致，HTTP 重试为 0。正式页面与询盘复测见更名验收记录。
+sitemap 修复已随业务提交 `32f1801` 发布。正式根及六语 sitemap/robots 共 14 个文件一致，93 个规范 URL 和根首页均为 200；元数据、canonical／hreflang、结构化数据和 H1 与本地一致，原文章日期及未翻译文章 noindex/canonical 策略保留，43 条旧 URL 重定向正常。完整发布凭证、线上媒体与交互验收统一见 [BRAND_UPDATE_REVIEW.md](BRAND_UPDATE_REVIEW.md)。
 
 本次没有替所有者登录 Search Console 或提交表单；提交入口仍为 `https://www.gateremotesource.com/sitemap.xml`。正式文件可正常读取，不等于 Google 已完成抓取或收录。

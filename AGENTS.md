@@ -1,4 +1,4 @@
-# GateRemoteSource project rules
+# WindChord Remote project rules
 
 - 这是基于 Next.js 16 App Router 的多语言 B2B 静态网站。修改 Next.js 代码前，先阅读 `node_modules/next/dist/docs/` 中相关当前版本文档。
 - 使用 `npm run lint` 验证代码；涉及路由、元数据、静态导出或构建脚本时还必须运行 `npm run build`。

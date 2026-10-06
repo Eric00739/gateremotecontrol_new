@@ -61,7 +61,7 @@
 
 真实图片由站点所有者后续提供。图片到位前，工厂区域应采用真实可核验的文字流程，或暂时隐藏图库，不能继续把未确认图片称为 “Factory Evidence”。
 
-## 2. 当前技术事实（2026-10-05）
+## 2. 当前技术事实（2026-10-06）
 
 - 项目使用 Next.js `16.3.2` 和 App Router，依赖声明为 `^16.3.2`。
 - `next.config.mjs` 设置了 `output: 'export'`，当前产物是纯静态网站。
@@ -73,7 +73,7 @@
 - 六套词典通过 `Record<Locale, Dictionary>` 以英文键结构执行构建时类型检查；品牌详情与目录卡片使用 `brandPage.brands` 的本地化文案，FAQ 可见内容与结构化数据同源。明显西班牙语乱码已修正，未完成母语审核。
 - 普通询盘入口在每套词典共用 `inquiryCta`，英文为 `Start an Inquiry`；目录与 OEM 保留专用动作。首屏只保留一个询盘按钮与一个兼容性浏览入口；导航 Contact 指向现有页脚联系方式。
 - 博客元数据在 `src/data/blog.ts`，正文在 `src/data/blog-content.ts`，构建执行正文完整性检查；不为未核实文章编造日期。
-- `npm run build` 还执行旧 URL 重定向生成、HTML 语言修正和 `scripts/verify-export.mjs`；当前校验包含 90 个 sitemap URL、43 条旧重定向及六语博客完整目录中的全部英文文章链接。
+- `npm run build` 还执行旧 URL 重定向生成、HTML 语言修正、六语 sitemap/robots 静态文件生成及 `scripts/verify-export.mjs`；当前校验包含 93 个 sitemap URL（72 个主要页面与 21 篇英文文章）、43 条旧重定向及六语博客完整目录中的全部英文文章链接。品牌与联系方式以 `src/data/site.ts` 为准；最终更名验收与发布凭证见 `BRAND_UPDATE_REVIEW.md`。
 - 首页视频、生产场景区域与质量页使用所有者指定的视频帧，通过 `EditorialImage` 及 `src/data/visuals.ts` 管理；来源与处理记录见第 16 节及 `public/images/video/README.md`，不作为公司归属证据。产品、应用、OEM、目录、兼容性及博客使用第 17、22 节的 AI 示意图，通过 `GeneratedImage` 和 `src/data/generated-visuals.ts` 管理。
 
 任何执行模型开始写代码前，必须重新核查这些事实，不得把本计划当作永远正确的代码快照。
@@ -1005,32 +1005,12 @@ lint、TypeScript 与静态构建通过，216 个页面、276 个导出 HTML、9
 
 六语正式目录的分页、CR2032 搜索和无结果状态正常；手机/桌面的旧评论锚点及桌面提问入口跳转可见对应区域，未发送测试邮件或询盘。英文手机首屏和正式碰撞文章桌面图示截图已审阅。发布之后的记录同步只改文档，不改变页面行为。
 
-## 25. 2026-10-06 全站 WindChord Remote 更名（本地）
+## 25. 2026-10-06 全站 WindChord Remote 更名（已发布）
 
-所有者确认公司名称为东莞市风弦电子科技有限公司／Dongguan Fengxian Electronics Technology Co., Ltd.，接受对外品牌 WindChord Remote；要求去掉所提供 Logo 的底部文字，域名、联系方式和地址不变，并明确范围是整个网站。连续性评估为 CONTINUE。
+公司名称、对外品牌及去掉底部文字的 Logo 已由所有者确认并落实到整个网站。域名、联系方式、公开地址、原文章发布日期和历史 URL 保留。六语 sitemap/robots 静态路径修复一起发布，正式 sitemap 共 93 条 URL。
 
-全站页头、页脚、六语标题、兼容性声明、搜索／分享元数据与 Organization、WebSite、博客 publisher 统一使用新品牌及公司名称。名称、Logo、邮箱、电话／WhatsApp 和原地址集中在 `src/data/site.ts`。采用内置 image_gen 编辑的无文字透明 Logo，并替换 favicon；编辑要求、校验和与尺寸见 `public/images/brand/provenance.json`。产品、应用、OEM、质量、目录和博客均继承公共品牌，保留原内容主题和所有历史 URL。
+业务提交 `32f1801` 的 Pages build/deploy 于 2026-10-06 10:26（Asia/Shanghai）成功，后续记录提交 `303d00d` 于 10:30 部署成功。最终改动、15 项负例、76 个视口、线上页面／媒体／重定向复测及发布凭证统一见 [BRAND_UPDATE_REVIEW.md](BRAND_UPDATE_REVIEW.md)；SEO 待办见 [SEO_REVIEW.md](SEO_REVIEW.md)，不重复维护中间构建数量。
 
-`npm run lint`、`npm run build` 和 `git diff --check` 通过；本地最终构建为 230 个静态生成入口、290 个 HTML、92 条 sitemap URL、43 条旧重定向、137 项引用媒体，223 个含公共页头的页面品牌与主体一致。六语首页 320／390／768／1024／1280／1440 像素及八类代表页面 320／1440 像素共 52 组复查正常。初检发现四种语言的 1024 像素导航溢出，完整导航门槛改为 1280 像素后复测通过。
+公司名称已解除 D1 的该项阻塞；完整地址、工厂关系和可公开核验资料仍需所有者提供。其余 B04／B05／B08／B09、C04 资料或决策依赖保留。
 
-临时副本先验证完整基线退出 0，再注入旧品牌标题、错误公司名称、错误 Organization Logo、错误邮件和 WhatsApp 链接；五项均准确报错并退出 1，副本已删除。手机询盘、Escape 焦点恢复、手机／平板折叠菜单及语言切换通过，WhatsApp 外部动作被拦截，未发送测试询盘。
-
-更名前的 19 篇文章日期与 `e0c2679` 逐篇一致；本轮未因更名改变文章日期或新增对外修改日期。验证期间另一项工作新增 `different-codes-rf-remote-collisions`，本轮未编辑其正文、日期或图片；最终本地共 20 篇文章。sitemap、robots 与旧重定向源文件的品牌实施基线校验和保持不变，六语 sitemap/robots 的先前静态路径修复随本轮代码验证，详情见 `SEO_REVIEW.md`。
-
-完整修改文件与验收见 [BRAND_UPDATE_REVIEW.md](BRAND_UPDATE_REVIEW.md)。当前邮箱统一为 `sales@gateremotesource.com`，域名仍为 `www.gateremotesource.com`。本轮未执行提交、推送或部署；正式站状态应以发布凭证为准。D1 中公司名称已确认，其余完整地址、工厂关系与可核验资料仍待所有者提供。
-
-### 上传前追加审查
-
-所有者已明确授权“对抗性优化所有更新，没有问题就上传”。发布前审查发现西语、意语、葡语在 640 像素溢出，品牌文字改为 768 像素起显示；完整导航保持 1280 像素门槛。页头／页脚新增 144 像素透明 Logo，9,464 字节，相较大图减小 89.2%，Organization 保留原 544 像素图。
-
-校验新增首页 Organization／WebSite 必须存在、统一实体 ID、真实透明像素、ICO 目录和帧边界及解码检查。`npm run lint`、`npm run build` 通过，76 个页面／视口组合与六语手机询盘复查通过；十二项临时副本破坏测试全部准确拒绝，新增文章修改日期、伪透明大图及伪透明显示图的三个负例也被拒绝。
-
-另一聊天的新文章 `wireless-receiver-controller-factory-testing` 已单独提交 `b33df15`，本轮不编辑其正文、日期或图片。最终整合构建：237 个静态生成入口、297 个 HTML、93 条 sitemap URL、43 条重定向、146 项引用媒体、230 个公共品牌页面。具体改动和验证见 `BRAND_UPDATE_REVIEW.md`；发布凭证在完成后追加。
-
-### 已发布与线上复测
-
-业务提交 [`32f1801`](https://github.com/Eric00739/gateremotecontrol_new/commit/32f180138cc64999042469e4c006eb0f9408a6d0) 已推送到 `main`，[Pages 运行 37404030929](https://github.com/Eric00739/gateremotecontrol_new/actions/runs/37404030929) 的 build/deploy 均成功，2026-10-06 10:26（Asia/Shanghai）完成部署。
-
-正式站 93 个 sitemap 页面及根首页均返回 200，元标签、canonical／hreflang、结构化数据与 H1 和本地一致；14 个根／六语 sitemap/robots 逐字节一致，83 项引用媒体 SHA-256 一致，43 条旧 URL 重定向正常，重试为 0。正式六语与代表页面 76 组视口、六语手机询盘目标／焦点恢复／折叠菜单复查通过，Logo 与公司名称正常，外部动作被拦截，未发送测试询盘。
-
-本批共 35 个发布文件，临时浏览器日志、截图和测试副本未进入提交。发布凭证同步只修改文档；详细文件清单与证据见 `BRAND_UPDATE_REVIEW.md`。Search Console 仍提交 `https://www.gateremotesource.com/sitemap.xml`；邮箱保持 `sales@gateremotesource.com`。
+2026-10-06 neat-freak 收尾更新本计划第 2 节的当前构建事实，合并更名报告的中间状态，核对规则导入、远端提交、部署及正式响应。未修改网站代码、平台记忆或其他项目；历史草稿与复测现场保留，清场候选及未闭合项见更名报告末节。
