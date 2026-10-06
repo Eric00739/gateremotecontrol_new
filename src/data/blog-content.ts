@@ -11,6 +11,207 @@ export type BlogPost = BlogPostMeta & {
 /** Full article bodies, keyed by slug. Split from blog.ts so client list pages
  * ship only metadata instead of every article's full text. */
 export const blogContentBySlug: Record<string, BlogPostContentBlock[]> = {
+  'rf-remote-pairing-field-checklist': [
+    {
+      type: 'paragraph',
+      text: 'A remote does nothing. You press the button again, repeat the learning sequence and eventually try a replacement. The replacement does nothing either. Before ordering another unit, work through the installation in a consistent order.',
+    },
+    {
+      type: 'paragraph',
+      text: 'This checklist is for installers, after-sales teams and buyers checking a replacement RF remote. It starts with simple checks and moves toward compatibility, enrollment and receiver diagnostics. The aim is to narrow down the fault rather than guess which part to replace.',
+    },
+    {
+      type: 'quote',
+      text: 'No movement is a symptom. It does not tell you whether pairing failed, the radio message was missed or the controller declined to act.',
+    },
+    {
+      type: 'image',
+      src: '/images/blog/rf-remote-pairing-field-checklist/pairing-workbench.webp',
+      srcSet: '/images/blog/rf-remote-pairing-field-checklist/pairing-workbench-320.webp 320w, /images/blog/rf-remote-pairing-field-checklist/pairing-workbench-640.webp 640w, /images/blog/rf-remote-pairing-field-checklist/pairing-workbench.webp 1280w',
+      alt: 'Illustration: A generic RF remote, disconnected receiver controller, spare coin cell and meter on a gray workbench',
+      caption: 'A conceptual bench setup. These are generic illustrations, not tested products or a company installation.',
+    },
+    {
+      type: 'heading',
+      id: 'identify-the-failed-step',
+      text: 'Identify the Failed Step',
+    },
+    {
+      type: 'paragraph',
+      text: 'Start by separating enrollment from normal operation. Did the receiver confirm that it saved the remote, or are you assuming failure because the door did not move? A receiver may accept a command while the downstream controller is stopped by an input, interlock or output fault.',
+    },
+    {
+      type: 'paragraph',
+      text: 'Record the remote model, receiver model, intended button action and exact indicator sequence. If an existing remote still operates the equipment, keep it as a reference. Change one thing at a time so the next result tells you something useful.',
+    },
+    {
+      type: 'heading',
+      id: 'check-battery-and-contacts',
+      text: 'Check the Battery and Its Contacts',
+    },
+    {
+      type: 'paragraph',
+      text: 'Intermittent operation, a sudden loss of range or a dim indicator are good reasons to check the battery first. Fit a fresh battery of the specified type and polarity. Inspect the holder for loose contacts, corrosion or a contact that no longer presses firmly against the cell.',
+    },
+    {
+      type: 'paragraph',
+      text: 'A battery can show voltage at rest and still sag during a transmission pulse. A lit indicator does not establish that the supply stays within the radio circuit’s operating limits. If you measure voltage, compare the voltage during a button press with the limits for that remote; an unloaded reading alone is incomplete.',
+    },
+    {
+      type: 'paragraph',
+      text: 'For the difference between remaining charge and voltage under load, see our CR2032 battery guide. Use the battery specified for your model; RF remotes do not all use a CR2032.',
+      links: [{ text: 'CR2032 battery guide', href: '/blog/cr2032-rf-remote-battery-life' }],
+    },
+    {
+      type: 'image',
+      src: '/images/blog/rf-remote-pairing-field-checklist/battery-contact-check.webp',
+      srcSet: '/images/blog/rf-remote-pairing-field-checklist/battery-contact-check-320.webp 320w, /images/blog/rf-remote-pairing-field-checklist/battery-contact-check-640.webp 640w, /images/blog/rf-remote-pairing-field-checklist/battery-contact-check.webp 1280w',
+      alt: 'Illustration: An open generic keyfob with its battery holder and a separate coin cell on a gray workbench',
+      caption: 'Check the specified battery, polarity and contact condition before changing other parts.',
+    },
+    {
+      type: 'heading',
+      id: 'confirm-radio-and-code-compatibility',
+      text: 'Confirm Frequency and Coding Compatibility',
+    },
+    {
+      type: 'paragraph',
+      text: '315 MHz and 433 MHz are familiar labels on RF remotes, but two identical housings can contain different radios. Check the exact operating frequency of both the remote and receiver against their labels, manuals or manufacturer’s model records. A housing or button count is not a reliable identifier.',
+    },
+    {
+      type: 'paragraph',
+      text: 'Do not assume that every crystal or resonator is marked with the transmit frequency. Some radios synthesize the carrier from a lower-frequency reference. TI’s CC1101 data sheet, for example, describes a crystal reference and a programmable RF synthesizer. Board markings can be useful clues, but they need to be interpreted for that design.',
+      links: [{ text: 'TI’s CC1101 data sheet', href: 'https://www.ti.com/lit/ds/symlink/cc1101.pdf' }],
+    },
+    {
+      type: 'paragraph',
+      text: 'Matching frequency is only one requirement. Modulation, coding protocol, button mapping and any rolling-code provisioning must also match. Learning describes how a receiver stores a transmitter; it does not by itself identify a separate security level or guarantee compatibility.',
+    },
+    {
+      type: 'paragraph',
+      text: 'Microchip’s HCS301 documentation illustrates the extra state involved in one rolling-code system: transmitter identity, a key and synchronization information. A matching chip family or carrier frequency alone does not prove that a replacement has the correct configuration. See the replacement pairing guide for a fuller compatibility check.',
+      links: [
+        { text: 'Microchip’s HCS301 documentation', href: 'https://ww1.microchip.com/downloads/en/devicedoc/21143c.pdf' },
+        { text: 'replacement pairing guide', href: '/blog/third-party-rf-remote-brand-receiver-pairing' },
+      ],
+    },
+    {
+      type: 'heading',
+      id: 'follow-the-model-specific-procedure',
+      text: 'Follow the Procedure for That Model',
+    },
+    {
+      type: 'paragraph',
+      text: 'There is no universal pairing sequence. Some receivers have a learning button; others use a controller menu or a procedure involving an already authorized remote. Fixed-address systems may require matching settings rather than learning. Copying a signal into a remote is also different from enrolling it in the receiver.',
+    },
+    {
+      type: 'list',
+      items: [
+        'Use the instructions for the exact receiver and remote combination, including any required enrollment permission.',
+        'Confirm the receiver’s documented learning-state indication before pressing the new remote.',
+        'Use the specified button, hold time and learning window. A long press can select another function, including memory deletion.',
+        'Use the documented distance and antenna arrangement. Start at a short practical distance without pressing the remote against the receiver antenna.',
+        'Look for the model’s actual success indication, then test the intended button action in normal operation.',
+      ],
+    },
+    {
+      type: 'paragraph',
+      text: 'Avoid treating a flash or beep as a universal success signal. Nice’s SMXI/SMXIS instructions show distinct memorization modes and LED sequences. Those sequences are examples for the named receivers, not instructions for an unrelated product.',
+      links: [{ text: 'Nice’s SMXI/SMXIS instructions', href: 'https://www.niceforyou.com/sites/default/files/upload/manuals/IS0136A00MM.pdf' }],
+    },
+    {
+      type: 'heading',
+      id: 'compare-site-and-bench-conditions',
+      text: 'Compare Site and Bench Conditions',
+    },
+    {
+      type: 'paragraph',
+      text: 'If the same pair works on the bench but fails after installation, compare antenna placement, metalwork, receiver supply and nearby equipment. Motor drives and switching supplies can introduce electrical noise; other transmitters using the same radio channel can interfere with reception. The actual effect depends on the equipment and installation.',
+    },
+    {
+      type: 'paragraph',
+      text: 'Wi-Fi and Bluetooth normally operate in bands different from a 315 or 433 MHz remote. Their presence alone does not establish direct same-channel interference. Check the radio environment and possible supply or installation effects rather than blame every nearby wireless device.',
+    },
+    {
+      type: 'paragraph',
+      text: 'Repeat the test with the same remote, receiver, battery and procedure, changing one condition at a time. Compare nearby equipment running and stopped where practical, and try the antenna placement permitted by the receiver instructions. Keep a note of what changed and whether the result repeats.',
+    },
+    {
+      type: 'callout',
+      title: 'A different location is a clue, not a diagnosis',
+      text: 'Moving the equipment changes distance, orientation, obstructions and sometimes the power supply as well as interference. If operation improves, isolate those changes before deciding what caused the failure.',
+    },
+    {
+      type: 'heading',
+      id: 'separate-transmitter-receiver-and-output',
+      text: 'Separate the Remote, Receiver and Output',
+    },
+    {
+      type: 'paragraph',
+      text: 'A flashing remote LED shows that its indicator circuit responded. It does not prove correct frequency, RF output, data timing or protocol. Likewise, a receiver entering learning mode shows that part of its control logic responded; it does not prove that its radio front end can recover the message.',
+    },
+    {
+      type: 'list',
+      items: [
+        'Compare an already enrolled, known-working remote on the same receiver. If it works, focus first on the new remote’s compatibility and enrollment.',
+        'Where available, test the suspect remote with a known-compatible receiver using its documented procedure. Two unverified units are a poor reference pair.',
+        'If the receiver cannot enter learning mode, check its documented supply requirements, programming restrictions and fault indications.',
+        'If enrollment is confirmed but the equipment does not move, check button assignment, receiver output and the downstream controller’s status.',
+      ],
+    },
+    {
+      type: 'paragraph',
+      text: 'A frequency checker can indicate the presence of a signal within its capabilities, but that alone does not validate the encoded message. Where measurements are needed, record what the instrument actually established rather than label the whole remote “good.” Leave the controller’s required interlocks in operation during checks.',
+    },
+    {
+      type: 'heading',
+      id: 'check-memory-before-clearing',
+      text: 'Check Capacity Before Clearing Memory',
+    },
+    {
+      type: 'paragraph',
+      text: 'A full receiver memory can prevent a new enrollment, but a failed attempt does not prove the memory is full. Check the model’s capacity, how entries are counted and any full-memory indication. An entry may represent a whole transmitter or one button assignment.',
+    },
+    {
+      type: 'paragraph',
+      text: 'Use individual deletion if the receiver supports it and the entry can be identified. Clear the whole memory only when the documented procedure calls for it and you have the information and access needed to enroll every remote that must keep working. A full reset may also change settings beyond the transmitter list.',
+    },
+    {
+      type: 'callout',
+      title: 'Make clearing a planned step',
+      text: 'Record the current remotes and button assignments before erasing anything. Confirm the deletion method with the system administrator or manufacturer, then check each required remote after enrollment. Repeated blind resets can make a manageable pairing problem harder to recover.',
+    },
+    {
+      type: 'heading',
+      id: 'three-checks-to-remember',
+      text: 'Three Checks Worth Remembering',
+    },
+    {
+      type: 'list',
+      items: [
+        'A battery showing voltage at rest may still fail under transmission load.',
+        'Matching frequency does not establish matching protocol or enrollment configuration.',
+        'A remote LED or a receiver learning LED does not prove that the full control chain works.',
+      ],
+    },
+    {
+      type: 'heading',
+      id: 'send-a-useful-support-record',
+      text: 'Send a Useful Support Record',
+    },
+    {
+      type: 'paragraph',
+      text: 'The practical lesson is to investigate in order: battery and contacts, radio compatibility, the exact learning sequence, installation conditions, receiver response and memory management. Hardware faults remain possible. The checklist helps produce evidence for the next decision rather than assign blame to the product or installer.',
+    },
+    {
+      type: 'paragraph',
+      text: 'For a replacement-remote or receiver inquiry with Dongguan Fengxian Electronics Technology Co., Ltd., send the remote and receiver model numbers, their documented frequency, the button action you need and the steps already tried. Include the indicator sequence and whether an existing remote still works. Photos of labels and accessible boards can help identify the configuration.',
+    },
+    {
+      type: 'paragraph',
+      text: 'Use the RF question form below to open an email draft. Review the message, attach your photos in your email app and send it. A clear test record makes the next compatibility or troubleshooting check more useful.',
+    },
+  ],
   'one-to-many-many-to-one-rf-remote-control': [
     {
       type: 'paragraph',

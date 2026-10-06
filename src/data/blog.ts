@@ -111,6 +111,26 @@ export const popularGuides = [
 
 export const blogPosts: BlogPostMeta[] = [
   {
+    title: 'RF Remote Won’t Pair? A Field Troubleshooting Checklist',
+    seoTitle: 'RF Remote Pairing Troubleshooting: A Field Checklist',
+    category: 'troubleshooting',
+    excerpt: 'Check battery condition, radio compatibility, enrollment steps and receiver behavior before replacing a remote or clearing its memory.',
+    slug: 'rf-remote-pairing-field-checklist',
+    author: 'Eric Huang',
+    publishedAt: '2026-10-06',
+    readTime: '7 min read',
+    image: '/images/blog/rf-remote-pairing-field-checklist/pairing-workbench.webp',
+    thumbnail: '/images/blog/rf-remote-pairing-field-checklist/pairing-workbench-320.webp',
+    imageAlt: 'Illustration: Generic RF remote, disconnected receiver controller and battery-check tools on a gray workbench',
+    imageSrcSet: '/images/blog/rf-remote-pairing-field-checklist/pairing-workbench-320.webp 320w, /images/blog/rf-remote-pairing-field-checklist/pairing-workbench-640.webp 640w, /images/blog/rf-remote-pairing-field-checklist/pairing-workbench.webp 1280w',
+    imageCaption: 'Work through the transmitter, radio link and receiver in order.',
+    relatedSlugs: [
+      'third-party-rf-remote-brand-receiver-pairing',
+      'rf-remote-buttons-not-working',
+      '433mhz-remote-short-range-diagnostics',
+    ],
+  },
+  {
     title: 'One Remote, Many Doors: How Shared RF Control Works',
     seoTitle: 'One-to-Many and Many-to-One RF Remote Control',
     category: 'rf-engineering',

@@ -1,0 +1,71 @@
+{
+  "slug": "rf-remote-pairing-field-checklist",
+  "createdAt": "2026-10-06",
+  "tool": "image_gen.imagegen (built-in)",
+  "processing": "Original aspect ratio preserved; sharp WebP quality 82; widths 1280, 640 and 320 px.",
+  "usage": "Generic technical illustrations, not company premises, real SKUs or test evidence.",
+  "assets": [
+    {
+      "id": "pairing-workbench",
+      "sourceFile": "exec-c22ace9c-c6d1-42cc-addb-13f27a7befef.png",
+      "sourceWidth": 1672,
+      "sourceHeight": 941,
+      "sourceSha256": "9cd59c4200137917e22f9db73449d1a869112facfcb4558f42ffabade711d7a1",
+      "prompt": "Use case: product-mockup. Create a polished 16:9 editorial photographic-style illustration for an RF remote-control troubleshooting blog, matching understated existing workbench imagery. A generic black four-button keyfob remote, a disconnected open low-voltage receiver controller with its simple short wire antenna, a spare unbranded coin cell and a closed pocket multimeter arranged neatly on a matte cool gray workbench. Slightly elevated three-quarter camera, soft natural studio lighting, realistic plastic and PCB textures, gray and charcoal palette with restrained orange button detail, uncluttered composition, generous breathing room. This is a conceptual generic scene, not a real company facility or actual SKU. No people, logos, brand names, text, labels, arrows, instruments showing readings, mains cables or invented test results. Output wide 16:9.",
+      "files": [
+        {
+          "file": "pairing-workbench.webp",
+          "width": 1280,
+          "height": 720,
+          "bytes": 93294,
+          "sha256": "873ff0089619bc8465c5fd18caeae6a20d1844383c137ba3afca7cb109c4f37e"
+        },
+        {
+          "file": "pairing-workbench-640.webp",
+          "width": 640,
+          "height": 360,
+          "bytes": 25620,
+          "sha256": "600ee3695769e9e3e34d6ce43db6a4fa7fe56c63a9734d1904646b05e6ca63b0"
+        },
+        {
+          "file": "pairing-workbench-320.webp",
+          "width": 320,
+          "height": 180,
+          "bytes": 7268,
+          "sha256": "c680be0dedecb1243ff7b02aea20146fa0adff7d5468123c985fb7fb597c6897"
+        }
+      ]
+    },
+    {
+      "id": "battery-contact-check",
+      "sourceFile": "exec-52fa4b18-67b8-4c49-98f3-c329564e56f2.png",
+      "sourceWidth": 1672,
+      "sourceHeight": 941,
+      "sourceSha256": "260f35d1049f2e0e87786d09e31ae5290b2470d61d71c24d95727cf7265dd2cb",
+      "prompt": "Use case: product-mockup. Create one wide 16:9 editorial photographic-style illustration for an RF remote battery and contact checklist. Restrained cool gray workbench and dark navy background, soft diffuse natural studio light, realistic commercial photography texture. A generic black four-button RF keyfob open at its removable rear battery cover: show a plausible tidy small PCB with a clearly accessible empty round coin-cell holder and metal spring contact. Place one separate unbranded silver coin cell and the removed black rear cover neatly alongside. No person or hand. Modest uncluttered close-up, every object fully inside the central 80 percent with generous margins. Generic fictional equipment, not a real SKU, company premises or test evidence. No text, numbers, logos, labels, diagrams, arrows, glowing indicator, wiring, meters, readings or watermark. Landscape 16:9.",
+      "files": [
+        {
+          "file": "battery-contact-check.webp",
+          "width": 1280,
+          "height": 720,
+          "bytes": 99980,
+          "sha256": "0992459d90bb7828af0486ca237071a26a59425fe47459b18e7bf263424723c8"
+        },
+        {
+          "file": "battery-contact-check-640.webp",
+          "width": 640,
+          "height": 360,
+          "bytes": 26898,
+          "sha256": "19513473889d2b04705bdc1c55f5919e71d1cb148d77375ec862e9dbf69c508b"
+        },
+        {
+          "file": "battery-contact-check-320.webp",
+          "width": 320,
+          "height": 180,
+          "bytes": 7334,
+          "sha256": "91a7c802c7d3c04a5cd1d9a0d700bb610b8769179d6e542ee59a93641f874e9d"
+        }
+      ]
+    }
+  ]
+}
