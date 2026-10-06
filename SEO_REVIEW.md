@@ -76,3 +76,24 @@ Google 使用可信的实际修改日期，并忽略 sitemap 的 `priority` 和 
 sitemap 修复已随业务提交 `32f1801` 发布。正式根及六语 sitemap/robots 共 14 个文件一致，93 个规范 URL 和根首页均为 200；元数据、canonical／hreflang、结构化数据和 H1 与本地一致，原文章日期及未翻译文章 noindex/canonical 策略保留，43 条旧 URL 重定向正常。完整发布凭证、线上媒体与交互验收统一见 [BRAND_UPDATE_REVIEW.md](BRAND_UPDATE_REVIEW.md)。
 
 本次没有替所有者登录 Search Console 或提交表单；提交入口仍为 `https://www.gateremotesource.com/sitemap.xml`。正式文件可正常读取，不等于 Google 已完成抓取或收录。
+
+## 双业务获客 SEO（2026-10-06，本地完成，未发布）
+
+所有者确认两条业务：定制 RF 遥控器、接收器／控制器和汽车遥控器；品牌门／车库遥控器售后替代采购。核心文案和元数据据此调整，关键词取自这两条业务的产品及采购任务，本轮未读取 Search Console 查询数据。
+
+| 页面 | 搜索意图与最终英文标题 |
+| --- | --- |
+| `/en` | 双业务入口：Custom RF & Car Remotes · Garage Door Remote Replacements |
+| `/en/oem-odm` | 定制项目：Custom RF Remotes, Controllers & Car Remotes |
+| `/en/compatibility` | 批量替代采购：Wholesale Gate & Garage Door Replacement Remotes |
+| `/en/compatibility/{brand}` | 原系统品牌替代，例如 FAAC Aftermarket Replacement Remotes |
+
+实际 title 末尾保留 WindChord Remote。六语对应本地语言标题、H1、正文和摘要；首页摘要覆盖 RF、控制器、汽车遥控器及门／车库替代，OEM 摘要覆盖功能、接口与样品。兼容目录使用独立搜索摘要，明确产品、贸易买家、原型号、样品和批量价格；品牌页使用各自原系统与型号说明。修正笼统的“汽车项目”和漏写“遥控器”的按钮，不将品牌参考写成授权或兼容保证。
+
+Google 建议标题准确、简洁，避免堆词，并让摘要对应实际页面内容；本批按页面任务分工，不要求每个标题罗列全部产品。[标题说明](https://developers.google.com/search/docs/appearance/title-link)、[摘要说明](https://developers.google.com/search/docs/appearance/snippet)。没有新增空泛品牌页或缺乏真实产品资料的 Product 库存／价格标记。
+
+保留既有 URL、canonical、hreflang、robots、sitemap、旧重定向、未翻译文章的 noindex/canonical 及原发布日期。页面实质更新日继续为 2026-10-06，不用构建时刻刷新日期。原有多语言映射和独立品牌正文保留。[多语言映射说明](https://developers.google.com/search/docs/specialty/international/localized-versions)
+
+`npm run lint`、`npm run build` 和导出校验通过。新增校验核对六语共 54 个销售页的 title、description、Open Graph 和单一 H1 与词典一致；98 条本地 sitemap URL 的可索引性、canonical 与双向 hreflang、43 条旧重定向通过。六语首页、OEM、兼容目录和 FAAC 页共 48 个手机／桌面组合无横向溢出或页面运行异常。采购交互和修改文件清单见 [COPY_POSITIONING_REVIEW.md](COPY_POSITIONING_REVIEW.md)。
+
+本轮没有发布、测量搜索排名或实际询盘转化。发布后仍按上方步骤核对目标版本，再用 Search Console 查看真实查询和收录情况。

@@ -1,41 +1,19 @@
 'use client';
 
 import Link from 'next/link';
-import { ArrowRight, Boxes, RadioTower, Settings } from 'lucide-react';
+import { ArrowRight, RadioTower, Settings } from 'lucide-react';
 import { useDict, useLocale } from '@/i18n';
+import LeadModalTrigger from './LeadModalTrigger';
 
-const icons = [Boxes, RadioTower, Settings];
-
-const defaultBuyerPaths = {
-  sectionLabel: 'Buyer paths',
-  title: 'Choose the path that matches your purchase',
-  subtitle: 'Start with your buying role, then send model and market details for confirmation.',
-  paths: [
-    {
-      title: 'Distributors & wholesalers',
-      description: 'Request a private catalog after product, market, and quantity requirements are clear.',
-      href: '/request-catalog',
-    },
-    {
-      title: 'Installers & locksmiths',
-      description: 'Check limited public compatibility references before requesting a model match.',
-      href: '/compatibility',
-    },
-    {
-      title: 'OEM & private label',
-      description: 'Discuss a private-label RF project around verified market and protocol requirements.',
-      href: '/oem-odm',
-    },
-  ],
-};
+const icons = [Settings, RadioTower];
 
 export default function CapabilityHighlightsSection() {
   const locale = useLocale();
   const dict = useDict();
-  const section = dict.buyerPaths || defaultBuyerPaths;
+  const section = dict.buyerPaths;
 
   return (
-    <section className="bg-white">
+    <section id="buyer-paths" className="bg-white">
       <div className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8 py-16 lg:py-24">
         <div className="flex items-center gap-3 mb-4">
           <div className="w-8 h-[2px] bg-[#FF8A1F]" />
@@ -55,15 +33,14 @@ export default function CapabilityHighlightsSection() {
           </div>
 
           <div className="grid sm:grid-cols-2 gap-4">
-            {section.paths.map((item: { title: string; description: string; href: string }, index: number) => {
+            {section.paths.map((item, index) => {
               const Icon = icons[index];
               const href = `/${locale}${item.href}`;
 
               return (
-                <Link
+                <article
                   key={item.href}
-                  href={href}
-                  className="group rounded-lg border border-[#E2E8F0] bg-[#F8FAFC] p-5 transition-all hover:-translate-y-0.5 hover:border-[#FF8A1F]/40 hover:bg-white hover:shadow-lg hover:shadow-slate-200/60"
+                  className="group flex min-w-0 flex-col rounded-lg border border-[#E2E8F0] bg-[#F8FAFC] p-5"
                 >
                   <div className="mb-5 flex items-center justify-between gap-4">
                     <div className="flex h-10 w-10 items-center justify-center rounded-lg border border-[#E2E8F0] bg-white text-[#FF8A1F]">
@@ -74,8 +51,19 @@ export default function CapabilityHighlightsSection() {
                   <h3 className="text-base font-bold text-[#0F172A]" style={{ fontFamily: 'var(--font-outfit), sans-serif' }}>
                     {item.title}
                   </h3>
-                  <p className="mt-2 text-sm leading-relaxed text-[#64748B]">{item.description}</p>
-                </Link>
+                  <p className="mt-2 mb-5 text-sm leading-relaxed text-[#64748B]">{item.description}</p>
+                  <LeadModalTrigger
+                    prefillType={index === 0 ? 'oem' : 'compatibility'}
+                    inquiryContext={{ productInterest: item.title }}
+                    className="mt-auto min-h-11 rounded-lg bg-[#0B3A63] px-4 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-[#062748]"
+                  >
+                    {item.cta}
+                  </LeadModalTrigger>
+                  <Link href={href} className="mt-3 inline-flex min-h-11 items-center gap-2 text-sm font-semibold text-[#9A3412] hover:text-[#C2410C]">
+                    {item.guideCta}
+                    <ArrowRight className="h-4 w-4 shrink-0" />
+                  </Link>
+                </article>
               );
             })}
           </div>

@@ -15,6 +15,7 @@ interface LeadModalContextValue {
   prefillType: PrefillType;
   inquiryContext: InquiryContext;
   inquiryKey: string;
+  inquirySession: number;
   sourceUrl: string;
   openModal: (type: PrefillType, trigger?: HTMLElement | null, context?: InquiryContext) => void;
   closeModal: () => void;
@@ -25,6 +26,7 @@ const defaultValue: LeadModalContextValue = {
   prefillType: 'quote',
   inquiryContext: {},
   inquiryKey: '',
+  inquirySession: 0,
   sourceUrl: '',
   openModal: () => {},
   closeModal: () => {},
@@ -41,6 +43,7 @@ export default function LeadModalProvider({ children }: { children: ReactNode })
   const [prefillType, setPrefillType] = useState<PrefillType>('quote');
   const [inquiryContext, setInquiryContext] = useState<InquiryContext>({});
   const [inquiryKey, setInquiryKey] = useState('');
+  const [inquirySession, setInquirySession] = useState(0);
   const [sourceUrl, setSourceUrl] = useState('');
   const [returnFocusElement, setReturnFocusElement] = useState<HTMLElement | null>(null);
 
@@ -48,6 +51,7 @@ export default function LeadModalProvider({ children }: { children: ReactNode })
     setPrefillType(type);
     setInquiryContext(context);
     setInquiryKey(JSON.stringify([window.location.pathname, type, context.productInterest, context.modelReference]));
+    setInquirySession(previous => previous + 1);
     setSourceUrl(window.location.href);
     setReturnFocusElement(trigger ?? (document.activeElement instanceof HTMLElement ? document.activeElement : null));
     setOpen(true);
@@ -69,7 +73,7 @@ export default function LeadModalProvider({ children }: { children: ReactNode })
   }, [open, returnFocusElement]);
 
   return (
-    <LeadModalContext.Provider value={{ open, prefillType, inquiryContext, inquiryKey, sourceUrl, openModal, closeModal }}>
+    <LeadModalContext.Provider value={{ open, prefillType, inquiryContext, inquiryKey, inquirySession, sourceUrl, openModal, closeModal }}>
       {children}
       <LeadModal />
     </LeadModalContext.Provider>

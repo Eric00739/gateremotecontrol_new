@@ -92,7 +92,7 @@ export default function AuthorBio({ variant = 'article', className = '' }: Autho
               {authorProfile.closing}
             </p>
             <LeadModalTrigger
-              prefillType="support"
+              prefillType="quote"
               className="mt-4 inline-flex items-center gap-2 rounded-lg bg-[#FF8A1F] px-4 py-2 text-sm font-bold text-[#062748] transition-colors hover:bg-[#F97316]"
             >
               {dict.blogPost.contactUs} <ArrowRight className="h-4 w-4" />

@@ -583,7 +583,7 @@ export default function BlogIndexClient() {
                       Send the remote and receiver models, your country, and what you need to replace or develop.
                     </p>
                     <LeadModalTrigger
-                      prefillType="support"
+                      prefillType="quote"
                       className="mt-4 inline-flex w-full items-center justify-center gap-2 rounded-lg bg-[#FF8A1F] px-4 py-2.5 text-sm font-bold text-[#062748] transition-colors hover:bg-[#F97316]"
                     >
                       Ask a question <MessageSquare className="h-4 w-4" />
@@ -667,7 +667,7 @@ export default function BlogIndexClient() {
                 ))}
             </div>
             <LeadModalTrigger
-              prefillType="support"
+              prefillType="quote"
               className="inline-flex shrink-0 items-center justify-center gap-2 rounded-lg bg-[#FF8A1F] px-6 py-3 text-sm font-bold text-[#062748] transition-colors hover:bg-[#F97316]"
             >
               {dict.blog.helpCta} <ArrowRight className="h-4 w-4" />

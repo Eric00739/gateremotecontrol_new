@@ -24,6 +24,7 @@ export default function LeadModalTrigger({
   return (
     <button
       type="button"
+      data-inquiry-type={prefillType}
       ref={triggerRef}
       className={className}
       style={style}

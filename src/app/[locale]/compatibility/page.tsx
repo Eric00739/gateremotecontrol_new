@@ -23,7 +23,7 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
     const title = dict.compatibility.metaTitle;
     return {
       title,
-      description: dict.compatibility.subtitle,
+      description: dict.compatibility.metaDescription,
       alternates: {
         canonical: `/${locale}/compatibility`,
         languages: localizedAlternates('/compatibility'),
@@ -33,12 +33,12 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
         siteName,
         url: `/${locale}/compatibility`,
         title,
-        description: dict.compatibility.subtitle,
+        description: dict.compatibility.metaDescription,
       },
       twitter: {
         card: 'summary',
         title,
-        description: dict.compatibility.subtitle,
+        description: dict.compatibility.metaDescription,
       },
     };
   })();

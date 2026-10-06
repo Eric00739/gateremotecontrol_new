@@ -15,8 +15,6 @@ export default function BrandCompatibilitySection() {
   const labelMap: Record<string, string> = {
     Available: dict.compatibilityTable.available || 'Available',
     'To Confirm': dict.compatibilityTable.toConfirm || 'To Confirm',
-    Recommended: dict.compatibilityTable.recommended || 'Recommended',
-    Yes: dict.compatibilityTable.yes || 'Yes',
     'Rolling Code': dict.compatibilityTable.rollingCode || 'Rolling Code',
   };
   const localizeValue = (value: string) => labelMap[value] || value;
@@ -39,7 +37,7 @@ export default function BrandCompatibilitySection() {
         <div className="flex items-center gap-3 mb-4">
           <div className="w-8 h-[2px] bg-[#FF8A1F]" />
           <span className="text-[11px] font-semibold tracking-[0.2em] uppercase text-[#9A3F00]" style={{ fontFamily: "var(--font-jetbrains-mono), monospace" }}>
-            {dict.compatibilityTable.title}
+            {dict.compatibilityTable.sectionLabel}
           </span>
         </div>
 
@@ -65,7 +63,7 @@ export default function BrandCompatibilitySection() {
 
         <div className="lg:hidden space-y-3 mb-6">
           {filteredRows.map((row) => (
-            <div key={`${row.brand}-${row.model}`} className="rounded-lg border border-[#D8E4F0] bg-white p-4 shadow-sm shadow-[#062748]/5">
+            <div key={`${row.brand}-${row.model}`} data-model-reference={`${row.brand} ${row.model}`} className="rounded-lg border border-[#D8E4F0] bg-white p-4 shadow-sm shadow-[#062748]/5">
               <div className="flex items-start justify-between gap-4">
                 <div>
                   <p className="text-[10px] uppercase tracking-[0.14em] text-[#475569]" style={{ fontFamily: "var(--font-jetbrains-mono), monospace" }}>
@@ -94,9 +92,16 @@ export default function BrandCompatibilitySection() {
                 </div>
                 <div>
                   <p className="text-[10px] uppercase tracking-[0.12em] text-[#475569]" style={{ fontFamily: "var(--font-jetbrains-mono), monospace" }}>{dict.compatibilityTable.sampleTestHeader}</p>
-                  <p className="mt-1 text-[#64748B]">{localizeValue(row.sampleTest)}</p>
+                  <p className="mt-1 text-[#64748B]">{dict.compatibilityTable.testOnReceiver}</p>
                 </div>
               </div>
+              <LeadModalTrigger
+                prefillType="compatibility"
+                inquiryContext={{ modelReference: `${row.brand} ${row.model}` }}
+                className="mt-4 inline-flex min-h-11 items-center justify-center rounded-lg bg-[#0B3A63] px-4 py-2.5 text-sm font-semibold text-white hover:bg-[#062748]"
+              >
+                {dict.compatibilityTable.askReplacement}
+              </LeadModalTrigger>
             </div>
           ))}
           {filteredRows.length === 0 && (
@@ -117,11 +122,12 @@ export default function BrandCompatibilitySection() {
                   <th className="px-5 py-4 font-semibold">{dict.compatibilityTable.codeTypeHeader}</th>
                   <th className="px-5 py-4 font-semibold">{dict.compatibilityTable.solutionHeader}</th>
                   <th className="px-5 py-4 font-semibold">{dict.compatibilityTable.sampleTestHeader}</th>
+                  <th className="px-5 py-4 font-semibold">{dict.compatibilityTable.actionHeader}</th>
                 </tr>
               </thead>
               <tbody className="divide-y divide-[#E2E8F0]">
                 {filteredRows.map((row) => (
-                  <tr key={`${row.brand}-${row.model}`} className="text-sm text-[#0F172A]">
+                  <tr key={`${row.brand}-${row.model}`} data-model-reference={`${row.brand} ${row.model}`} className="text-sm text-[#0F172A]">
                     <td className="px-5 py-4 font-bold">{row.brand}</td>
                     <td className="px-5 py-4">{row.model}</td>
                     <td className="px-5 py-4 text-[#475569]">{localizeValue(row.frequency)}</td>
@@ -131,7 +137,16 @@ export default function BrandCompatibilitySection() {
                         {localizeValue(row.solution)}
                       </span>
                     </td>
-                    <td className="px-5 py-4 text-[#475569]">{localizeValue(row.sampleTest)}</td>
+                    <td className="px-5 py-4 text-[#475569]">{dict.compatibilityTable.testOnReceiver}</td>
+                    <td className="px-5 py-4">
+                      <LeadModalTrigger
+                        prefillType="compatibility"
+                        inquiryContext={{ modelReference: `${row.brand} ${row.model}` }}
+                        className="inline-flex min-h-11 items-center justify-center rounded-lg bg-[#0B3A63] px-4 py-2.5 text-sm font-semibold text-white hover:bg-[#062748]"
+                      >
+                        {dict.compatibilityTable.askReplacement}
+                      </LeadModalTrigger>
+                    </td>
                   </tr>
                 ))}
               </tbody>

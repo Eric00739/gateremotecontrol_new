@@ -189,6 +189,7 @@ export default async function BrandCompatibilityPage({
             <h2 className="mt-3 text-xl font-bold" style={{ fontFamily: 'var(--font-outfit), sans-serif' }}>
               {dict.brandPage.sendDetails}
             </h2>
+            <p className="mt-3 text-sm leading-relaxed text-[#64748B]">{dict.brandPage.startNote}</p>
             <div className="mt-5 space-y-3">
               {localizedBrand.checks.map((check) => (
                 <div key={check} className="flex gap-3">
@@ -216,7 +217,7 @@ export default async function BrandCompatibilityPage({
                 {dict.brandPage.importantNote}
               </h2>
               <p className="mt-4 text-sm leading-relaxed text-[#64748B]">
-                {brand.name} {dict.brandPage.importantNote}
+                {dict.brandReferences.verificationNote}
               </p>
             </div>
             <div className="grid sm:grid-cols-2 gap-4">

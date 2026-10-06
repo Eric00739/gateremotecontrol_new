@@ -79,7 +79,7 @@ export default function CompatibilityWorkflowSection() {
               </p>
             </div>
             <LeadModalTrigger
-              prefillType="compatibility"
+              prefillType="quote"
               className="inline-flex min-h-11 items-center justify-center rounded-lg bg-[#FF8A1F] px-5 py-2.5 text-sm font-bold text-[#062748] transition-colors hover:bg-[#F97316] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#C2410C]"
             >
               {dict.workflow.requestCta}

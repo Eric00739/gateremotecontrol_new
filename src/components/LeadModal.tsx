@@ -11,16 +11,14 @@ const WHATSAPP_NUMBER = siteContact.whatsAppNumber;
 const EMAIL = siteContact.email;
 
 type InquiryDraft = {
-  requestType: PrefillType;
   productInterest: string;
   targetCountry: string;
   quantity: string;
   message: string;
 };
 
-function createDraft(type: PrefillType, context: InquiryContext): InquiryDraft {
+function createDraft(context: InquiryContext): InquiryDraft {
   return {
-    requestType: type === 'support' ? 'compatibility' : type,
     productInterest: context.productInterest ?? '',
     targetCountry: '',
     quantity: '',
@@ -29,26 +27,44 @@ function createDraft(type: PrefillType, context: InquiryContext): InquiryDraft {
 }
 
 function LeadModalContent() {
-  const { open, prefillType, inquiryContext, inquiryKey, sourceUrl, closeModal } = useLeadModal();
+  const { open, prefillType, inquiryContext, inquiryKey, inquirySession, sourceUrl, closeModal } = useLeadModal();
   const dict = useDict();
   const locale = useLocale();
   const [name, setName] = useState('');
   const [company, setCompany] = useState('');
   const [email, setEmail] = useState('');
   const [whatsApp, setWhatsApp] = useState('');
-  const [copyState, setCopyState] = useState<'idle' | 'copied'>('idle');
-  const [emailError, setEmailError] = useState(false);
+  const [copiedSession, setCopiedSession] = useState<number | null>(null);
+  const [emailErrorSession, setEmailErrorSession] = useState<number | null>(null);
+  const [requestTypeOverride, setRequestTypeOverride] = useState<{ session: number; value: PrefillType } | null>(null);
+  const copyState = copiedSession === inquirySession ? 'copied' : 'idle';
+  const emailError = emailErrorSession === inquirySession;
   // Retain edits per buying context without carrying one product into another request.
   const [drafts, setDrafts] = useState<Record<string, InquiryDraft>>({});
-  const draft = drafts[inquiryKey] ?? createDraft(prefillType, inquiryContext);
-  const updateDraft = (updates: Partial<InquiryDraft>) => {
+  const draft = {
+    ...(drafts[inquiryKey] ?? createDraft(inquiryContext)),
+    requestType: requestTypeOverride?.session === inquirySession
+      ? requestTypeOverride.value
+      : prefillType === 'support' ? 'compatibility' : prefillType,
+  };
+  const requestCopy = draft.requestType === 'oem'
+    ? dict.leadModal.customProject
+    : draft.requestType === 'compatibility'
+      ? dict.leadModal.replacement
+      : { title: dict.leadModal.title, detailsLabel: dict.leadModal.detailsLabel, detailsPlaceholder: dict.leadModal.detailsPlaceholder, note: dict.leadModal.unknownModelNote };
+  const updateDraft = (updates: Partial<InquiryDraft> & { requestType?: PrefillType }) => {
+    const { requestType, ...details } = updates;
+    if (requestType) setRequestTypeOverride({ session: inquirySession, value: requestType });
     setDrafts(previous => ({
       ...previous,
-      [inquiryKey]: { ...(previous[inquiryKey] ?? createDraft(prefillType, inquiryContext)), ...updates },
+      [inquiryKey]: { ...(previous[inquiryKey] ?? createDraft(inquiryContext)), ...details },
     }));
   };
-  const firstInputRef = useRef<HTMLInputElement>(null);
+  const firstInputRef = useRef<HTMLTextAreaElement>(null);
   const emailInputRef = useRef<HTMLInputElement>(null);
+  const contactDetailsRef = useRef<HTMLDetailsElement>(null);
+  const copyOperationRef = useRef(0);
+  const copyResetTimerRef = useRef<number | undefined>(undefined);
   const dialogRef = useRef<HTMLDivElement>(null);
   const overlayRef = useRef<HTMLDivElement>(null);
 
@@ -56,7 +72,7 @@ function LeadModalContent() {
     if (!open) return;
     const handleKey = (e: KeyboardEvent) => {
       if (e.key === 'Escape') {
-        setCopyState('idle');
+        setCopiedSession(null);
         closeModal();
         return;
       }
@@ -67,7 +83,15 @@ function LeadModalContent() {
         dialogRef.current.querySelectorAll<HTMLElement>(
           'button:not([disabled]), input:not([disabled]), select:not([disabled]), textarea:not([disabled]), summary, a[href], [tabindex]:not([tabindex="-1"])',
         ),
-      ).filter(element => element.getClientRects().length > 0);
+      ).filter(element => {
+        if (element.getClientRects().length === 0) return false;
+        // Closed details can still give their hidden fields layout rectangles.
+        for (let ancestor = element.parentElement; ancestor; ancestor = ancestor.parentElement) {
+          if (ancestor instanceof HTMLDetailsElement && !ancestor.open &&
+              !ancestor.querySelector(':scope > summary')?.contains(element)) return false;
+        }
+        return true;
+      });
       const firstElement = focusableElements[0];
       const lastElement = focusableElements[focusableElements.length - 1];
 
@@ -86,11 +110,13 @@ function LeadModalContent() {
     document.body.style.overflow = 'hidden';
     const focusTimer = window.setTimeout(() => firstInputRef.current?.focus(), 0);
     return () => {
+      copyOperationRef.current += 1;
+      window.clearTimeout(copyResetTimerRef.current);
       document.removeEventListener('keydown', handleKey);
       document.body.style.overflow = previousOverflow;
       window.clearTimeout(focusTimer);
     };
-  }, [open, closeModal]);
+  }, [open, closeModal, inquirySession]);
 
   if (!open) return null;
 
@@ -122,22 +148,25 @@ function LeadModalContent() {
 
   const handleEmailSubmit = () => {
     if (!emailInputRef.current?.checkValidity()) {
-      setEmailError(true);
+      setEmailErrorSession(inquirySession);
+      if (contactDetailsRef.current) contactDetailsRef.current.open = true;
       emailInputRef.current?.focus();
       return;
     }
-    setEmailError(false);
+    setEmailErrorSession(null);
     const text = buildMessage();
     const label = requestTypeOptions.find(o => o.value === draft.requestType)?.label || dict.leadModal.messageFallbackType;
     const subject = encodeURIComponent(`${dict.leadModal.messageSubjectPrefix}: ${label}`);
     const body = encodeURIComponent(text);
     window.location.href = `mailto:${EMAIL}?subject=${subject}&body=${body}`;
-    setCopyState('idle');
+    setCopiedSession(null);
   };
 
   // Fallback channel: lets buyers keep the filled-in inquiry when neither
   // WhatsApp nor a local mail client is available on the device.
   const handleCopyContent = async () => {
+    const operation = ++copyOperationRef.current;
+    window.clearTimeout(copyResetTimerRef.current);
     const text = buildMessage();
     let copied = false;
 
@@ -147,6 +176,8 @@ function LeadModalContent() {
     } catch {
       // Clipboard API unavailable (insecure context or permission denied).
     }
+
+    if (operation !== copyOperationRef.current) return;
 
     if (!copied) {
       const previousFocus = document.activeElement instanceof HTMLElement ? document.activeElement : null;
@@ -167,8 +198,12 @@ function LeadModalContent() {
       }
     }
 
-    if (copied) setCopyState('copied');
-    window.setTimeout(() => setCopyState('idle'), 2000);
+    if (copied) setCopiedSession(inquirySession);
+    copyResetTimerRef.current = window.setTimeout(() => {
+      if (operation === copyOperationRef.current) {
+        setCopiedSession(current => current === inquirySession ? null : current);
+      }
+    }, 2000);
   };
 
   const inputClass = 'w-full rounded-lg border border-[#D8E4F0] bg-[#F8FAFC] px-3 py-2.5 text-sm text-[#0F172A] placeholder:text-[#64748B] outline-none transition-colors focus:border-[#C2410C] focus:bg-white';
@@ -178,7 +213,7 @@ function LeadModalContent() {
     <div
       ref={overlayRef}
       className="fixed inset-0 z-[100] flex items-center justify-center bg-black/50 p-4"
-      onClick={(e) => { if (e.target === overlayRef.current) { setCopyState('idle'); closeModal(); } }}
+      onClick={(e) => { if (e.target === overlayRef.current) { setCopiedSession(null); closeModal(); } }}
     >
       <div
         ref={dialogRef}
@@ -191,11 +226,11 @@ function LeadModalContent() {
         {/* Header */}
         <div className="sticky top-0 bg-white border-b border-[#E2E8F0] px-5 py-3.5 flex items-center justify-between rounded-t-2xl z-10">
           <h2 id="lead-modal-title" className="text-base font-bold text-[#0F172A]" style={{ fontFamily: 'var(--font-outfit), sans-serif' }}>
-            {dict.leadModal.title}
+            {requestCopy.title}
           </h2>
           <button
             type="button"
-            onClick={() => { setCopyState('idle'); closeModal(); }}
+            onClick={() => { setCopiedSession(null); closeModal(); }}
             aria-label={dict.leadModal.closeLabel}
             className="w-10 h-10 rounded-lg flex items-center justify-center text-[#64748B] hover:text-[#0F172A] hover:bg-[#F1F5F9] transition-colors"
           >
@@ -205,49 +240,52 @@ function LeadModalContent() {
 
         {/* Form */}
         <div className="px-5 py-4 space-y-3.5">
+          {draft.productInterest && <p className="text-sm font-semibold text-[#0B3A63]">{draft.productInterest}</p>}
           <div>
-            <label htmlFor="lead-product" className={labelClass}>{dict.leadModal.productInterestLabel}</label>
-            <input id="lead-product" ref={firstInputRef} type="text" value={draft.productInterest} onChange={e => updateDraft({ productInterest: e.target.value })} placeholder={dict.leadModal.productInterestPlaceholder} className={inputClass} />
+            <label htmlFor="lead-details" className={labelClass}>{requestCopy.detailsLabel}</label>
+            <textarea id="lead-details" ref={firstInputRef} value={draft.message} onChange={e => updateDraft({ message: e.target.value })} placeholder={requestCopy.detailsPlaceholder} aria-describedby="lead-modal-unknown-note" rows={3} className={`${inputClass} resize-y`} />
+            <p id="lead-modal-unknown-note" className="mt-2 text-xs leading-5 text-[#475569]">{requestCopy.note}</p>
           </div>
 
-          <div className="grid grid-cols-2 items-end gap-3">
-            <div>
-              <label htmlFor="lead-country" className={labelClass}>{dict.leadModal.targetCountryLabel}</label>
-              <input id="lead-country" type="text" autoComplete="country-name" value={draft.targetCountry} onChange={e => updateDraft({ targetCountry: e.target.value })} placeholder={dict.leadModal.targetCountryPlaceholder} className={inputClass} />
+          <details id="lead-request-details" className="rounded-lg border border-[#D8E4F0] px-3 py-2.5">
+            <summary className="cursor-pointer text-xs font-semibold leading-5 text-[#475569]">{dict.leadModal.requestDetailsLabel}</summary>
+            <div className="mt-3 space-y-3">
+              <div>
+                <label htmlFor="lead-product" className={labelClass}>{dict.leadModal.productInterestLabel}</label>
+                <input id="lead-product" type="text" value={draft.productInterest} onChange={e => updateDraft({ productInterest: e.target.value })} placeholder={dict.leadModal.productInterestPlaceholder} className={inputClass} />
+              </div>
+              <div className="grid grid-cols-2 items-end gap-3">
+                <div>
+                  <label htmlFor="lead-country" className={labelClass}>{dict.leadModal.targetCountryLabel}</label>
+                  <input id="lead-country" type="text" autoComplete="country-name" value={draft.targetCountry} onChange={e => updateDraft({ targetCountry: e.target.value })} placeholder={dict.leadModal.targetCountryPlaceholder} className={inputClass} />
+                </div>
+                <div>
+                  <label htmlFor="lead-quantity" className={labelClass}>{dict.leadModal.quantityLabel}</label>
+                  <input id="lead-quantity" type="text" value={draft.quantity} onChange={e => updateDraft({ quantity: e.target.value })} placeholder={dict.leadModal.quantityPlaceholder} className={inputClass} />
+                </div>
+              </div>
+              <div>
+                <label htmlFor="lead-request-type" className={labelClass}>{dict.leadModal.requestTypeLabel}</label>
+                <select id="lead-request-type" value={draft.requestType} onChange={e => {
+                  const option = requestTypeOptions.find(item => item.value === e.target.value);
+                  if (option) updateDraft({ requestType: option.value });
+                }} className={inputClass}>
+                  {requestTypeOptions.map(opt => (
+                    <option key={opt.value} value={opt.value}>{opt.label}</option>
+                  ))}
+                </select>
+              </div>
             </div>
-            <div>
-              <label htmlFor="lead-quantity" className={labelClass}>{dict.leadModal.quantityLabel}</label>
-              <input id="lead-quantity" type="text" value={draft.quantity} onChange={e => updateDraft({ quantity: e.target.value })} placeholder={dict.leadModal.quantityPlaceholder} className={inputClass} />
-            </div>
-          </div>
+          </details>
 
-          <div>
-            <label htmlFor="lead-request-type" className={labelClass}>{dict.leadModal.requestTypeLabel}</label>
-            <select id="lead-request-type" value={draft.requestType} onChange={e => {
-              const option = requestTypeOptions.find(item => item.value === e.target.value);
-              if (option) updateDraft({ requestType: option.value });
-            }} className={inputClass}>
-              {requestTypeOptions.map(opt => (
-                <option key={opt.value} value={opt.value}>{opt.label}</option>
-              ))}
-            </select>
-          </div>
-
-          <div>
-            <label htmlFor="lead-details" className={labelClass}>{dict.leadModal.detailsLabel}</label>
-            <textarea id="lead-details" value={draft.message} onChange={e => updateDraft({ message: e.target.value })} placeholder={dict.leadModal.detailsPlaceholder} aria-describedby="lead-modal-unknown-note" rows={3} className={`${inputClass} resize-y`} />
-            <p id="lead-modal-unknown-note" className="mt-2 text-xs leading-5 text-[#475569]">{dict.leadModal.unknownModelNote}</p>
-          </div>
-
-          <div>
-            <label htmlFor="lead-email" className={labelClass}>{dict.leadModal.emailLabel}</label>
-            <input id="lead-email" ref={emailInputRef} type="email" required autoComplete="email" value={email} onChange={e => { setEmail(e.target.value); setEmailError(false); }} aria-invalid={emailError || undefined} aria-describedby={emailError ? 'lead-email-error' : undefined} placeholder={dict.leadModal.emailPlaceholder} className={inputClass} />
-            {emailError && <p id="lead-email-error" role="alert" className="mt-2 text-xs leading-5 text-[#B91C1C]">{dict.leadModal.emailError}</p>}
-          </div>
-
-          <details className="rounded-lg border border-[#D8E4F0] px-3 py-2.5">
+          <details id="lead-contact-details" ref={contactDetailsRef} className="rounded-lg border border-[#D8E4F0] px-3 py-2.5">
             <summary className="cursor-pointer text-xs font-semibold leading-5 text-[#475569]">{dict.leadModal.contactDetailsLabel}</summary>
             <div className="mt-3 space-y-3">
+              <div>
+                <label htmlFor="lead-email" className={labelClass}>{dict.leadModal.emailLabel}</label>
+                <input id="lead-email" ref={emailInputRef} type="email" required autoComplete="email" value={email} onChange={e => { setEmail(e.target.value); setEmailErrorSession(null); }} aria-invalid={emailError || undefined} aria-describedby={emailError ? 'lead-email-error' : undefined} placeholder={dict.leadModal.emailPlaceholder} className={inputClass} />
+                {emailError && <p id="lead-email-error" role="alert" className="mt-2 text-xs leading-5 text-[#B91C1C]">{dict.leadModal.emailError}</p>}
+              </div>
               <div>
                 <label htmlFor="lead-name" className={labelClass}>{dict.leadModal.nameLabel}</label>
                 <input id="lead-name" type="text" autoComplete="name" value={name} onChange={e => setName(e.target.value)} placeholder={dict.leadModal.namePlaceholder} className={inputClass} />
@@ -276,7 +314,7 @@ function LeadModalContent() {
               onClick={() => {
                 const text = buildMessage();
                 window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(text)}`, '_blank', 'noopener,noreferrer');
-                setCopyState('idle');
+                setCopiedSession(null);
               }}
               className="flex-1 bg-[#15803D] hover:bg-[#166534] text-white font-bold py-2.5 rounded-lg transition-colors text-sm flex items-center justify-center gap-2"
             >

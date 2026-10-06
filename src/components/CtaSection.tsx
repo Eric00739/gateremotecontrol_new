@@ -35,12 +35,22 @@ export default function CtaSection() {
             <p className="text-[#C7D7E8] leading-relaxed mb-8 max-w-md">
               {dict.cta.subtitle}
             </p>
-            <LeadModalTrigger
-              prefillType="support"
-              className="btn-glow inline-block bg-[#FF8A1F] hover:bg-[#F97316] text-[#062748] font-bold px-10 py-4 rounded-lg transition-all hover:shadow-xl hover:shadow-amber-500/20 text-[14px] cursor-pointer"
-            >
-              {dict.cta.button}
-            </LeadModalTrigger>
+            <div className="flex flex-wrap gap-3">
+              <LeadModalTrigger
+                prefillType="oem"
+                inquiryContext={{ productInterest: dict.buyerPaths.paths[0].title }}
+                className="btn-glow inline-block bg-[#FF8A1F] hover:bg-[#F97316] text-[#062748] font-bold px-10 py-4 rounded-lg transition-all hover:shadow-xl hover:shadow-amber-500/20 text-[14px] cursor-pointer"
+              >
+                {dict.cta.button}
+              </LeadModalTrigger>
+              <LeadModalTrigger
+                prefillType="compatibility"
+                inquiryContext={{ productInterest: dict.buyerPaths.paths[1].title }}
+                className="inline-flex items-center rounded-lg border border-[#2A587C] px-6 py-4 text-left text-sm font-semibold text-[#F7FBFF] transition-colors hover:border-[#FF8A1F]"
+              >
+                {dict.cta.replacementButton}
+              </LeadModalTrigger>
+            </div>
           </div>
 
           <div className="w-full max-w-lg lg:justify-self-end">

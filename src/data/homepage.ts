@@ -15,7 +15,7 @@ export const compatibilityRows = [
     frequency: '433.92 MHz',
     codeType: 'Rolling Code',
     solution: 'Available',
-    sampleTest: 'Recommended',
+    sampleTest: 'Test on your receiver',
   },
   {
     brand: 'BFT',
@@ -23,7 +23,7 @@ export const compatibilityRows = [
     frequency: '433.92 MHz',
     codeType: 'Rolling Code',
     solution: 'Available',
-    sampleTest: 'Yes',
+    sampleTest: 'Test on your receiver',
   },
   {
     brand: 'Nice',
@@ -31,7 +31,7 @@ export const compatibilityRows = [
     frequency: '433.92 MHz',
     codeType: 'Rolling Code',
     solution: 'Available',
-    sampleTest: 'Yes',
+    sampleTest: 'Test on your receiver',
   },
   {
     brand: 'LiftMaster',
@@ -39,7 +39,7 @@ export const compatibilityRows = [
     frequency: 'To Confirm',
     codeType: 'Rolling Code',
     solution: 'To Confirm',
-    sampleTest: 'Yes',
+    sampleTest: 'Test on your receiver',
   },
 ];
 

@@ -103,6 +103,50 @@ for (const [locale, dictionary] of dictionaries) {
   }
 
   const homeHtml = (await readTextIfExists(pathToHtmlFile(`/${locale}`))) ?? '';
+  const salesPages = [
+    { path: '', html: homeHtml, title: dictionary.meta.title, description: dictionary.meta.description, heading: dictionary.hero.title },
+    { path: '/oem-odm', html: oemHtml, title: dictionary.servicePages.oem.metaTitle, description: dictionary.servicePages.oem.metaDescription, heading: dictionary.servicePages.oem.title },
+    { path: '/compatibility', title: dictionary.compatibility.metaTitle, description: dictionary.compatibility.metaDescription, heading: dictionary.compatibility.title },
+    ...referenceBrands.filter((brand) => brand.guideSlug).map((brand) => ({
+      path: `/compatibility/${brand.guideSlug}`,
+      title: `${brand.name} ${dictionary.brandPage.referenceTitle} | ${site.siteName}`,
+      description: dictionary.brandPage.brands[brand.guideSlug].shortDescription,
+      heading: `${brand.name} ${dictionary.brandPage.referenceTitle}`,
+    })),
+  ];
+  for (const page of salesPages) {
+    const html = page.html ?? (await readTextIfExists(pathToHtmlFile(`/${locale}${page.path}`))) ?? '';
+    const meta = [...html.matchAll(/<meta\b[^>]*>/gi)].map((match) => attributes(match[0]));
+    const h1 = [...html.matchAll(/<h1\b[^>]*>([\s\S]*?)<\/h1>/gi)];
+    if (visibleText(html.match(/<title>([\s\S]*?)<\/title>/)?.[1] ?? '') !== visibleText(page.title) ||
+        meta.find((tag) => tag.name === 'description')?.content !== visibleText(page.description) ||
+        meta.find((tag) => tag.property === 'og:title')?.content !== visibleText(page.title) ||
+        meta.find((tag) => tag.property === 'og:description')?.content !== visibleText(page.description) ||
+        h1.length !== 1 || visibleText(h1[0]?.[1] ?? '') !== visibleText(page.heading)) {
+      problems.push(`Sales page metadata and single H1 must match its localized copy: ${locale}${page.path}`);
+    }
+  }
+  const hero = homeHtml.match(/<section\b[^>]*\bid="home-intro"[^>]*>([\s\S]*?)<\/section>/)?.[1] ?? '';
+  const heroButtons = [...hero.matchAll(/<button\b([^>]*)>([\s\S]*?)<\/button>/gi)];
+  for (const [type, label] of [['oem', dictionary.hero.modelDetailsCta], ['compatibility', dictionary.hero.supportedBrandsCta]]) {
+    if (!heroButtons.some((button) => button[1].includes(`data-inquiry-type="${type}"`) && visibleText(button[2]).startsWith(visibleText(label)))) {
+      problems.push(`Missing direct ${type} inquiry in homepage hero: ${locale}`);
+    }
+  }
+  const buyerPaths = homeHtml.match(/<section\b[^>]*\bid="buyer-paths"[^>]*>([\s\S]*?)<\/section>/)?.[1] ?? '';
+  const buyerCards = [...buyerPaths.matchAll(/<article\b[^>]*>([\s\S]*?)<\/article>/gi)].map((match) => match[1]);
+  if (dictionary.buyerPaths.paths.length !== 2 || buyerCards.length !== 2 ||
+      dictionary.buyerPaths.paths.some((buyer, index) => {
+        const card = buyerCards[index] ?? '';
+        const type = buyer.href === '/oem-odm' ? 'oem' : 'compatibility';
+        const button = card.match(/<button\b([^>]*)>([\s\S]*?)<\/button>/i);
+        return !visibleText(card).includes(visibleText(buyer.title)) ||
+          !button?.[1].includes(`data-inquiry-type="${type}"`) ||
+          visibleText(button?.[2] ?? '') !== visibleText(buyer.cta) || !card.includes(`href="/${locale}${buyer.href}"`);
+      }) ||
+      homeHtml.indexOf('id="buyer-paths"') > homeHtml.indexOf('id="products"')) {
+    problems.push(`Two buying paths must offer direct inquiries and working guides before products: ${locale}`);
+  }
   const applications = homeHtml.match(/<section\b[^>]*\bid="applications"[^>]*>([\s\S]*?)<\/section>/)?.[1] ?? '';
   const applicationHeadings = [...applications.matchAll(/<h3\b[^>]*>([\s\S]*?)<\/h3>/gi)].map((match) => visibleText(match[1]));
   const applicationImages = [...applications.matchAll(/<img\b[^>]*\bsrc="([^"]+)"/gi)].map((match) => match[1]);
@@ -114,7 +158,25 @@ for (const [locale, dictionary] of dictionaries) {
   }
   const productCards = homeHtml.match(/<section\b[^>]*\bid="products"[^>]*>([\s\S]*?)<\/section>/)?.[1] ?? '';
   if (!visibleText(productCards).includes(visibleText(dictionary.product.accessories.title)) || !productCards.includes('/images/generated/car-remotes-640.webp')) {
-    problems.push(`Aftermarket car category or image missing: ${locale}`);
+    problems.push(`Automotive remote category or image missing: ${locale}`);
+  }
+  const automotiveCard = [...productCards.matchAll(/<article\b[^>]*>([\s\S]*?)<\/article>/gi)]
+    .find((match) => visibleText(match[1]).includes(visibleText(dictionary.product.accessories.title)))?.[1] ?? '';
+  const automotiveButtons = [...automotiveCard.matchAll(/<button\b([^>]*)>([\s\S]*?)<\/button>/gi)];
+  for (const [type, label] of [['oem', dictionary.products.automotiveCustomInquiry], ['compatibility', dictionary.products.automotiveReplacementInquiry]]) {
+    if (!automotiveButtons.some((button) => button[1].includes(`data-inquiry-type="${type}"`) && visibleText(button[2]) === visibleText(label))) {
+      problems.push(`Automotive remote category missing its ${type} inquiry: ${locale}`);
+    }
+  }
+  const modelSection = homeHtml.match(/<section\b[^>]*\bid="compatibility"[^>]*>([\s\S]*?)<\/section>/)?.[1] ?? '';
+  const modelRows = [...modelSection.matchAll(/<(div|tr)\b[^>]*\bdata-model-reference="([^"]+)"[^>]*>([\s\S]*?)<\/\1>/gi)];
+  // The desktop rows avoid nested div markup; each example must offer an inquiry.
+  const desktopRows = modelRows.filter((row) => row[1] === 'tr');
+  if (desktopRows.length !== 4 || desktopRows.some((row) =>
+    !row[3].includes('data-inquiry-type="compatibility"') ||
+    !visibleText(row[3]).includes(visibleText(dictionary.compatibilityTable.askReplacement)) ||
+    !visibleText(row[3]).includes(visibleText(dictionary.compatibilityTable.testOnReceiver)))) {
+    problems.push(`Every model example must offer an inquiry and request receiver testing: ${locale}`);
   }
   for (const pagePath of ['', '/factory-quality']) {
     const footageHtml = pagePath === '' ? homeHtml : (await readTextIfExists(pathToHtmlFile(`/${locale}${pagePath}`))) ?? '';

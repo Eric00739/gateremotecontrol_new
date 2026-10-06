@@ -6,12 +6,12 @@ import { useDict } from '@/i18n';
 import GeneratedImage from './GeneratedImage';
 
 const categories = [
-  { key: 'replacementRemotes', visual: 'remotes', altKey: 'remotesAlt' },
-  { key: 'universalReceivers', visual: 'receiver', altKey: 'receiverAlt' },
-  { key: 'duplicators', visual: 'learning', altKey: 'learningAlt' },
+  { key: 'oemCustom', visual: 'matching', altKey: 'matchingAlt' },
   { key: 'controllers', visual: 'controller', altKey: 'controllerAlt' },
+  { key: 'universalReceivers', visual: 'receiver', altKey: 'receiverAlt' },
   { key: 'accessories', visual: 'carRemotes', altKey: 'accessoriesAlt' },
-  { key: 'oemCustom', visual: 'oemKit', altKey: 'oemAlt' },
+  { key: 'replacementRemotes', visual: 'remotes', altKey: 'remotesAlt' },
+  { key: 'duplicators', visual: 'learning', altKey: 'learningAlt' },
 ] as const;
 
 export default function ProductCategoriesSection() {
@@ -42,6 +42,8 @@ export default function ProductCategoriesSection() {
           {categories.map((category, idx) => {
             const pKey = category.key;
             const pDict = dict.product[pKey];
+            const isCustom = pKey === 'oemCustom' || pKey === 'controllers' || pKey === 'universalReceivers';
+            const isReplacement = pKey === 'replacementRemotes' || pKey === 'duplicators';
 
             return (
               <article
@@ -54,14 +56,33 @@ export default function ProductCategoriesSection() {
                 </span>
                 <h3 className="mt-3 text-base font-bold text-[#0F172A] sm:text-xl" style={{ fontFamily: "var(--font-outfit), sans-serif" }}>{pDict.title}</h3>
                 <p className="mt-3 mb-4 text-sm leading-relaxed text-[#475569]">{pDict.description}</p>
-                <LeadModalTrigger
-                  prefillType={pKey === 'oemCustom' ? 'oem' : 'quote'}
-                  inquiryContext={{ productInterest: pDict.title }}
-                  className="mt-auto inline-flex min-h-11 flex-wrap items-center gap-1.5 self-start text-left text-sm font-bold text-[#9A3412] transition-colors hover:text-[#C2410C] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#C2410C]"
-                >
-                  {dict.products.sendInquiry}
-                  <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
-                </LeadModalTrigger>
+                {pKey === 'accessories' ? (
+                  <div className="mt-auto flex flex-col gap-1">
+                    {([
+                      { type: 'oem', label: dict.products.automotiveCustomInquiry },
+                      { type: 'compatibility', label: dict.products.automotiveReplacementInquiry },
+                    ] as const).map((action) => (
+                      <LeadModalTrigger
+                        key={action.type}
+                        prefillType={action.type}
+                        inquiryContext={{ productInterest: pDict.title }}
+                        className="inline-flex min-h-11 flex-wrap items-center gap-1.5 self-start text-left text-sm font-bold text-[#9A3412] transition-colors hover:text-[#C2410C] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#C2410C]"
+                      >
+                        {action.label}
+                        <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+                      </LeadModalTrigger>
+                    ))}
+                  </div>
+                ) : (
+                  <LeadModalTrigger
+                    prefillType={isCustom ? 'oem' : isReplacement ? 'compatibility' : 'quote'}
+                    inquiryContext={{ productInterest: pDict.title }}
+                    className="mt-auto inline-flex min-h-11 flex-wrap items-center gap-1.5 self-start text-left text-sm font-bold text-[#9A3412] transition-colors hover:text-[#C2410C] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#C2410C]"
+                  >
+                    {isCustom ? dict.products.customInquiry : isReplacement ? dict.products.replacementInquiry : dict.products.sendInquiry}
+                    <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+                  </LeadModalTrigger>
+                )}
               </article>
             );
           })}

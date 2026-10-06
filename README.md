@@ -1,6 +1,6 @@
 # WindChord Remote
 
-面向安装商、锁匠、批发商和 OEM 客户的多语言 RF 遥控器与接收器 B2B 静态网站。
+多语言 B2B 静态网站，围绕两类需求获取询盘：定制 RF 遥控器、接收器／控制器及汽车遥控器项目；品牌门与车库遥控器的独立售后替代采购。
 
 对外品牌为 **WindChord Remote**，公司名称为 **Dongguan Fengxian Electronics Technology Co., Ltd.（东莞市风弦电子科技有限公司）**。域名保持 `www.gateremotesource.com`，原邮箱、电话／WhatsApp 和地址保持不变。品牌、公司名称、Logo 与联系方式统一维护在 `src/data/site.ts`；全站页头／页脚、六语元数据、询盘及结构化数据读取这些值。
 
@@ -24,7 +24,7 @@ npm run lint
 npm run build
 ```
 
-`npm run build` 完成 Next.js 构建、旧 URL 重定向生成、HTML 语言标记修正、六语 sitemap/robots 静态文件生成，以及 sitemap、canonical、博客完整目录和重定向目标校验。SEO 校验覆盖重复或遗漏的规范 URL、noindex、HTML/XML hreflang、语言标记及文章日期保留规则。还会检查六套词典的键与数组结构、OEM 页面本地化、FAQ 正文与结构化数据的一致性，全站品牌／公司／Logo、联系方式及链接目标，并防止已撤下的无依据宣传陈述恢复。任何校验失败都会令构建失败。
+`npm run build` 完成 Next.js 构建、旧 URL 重定向生成、HTML 语言标记修正、六语 sitemap/robots 静态文件生成，以及 sitemap、canonical、博客完整目录和重定向目标校验。SEO 校验覆盖重复或遗漏的规范 URL、noindex、HTML/XML hreflang、语言标记及文章日期保留规则。还会检查六套词典的键与数组结构、OEM 页面本地化、FAQ 正文与结构化数据的一致性，全站品牌／公司／Logo、联系方式及链接目标，并防止已撤下的无依据宣传陈述恢复。首页检查要求定制和品牌替代均有直接询盘入口，每张业务卡的按钮须对应正确需求类型和指南链接。任何校验失败都会令构建失败。
 
 项目使用 Next.js `output: 'export'`，不要运行 `next start`。完整的本地交互检查使用 `npm run dev`；直接查看构建产物可运行：
 
@@ -52,12 +52,23 @@ GitHub Actions 工作流 [`.github/workflows/deploy.yml`](.github/workflows/depl
 - `scripts/generate-static-metadata.mjs`：静态导出后生成六语 sitemap/robots 文件，补足 Next.js 对动态语言目录元数据路由的导出限制。
 - `scripts/legacy-redirects.mjs`：旧 URL 重定向数据。
 - `scripts/verify-export.mjs`：静态导出、媒体、sitemap、canonical、六语内容、FAQ 和重定向目标校验。
+- `scripts/verify-inquiry-browser.js`：本地浏览器检查汽车遥控器双入口、型号预填、折叠表单、焦点和询盘会话隔离。
 
 ## 询盘与内容边界
 
 这是纯静态站点。询盘支持打开 WhatsApp、本机邮件草稿，或复制询盘内容；网站不会接收表单数据或上传附件。产品、品牌和无匹配搜索词会带入需求；同一页面和需求上下文的编辑在当前 Provider 生命周期内保留，刷新后丢失，不写入浏览器存储。WhatsApp 不要求姓名或邮箱；邮件草稿要求有效邮箱。打开外部应用不代表已经发送或收到。
 
 目录申请使用独立的 `catalog` 需求类型，编辑产品后仍能保留目录意图；OEM 和其他产品询盘分别保留自己的需求上下文。浏览器禁用 Clipboard API 时使用备用复制，成功或失败后均恢复弹窗内的原焦点；复制失败不显示成功。
+
+首页首屏、两张业务卡和结尾分别提供定制项目（`oem`）与品牌替代（`compatibility`）询盘。表单先展示需求描述；产品、市场、数量和联系资料分组收起，邮件校验失败时自动展开邮箱并聚焦。每次进入时恢复入口指定的需求类型，文字草稿仍按购买上下文保留，邮箱错误和复制结果按本次打开隔离。导航、页脚、博客目录和作者区的通用联系按钮使用 `quote`。汽车遥控器分类提供定制与替代两个询盘，均带入汽车遥控器产品名；实际适配及编程按项目核对。核心销售文案与本地验收见 `COPY_POSITIONING_REVIEW.md`。
+
+需要复测浏览器行为时，先启动 `npm run dev`，再运行以下 Playwright skill CLI 命令。测试只允许本地地址，拦截 WhatsApp 和复制操作，不发送测试询盘。
+
+```sh
+~/.codex/skills/playwright/scripts/playwright_cli.sh -s=windchord-inquiry open http://localhost:3000/en
+~/.codex/skills/playwright/scripts/playwright_cli.sh -s=windchord-inquiry run-code --filename scripts/verify-inquiry-browser.js
+~/.codex/skills/playwright/scripts/playwright_cli.sh -s=windchord-inquiry close
+```
 
 接入真实表单、附件上传、CRM、统计或其他第三方服务前，需要先确认托管、隐私和密钥方案。
 

@@ -122,7 +122,7 @@ export default function Header() {
               </svg>
             </a>
             <LeadModalTrigger
-              prefillType="compatibility"
+              prefillType="quote"
               className="bg-[#FF8A1F] hover:bg-[#F97316] text-[#062748] text-[12px] font-bold px-5 py-2 rounded-lg transition-all btn-glow shadow-sm shadow-orange-500/20"
               style={{ fontFamily: "var(--font-dm-sans), sans-serif" }}
             >
@@ -183,7 +183,7 @@ export default function Header() {
                 ))}
               </div>
               <LeadModalTrigger
-                prefillType="compatibility"
+                prefillType="quote"
                 className="bg-[#FF8A1F] hover:bg-[#F97316] text-[#062748] text-sm font-bold py-2.5 px-5 rounded-lg text-center mt-1"
                 onClick={() => setMobileOpen(false)}
               >

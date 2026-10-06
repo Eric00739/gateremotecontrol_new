@@ -14,11 +14,11 @@ export default function HomePage() {
   return (
     <>
       <HeroSection />
-      <ProductCategoriesSection />
-      <ProductionScenes />
       <CapabilityHighlightsSection />
+      <ProductCategoriesSection />
       <BrandCompatibilitySection />
       <CompatibilityWorkflowSection />
+      <ProductionScenes />
       <ApplicationScenariosSection />
       <RiskControlSection />
       <ResourcesSection />

@@ -97,7 +97,7 @@ export default async function OemOdmPage({ params }: { params: Promise<{ locale:
               </div>
             </div>
 
-            <GeneratedImage visual="oemKit" alt={dict.generatedVisuals.oemAlt} copy={dict.generatedVisuals} kind="packaging" eager dark />
+            <GeneratedImage visual="matching" alt={dict.generatedVisuals.matchingAlt} copy={dict.generatedVisuals} kind="editorial" eager dark />
           </div>
         </div>
       </section>
@@ -141,13 +141,10 @@ export default async function OemOdmPage({ params }: { params: Promise<{ locale:
             const Icon = iconMap[index] || Settings;
             return (
               <div key={step.title} className="rounded-lg border border-[#E2E8F0] bg-white p-5">
-                <div className="mb-5 flex items-center justify-between gap-3">
+                <div className="mb-5">
                   <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-[#FF8A1F]/10 text-[#FF8A1F]">
                     <Icon className="h-5 w-5" />
                   </div>
-                  <span className="text-[11px] font-bold text-[#94A3B8]" style={{ fontFamily: 'var(--font-jetbrains-mono), monospace' }}>
-                    {String(index + 1).padStart(2, '0')}
-                  </span>
                 </div>
                 <h3 className="text-sm font-bold text-[#0F172A]" style={{ fontFamily: 'var(--font-outfit), sans-serif' }}>
                   {step.title}
@@ -156,6 +153,14 @@ export default async function OemOdmPage({ params }: { params: Promise<{ locale:
               </div>
             );
           })}
+        </div>
+        <div className="mt-8">
+          <LeadModalTrigger
+            prefillType="oem"
+            className="inline-flex min-h-11 items-center justify-center rounded-lg bg-[#FF8A1F] px-6 py-3 text-sm font-bold text-[#062748] transition-colors hover:bg-[#F97316] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#C2410C]"
+          >
+            {page.primaryCta}
+          </LeadModalTrigger>
         </div>
       </section>
     </div>

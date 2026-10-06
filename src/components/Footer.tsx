@@ -77,10 +77,10 @@ export default function Footer() {
               </p>
             </div>
             <LeadModalTrigger
-              prefillType="compatibility"
+              prefillType="quote"
               className="mt-4 inline-flex min-h-11 items-center justify-center rounded-lg bg-[#FF8A1F] px-5 py-2.5 text-sm font-bold text-[#062748] transition-colors hover:bg-[#F97316] btn-glow"
             >
-              {dict.hero.modelDetailsCta}
+              {dict.header.modelDetails}
             </LeadModalTrigger>
           </div>
         </div>

@@ -18,14 +18,14 @@ export default function HeroSection() {
   const dict = useDict();
 
   return (
-    <section className="relative overflow-hidden">
+    <section id="home-intro" className="relative overflow-hidden">
       {/* Deep background */}
       <div className="absolute inset-0 bg-[#062748]" />
 
       {/* Technical grid */}
       <div className="absolute inset-0 tech-grid" />
 
-      <div className="relative max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8 py-24 lg:py-32">
+      <div className="relative max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8 py-14 lg:py-24">
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
           {/* Left: Content */}
           <div>
@@ -44,18 +44,20 @@ export default function HeroSection() {
 
             <div className="animate-fade-in-up delay-400 flex flex-wrap gap-4">
               <LeadModalTrigger
-                prefillType="compatibility"
+                prefillType="oem"
+                inquiryContext={{ productInterest: dict.buyerPaths.paths[0].title }}
                 className="btn-glow bg-[#FF8A1F] hover:bg-[#F97316] text-[#062748] font-bold px-8 py-3.5 rounded-lg transition-all hover:shadow-xl hover:shadow-amber-500/20 text-[14px]"
               >
                 {dict.hero.modelDetailsCta}
               </LeadModalTrigger>
-              <a
-                href="#compatibility"
+              <LeadModalTrigger
+                prefillType="compatibility"
+                inquiryContext={{ productInterest: dict.buyerPaths.paths[1].title }}
                 className="group border border-[#2A587C] hover:border-[#FF8A1F]/40 text-[#C7D7E8] hover:text-[#F7FBFF] font-medium px-8 py-3.5 rounded-lg transition-all text-[14px] flex items-center gap-2 cursor-pointer"
               >
                 {dict.hero.supportedBrandsCta}
                 <span className="text-[#FF8A1F] group-hover:translate-x-1 transition-transform">&rarr;</span>
-              </a>
+              </LeadModalTrigger>
             </div>
             <p className="mt-5 text-sm text-[#C7D7E8]">
               {dict.hero.unknownModelCta}

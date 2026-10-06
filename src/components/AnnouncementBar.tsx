@@ -14,7 +14,7 @@ export default function AnnouncementBar() {
           {dict.announcement.text}
         </p>
         <LeadModalTrigger
-          prefillType="support"
+          prefillType="quote"
           className="hidden sm:flex text-[10px] text-[#FF8A1F] hover:text-[#F97316] transition-colors font-semibold tracking-wide items-center gap-2 flex-shrink-0 cursor-pointer bg-transparent border-none"
           style={{ fontFamily: "var(--font-jetbrains-mono), monospace" }}
         >
