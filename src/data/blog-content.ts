@@ -11,6 +11,275 @@ export type BlogPost = BlogPostMeta & {
 /** Full article bodies, keyed by slug. Split from blog.ts so client list pages
  * ship only metadata instead of every article's full text. */
 export const blogContentBySlug: Record<string, BlogPostContentBlock[]> = {
+  'rf-remote-compatibility-beginner-guide': [
+    {
+      type: 'paragraph',
+      text: 'A housing, a battery, a few buttons, a circuit board and a transmit frequency: an RF remote looks like a simple product. Then a customer asks for a “433 MHz remote.” You supply one, and it will not pair. Two four-button remotes use the same frequency but cannot copy each other. An inexpensive order turns into hours of support.',
+    },
+    {
+      type: 'paragraph',
+      text: 'The missing piece is usually the system around the remote. The customer wants a door to open again, another person to gain access or a lost transmitter to be replaced. The remote is the part of that control system closest to the user. Learn the system first, and frequency, coding, protocol and pairing start to make sense.',
+    },
+    {
+      type: 'heading',
+      id: 'start-with-the-installed-system',
+      text: 'Start with the Installed System',
+    },
+    {
+      type: 'paragraph',
+      text: 'Newcomers often start with a specification sheet: frequency, encoder chip, range, button count, battery type, water resistance and copying support. Those details matter, but the first question is simpler: which existing system must this remote join?',
+    },
+    {
+      type: 'paragraph',
+      text: 'Replacing a broken garage-door remote, adding an employee to a parking barrier and upgrading an old roller-door controller are different jobs. They need different evidence, permissions and installation steps. A remote that transmits correctly can still be the wrong product for all three.',
+    },
+    {
+      type: 'quote',
+      text: 'The item on the invoice is a transmitter. The result the customer needs is working control of the intended equipment.',
+    },
+    {
+      type: 'paragraph',
+      text: 'Treat the inquiry as four connected questions. This is a working model for sales and troubleshooting, not a formal communications standard:',
+    },
+    {
+      type: 'list',
+      items: [
+        'Application: what equipment is controlled, which receiver or controller is installed, and what result does the user need?',
+        'Radio: can the receiver recover this signal under the intended frequency, modulation, timing, range and installation conditions?',
+        'Identity: does the message follow the expected protocol and satisfy the receiver’s address, credential and security checks?',
+        'Delivery: can the customer enroll the remote, map the buttons and demonstrate the required operation?',
+      ],
+    },
+    {
+      type: 'image',
+      src: '/images/blog/rf-remote-compatibility-beginner-guide/system-map.webp',
+      srcSet: '/images/blog/rf-remote-compatibility-beginner-guide/system-map-320.webp 320w, /images/blog/rf-remote-compatibility-beginner-guide/system-map-640.webp 640w, /images/blog/rf-remote-compatibility-beginner-guide/system-map.webp 1280w',
+      alt: 'Diagram with four questions: application—which system; radio—can it receive; identity—will it accept; delivery—does it work',
+      caption: 'Use these four checks to organize an inquiry. A frequency match is only one part of the second check.',
+    },
+    {
+      type: 'heading',
+      id: 'same-frequency-is-not-compatibility',
+      text: 'Why the Same Frequency Is Not Enough',
+    },
+    {
+      type: 'paragraph',
+      text: 'A carrier frequency tells you where a signal is transmitted. It does not tell you how the signal carries data, what the data means or whether the receiver will accept it. “Both are 433.92 MHz” is a useful observation, not a compatibility result.',
+    },
+    {
+      type: 'paragraph',
+      text: 'The radio layer includes modulation. ASK changes signal amplitude; OOK is an ASK form that switches the carrier on and off. FSK carries information by changing frequency around a nominal center. A receiver configured only for one method will not correctly recover the other just because their nominal frequency labels match.',
+    },
+    {
+      type: 'image',
+      src: '/images/blog/rf-remote-compatibility-beginner-guide/same-frequency-different-modulation.webp',
+      srcSet: '/images/blog/rf-remote-compatibility-beginner-guide/same-frequency-different-modulation-320.webp 320w, /images/blog/rf-remote-compatibility-beginner-guide/same-frequency-different-modulation-640.webp 640w, /images/blog/rf-remote-compatibility-beginner-guide/same-frequency-different-modulation.webp 1280w',
+      alt: 'Schematic comparison of ASK/OOK amplitude changes and FSK frequency changes using the same example nominal carrier frequency',
+      caption: 'Conceptual waveforms, not measured signals. Matching the nominal frequency does not establish matching modulation or receiver settings.',
+    },
+    {
+      type: 'paragraph',
+      text: 'Data rate, pulse timing and receiver bandwidth also matter. Some radios support several modulation modes, but they still need the correct configuration. TI’s CC1101 data sheet provides a concrete example of a configurable radio with separate frequency, modulation and data-rate settings.',
+      links: [{ text: 'TI’s CC1101 data sheet', href: 'https://www.ti.com/lit/ds/symlink/cc1101.pdf' }],
+    },
+    {
+      type: 'paragraph',
+      text: 'Above that, the receiver must understand the packet or pulse format, interpret the button data and accept the transmitter’s identity. Sharing a channel resembles being in the same room: it creates an opportunity to communicate, but it does not supply a shared language or permission to act.',
+    },
+    {
+      type: 'heading',
+      id: 'translate-the-customer-request',
+      text: 'Translate the Customer’s Request into a Job',
+    },
+    {
+      type: 'paragraph',
+      text: 'When a customer asks for a “433 MHz garage remote,” ask what changed and what they want to achieve. The answer determines the next step:',
+    },
+    {
+      type: 'list',
+      items: [
+        '“The original is lost”: restore control and confirm how the lost remote can be revoked.',
+        '“I need one more”: add an authorized user and check enrollment access and available receiver capacity.',
+        '“Can your copier copy this?”: identify the source system and decide whether copying is supported or receiver enrollment is required.',
+        '“The remote stopped working”: separate the battery, transmitter, receiver and downstream controller before choosing a replacement.',
+        '“I want a universal model”: define the installed models the buyer actually needs to cover.',
+      ],
+    },
+    {
+      type: 'paragraph',
+      text: 'This turns a catalog question into a control task. It also makes the sample test meaningful: success is the specified button producing the intended action on the identified receiver, not an LED flashing on a copy remote.',
+    },
+    {
+      type: 'heading',
+      id: 'separate-coding-from-enrollment',
+      text: 'Separate Coding from Enrollment',
+    },
+    {
+      type: 'paragraph',
+      text: 'Fixed code, learning code and rolling code are familiar trade terms, but they are not three neatly separated security levels. Fixed or changing message data describes one property. How the receiver enrolls a transmitter describes another.',
+    },
+    {
+      type: 'list',
+      items: [
+        'Fixed code: the relevant transmitted code stays the same for the same command. Some systems use matching DIP-switch addresses; others use factory-set identities. Static systems without additional protection can be vulnerable to replay.',
+        'Learning: the receiver saves information about an accepted transmitter. It can learn static-code remotes or rolling-code remotes. A Learn or Code button is evidence of a programming interface, not proof of a particular security mechanism.',
+        'Rolling code: part of the message changes, and the receiver checks it against stored security and synchronization state. A stable transmitter identifier may still be present; not every identity field changes on every press.',
+      ],
+    },
+    {
+      type: 'image',
+      src: '/images/blog/rf-remote-compatibility-beginner-guide/learning-is-enrollment.webp',
+      srcSet: '/images/blog/rf-remote-compatibility-beginner-guide/learning-is-enrollment-320.webp 320w, /images/blog/rf-remote-compatibility-beginner-guide/learning-is-enrollment-640.webp 640w, /images/blog/rf-remote-compatibility-beginner-guide/learning-is-enrollment.webp 1280w',
+      alt: 'Diagram showing receiver enrollment above two examples: repeated static code and changing rolling-code data',
+      caption: 'The letter groups illustrate code behavior only. Actual message formats and acceptance checks depend on the system.',
+    },
+    {
+      type: 'paragraph',
+      text: 'Microchip’s HCS301 documentation illustrates enrollment that stores a transmitter identity, key and synchronization state. Replaying one captured transmission does not provide an independently enrolled, reliable replacement. That is different from saying every rolling-code system is impossible to replace: supported replacements still depend on the exact system and enrollment method.',
+      links: [{ text: 'Microchip’s HCS301 documentation', href: 'https://ww1.microchip.com/downloads/en/devicedoc/21143c.pdf' }],
+    },
+    {
+      type: 'paragraph',
+      text: 'A useful response is: “Please confirm the receiver model and programming procedure. We can then assess a verified replacement or an appropriate receiver upgrade.” The model and sample result should support the offer. A chip-family name, housing match or security label alone cannot do that.',
+    },
+    {
+      type: 'heading',
+      id: 'triage-a-sample-with-evidence',
+      text: 'Use the First Five Minutes to Collect Evidence',
+    },
+    {
+      type: 'paragraph',
+      text: 'Five minutes can route a sample to the right investigation. It cannot establish every protocol detail or guarantee compatibility. Use a consistent intake sequence:',
+    },
+    {
+      type: 'list',
+      items: [
+        '1. Record the remote and receiver: model labels, frequency information, button functions, battery type and the current programming instructions. Add clear housing and accessible PCB photos where appropriate.',
+        '2. Look for address switches, board revisions and chip markings. A DIP-switch bank is a clue; confirm its documented function before assuming it sets a fixed-code address.',
+        '3. Ask how an additional remote is enrolled: matching switches, a receiver button, a controller menu or an already authorized transmitter. Copying into a remote and enrolling in a receiver are different operations.',
+        '4. Measure only what the equipment can establish. A frequency reading does not validate modulation, message timing, security credentials or correct button mapping.',
+        '5. Route the inquiry using confirmed evidence: assess an identified replacement, follow the documented enrollment process, obtain missing receiver information or evaluate an upgrade.',
+      ],
+    },
+    {
+      type: 'paragraph',
+      text: 'A copier reporting success while the door stays still does not diagnose rolling code. Wrong frequency, timing, protocol, enrollment, receiver state or output mapping can also explain it. Likewise, even a confirmed fixed-code system needs the right encoding and command structure; matching DIP count and button count is not sufficient.',
+    },
+    {
+      type: 'paragraph',
+      text: 'Manufacturer instructions are the reference for pairing. Nice’s SMXI/SMXIS manual, for example, distinguishes memorization modes and specific indication sequences. It is an example of why a generic “press Learn, then press the remote” instruction cannot cover every receiver.',
+      links: [{ text: 'Nice’s SMXI/SMXIS manual', href: 'https://www.niceforyou.com/sites/default/files/upload/manuals/IS0136A00MM.pdf' }],
+    },
+    {
+      type: 'heading',
+      id: 'define-universal-compatibility',
+      text: 'Give “Universal” a Defined Boundary',
+    },
+    {
+      type: 'paragraph',
+      text: 'Universal is attractive to customers and stockists: fewer SKUs, simpler ordering and wider coverage. It becomes a useful claim only when the supported models and conditions are stated. A multi-frequency remote can still support a limited set of protocols, and a multi-protocol remote can still require model-specific enrollment.',
+    },
+    {
+      type: 'paragraph',
+      text: 'Define the exact receiver models or families, supported regional variants, firmware restrictions where relevant, required programming method and button functions. Keep a sample-test record for the combinations actually verified. Certification for a market is a separate requirement; it does not prove that an unrelated receiver accepts the remote.',
+    },
+    {
+      type: 'callout',
+      title: 'A compatibility statement should be testable',
+      text: 'State the supported receiver and remote models, the enrollment procedure and what was verified. Request the missing identification before promising a replacement. “All 433 MHz garage doors” is not a useful technical boundary.',
+    },
+    {
+      type: 'paragraph',
+      text: 'When the original protocol cannot be supported, a transmitter-and-receiver kit may be worth evaluating. Check controller inputs, output behavior, supply requirements and the installation’s existing functions and interlocks. Adding a receiver changes the system interface; it is not automatically a drop-in solution.',
+    },
+    {
+      type: 'heading',
+      id: 'build-a-market-from-installed-models',
+      text: 'Build a Market Plan from Installed Models',
+    },
+    {
+      type: 'paragraph',
+      text: 'For a market such as Saudi Arabia, start with local installers’ actual inquiries: garage doors, villa gates, shop shutters, warehouse doors or parking barriers. Ask for receiver models, regional variants, photos and programming methods. These are inputs to a market assessment, not evidence that one frequency or a short brand list covers the market.',
+    },
+    {
+      type: 'paragraph',
+      text: 'If an identified installation uses 433.92 MHz, that is a radio requirement for that installation. It does not establish the country’s installed-base share or the complete approval requirements for a new product. Confirm current local radio and equipment requirements for the proposed configuration separately.',
+    },
+    {
+      type: 'paragraph',
+      text: 'Then organize the offering around three different jobs:',
+    },
+    {
+      type: 'list',
+      items: [
+        'An identified basic replacement: a compatible model with a clear setup procedure for a specific existing system.',
+        'A verified brand-and-model replacement: documented coverage for the installed receiver variant, rather than a brand-wide promise.',
+        'An assessed transmitter-and-receiver upgrade: for installations where keeping the original radio interface is impractical and the controller interface supports the change.',
+      ],
+    },
+    {
+      type: 'paragraph',
+      text: 'Stock and support can follow the observed demand for those jobs. Price, delivery commitments and available models need real supplier and customer information. They should not be inferred from a country name or frequency label.',
+    },
+    {
+      type: 'heading',
+      id: 'car-keys-add-start-authorization',
+      text: 'Car Keys Add a Separate Authorization Problem',
+    },
+    {
+      type: 'paragraph',
+      text: 'Gate-remote experience transfers well to automotive work in several areas: radio links, model identification, enrollment questions and disciplined sample records. What does not transfer automatically is the complete vehicle security and programming process.',
+    },
+    {
+      type: 'paragraph',
+      text: 'Remote locking and unlocking, immobilizer authorization and passive entry or start may be distinct functions, even when integrated in one key. Working door buttons do not prove that the vehicle will permit starting. NXP’s overview of car-key development describes the integration of remote keyless entry and immobilizer functions without making them the same job.',
+      links: [{ text: 'NXP’s overview of car-key development', href: 'https://www.nxp.com/company/about-nxp/smarter-world-blog/BL-NXP-CAR-KEY-EVOLUTION' }],
+    },
+    {
+      type: 'paragraph',
+      text: 'Begin with the vehicle make, model, year, market variant, key reference and supported programming method. Transponder and credential requirements, tool coverage and authorized access differ by vehicle. OBD programming is one possible route, not a universal procedure. Define which functions need replacement and verify them individually.',
+    },
+    {
+      type: 'heading',
+      id: 'choose-wireless-technology-from-the-job',
+      text: 'Choose Wireless Technology from the Job',
+    },
+    {
+      type: 'paragraph',
+      text: 'Do not put every wireless term in the same category. 433.92 MHz is a frequency; ASK and FSK describe modulation; static and rolling-code behavior describe message and acceptance properties. Bluetooth, Wi-Fi, Zigbee and network stacks cover additional communication rules. LoRa describes a radio technology, while LoRaWAN adds network behavior. Matter is an application-level interoperability standard, not a new radio frequency.',
+    },
+    {
+      type: 'list',
+      items: [
+        'Phone interaction: BLE can be a useful candidate where supported by the phone and product. It still needs the appropriate application, authorization and control path; a phone does not directly become a conventional sub-GHz transmitter.',
+        'Smart-home integration: choose the required controller ecosystem and device functions first. Zigbee, Thread and Wi-Fi have different network requirements. Matter can run over IP transports such as Thread, Wi-Fi and Ethernet; supported bridges may connect other systems.',
+        'Wide-area monitoring: LoRaWAN, NB-IoT and LTE-M can be candidates for suitable telemetry and management tasks. Evaluate coverage, infrastructure, power, message rate and downlink latency. Long range does not establish suitability for immediate motion control.',
+        'Industrial networking: systems such as WirelessHART, ISA100.11a and Wi-SUN serve different application and network requirements. A technology name alone does not guarantee deterministic timing or a complete machine-control solution.',
+        'Digital vehicle keys: supported implementations can combine BLE, UWB and NFC for different communication and proximity functions. These are parts of a vehicle-access system, not substitutes for vehicle credentials and authorization.',
+      ],
+    },
+    {
+      type: 'paragraph',
+      text: 'The Matter FAQ explains the distinction between the application standard and its network transports. The LoRa Alliance’s overview shows why device class and receive windows matter for downlink behavior. The CCC Digital Key use cases illustrate BLE/UWB and NFC access paths. Each source describes a particular system; none is a blanket promise about an arbitrary product.',
+      links: [
+        { text: 'Matter FAQ', href: 'https://csa-iot.org/all-solutions/matter/matter-faq/' },
+        { text: 'LoRa Alliance’s overview', href: 'https://lora-alliance.org/about-lorawan-old/' },
+        { text: 'CCC Digital Key use cases', href: 'https://carconnectivity.org/digital-key-use-cases/' },
+      ],
+    },
+    {
+      type: 'paragraph',
+      text: 'Ask about distance, power source, data and security, then add response time, command confirmation, network availability and behavior when communication fails. These requirements give technology selection a purpose. The longest range or most familiar protocol name is not an answer by itself.',
+    },
+    {
+      type: 'quote',
+      text: 'For every remote, ask what it controls, why the receiver accepts it and what the customer needs to achieve.',
+    },
+    {
+      type: 'paragraph',
+      text: 'That habit turns a scattered collection of frequency, chip and housing facts into a usable method. For a compatibility inquiry with Dongguan Fengxian Electronics Technology Co., Ltd., start with the remote and receiver models, the existing programming method and the required outcome. Use the RF question form below to open an email draft and add your identification photos in your email app.',
+    },
+  ],
   'rf-remote-pairing-field-checklist': [
     {
       type: 'paragraph',

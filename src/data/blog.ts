@@ -111,6 +111,26 @@ export const popularGuides = [
 
 export const blogPosts: BlogPostMeta[] = [
   {
+    title: 'New to RF Remotes? Start with the System, Not the Frequency',
+    seoTitle: 'RF Remote Compatibility, Coding and Pairing: A Beginner Guide',
+    category: 'compatibility',
+    excerpt: 'Use the installed system, radio link, receiver identity checks and enrollment process to turn a frequency-only inquiry into a compatibility decision you can verify.',
+    slug: 'rf-remote-compatibility-beginner-guide',
+    author: 'Eric Huang',
+    publishedAt: '2026-10-06',
+    readTime: '10 min read',
+    image: '/images/blog/rf-remote-compatibility-beginner-guide/system-map.webp',
+    thumbnail: '/images/blog/rf-remote-compatibility-beginner-guide/system-map-320.webp',
+    imageAlt: 'Diagram: Four layers of RF remote compatibility—application, radio, identity and delivery',
+    imageSrcSet: '/images/blog/rf-remote-compatibility-beginner-guide/system-map-320.webp 320w, /images/blog/rf-remote-compatibility-beginner-guide/system-map-640.webp 640w, /images/blog/rf-remote-compatibility-beginner-guide/system-map.webp 1280w',
+    imageCaption: 'A frequency match covers only part of the radio layer.',
+    relatedSlugs: [
+      'third-party-rf-remote-brand-receiver-pairing',
+      'one-to-many-many-to-one-rf-remote-control',
+      'why-universal-remote-cannot-copy',
+    ],
+  },
+  {
     title: 'RF Remote Won’t Pair? A Field Troubleshooting Checklist',
     seoTitle: 'RF Remote Pairing Troubleshooting: A Field Checklist',
     category: 'troubleshooting',

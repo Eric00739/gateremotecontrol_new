@@ -1,0 +1,96 @@
+{
+  "slug": "rf-remote-compatibility-beginner-guide",
+  "createdAt": "2026-10-06",
+  "tool": "Code-authored SVG diagrams; baoyu-diagram layout guidance; sharp rasterization",
+  "processing": "16:9 SVG viewBox 1280x720; WebP quality 90; widths 1280, 640 and 320. Editable sources retained as local delivery artifacts.",
+  "usage": "Concept diagrams and schematic signals, not company products, measured waveforms or certification evidence.",
+  "assets": [
+    {
+      "id": "system-map",
+      "sourceFile": "system-map.svg",
+      "sourceSha256": "c3b29767324408dd7e9c0842e28462f36057df381724bf094c6f76ce143f8383",
+      "files": [
+        {
+          "file": "system-map.webp",
+          "width": 1280,
+          "height": 720,
+          "bytes": 46922,
+          "sha256": "2b4a79ab9ed7f66df9ec19704477f4749e6aba3bee5a1fabe1e8b2adfbc0f03f"
+        },
+        {
+          "file": "system-map-640.webp",
+          "width": 640,
+          "height": 360,
+          "bytes": 21994,
+          "sha256": "3316e67887f01a3ba2f4e13fd4137c0d8772a374ed6741192fedf9158b289386"
+        },
+        {
+          "file": "system-map-320.webp",
+          "width": 320,
+          "height": 180,
+          "bytes": 9170,
+          "sha256": "acacacac502856db1edc37b044484a95b72ad5ae9e14a97bf25e09842a695435"
+        }
+      ],
+      "designIntent": "Four practical layers: application, radio, identity and delivery; frequency covers only part of radio."
+    },
+    {
+      "id": "same-frequency-different-modulation",
+      "sourceFile": "same-frequency-different-modulation.svg",
+      "sourceSha256": "9852943ebe743b29b342d719d2f598321bbf06fa9fe2f210277cdedc06ea2574",
+      "files": [
+        {
+          "file": "same-frequency-different-modulation.webp",
+          "width": 1280,
+          "height": 720,
+          "bytes": 81158,
+          "sha256": "8adf63ef3ceccbc33f99a93b897bedf97b49f5f15b40c61d2d3fd7e225255923"
+        },
+        {
+          "file": "same-frequency-different-modulation-640.webp",
+          "width": 640,
+          "height": 360,
+          "bytes": 33346,
+          "sha256": "3151bc05bff9a37d3ff4b1293eb332f194868ecabdd6fa6a9c33d6a8ef53ec22"
+        },
+        {
+          "file": "same-frequency-different-modulation-320.webp",
+          "width": 320,
+          "height": 180,
+          "bytes": 12708,
+          "sha256": "c59472b2fa41b4826eb8b2b3686c9c11696aed34362bee462165c37f3676d13c"
+        }
+      ],
+      "designIntent": "Conceptual OOK/ASK amplitude and FSK frequency behavior for a shared nominal center; not measured waveforms."
+    },
+    {
+      "id": "learning-is-enrollment",
+      "sourceFile": "learning-is-enrollment.svg",
+      "sourceSha256": "52b75c493864e336060c5460918f2610b345069d3603cc20dd1bf0035de83978",
+      "files": [
+        {
+          "file": "learning-is-enrollment.webp",
+          "width": 1280,
+          "height": 720,
+          "bytes": 48362,
+          "sha256": "908ea7185a5d17b0115ec258d3ddc580f33c69a96583d9a62588af6ca34f2162"
+        },
+        {
+          "file": "learning-is-enrollment-640.webp",
+          "width": 640,
+          "height": 360,
+          "bytes": 22004,
+          "sha256": "e461a2a1cffe25ff2680f501c058b7ee3962aafed6f3b8b39c18a29aa28ad832"
+        },
+        {
+          "file": "learning-is-enrollment-320.webp",
+          "width": 320,
+          "height": 180,
+          "bytes": 9448,
+          "sha256": "a6c68be163799f1da4eddba1cf1048ae72400087a810edf77cb977e36edef566"
+        }
+      ],
+      "designIntent": "Enrollment can save either static or rolling-code transmitters; a Learn button is not a security classification."
+    }
+  ]
+}
