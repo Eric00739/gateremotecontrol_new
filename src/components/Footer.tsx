@@ -1,6 +1,8 @@
 'use client';
 
 import Link from 'next/link';
+import Image from 'next/image';
+import { companyName, siteContact, siteLogoSmall, siteName } from '@/data/site';
 import LeadModalTrigger from './LeadModalTrigger';
 import { useDict, useLocale } from '@/i18n';
 import BrandReferences from './BrandReferences';
@@ -26,24 +28,19 @@ export default function Footer() {
           {/* Brand */}
           <div className="max-w-xl">
             <div className="flex items-center gap-3 mb-3">
-              <div className="w-9 h-9 bg-[#FF8A1F] rounded-lg flex items-center justify-center">
-                <span className="text-[#062748] font-bold text-sm" style={{ fontFamily: 'var(--font-jetbrains-mono), monospace' }}>
-                  GR
-                </span>
+              <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-md bg-white p-1.5">
+                <Image src={siteLogoSmall} alt="" width={36} height={36} className="h-9 w-9 object-contain" />
               </div>
               <div className="leading-tight">
                 <span className="text-[#F7FBFF] font-bold text-lg" style={{ fontFamily: 'var(--font-outfit), sans-serif' }}>
-                  Gate
-                </span>
-                <span className="text-[#FF8A1F] font-bold text-lg" style={{ fontFamily: 'var(--font-outfit), sans-serif' }}>
-                  Remote
-                </span>
-                <span className="text-[#F7FBFF] font-bold text-lg" style={{ fontFamily: 'var(--font-outfit), sans-serif' }}>
-                  Source
+                  {siteName}
                 </span>
               </div>
             </div>
 
+            <p lang="en" className="mb-2 text-sm font-semibold leading-relaxed text-[#F7FBFF]" data-company-identity>
+              {companyName}
+            </p>
             <p className="text-sm leading-relaxed text-[#C7D7E8] max-w-md">
               {dict.footer.description}
             </p>
@@ -69,14 +66,14 @@ export default function Footer() {
               {dict.footer.sendModelList}
             </p>
             <div className="space-y-2 text-sm text-[#C7D7E8]">
-              <a href="mailto:sales@gateremotesource.com" className="block break-words hover:text-[#FF8A1F] transition-colors">
-                sales@gateremotesource.com
+              <a href={`mailto:${siteContact.email}`} className="block break-words hover:text-[#FF8A1F] transition-colors">
+                {siteContact.email}
               </a>
-              <a href="https://wa.me/8615899648898" target="_blank" rel="noopener noreferrer" className="block hover:text-[#FF8A1F] transition-colors">
-                WhatsApp: +86 158 9964 8898
+              <a href={`https://wa.me/${siteContact.whatsAppNumber}`} target="_blank" rel="noopener noreferrer" className="block hover:text-[#FF8A1F] transition-colors">
+                WhatsApp: {siteContact.telephone}
               </a>
               <p className="text-xs leading-relaxed text-[#7F9AB7]">
-                Dongguan, Guangdong, China
+                {siteContact.address}
               </p>
             </div>
             <LeadModalTrigger
@@ -95,7 +92,7 @@ export default function Footer() {
             {dict.footer.disclaimer}
           </p>
           <p className="shrink-0">
-            &copy; {new Date().getFullYear()} GateRemoteSource. {dict.footer.copyright}
+            &copy; {new Date().getFullYear()} {siteName}. {dict.footer.copyright}
           </p>
         </div>
       </div>

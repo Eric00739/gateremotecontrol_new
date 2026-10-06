@@ -1,0 +1,67 @@
+import type { MetadataRoute } from 'next';
+import { blogPosts } from '@/data/blog';
+import { compatibilityBrands } from '@/data/compatibility';
+import { catalogPage, factoryQualityPage, oemPage } from '@/data/servicePages';
+import { defaultLocale, locales } from '@/i18n';
+import { absoluteUrl, localizedAlternates, pageLastModified } from '@/lib/seo';
+
+export function buildSitemap(): MetadataRoute.Sitemap {
+  const entries: MetadataRoute.Sitemap = [];
+
+  for (const locale of locales) {
+    entries.push({
+      url: absoluteUrl(`/${locale}`),
+      lastModified: pageLastModified(''),
+      changeFrequency: 'monthly',
+      priority: 1,
+      alternates: { languages: localizedAlternates('') },
+    });
+
+    entries.push({
+      url: absoluteUrl(`/${locale}/compatibility`),
+      lastModified: pageLastModified('/compatibility'),
+      changeFrequency: 'weekly',
+      priority: 0.9,
+      alternates: { languages: localizedAlternates('/compatibility') },
+    });
+
+    for (const page of [oemPage, factoryQualityPage, catalogPage]) {
+      entries.push({
+        url: absoluteUrl(`/${locale}${page.path}`),
+        lastModified: pageLastModified(page.path),
+        changeFrequency: 'monthly',
+        priority: 0.75,
+        alternates: { languages: localizedAlternates(page.path) },
+      });
+    }
+
+    for (const brand of compatibilityBrands) {
+      entries.push({
+        url: absoluteUrl(`/${locale}/compatibility/${brand.slug}`),
+        lastModified: pageLastModified(`/compatibility/${brand.slug}`),
+        changeFrequency: 'weekly',
+        priority: 0.85,
+        alternates: { languages: localizedAlternates(`/compatibility/${brand.slug}`) },
+      });
+    }
+
+    entries.push({
+      url: absoluteUrl(`/${locale}/blog`),
+      lastModified: pageLastModified('/blog'),
+      changeFrequency: 'weekly',
+      priority: 0.8,
+      alternates: { languages: localizedAlternates('/blog') },
+    });
+  }
+
+  for (const post of blogPosts) {
+    entries.push({
+      url: absoluteUrl(`/${defaultLocale}/blog/${post.slug}`),
+      changeFrequency: 'monthly',
+      priority: 0.7,
+      images: post.image ? [absoluteUrl(post.image)] : undefined,
+    });
+  }
+
+  return entries;
+}

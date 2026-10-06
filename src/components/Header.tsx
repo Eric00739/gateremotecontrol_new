@@ -1,6 +1,8 @@
 'use client';
 
 import Link from 'next/link';
+import Image from 'next/image';
+import { siteContact, siteLogoSmall, siteName } from '@/data/site';
 import { Menu, X, Globe } from 'lucide-react';
 import { useState } from 'react';
 import { usePathname, useRouter } from 'next/navigation';
@@ -37,15 +39,11 @@ export default function Header() {
       <div className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-[64px]">
           {/* Logo */}
-          <Link href={`/${currentLocale}`} className="flex items-center gap-3 group">
-            <div className="w-9 h-9 bg-[#0B3A63] rounded-md flex items-center justify-center relative overflow-hidden group-hover:bg-[#062748] transition-colors duration-300">
-              <span className="text-white font-bold text-sm tracking-tight relative z-10" style={{ fontFamily: "var(--font-jetbrains-mono), monospace" }}>GR</span>
-            </div>
-            <div className="hidden sm:block">
+          <Link href={`/${currentLocale}`} aria-label={siteName} className="flex shrink-0 items-center gap-2.5 group">
+            <Image src={siteLogoSmall} alt="" width={44} height={44} loading="eager" className="h-11 w-11 object-contain" />
+            <div className="hidden md:block">
               <div className="leading-tight">
-                <span className="text-[#0B2745] font-extrabold text-lg tracking-tight" style={{ fontFamily: "var(--font-outfit), sans-serif" }}>Gate</span>
-                <span className="text-[#FF8A1F] font-extrabold text-lg tracking-tight" style={{ fontFamily: "var(--font-outfit), sans-serif" }}>Remote</span>
-                <span className="text-[#0B2745] font-extrabold text-lg tracking-tight" style={{ fontFamily: "var(--font-outfit), sans-serif" }}>Source</span>
+                <span className="text-[#0B2745] font-extrabold text-lg tracking-tight" style={{ fontFamily: "var(--font-outfit), sans-serif" }}>{siteName}</span>
               </div>
               <p className="text-[10px] text-[#3B5068] tracking-[0.16em] uppercase -mt-0.5" style={{ fontFamily: "var(--font-jetbrains-mono), monospace" }}>
                 {dict.header.tagline}
@@ -54,7 +52,7 @@ export default function Header() {
           </Link>
 
           {/* Desktop Nav */}
-          <nav className="hidden lg:flex items-center gap-1">
+          <nav className="hidden xl:flex items-center gap-1">
             {navItems.map((item) => (
               <Link
                 key={item.label}
@@ -113,7 +111,7 @@ export default function Header() {
             </div>
 
             <a
-              href="https://wa.me/8615899648898"
+              href={`https://wa.me/${siteContact.whatsAppNumber}`}
               target="_blank"
               rel="noopener noreferrer"
               className="text-[#22C55E] hover:text-[#16A34A] transition-colors"
@@ -134,7 +132,7 @@ export default function Header() {
             {/* Mobile menu button */}
             <button
               type="button"
-              className="lg:hidden p-2 text-[#153A5C]"
+              className="xl:hidden p-2 text-[#153A5C]"
               onClick={() => setMobileOpen(!mobileOpen)}
               aria-label="Toggle menu"
               aria-expanded={mobileOpen}
@@ -147,7 +145,7 @@ export default function Header() {
 
         {/* Mobile Nav */}
         {mobileOpen && (
-          <nav id="mobile-navigation" className="lg:hidden py-4 border-t border-[#D8E4F0] bg-white">
+          <nav id="mobile-navigation" className="xl:hidden py-4 border-t border-[#D8E4F0] bg-white">
             <div className="flex flex-col gap-2">
               {navItems.map((item) => (
                 <Link

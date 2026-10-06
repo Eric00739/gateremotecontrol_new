@@ -1,8 +1,9 @@
+import { siteName } from '@/data/site';
 const inquiryCta = 'Iniciar una consulta';
 
 const es = {
   meta: {
-    title: 'Mandos para portones al por mayor | GateRemoteSource',
+    title: `Mandos para portones al por mayor | ${siteName}`,
     description: 'Mandos compatibles para portones y garajes, receptores y opciones OEM para instaladores y distribuidores. Confirme la compatibilidad antes del pedido.',
   },
   announcement: {
@@ -72,7 +73,7 @@ const es = {
     logoPackaging: 'Logotipo / Empaquetado',
   },
   compatibility: {
-    metaTitle: 'Compatibilidad de mandos para portones | GateRemoteSource',
+    metaTitle: `Compatibilidad de mandos para portones | ${siteName}`,
     sectionLabel: 'Compatibilidad',
     title: 'Guía de mandos de repuesto compatibles',
     subtitle: 'Use estas guías para identificar el mando y preparar una revisión de compatibilidad. Empiece con fotos y los datos del modelo o receptor que tenga.',
@@ -117,7 +118,7 @@ const es = {
     independentNote: "Alternativas independientes de posventa. No son productos originales de las marcas.",
     brazil: "Referencias del mercado brasileño",
     international: "Referencias de sistemas internacionales",
-    trademarkNote: "Los nombres solo identifican el sistema original. GateRemoteSource no está afiliado, autorizado ni respaldado por estas marcas. Todas las marcas comerciales pertenecen a sus titulares.",
+    trademarkNote: `Los nombres solo identifican el sistema original. ${siteName} no está afiliado, autorizado ni respaldado por estas marcas. Todas las marcas comerciales pertenecen a sus titulares.`,
     verificationNote: "La compatibilidad depende del mando, receptor, codificación y versión regional exactos. Confirme la opción seleccionada mediante pruebas de muestras antes de comprar.",
     footerNote: "Los nombres identifican sistemas originales para su revisión. No implican afiliación ni respaldo. Se requiere verificar modelo, receptor y muestras.",
   },
@@ -561,7 +562,7 @@ const es = {
       { title: 'Solicitar catálogo mayorista', description: 'Empiece con la categoría de producto, el mercado y la cantidad estimada; los detalles técnicos pueden completarse después.' },
     ],
     oem: {
-      metaTitle: 'Desarrollo RF OEM / ODM | GateRemoteSource',
+      metaTitle: `Desarrollo RF OEM / ODM | ${siteName}`,
       metaDescription: 'Desarrollo RF de marca privada, empaque, manuales, prueba de muestras y soporte de protocolo para compradores mayoristas.',
       eyebrow: 'OEM / ODM',
       title: 'Desarrollo RF de Marca Privada',
@@ -581,7 +582,7 @@ const es = {
       detailSubtitle: 'Elija las opciones relevantes para su producto. Confirme conjuntamente el alcance, las pruebas de muestras y los requisitos de producción.',
     },
     factoryQuality: {
-      metaTitle: 'Proceso de calidad y verificación | GateRemoteSource',
+      metaTitle: `Proceso de calidad y verificación | ${siteName}`,
       metaDescription: 'Flujo de verificación de muestras, pruebas RF, inspección de empaque y documentación de exportación para pedidos de mandos compatibles.',
       eyebrow: 'Calidad y verificación',
       title: 'Controles de calidad antes de pedidos en volumen',
@@ -603,7 +604,7 @@ const es = {
       facilityTitle: 'Proceso visible, reclamos controlados.',
     },
     catalog: {
-      metaTitle: 'Solicitar catálogo mayorista | GateRemoteSource',
+      metaTitle: `Solicitar catálogo mayorista | ${siteName}`,
       metaDescription: 'Solicite un catálogo mayorista de mandos compatibles, receptores y soluciones RF. Empiece con la categoría, el país de destino y la cantidad estimada.',
       eyebrow: 'Catálogo mayorista',
       title: 'Solicite un catálogo al por mayor',

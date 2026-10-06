@@ -2,6 +2,7 @@
 
 import { FormEvent, useState } from 'react';
 import { MessageSquare, Send } from 'lucide-react';
+import { siteContact } from '@/data/site';
 
 export default function BlogCommentBox({ articleTitle }: { articleTitle: string }) {
   const [status, setStatus] = useState('');
@@ -25,11 +26,11 @@ export default function BlogCommentBox({ articleTitle }: { articleTitle: string 
       message,
     ].join('\n');
 
-    const mailto = new URL('mailto:sales@gateremotesource.com');
+    const mailto = new URL(`mailto:${siteContact.email}`);
     mailto.searchParams.set('subject', `RF question: ${articleTitle}`);
     mailto.searchParams.set('body', body);
     window.location.href = mailto.toString();
-    setStatus('Email draft requested. Review and send it in your email app. If no app opened, email sales@gateremotesource.com directly.');
+    setStatus(`Email draft requested. Review and send it in your email app. If no app opened, email ${siteContact.email} directly.`);
   };
 
   return (

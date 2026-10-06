@@ -1,6 +1,6 @@
 import type { BlogPostContentBlock } from '@/data/blog';
 import type { BlogPost } from '@/data/blog-content';
-import { siteName, siteUrl } from '@/data/site';
+import { companyName, companyNameZh, siteContact, siteLogo, siteName, siteUrl } from '@/data/site';
 import { defaultLocale, locales, type Locale } from '@/i18n';
 
 // Record meaningful page changes explicitly; rebuilding does not update dates.
@@ -24,7 +24,7 @@ export function pageLastModified(path: string): string | undefined {
 }
 
 export const defaultOgImage = '/images/video/circuit-boards.webp';
-export const organizationLogo = '/favicon.ico';
+export const organizationLogo = siteLogo;
 
 export function absoluteUrl(path: string) {
   return new URL(path, siteUrl).toString();
@@ -51,15 +51,18 @@ export function organizationJsonLd() {
   return {
     '@context': 'https://schema.org',
     '@type': 'Organization',
+    '@id': `${siteUrl}/#organization`,
     name: siteName,
+    legalName: companyName,
+    alternateName: companyNameZh,
     url: siteUrl,
     logo: absoluteUrl(organizationLogo),
     contactPoint: [
       {
         '@type': 'ContactPoint',
         contactType: 'sales',
-        email: 'sales@gateremotesource.com',
-        telephone: '+86 158 9964 8898',
+        email: siteContact.email,
+        telephone: siteContact.telephone,
         areaServed: 'Worldwide',
         availableLanguage: ['English', 'Italian', 'Portuguese', 'Spanish', 'Russian', 'French'],
       },
@@ -71,11 +74,13 @@ export function websiteJsonLd(locale: Locale) {
   return {
     '@context': 'https://schema.org',
     '@type': 'WebSite',
+    '@id': `${siteUrl}/#website`,
     name: siteName,
-    url: absoluteUrl(`/${locale}`),
+    url: siteUrl,
     inLanguage: locale,
     publisher: {
       '@type': 'Organization',
+      '@id': `${siteUrl}/#organization`,
       name: siteName,
       url: siteUrl,
     },
@@ -144,7 +149,9 @@ export function blogPostingJsonLd({
     },
     publisher: {
       '@type': 'Organization',
+      '@id': `${siteUrl}/#organization`,
       name: siteName,
+      legalName: companyName,
       url: siteUrl,
       logo: {
         '@type': 'ImageObject',

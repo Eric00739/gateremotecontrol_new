@@ -1,9 +1,10 @@
+import { siteName } from '@/data/site';
 import type { Metadata } from 'next';
 import LegacyEnglishShell from '@/components/LegacyEnglishShell';
 import CompatibilityPage from '@/app/[locale]/compatibility/page';
 
 export const metadata: Metadata = {
-  title: 'Compatible Replacement Remote Guides | GateRemoteSource',
+  title: `Compatible Replacement Remote Guides | ${siteName}`,
   robots: { index: false, follow: true },
   alternates: { canonical: '/en/compatibility' },
 };

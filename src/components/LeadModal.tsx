@@ -5,9 +5,10 @@ import { useEffect, useRef, useState } from 'react';
 import { Check, Copy, X } from 'lucide-react';
 import { useLeadModal, type InquiryContext, type PrefillType } from './LeadModalProvider';
 import { localeNames, useDict, useLocale } from '@/i18n';
+import { siteContact } from '@/data/site';
 
-const WHATSAPP_NUMBER = '8615899648898';
-const EMAIL = 'sales@gateremotesource.com';
+const WHATSAPP_NUMBER = siteContact.whatsAppNumber;
+const EMAIL = siteContact.email;
 
 type InquiryDraft = {
   requestType: PrefillType;

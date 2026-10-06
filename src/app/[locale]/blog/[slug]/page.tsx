@@ -402,7 +402,7 @@ export async function generateMetadata({
   const post = blogPosts.find((item) => item.slug === slug);
   if (!post) return { title: 'Article Not Found' };
 
-  const title = `${post.seoTitle || post.title} | GateRemoteSource`;
+  const title = `${post.seoTitle || post.title} | ${siteName}`;
   const isDefaultLocaleArticle = locale === defaultLocale;
   const canonicalPath = `/${defaultLocale}/blog/${post.slug}`;
   const openGraph: Metadata['openGraph'] = {

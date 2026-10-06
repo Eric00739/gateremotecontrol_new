@@ -24,7 +24,7 @@ function redirectHtml(sourcePath, destinationUrl) {
     <meta charset="utf-8">
     <meta http-equiv="refresh" content="0; url=${escapedDestination}">
     <link rel="canonical" href="${escapedDestination}">
-    <title>Redirecting | GateRemoteSource</title>
+    <title>Redirecting</title>
     <script>window.location.replace(${JSON.stringify(destinationUrl)});</script>
   </head>
   <body>

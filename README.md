@@ -1,6 +1,10 @@
-# GateRemoteSource
+# WindChord Remote
 
 面向安装商、锁匠、批发商和 OEM 客户的多语言 RF 遥控器与接收器 B2B 静态网站。
+
+对外品牌为 **WindChord Remote**，公司名称为 **Dongguan Fengxian Electronics Technology Co., Ltd.（东莞市风弦电子科技有限公司）**。域名保持 `www.gateremotesource.com`，原邮箱、电话／WhatsApp 和地址保持不变。品牌、公司名称、Logo 与联系方式统一维护在 `src/data/site.ts`；全站页头／页脚、六语元数据、询盘及结构化数据读取这些值。
+
+网站使用无底部文字的透明 Logo，页头／页脚使用 144 像素的 `public/images/brand/windchord-logo-144.png`，Organization 使用保留的大图 `windchord-logo.png`，favicon 为 `src/app/favicon.ico`。图像编辑方式与来源校验和见 [provenance.json](public/images/brand/provenance.json)，全站更名及验收见 [BRAND_UPDATE_REVIEW.md](BRAND_UPDATE_REVIEW.md)。
 
 ## 本地运行
 
@@ -20,7 +24,7 @@ npm run lint
 npm run build
 ```
 
-`npm run build` 完成 Next.js 构建、旧 URL 重定向生成、HTML 语言标记修正，以及 sitemap、canonical、博客完整目录和重定向目标校验。还会检查六套词典的键与数组结构、OEM 页面本地化、FAQ 正文与结构化数据的一致性，并防止已撤下的无依据宣传陈述恢复。任何校验失败都会令构建失败。
+`npm run build` 完成 Next.js 构建、旧 URL 重定向生成、HTML 语言标记修正、六语 sitemap/robots 静态文件生成，以及 sitemap、canonical、博客完整目录和重定向目标校验。SEO 校验覆盖重复或遗漏的规范 URL、noindex、HTML/XML hreflang、语言标记及文章日期保留规则。还会检查六套词典的键与数组结构、OEM 页面本地化、FAQ 正文与结构化数据的一致性，全站品牌／公司／Logo、联系方式及链接目标，并防止已撤下的无依据宣传陈述恢复。任何校验失败都会令构建失败。
 
 项目使用 Next.js `output: 'export'`，不要运行 `next start`。完整的本地交互检查使用 `npm run dev`；直接查看构建产物可运行：
 
@@ -44,6 +48,8 @@ GitHub Actions 工作流 [`.github/workflows/deploy.yml`](.github/workflows/depl
 - `src/data/visuals.ts`：首页与质量页的视频帧配置、时间点、本地化 alt 键及响应式图片路径；来源记录见 `public/images/video/README.md`。
 - `src/data/generated-visuals.ts`：产品、应用、服务页与博客的 AI 示意图配置；提示词、原图校验和与处理方式见 `public/images/generated/`。
 - `scripts/generate-static-redirects.mjs`：旧 URL 重定向和导出 HTML 的语言标记修正。
+- `src/lib/sitemap.ts`：根目录及语言目录共用的 sitemap 数据生成逻辑。
+- `scripts/generate-static-metadata.mjs`：静态导出后生成六语 sitemap/robots 文件，补足 Next.js 对动态语言目录元数据路由的导出限制。
 - `scripts/legacy-redirects.mjs`：旧 URL 重定向数据。
 - `scripts/verify-export.mjs`：静态导出、媒体、sitemap、canonical、六语内容、FAQ 和重定向目标校验。
 
@@ -85,4 +91,6 @@ GitHub Actions 工作流 [`.github/workflows/deploy.yml`](.github/workflows/depl
 
 2026-10-05 完成 18 篇英文博客的内容与事实修订，保留原布局、字体、发布日期、URL 和旧章节锚点。逐篇主要修正、资料入口及验证记录见 [BLOG_CONTENT_REVIEW.md](BLOG_CONTENT_REVIEW.md)；9 张修订概念图的提示词与校验和见 [reviewed-visuals.json](public/images/blog/reviewed-visuals.json)。导出检查覆盖正文资料链接、稳定锚点和邮件提问入口。
 
-`src/lib/seo.ts` 的 `pageUpdatedAt` 按页面路径记录实质修改日期，构建不会自动刷新日期。修改同一页面的六语内容时一起更新对应记录；各语言更新日不同时应拆开登记。未知日期的页面或文章省略 lastmod，不修改原发布日期制造更新。
+`src/lib/seo.ts` 的 `pageUpdatedAt` 按页面路径记录实质修改日期，构建不会自动刷新日期。修改同一页面的六语内容时一起更新对应记录；各语言更新日不同时应拆开登记。未知日期的页面或文章省略 lastmod，不修改原发布日期制造更新。按所有者 2026-10-06 的要求，保留文章最早一批的原发布日期数据，本次不新增文章 `lastmod`、BlogPosting `dateModified` 或 Open Graph 修改日期。
+
+Search Console 提交根目录的 `https://www.gateremotesource.com/sitemap.xml` 即可。六语 sitemap 是兼容入口，内容与根文件一致，无需分别提交。SEO 检查结果、待办和发布后复核步骤见 [SEO_REVIEW.md](SEO_REVIEW.md)。

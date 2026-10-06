@@ -1,8 +1,9 @@
+import { siteName } from '@/data/site';
 const inquiryCta = "Démarrer une demande";
 
 const fr = {
   meta: {
-    title: "Télécommandes de portail en gros | GateRemoteSource",
+    title: `Télécommandes de portail en gros | ${siteName}`,
     description: "Télécommandes compatibles pour portails et garages, récepteurs et options OEM pour installateurs et distributeurs. Compatibilité à confirmer avant commande.",
   },
   announcement: {
@@ -72,7 +73,7 @@ const fr = {
     logoPackaging: "Logo / Emballage",
   },
   compatibility: {
-    metaTitle: "Compatibilité des télécommandes | GateRemoteSource",
+    metaTitle: `Compatibilité des télécommandes | ${siteName}`,
     sectionLabel: "Compatibilité",
     title: "Guides de télécommandes de remplacement compatibles",
     subtitle: "Utilisez ces guides pour identifier la télécommande et préparer une étude de remplacement. Commencez par des photos et les détails du modèle ou du récepteur disponibles.",
@@ -117,7 +118,7 @@ const fr = {
     independentNote: "Solutions indépendantes de rechange. Ce ne sont pas des produits d’origine des marques.",
     brazil: "Références du marché brésilien",
     international: "Références de systèmes internationaux",
-    trademarkNote: "Les noms identifient uniquement le système d’origine. GateRemoteSource n’est ni affilié, ni agréé, ni soutenu par ces marques. Toutes les marques appartiennent à leurs titulaires.",
+    trademarkNote: `Les noms identifient uniquement le système d’origine. ${siteName} n’est ni affilié, ni agréé, ni soutenu par ces marques. Toutes les marques appartiennent à leurs titulaires.`,
     verificationNote: "La compatibilité dépend de la télécommande, du récepteur, du codage et de la version régionale exacts. Validez l’option retenue par un essai d’échantillon avant commande.",
     footerNote: "Les noms identifient des systèmes d’origine à examiner. Ils n’impliquent aucune affiliation ni aucun soutien. Le modèle, le récepteur et les échantillons doivent être vérifiés.",
   },
@@ -561,7 +562,7 @@ const fr = {
       { title: "Demander le catalogue grossiste", description: "Commencez par la catégorie, le marché et la quantité estimée ; les détails techniques peuvent suivre." },
     ],
     oem: {
-      metaTitle: "Développement de télécommandes RF OEM / ODM | GateRemoteSource",
+      metaTitle: `Développement de télécommandes RF OEM / ODM | ${siteName}`,
       metaDescription: "Développement RF en marque privée, emballage, manuel, tests d'échantillons et support protocole pour acheteurs grossistes.",
       eyebrow: "OEM / ODM",
       title: "Développement RF en marque privée",
@@ -581,7 +582,7 @@ const fr = {
       detailSubtitle: "Choisissez les options utiles à votre produit. Confirmez ensemble le périmètre, les essais d’échantillons et les exigences de production.",
     },
     factoryQuality: {
-      metaTitle: "Processus qualité et vérification | GateRemoteSource",
+      metaTitle: `Processus qualité et vérification | ${siteName}`,
       metaDescription: "Processus de vérification des échantillons, tests RF, contrôle d'emballage et documentation export pour les commandes de télécommandes compatibles.",
       eyebrow: "Qualité et vérification",
       title: "Contrôles qualité avant les commandes en volume",
@@ -603,7 +604,7 @@ const fr = {
       facilityTitle: "Processus visible, revendications contrôlées.",
     },
     catalog: {
-      metaTitle: "Catalogue grossiste | GateRemoteSource",
+      metaTitle: `Catalogue grossiste | ${siteName}`,
       metaDescription: "Demandez un catalogue de gros de télécommandes compatibles, récepteurs et solutions RF. Indiquez la catégorie, le pays de destination et la quantité estimée.",
       eyebrow: "Catalogue de gros",
       title: "Demandez un catalogue de gros",

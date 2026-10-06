@@ -1,3 +1,4 @@
+import { siteName } from '@/data/site';
 import type { Metadata } from 'next';
 import LegacyEnglishShell from '@/components/LegacyEnglishShell';
 import BlogPostPage from '@/app/[locale]/blog/[slug]/page';
@@ -23,7 +24,7 @@ export async function generateMetadata({
   const { slug } = await params;
   const post = blogPosts.find((item) => item.slug === slug);
   return {
-    title: post ? `${post.seoTitle || post.title} | GateRemoteSource` : 'Blog Article | GateRemoteSource',
+    title: post ? `${post.seoTitle || post.title} | ${siteName}` : `Blog Article | ${siteName}`,
     robots: { index: false, follow: true },
     alternates: { canonical: `/en/blog/${slug}` },
   };

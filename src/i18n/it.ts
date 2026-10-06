@@ -1,8 +1,9 @@
+import { siteName } from '@/data/site';
 const inquiryCta = 'Avvia una richiesta';
 
 const it = {
   meta: {
-    title: 'Telecomandi per cancelli all’ingrosso | GateRemoteSource',
+    title: `Telecomandi per cancelli all’ingrosso | ${siteName}`,
     description: 'Telecomandi compatibili per cancelli e garage, ricevitori e opzioni OEM per installatori e distributori. Compatibilità da confermare prima dell’ordine.',
   },
   announcement: {
@@ -72,7 +73,7 @@ const it = {
     logoPackaging: 'Logo / Packaging',
   },
   compatibility: {
-    metaTitle: 'Compatibilità telecomandi per cancelli | GateRemoteSource',
+    metaTitle: `Compatibilità telecomandi per cancelli | ${siteName}`,
     sectionLabel: 'Compatibilit\u00e0',
     title: 'Guide per Telecomandi di Ricambio Compatibili',
     subtitle: 'Usa queste guide per identificare il telecomando e preparare una verifica del ricambio. Inizia con foto e dettagli del modello o del ricevitore disponibili.',
@@ -117,7 +118,7 @@ const it = {
     independentNote: "Alternative aftermarket indipendenti. Non sono prodotti originali dei marchi.",
     brazil: "Riferimenti del mercato brasiliano",
     international: "Riferimenti di sistemi internazionali",
-    trademarkNote: "I nomi identificano solo il sistema originale. GateRemoteSource non è affiliato, autorizzato o sostenuto da questi marchi. Tutti i marchi appartengono ai rispettivi titolari.",
+    trademarkNote: `I nomi identificano solo il sistema originale. ${siteName} non è affiliato, autorizzato o sostenuto da questi marchi. Tutti i marchi appartengono ai rispettivi titolari.`,
     verificationNote: "La compatibilità dipende da telecomando, ricevitore, codifica e versione regionale esatti. Verifica l’opzione scelta con un campione prima di ordinare.",
     footerNote: "I nomi identificano sistemi originali da verificare. Non implicano affiliazione o sostegno. Occorre verificare modello, ricevitore e campioni.",
   },
@@ -561,7 +562,7 @@ const it = {
       { title: 'Richiedi Catalogo Wholesale', description: 'Iniziate con categoria, mercato e quantità stimata; i dettagli tecnici possono seguire.' },
     ],
     oem: {
-      metaTitle: 'Sviluppo Telecomandi RF OEM / ODM | GateRemoteSource',
+      metaTitle: `Sviluppo Telecomandi RF OEM / ODM | ${siteName}`,
       metaDescription: 'Sviluppo RF private-label, packaging, manuali, test campione e supporto protocollo per acquirenti wholesale.',
       eyebrow: 'OEM / ODM',
       title: 'Sviluppo Telecomandi RF Private-Label',
@@ -581,7 +582,7 @@ const it = {
       detailSubtitle: 'Scegli le opzioni utili al prodotto. Conferma insieme ambito, test sui campioni e requisiti di produzione.',
     },
     factoryQuality: {
-      metaTitle: 'Processo qualit\u00e0 e verifica | GateRemoteSource',
+      metaTitle: `Processo qualit\u00e0 e verifica | ${siteName}`,
       metaDescription: 'Flusso di verifica campioni, test RF, controllo packaging e documentazione export per ordini di telecomandi compatibili.',
       eyebrow: 'Qualit\u00e0 e verifica',
       title: 'Controlli qualit\u00e0 prima degli ordini in volume',
@@ -603,7 +604,7 @@ const it = {
       facilityTitle: 'Processo visibile, dichiarazioni controllate.',
     },
     catalog: {
-      metaTitle: 'Richiedi catalogo all’ingrosso | GateRemoteSource',
+      metaTitle: `Richiedi catalogo all’ingrosso | ${siteName}`,
       metaDescription: 'Richiedete un catalogo all’ingrosso di telecomandi compatibili, ricevitori e soluzioni RF. Iniziate con categoria, paese di destinazione e quantità stimata.',
       eyebrow: 'Catalogo all’ingrosso',
       title: 'Richiedi un catalogo all’ingrosso',

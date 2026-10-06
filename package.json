@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "next build --webpack && node scripts/generate-static-redirects.mjs && node scripts/verify-export.mjs",
+    "build": "next build --webpack && node scripts/generate-static-redirects.mjs && node scripts/generate-static-metadata.mjs && node scripts/verify-export.mjs",
     "lint": "eslint"
   },
   "dependencies": {

@@ -1,3 +1,4 @@
+import { siteName } from '@/data/site';
 import type { Metadata } from 'next';
 import LegacyEnglishShell from '@/components/LegacyEnglishShell';
 import BrandCompatibilityPage from '@/app/[locale]/compatibility/[brand]/page';
@@ -15,7 +16,7 @@ export async function generateMetadata({
   const { brand } = await params;
   const brandData = getCompatibilityBrand(brand);
   return {
-    title: brandData ? `${brandData.name} Matching References | GateRemoteSource` : 'Compatibility References | GateRemoteSource',
+    title: brandData ? `${brandData.name} Matching References | ${siteName}` : `Compatibility References | ${siteName}`,
     robots: { index: false, follow: true },
     alternates: { canonical: `/en/compatibility/${brand}` },
   };

@@ -13,7 +13,7 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
   const { locale: rawLocale } = await params;
   const locale = locales.includes(rawLocale as Locale) ? rawLocale as Locale : 'en';
   const dict = getDictSync(locale);
-  const title = `${dict.blog.title} | GateRemoteSource`;
+  const title = `${dict.blog.title} | ${siteName}`;
   return {
     title,
     description: dict.blog.subtitle,

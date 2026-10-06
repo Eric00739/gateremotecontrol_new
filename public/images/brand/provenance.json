@@ -1,0 +1,38 @@
+{
+  "createdAt": "2026-10-06",
+  "brand": "WindChord Remote",
+  "mode": "built-in image_gen edit",
+  "reference": {
+    "fileName": "codex-clipboard-8662656b-6b65-42bf-8e3b-13ded6478239.png",
+    "providedBy": "site owner",
+    "sha256": "2fba390448dca4ec8f5069690e86266aab5b6fbfbe36e21b8b565bccb1c49b9c"
+  },
+  "editRequirements": "Remove only the bottom WindChord Remote wordmark. Retain the W-shaped symbol, remote-control cutout and buttons, blue wireless arc, navy and blue colors. No text, slogan, new symbol, shadow, border or watermark. Center the retained symbol in square framing with a genuinely transparent background.",
+  "generatedSource": {
+    "fileName": "exec-35a153a9-37c0-4e1b-83b1-12d7955aba77.png",
+    "sha256": "640ee3e7f93cb651cc2014a75faf25a195e8f28869dfd43fbb7c90cd26454665"
+  },
+  "websiteAsset": {
+    "path": "/images/brand/windchord-logo.png",
+    "width": 544,
+    "height": 544,
+    "hasAlpha": true,
+    "bytes": 87418,
+    "sha256": "210609c19c40b6701ff009ca3d4d297ab204e15371d1aa038c2a068d507e43e5",
+    "preparation": "Trim transparent outer margins, downscale, add transparent padding and encode with sharp; preserve the generated alpha channel. No additional visual elements."
+  },
+  "displayAsset": {
+    "path": "/images/brand/windchord-logo-144.png",
+    "width": 144,
+    "height": 144,
+    "hasAlpha": true,
+    "bytes": 9464,
+    "sha256": "36e88ad6ce9497755ee164aa3bba00d86845b55313d58958bbdf14feb9e920ae",
+    "preparation": "Resize the website asset with sharp and encode PNG at compressionLevel 9. Use for the 44 and 36 pixel header/footer images, retaining the 544 pixel asset for Organization structured data."
+  },
+  "favicon": {
+    "path": "src/app/favicon.ico",
+    "sizes": [16, 32, 48],
+    "preparation": "Resize the website logo into PNG frames in an ICO container; use a white background for legibility in browser tabs."
+  }
+}

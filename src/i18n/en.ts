@@ -1,8 +1,9 @@
+import { siteName } from '@/data/site';
 const inquiryCta = 'Start an Inquiry';
 
 const en = {
   meta: {
-    title: 'Wholesale Gate Remotes & Receivers | GateRemoteSource',
+    title: `Wholesale Gate Remotes & Receivers | ${siteName}`,
     description: 'Compatible gate and garage remotes, RF receivers, and OEM options for installers and distributors. Confirm the match before ordering.',
   },
   announcement: {
@@ -72,7 +73,7 @@ const en = {
     logoPackaging: 'Logo / Packaging',
   },
   compatibility: {
-    metaTitle: 'Gate Remote Compatibility Guides | GateRemoteSource',
+    metaTitle: `Gate Remote Compatibility Guides | ${siteName}`,
     sectionLabel: 'Compatibility',
     title: 'Compatible Replacement Remote Guides',
     subtitle: 'Use these guides to identify your remote and prepare a replacement match review. Start with photos and any model or receiver details you have.',
@@ -117,7 +118,7 @@ const en = {
     independentNote: "Independent aftermarket alternatives. Not original brand products.",
     brazil: "Brazilian Market References",
     international: "International System References",
-    trademarkNote: "Brand names identify the original system only. GateRemoteSource is not affiliated with, authorized by or endorsed by these brands. All trademarks belong to their respective owners.",
+    trademarkNote: `Brand names identify the original system only. ${siteName} is not affiliated with, authorized by or endorsed by these brands. All trademarks belong to their respective owners.`,
     verificationNote: "Compatibility depends on the exact remote, receiver, coding and regional version. Confirm the selected option through sample testing before ordering.",
     footerNote: "Names identify original systems for review. No brand affiliation or endorsement is implied. Model, receiver and sample verification are required.",
   },
@@ -561,7 +562,7 @@ const en = {
       { title: 'Request Wholesale Catalog', description: 'Start with product category, target market, and estimated quantity; technical details can follow.' },
     ],
     oem: {
-      metaTitle: 'OEM / ODM RF Remote Development | GateRemoteSource',
+      metaTitle: `OEM / ODM RF Remote Development | ${siteName}`,
       metaDescription: 'Private-label RF remote development, packaging, manual, sample testing, and protocol matching support for wholesale buyers.',
       eyebrow: 'OEM / ODM',
       title: 'Private-Label RF Remote Development',
@@ -581,7 +582,7 @@ const en = {
       detailSubtitle: 'Choose the options relevant to your product. Confirm the scope, sample checks and production requirements together.',
     },
     factoryQuality: {
-      metaTitle: 'Quality Verification Process | GateRemoteSource',
+      metaTitle: `Quality Verification Process | ${siteName}`,
       metaDescription: 'Sample verification, RF testing, packaging inspection, and export documentation workflow for compatible remote orders.',
       eyebrow: 'Quality & Verification',
       title: 'Quality Checks Before Bulk Orders',
@@ -603,7 +604,7 @@ const en = {
       facilityTitle: 'Visible process, controlled claims.',
     },
     catalog: {
-      metaTitle: 'Request Wholesale Catalog | GateRemoteSource',
+      metaTitle: `Request Wholesale Catalog | ${siteName}`,
       metaDescription: 'Request a wholesale catalog for compatible remotes, receivers, and RF solutions. Start with product category, target country, and estimated quantity.',
       eyebrow: 'Wholesale Catalog',
       title: 'Request a Wholesale Catalog',

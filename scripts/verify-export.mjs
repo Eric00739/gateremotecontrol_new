@@ -56,11 +56,24 @@ function dictionaryShape(value) {
 }
 
 const dictionaries = new Map();
+const siteSource = await readFile('src/data/site.ts', 'utf8');
+const siteCompiled = ts.transpileModule(siteSource, { compilerOptions: { module: ts.ModuleKind.CommonJS } });
+const siteModule = { exports: {} };
+vm.runInNewContext(siteCompiled.outputText, { module: siteModule, exports: siteModule.exports }, { timeout: 1000 });
+const site = siteModule.exports;
+if (site.siteUrl !== siteUrl) problems.push('Application and static-export site URLs differ');
 for (const locale of supportedLocales) {
   const source = await readFile(`src/i18n/${locale}.ts`, 'utf8');
   const compiled = ts.transpileModule(source, { compilerOptions: { module: ts.ModuleKind.CommonJS } });
   const dictionaryModule = { exports: {} };
-  vm.runInNewContext(compiled.outputText, { module: dictionaryModule, exports: dictionaryModule.exports }, { timeout: 1000 });
+  vm.runInNewContext(compiled.outputText, {
+    module: dictionaryModule,
+    exports: dictionaryModule.exports,
+    require: (specifier) => {
+      if (specifier === '@/data/site') return site;
+      throw new Error(`Unexpected dictionary dependency: ${specifier}`);
+    },
+  }, { timeout: 1000 });
   dictionaries.set(locale, dictionaryModule.exports.default);
 }
 
@@ -120,6 +133,11 @@ for (const [locale, dictionary] of dictionaries) {
   }
   const footer = homeHtml.match(/<footer\b[^>]*>([\s\S]*?)<\/footer>/)?.[1] ?? '';
   const footerText = visibleText(footer);
+  if (!footerText.includes(site.companyName) || !footerText.includes(site.siteName) ||
+      !footerText.includes(site.siteContact.email) || !footerText.includes(site.siteContact.telephone) ||
+      !footerText.includes(site.siteContact.address)) {
+    problems.push(`Company identity or existing contact details missing from footer: ${locale}`);
+  }
   if (referenceBrands.some((brand) => !footerText.includes(brand.name)) ||
       ['independentNote', 'footerNote'].some((key) => !footerText.includes(visibleText(dictionary.brandReferences[key])))) {
     problems.push(`Footer brand references or aftermarket explanation missing: ${locale}`);
@@ -148,16 +166,66 @@ for (const file of ['robots.txt', 'sitemap.xml']) {
   }
 }
 
-// 2. Every sitemap URL exists as HTML and self-canonicalizes.
+function attributes(tag) {
+  return Object.fromEntries(
+    [...tag.matchAll(/([\w:-]+)="([^"]*)"/g)].map((match) => [match[1].toLowerCase(), visibleText(match[2])]),
+  );
+}
+
+function hasNoindex(html) {
+  return [...html.matchAll(/<meta\b[^>]*>/gi)].some((match) => {
+    const tag = attributes(match[0]);
+    return ['robots', 'googlebot'].includes(tag.name?.toLowerCase()) && /\bnoindex\b/i.test(tag.content);
+  });
+}
+
+function languageLinks(text, tagName) {
+  return new Map(
+    [...text.matchAll(new RegExp(`<${tagName}\\b[^>]*>`, 'g'))]
+      .map((match) => attributes(match[0]))
+      .filter((tag) => tag.rel === 'alternate' && tag.hreflang)
+      .map((tag) => [tag.hreflang, tag.href]),
+  );
+}
+
+// 2. Every sitemap URL exists, is indexable and matches its HTML metadata.
 const sitemap = (await readTextIfExists(path.join(outputDir, 'sitemap.xml'))) ?? '';
-const sitemapUrls = [...sitemap.matchAll(/<loc>([^<]+)<\/loc>/g)].map((match) => match[1]);
+const sitemapEntries = [...sitemap.matchAll(/<url>([\s\S]*?)<\/url>/g)].map((match) => ({
+  url: match[1].match(/<loc>([^<]+)<\/loc>/)?.[1],
+  lastModified: match[1].match(/<lastmod>([^<]+)<\/lastmod>/)?.[1],
+  alternates: languageLinks(match[1], 'xhtml:link'),
+}));
+const sitemapUrls = sitemapEntries.map((entry) => entry.url).filter(Boolean);
+const sitemapUrlSet = new Set(sitemapUrls);
+const sitemapByUrl = new Map(sitemapEntries.map((entry) => [entry.url, entry]));
 
 if (sitemapUrls.length === 0) {
   problems.push('out/sitemap.xml contains no <loc> entries');
 }
+if (sitemapUrlSet.size !== sitemapUrls.length) {
+  problems.push('Duplicate sitemap URLs');
+}
+if (sitemapUrls.length !== sitemapEntries.length) {
+  problems.push('Sitemap entry missing <loc>');
+}
+
+const rootRobots = (await readTextIfExists(path.join(outputDir, 'robots.txt'))) ?? '';
+if (!rootRobots.includes(`Sitemap: ${siteUrl}/sitemap.xml`)) {
+  problems.push('Root robots.txt does not advertise the root sitemap');
+}
+for (const locale of supportedLocales) {
+  const alias = await readTextIfExists(path.join(outputDir, locale, 'sitemap.xml'));
+  if (alias !== sitemap) problems.push(`Missing or divergent localized sitemap: ${locale}`);
+  const robots = (await readTextIfExists(path.join(outputDir, locale, 'robots.txt'))) ?? '';
+  for (const targetLocale of supportedLocales) {
+    if (!robots.includes(`Sitemap: ${siteUrl}/${targetLocale}/sitemap.xml`)) {
+      problems.push(`Localized robots.txt missing sitemap: ${locale} -> ${targetLocale}`);
+    }
+  }
+}
 
 for (const url of sitemapUrls) {
-  if (!url.startsWith(siteUrl)) {
+  if (!url.startsWith(`${siteUrl}/`)) {
     problems.push(`Sitemap URL outside ${siteUrl}: ${url}`);
     continue;
   }
@@ -177,6 +245,29 @@ for (const url of sitemapUrls) {
   const canonical = html.match(/<link rel="canonical" href="([^"]*)"/)?.[1];
   if (canonical !== url) {
     problems.push(`Canonical mismatch for ${url}: canonical is ${canonical ?? 'missing'}`);
+  }
+  if (hasNoindex(html)) problems.push(`Sitemap URL is noindex: ${url}`);
+  if (html.match(/<html\b[^>]*\blang="([^"]+)"/)?.[1] !== firstSegment) {
+    problems.push(`Document language mismatch for ${url}`);
+  }
+
+  const entry = sitemapByUrl.get(url);
+  const htmlAlternates = languageLinks(html, 'link');
+  const article = /^\/en\/blog\/[^/]+$/.test(urlPath);
+  const expectedAlternates = article ? new Map() : new Map([
+    ...[...supportedLocales].map((locale) => [locale, `${siteUrl}/${locale}${urlPath.slice(firstSegment.length + 1)}`]),
+    ['x-default', `${siteUrl}/en${urlPath.slice(firstSegment.length + 1)}`],
+  ]);
+  for (const [label, actual] of [['HTML', htmlAlternates], ['sitemap', entry.alternates]]) {
+    if (actual.size !== expectedAlternates.size || [...expectedAlternates].some(([locale, href]) => actual.get(locale) !== href)) {
+      problems.push(`${label} hreflang mismatch for ${url}`);
+    }
+  }
+  for (const href of entry.alternates.values()) {
+    if (!sitemapUrlSet.has(href)) problems.push(`Hreflang target absent from sitemap: ${href}`);
+  }
+  if (entry.lastModified && (!/^\d{4}-\d{2}-\d{2}(?:T.*)?$/.test(entry.lastModified) || !Number.isFinite(Date.parse(entry.lastModified)))) {
+    problems.push(`Invalid sitemap lastmod for ${url}: ${entry.lastModified}`);
   }
 }
 
@@ -247,6 +338,24 @@ for (const post of articleData.getAllBlogPosts()) {
   }
   for (const locale of supportedLocales) {
     const articleHtml = (await readTextIfExists(pathToHtmlFile(`/${locale}/blog/${post.slug}`))) ?? '';
+    const canonicalUrl = `${siteUrl}/en/blog/${post.slug}`;
+    if (articleHtml.match(/<link rel="canonical" href="([^"]*)"/)?.[1] !== canonicalUrl ||
+        (locale !== 'en' && (!hasNoindex(articleHtml) || sitemapUrlSet.has(`${siteUrl}/${locale}/blog/${post.slug}`)))) {
+      problems.push(`Untranslated article indexing policy changed: ${locale}/${post.slug}`);
+    }
+    if (locale === 'en') {
+      const structuredArticle = [...articleHtml.matchAll(/<script\b[^>]*type="application\/ld\+json"[^>]*>([\s\S]*?)<\/script>/gi)]
+        .map((match) => JSON.parse(match[1]))
+        .find((data) => data['@type'] === 'BlogPosting');
+      const modifiedTime = [...articleHtml.matchAll(/<meta\b[^>]*>/gi)]
+        .map((match) => attributes(match[0]))
+        .find((tag) => tag.property === 'article:modified_time')?.content;
+      if (!sitemapUrlSet.has(canonicalUrl) || !structuredArticle ||
+          sitemapByUrl.get(canonicalUrl)?.lastModified !== undefined ||
+          structuredArticle.dateModified !== undefined || modifiedTime !== undefined) {
+        problems.push(`Article modification dates must remain omitted: ${post.slug}`);
+      }
+    }
     const articleBody = articleHtml.match(/<article\b[^>]*>([\s\S]*?)<\/article>/)?.[1] ?? '';
     const renderedLinks = new Set([...articleBody.matchAll(/<a\b[^>]*\bhref="([^"]+)"/g)].map((match) => visibleText(match[1])));
     if (anchorIds.some((id) => !articleBody.includes(`id="${id}"`)) ||
@@ -276,21 +385,77 @@ for (const [sourcePath, destinationPath] of redirects) {
 
 // 5. Every local image and responsive candidate in exported HTML is present.
 const mediaPaths = new Set();
+let brandPageCount = 0;
 for (const file of await readdir(outputDir, { recursive: true })) {
   if (!file.endsWith('.html')) continue;
   const html = await readFile(path.join(outputDir, file), 'utf8');
+  const pagePath = `/${file.replace(/\.html$/, '').split(path.sep).join('/')}`;
+  const canonical = html.match(/<link rel="canonical" href="([^"]*)"/)?.[1];
+  if (supportedLocales.has(pagePath.split('/')[1]) && canonical === `${siteUrl}${pagePath}` &&
+      !hasNoindex(html) && !sitemapUrlSet.has(canonical)) {
+    problems.push(`Indexable canonical page absent from sitemap: ${canonical}`);
+  }
   const text = visibleText(html);
+  if (html.includes('GateRemoteSource')) {
+    problems.push(`Previous site brand remains in ${file}`);
+  }
+  if (html.includes('<header')) {
+    brandPageCount += 1;
+    const title = visibleText(html.match(/<title>([\s\S]*?)<\/title>/)?.[1] ?? '');
+    const footer = html.match(/<footer\b[^>]*>([\s\S]*?)<\/footer>/)?.[1] ?? '';
+    const header = html.match(/<header\b[^>]*>([\s\S]*?)<\/header>/)?.[1] ?? '';
+    if (/\bGR\b/.test(`${visibleText(header)} ${visibleText(footer)}`)) problems.push(`Previous logo initials restored in ${file}`);
+    if (!title.includes(site.siteName) || !visibleText(footer).includes(site.companyName) ||
+        !header.includes(`src="${site.siteLogoSmall}"`) || !footer.includes(`src="${site.siteLogoSmall}"`)) {
+      problems.push(`Website brand, company or logo missing in ${file}`);
+    }
+    if (!footer.includes(`href="mailto:${site.siteContact.email}"`) ||
+        !footer.includes(`href="https://wa.me/${site.siteContact.whatsAppNumber}"`) ||
+        !visibleText(footer).includes(site.siteContact.telephone) ||
+        !visibleText(footer).includes(site.siteContact.address) ||
+        !header.includes(`href="https://wa.me/${site.siteContact.whatsAppNumber}"`)) {
+      problems.push(`Existing contact details or destinations changed in ${file}`);
+    }
+    const ogSiteName = [...html.matchAll(/<meta\b[^>]*>/gi)]
+      .map((match) => attributes(match[0]))
+      .find((tag) => tag.property === 'og:site_name')?.content;
+    // Legacy entry pages do not all declare Open Graph; declared values must agree.
+    if (ogSiteName && ogSiteName !== site.siteName) problems.push(`Open Graph brand mismatch in ${file}`);
+  }
   if (/50 retail-style production units|Built for Every Access Environment|Strict QC and on-time delivery worldwide\.|10\+ years in RF remote controls|guaranteed local-control layer/i.test(text)) {
     problems.push(`Unsupported public claim restored in ${file}`);
   }
+  const structuredTypes = new Set();
   for (const script of html.matchAll(/<script\b[^>]*type="application\/ld\+json"[^>]*>([\s\S]*?)<\/script>/gi)) {
     const data = JSON.parse(script[1]);
+    structuredTypes.add(data['@type']);
+    if (data['@type'] === 'Organization' && (data.name !== site.siteName || data.legalName !== site.companyName ||
+        data['@id'] !== `${site.siteUrl}/#organization` || data.alternateName !== site.companyNameZh ||
+        data.url !== site.siteUrl || data.logo !== `${site.siteUrl}${site.siteLogo}` ||
+        data.contactPoint?.[0]?.email !== site.siteContact.email || data.contactPoint?.[0]?.telephone !== site.siteContact.telephone)) {
+      problems.push(`Organization identity or contact mismatch in ${file}`);
+    }
+    if (data['@type'] === 'WebSite' && (data.name !== site.siteName || data.url !== site.siteUrl ||
+        data['@id'] !== `${site.siteUrl}/#website` ||
+        data.publisher?.['@id'] !== `${site.siteUrl}/#organization`)) {
+      problems.push(`Website identity mismatch in ${file}`);
+    }
+    if (data['@type'] === 'BlogPosting' && (data.publisher?.name !== site.siteName ||
+        data.publisher?.['@id'] !== `${site.siteUrl}/#organization` || data.publisher?.url !== site.siteUrl ||
+        data.publisher?.legalName !== site.companyName || data.publisher?.logo?.url !== `${site.siteUrl}${site.siteLogo}`)) {
+      problems.push(`Article publisher identity mismatch in ${file}`);
+    }
     if (data['@type'] !== 'FAQPage') continue;
     for (const entry of data.mainEntity ?? []) {
       faqCount += 1;
       if (!text.includes(visibleText(entry.name)) || !text.includes(visibleText(entry.acceptedAnswer.text))) {
         problems.push(`FAQ structured data differs from visible copy in ${file}`);
       }
+    }
+  }
+  if (pagePath === '/index' || supportedLocales.has(pagePath.slice(1))) {
+    for (const type of ['Organization', 'WebSite']) {
+      if (!structuredTypes.has(type)) problems.push(`Missing ${type} structured data in ${file}`);
     }
   }
   const generatedSourceCount = [...html.matchAll(/data-image-source-label="generated"/g)].length;
@@ -318,6 +483,48 @@ for (const assetPath of mediaPaths) {
   } catch {
     problems.push(`Missing media asset: ${assetPath}`);
   }
+}
+
+try {
+  const logoMetadata = await sharp(path.join(outputDir, site.siteLogo)).metadata();
+  const logoStats = await sharp(path.join(outputDir, site.siteLogo)).stats();
+  if (!logoMetadata.hasAlpha || logoStats.isOpaque || logoMetadata.width < 112 || logoMetadata.height < 112) {
+    problems.push('Organization logo must retain transparency and be at least 112×112');
+  }
+} catch {
+  problems.push('Organization logo is missing or unreadable');
+}
+try {
+  const logoSmall = await sharp(path.join(outputDir, site.siteLogoSmall)).metadata();
+  const logoStats = await sharp(path.join(outputDir, site.siteLogoSmall)).stats();
+  if (logoSmall.width !== 144 || logoSmall.height !== 144 || !logoSmall.hasAlpha || logoStats.isOpaque) {
+    problems.push('Display logo must be a transparent 144×144 image');
+  }
+} catch {
+  problems.push('Display logo is missing or unreadable');
+}
+try {
+  const favicon = await readFile(path.join(outputDir, 'favicon.ico'));
+  const count = favicon.length >= 6 ? favicon.readUInt16LE(4) : 0;
+  const directorySize = 6 + count * 16;
+  if (!count || favicon.length < directorySize || favicon.readUInt16LE(0) !== 0 || favicon.readUInt16LE(2) !== 1) {
+    throw new Error('Invalid favicon ICO container');
+  }
+  const sizes = new Set();
+  for (let i = 0; i < count; i += 1) {
+    const entry = 6 + i * 16;
+    const width = favicon[entry] || 256;
+    const height = favicon[entry + 1] || 256;
+    const length = favicon.readUInt32LE(entry + 8);
+    const offset = favicon.readUInt32LE(entry + 12);
+    if (!length || offset < directorySize || offset + length > favicon.length) throw new Error('Truncated favicon frame');
+    const frame = await sharp(favicon.subarray(offset, offset + length)).metadata();
+    if (width !== height || frame.width !== width || frame.height !== height) throw new Error('Invalid favicon frame dimensions');
+    sizes.add(width);
+  }
+  if ([16, 32, 48].some((size) => !sizes.has(size))) problems.push('Favicon must contain readable 16, 32 and 48 pixel frames');
+} catch {
+  problems.push('Favicon is missing, truncated or unreadable');
 }
 
 // Generated illustrations must remain traceable and ship at every declared size.
@@ -361,4 +568,4 @@ if (problems.length > 0) {
   process.exit(1);
 }
 
-console.log(`verify-export: ${sitemapUrls.length} sitemap URLs, ${redirects.length} legacy redirects, ${mediaPaths.size} media assets, ${dictionaries.size} dictionaries and localized OEM pages, ${faqCount} FAQ entries, 12 distinct applications and ${referenceBrands.length} aftermarket brand references — all checks passed.`);
+console.log(`verify-export: ${sitemapUrls.length} sitemap URLs, ${redirects.length} legacy redirects, ${mediaPaths.size} media assets, ${dictionaries.size} dictionaries and localized OEM pages, ${faqCount} FAQ entries, 12 distinct applications, ${referenceBrands.length} aftermarket brand references and ${brandPageCount} pages with consistent company branding — all checks passed.`);

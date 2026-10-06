@@ -1,6 +1,7 @@
+import { siteName } from '@/data/site';
 export const oemPage = {
   path: '/oem-odm',
-  metaTitle: 'OEM / ODM RF Remote Development | GateRemoteSource',
+  metaTitle: `OEM / ODM RF Remote Development | ${siteName}`,
   metaDescription:
     'Private-label RF remote development, packaging, manual, sample testing, and protocol matching support for wholesale buyers.',
   eyebrow: 'OEM / ODM',
@@ -26,7 +27,7 @@ export const oemPage = {
 
 export const factoryQualityPage = {
   path: '/factory-quality',
-  metaTitle: 'Quality Verification Process | GateRemoteSource',
+  metaTitle: `Quality Verification Process | ${siteName}`,
   metaDescription:
     'Sample verification, RF testing, packaging inspection, and export documentation workflow for compatible remote orders.',
   eyebrow: 'Quality & Verification',
@@ -53,7 +54,7 @@ export const factoryQualityPage = {
 
 export const catalogPage = {
   path: '/request-catalog',
-  metaTitle: 'Request Wholesale Catalog | GateRemoteSource',
+  metaTitle: `Request Wholesale Catalog | ${siteName}`,
   metaDescription:
     'Request a wholesale catalog for compatible remotes, receivers, and RF solutions. Start with product category, target country, and estimated quantity.',
   eyebrow: 'Wholesale Catalog',

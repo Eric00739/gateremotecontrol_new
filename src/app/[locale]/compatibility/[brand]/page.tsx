@@ -30,7 +30,7 @@ export async function generateMetadata({ params }: { params: Promise<{ brand: st
     if (!brand) notFound();
 
     const localizedBrand = getLocalizedBrandCopy(dict, brand.slug);
-    const title = `${brand.name} ${dict.brandPage.referenceTitle} | GateRemoteSource`;
+    const title = `${brand.name} ${dict.brandPage.referenceTitle} | ${siteName}`;
     const description = localizedBrand.shortDescription;
 
     return {

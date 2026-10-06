@@ -1,8 +1,9 @@
+import { siteName } from '@/data/site';
 const inquiryCta = 'Iniciar uma consulta';
 
 const pt = {
   meta: {
-    title: 'Controles para portões no atacado | GateRemoteSource',
+    title: `Controles para portões no atacado | ${siteName}`,
     description: 'Controles compatíveis para portões e garagens, receptores e opções OEM para instaladores e distribuidores. Confirme a compatibilidade antes do pedido.',
   },
   announcement: {
@@ -72,7 +73,7 @@ const pt = {
     logoPackaging: 'Logotipo / Embalagem',
   },
   compatibility: {
-    metaTitle: 'Compatibilidade de controles para portões | GateRemoteSource',
+    metaTitle: `Compatibilidade de controles para portões | ${siteName}`,
     sectionLabel: 'Compatibilidade',
     title: 'Guias de Controles Remotos Compatíveis de Reposição',
     subtitle: 'Use estes guias para identificar o controle e preparar uma avaliação de reposição. Comece com fotos e os dados do modelo ou receptor disponíveis.',
@@ -117,7 +118,7 @@ const pt = {
     independentNote: "Alternativas independentes de reposição. Não são produtos originais das marcas.",
     brazil: "Referências do mercado brasileiro",
     international: "Referências de sistemas internacionais",
-    trademarkNote: "Os nomes identificam apenas o sistema original. A GateRemoteSource não é afiliada, autorizada ou endossada por essas marcas. Todas as marcas pertencem aos seus respectivos titulares.",
+    trademarkNote: `Os nomes identificam apenas o sistema original. A ${siteName} não é afiliada, autorizada ou endossada por essas marcas. Todas as marcas pertencem aos seus respectivos titulares.`,
     verificationNote: "A compatibilidade depende do controle, receptor, codificação e versão regional exatos. Confirme a opção escolhida com testes de amostra antes de comprar.",
     footerNote: "Os nomes identificam sistemas originais para avaliação. Não implicam afiliação ou endosso. É necessário verificar modelo, receptor e amostras.",
   },
@@ -561,7 +562,7 @@ const pt = {
       { title: 'Solicitar Catalogo Atacado', description: 'Comece pela categoria, mercado e quantidade estimada; os detalhes técnicos podem vir depois.' },
     ],
     oem: {
-      metaTitle: 'Desenvolvimento RF OEM / ODM | GateRemoteSource',
+      metaTitle: `Desenvolvimento RF OEM / ODM | ${siteName}`,
       metaDescription: 'Desenvolvimento RF de marca propria, embalagem, manual, teste de amostras e suporte de protocolo para compradores atacadistas.',
       eyebrow: 'OEM / ODM',
       title: 'Desenvolvimento RF de Marca Propria',
@@ -581,7 +582,7 @@ const pt = {
       detailSubtitle: 'Escolha as opções relevantes para o produto. Confirme em conjunto o escopo, os testes de amostras e os requisitos de produção.',
     },
     factoryQuality: {
-      metaTitle: 'Processo de qualidade e verificação | GateRemoteSource',
+      metaTitle: `Processo de qualidade e verificação | ${siteName}`,
       metaDescription: 'Fluxo de verificação de amostras, testes RF, inspeção de embalagem e documentação de exportação para pedidos de controles compatíveis.',
       eyebrow: 'Qualidade e verificação',
       title: 'Controles de qualidade antes de pedidos em volume',
@@ -603,7 +604,7 @@ const pt = {
       facilityTitle: 'Processo visivel, alegacoes controladas.',
     },
     catalog: {
-      metaTitle: 'Solicitar catálogo no atacado | GateRemoteSource',
+      metaTitle: `Solicitar catálogo no atacado | ${siteName}`,
       metaDescription: 'Solicite um catálogo de atacado de controles compatíveis, receptores e soluções RF. Comece pela categoria, país de destino e quantidade estimada.',
       eyebrow: 'Catálogo de atacado',
       title: 'Solicite um catálogo no atacado',
