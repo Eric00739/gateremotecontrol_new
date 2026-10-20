@@ -43,33 +43,6 @@ export const compatibilityRows = [
   },
 ];
 
-export const riskCards = [
-  {
-    title: 'Identify the System',
-    description: 'Start with the original remote and receiver details to narrow down replacement options.',
-  },
-  {
-    title: 'Independent Aftermarket Supply',
-    description: 'Brand names identify compatibility references. Confirm the product and supplier details for your order.',
-  },
-  {
-    title: 'Review the Technical Match',
-    description: 'Check the model, receiver and market version; add frequency or PCB details when needed.',
-  },
-  {
-    title: 'Agree Sample Checks',
-    description: 'Agree the receiver, pairing procedure and test conditions before evaluating samples.',
-  },
-  {
-    title: 'Confirm Private-Label Options',
-    description: 'Review logo, packaging, label and manual requirements for the selected product.',
-  },
-  {
-    title: 'Request Product Documentation',
-    description: 'Tell us which documents your market requires so we can confirm what is available for the selected item.',
-  },
-];
-
 export const products = [
   {
     title: 'Compatible Replacement Remotes',

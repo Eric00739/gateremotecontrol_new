@@ -384,20 +384,6 @@ const es = {
     ],
     breadcrumb: { home: 'Inicio', compatibility: 'Compatibilidad' },
   },
-  risk: {
-    sectionLabel: 'Preparación del pedido',
-    title: 'Defina los requisitos antes de confirmar el pedido',
-    cards: [
-      { title: 'Funciones y sistema', description: 'Defina las funciones de control del proyecto a medida, o el mando y receptor originales para un repuesto.' },
-      { title: 'Mercado y versión del producto', description: 'Indique dónde venderá o instalará el producto para revisar frecuencia, etiquetas y documentación.' },
-      { title: 'Aceptación de muestras', description: 'Acuerde cómo comprobará el emparejamiento, las funciones de botones, las salidas y el alcance en el sistema previsto.' },
-      { title: 'Marca y embalaje', description: 'Confirme el diseño del logotipo, las etiquetas, los manuales y el embalaje con la muestra aprobada.' },
-      { title: 'Cantidad y entrega', description: 'Consulte el pedido mínimo, el coste de las muestras y el plazo de producción para el producto o alcance de desarrollo elegido.' },
-      { title: 'Documentación necesaria', description: 'Indique los requisitos de su mercado. Confirme qué documentos de producto y registros de pruebas se pueden facilitar.' },
-    ],
-    disclaimer: 'Los nombres de marcas se usan solo para indicar compatibilidad. Somos un proveedor independiente de postventa y no estamos afiliados, respaldados ni patrocinados por esos propietarios de marca. La compatibilidad debe confirmarse por modelo, frecuencia, IC/chip y protocolo antes del pedido.',
-    note: 'Nota: algunas marcas o modelos pueden requerir verificación, prueba de muestra o desarrollo personalizado.',
-  },
   products: {
     sectionLabel: 'Productos',
     title: '¿Qué necesita desarrollar o comprar?',

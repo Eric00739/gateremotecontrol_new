@@ -384,20 +384,6 @@ const en = {
     ],
     breadcrumb: { home: 'Home', compatibility: 'Compatibility' },
   },
-  risk: {
-    sectionLabel: 'Order Preparation',
-    title: 'Set the Requirements Before Committing to an Order',
-    cards: [
-      { title: 'Functions & System Fit', description: 'Define the control functions for a custom project, or the original remote and receiver for a replacement.' },
-      { title: 'Market & Product Version', description: 'Tell us where you will sell or install the product so frequency, labels and documentation can be reviewed.' },
-      { title: 'Sample Acceptance', description: 'Agree how you will check pairing, button functions, outputs and operating range on the intended system.' },
-      { title: 'Branding & Packaging', description: 'Confirm logo artwork, labels, manuals and packaging against the approved sample.' },
-      { title: 'Quantity & Delivery', description: 'Request MOQ, sample costs and production timing for the selected item or development scope.' },
-      { title: 'Required Documentation', description: 'List your market requirements. Confirm which product documents and test records can be provided.' },
-    ],
-    disclaimer: 'Brand names are used only to indicate compatibility. We are an independent aftermarket supplier and are not affiliated with, endorsed by, or sponsored by these brand owners. Compatibility should be confirmed by model, frequency, IC/chip, and coding protocol before order.',
-    note: 'Note: Some brands/models may require verification, sample testing, or custom development.',
-  },
   products: {
     sectionLabel: 'Products',
     title: 'What Do You Need to Develop or Source?',

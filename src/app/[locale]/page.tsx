@@ -1,7 +1,6 @@
 import HeroSection from '@/components/HeroSection';
 import ProductCategoriesSection from '@/components/ProductCategoriesSection';
 import BrandCompatibilitySection from '@/components/BrandCompatibilitySection';
-import RiskControlSection from '@/components/RiskControlSection';
 import CompatibilityWorkflowSection from '@/components/CompatibilityWorkflowSection';
 import CapabilityHighlightsSection from '@/components/CapabilityHighlightsSection';
 import ApplicationScenariosSection from '@/components/ApplicationScenariosSection';
@@ -20,7 +19,6 @@ export default function HomePage() {
       <CompatibilityWorkflowSection />
       <ProductionScenes />
       <ApplicationScenariosSection />
-      <RiskControlSection />
       <ResourcesSection />
       <FaqSection />
       <CtaSection />

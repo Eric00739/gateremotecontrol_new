@@ -384,20 +384,6 @@ const pt = {
     ],
     breadcrumb: { home: 'Início', compatibility: 'Compatibilidade' },
   },
-  risk: {
-    sectionLabel: 'Preparação do pedido',
-    title: 'Defina os requisitos antes de confirmar o pedido',
-    cards: [
-      { title: 'Funções e sistema', description: 'Defina as funções de controle do projeto personalizado, ou o controle e receptor originais para uma reposição.' },
-      { title: 'Mercado e versão do produto', description: 'Informe onde venderá ou instalará o produto para avaliarmos frequência, etiquetas e documentação.' },
-      { title: 'Aceitação de amostras', description: 'Combine como verificar pareamento, funções dos botões, saídas e alcance no sistema previsto.' },
-      { title: 'Marca e embalagem', description: 'Confirme a arte do logotipo, etiquetas, manuais e embalagem conforme a amostra aprovada.' },
-      { title: 'Quantidade e entrega', description: 'Consulte pedido mínimo, custos de amostras e prazo de produção para o item ou escopo de desenvolvimento escolhido.' },
-      { title: 'Documentação necessária', description: 'Liste os requisitos do seu mercado. Confirme quais documentos do produto e registros de testes podem ser fornecidos.' },
-    ],
-    disclaimer: 'Nomes de marcas são usados apenas para indicar compatibilidade. Somos um fornecedor independente de reposição e não somos afiliados, endossados ou patrocinados por esses proprietários de marca. A compatibilidade deve ser confirmada por modelo, frequência, IC/chip e protocolo antes do pedido.',
-    note: 'Nota: alguns modelos ou marcas podem exigir verificação, teste de amostra ou desenvolvimento personalizado.',
-  },
   products: {
     sectionLabel: 'Produtos',
     title: 'O que precisa desenvolver ou comprar?',

@@ -9,16 +9,20 @@ const outfit = Outfit({
   display: "swap",
 });
 
+// `subsets` only controls which files are preloaded; every subset (including
+// Cyrillic for /ru) is still self-hosted and loaded on demand via unicode-range.
 const inter = Inter({
-  subsets: ["latin", "cyrillic"],
+  subsets: ["latin"],
   variable: "--font-inter",
   display: "swap",
 });
 
+// Used only for small decorative labels: never worth a preload on the critical path.
 const jetBrainsMono = JetBrains_Mono({
-  subsets: ["latin", "cyrillic"],
+  subsets: ["latin"],
   variable: "--font-jetbrains-mono",
   display: "swap",
+  preload: false,
 });
 
 export const metadata: Metadata = {

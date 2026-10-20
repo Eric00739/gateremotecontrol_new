@@ -30,8 +30,8 @@ export default function ApplicationScenariosSection() {
               <div key={app.visual} className="min-w-0 overflow-hidden">
                 <GeneratedImage visual={app.visual} alt={name} copy={dict.generatedVisuals} kind="scene" compact caption={false} sizes="(max-width: 639px) calc((100vw - 48px) / 2), (max-width: 1023px) calc((100vw - 88px) / 3), (max-width: 1279px) calc((100vw - 124px) / 4), 289px" />
                 <h3 className="mt-3 text-[#153A5C] font-semibold text-[15px]" style={{ fontFamily: "var(--font-outfit), sans-serif" }}>{name}</h3>
-                <p className="mt-1.5 text-xs leading-relaxed text-[#475569]">{dict.applications.descriptions[index]}</p>
-                {'engineering' in app && <p className="mt-2 text-[10px] font-semibold text-[#9A3F00]">{dict.applications.engineeringLabel}</p>}
+                <p className="mt-1.5 text-[13px] leading-relaxed text-[#475569]">{dict.applications.descriptions[index]}</p>
+                {'engineering' in app && <p className="mt-2 text-[11px] font-semibold text-[#9A3F00]">{dict.applications.engineeringLabel}</p>}
               </div>
             );
           })}

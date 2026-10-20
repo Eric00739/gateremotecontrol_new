@@ -60,8 +60,8 @@ export default function CompatibilityWorkflowSection() {
                       </span>
                     </div>
                   </div>
-                  <h3 className="text-[13px] font-bold text-[#0F172A] mb-1.5 leading-snug" style={{ fontFamily: "var(--font-outfit), sans-serif" }}>{step.title}</h3>
-                  <p className="text-xs text-[#64748B] leading-relaxed">{step.description}</p>
+                  <h3 className="text-[15px] font-bold text-[#0F172A] mb-1.5 leading-snug" style={{ fontFamily: "var(--font-outfit), sans-serif" }}>{step.title}</h3>
+                  <p className="text-sm text-[#64748B] leading-relaxed">{step.description}</p>
                 </div>
               );
             })}
@@ -92,7 +92,7 @@ export default function CompatibilityWorkflowSection() {
                 <div className="text-[11px] font-bold uppercase tracking-[0.12em] text-[#9A3F00] mb-2" style={{ fontFamily: "var(--font-jetbrains-mono), monospace" }}>
                   {item.field}
                 </div>
-                <p className="text-[12px] leading-relaxed text-[#64748B]">
+                <p className="text-sm leading-relaxed text-[#64748B]">
                   {item.description}
                 </p>
               </div>

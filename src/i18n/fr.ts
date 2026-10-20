@@ -384,20 +384,6 @@ const fr = {
     ],
     breadcrumb: { home: "Accueil", compatibility: "Compatibilité" },
   },
-  risk: {
-    sectionLabel: "Préparation de commande",
-    title: "Définissez les exigences avant de confirmer la commande",
-    cards: [
-      { title: "Fonctions et système", description: "Définissez les fonctions de commande du projet sur mesure, ou la télécommande et le récepteur d’origine pour un remplacement." },
-      { title: "Marché et version du produit", description: "Indiquez où le produit sera vendu ou installé pour examiner la fréquence, les étiquettes et la documentation." },
-      { title: "Validation de l’échantillon", description: "Convenez des essais d’appairage, de fonctions des boutons, de sorties et de portée sur le système prévu." },
-      { title: "Marque et emballage", description: "Confirmez les fichiers du logo, les étiquettes, les notices et l’emballage à partir de l’échantillon validé." },
-      { title: "Quantité et livraison", description: "Demandez la quantité minimale, le coût des échantillons et le délai de production pour le produit ou le développement retenu." },
-      { title: "Documentation requise", description: "Précisez les exigences de votre marché. Confirmez quels documents produit et rapports d’essai peuvent être fournis." },
-    ],
-    disclaimer: "Les noms de marques sont utilisés uniquement pour indiquer la compatibilité. Nous sommes un fournisseur aftermarket indépendant et ne sommes pas affiliés, approuvés ou sponsorisés par ces propriétaires de marques. La compatibilité doit être confirmée par modèle, fréquence, IC/puce et protocole avant commande.",
-    note: "Remarque : certains modèles ou marques peuvent nécessiter vérification, test d'échantillon ou développement personnalisé.",
-  },
   products: {
     sectionLabel: "Produits",
     title: "Quel produit souhaitez-vous développer ou acheter ?",

@@ -384,20 +384,6 @@ const it = {
     ],
     breadcrumb: { home: 'Home', compatibility: 'Compatibilit\u00e0' },
   },
-  risk: {
-    sectionLabel: 'Preparazione dell’ordine',
-    title: 'Definisci i requisiti prima di confermare l’ordine',
-    cards: [
-      { title: 'Funzioni e sistema', description: 'Definisci le funzioni di controllo per un progetto su misura, oppure il telecomando e il ricevitore originali per un ricambio.' },
-      { title: 'Mercato e versione del prodotto', description: 'Indica dove venderai o installerai il prodotto per valutare frequenza, etichette e documentazione.' },
-      { title: 'Approvazione del campione', description: 'Concorda come verificare abbinamento, funzioni dei pulsanti, uscite e portata sul sistema previsto.' },
-      { title: 'Marchio e confezione', description: 'Conferma file del logo, etichette, manuali e confezione rispetto al campione approvato.' },
-      { title: 'Quantità e consegna', description: 'Richiedi quantità minima, costi dei campioni e tempi di produzione per l’articolo o lo sviluppo selezionato.' },
-      { title: 'Documentazione richiesta', description: 'Elenca i requisiti del tuo mercato. Conferma quali documenti di prodotto e rapporti di prova possono essere forniti.' },
-    ],
-    disclaimer: 'I nomi dei marchi sono usati solo per indicare compatibilita. Siamo un fornitore aftermarket indipendente e non siamo affiliati, approvati o sponsorizzati da questi titolari di marchio. La compatibilita deve essere confermata per modello, frequenza, IC/chip e protocollo prima dell ordine.',
-    note: 'Nota: alcuni marchi/modelli possono richiedere verifica, test campione o sviluppo personalizzato.',
-  },
   products: {
     sectionLabel: 'Prodotti',
     title: 'Cosa vuoi sviluppare o acquistare?',

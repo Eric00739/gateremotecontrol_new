@@ -59,7 +59,7 @@ export default function ResourcesSection() {
               )}
               <div className="p-5">
                 <h3 lang="en" className="mb-2 text-[14px] font-bold leading-snug text-[#0F172A]" style={{ fontFamily: "var(--font-outfit), sans-serif" }}>{post.title}</h3>
-                <p lang="en" className="mb-4 text-[12px] leading-relaxed text-[#64748B]">{post.excerpt}</p>
+                <p lang="en" className="mb-4 text-sm leading-relaxed text-[#64748B]">{post.excerpt}</p>
                 <span className="inline-flex items-center gap-1.5 text-[11px] font-bold text-[#9A3F00] transition-all group-hover:gap-2" style={{ fontFamily: "var(--font-jetbrains-mono), monospace" }}>
                   {dict.resources.readMore}
                   {locale !== defaultLocale && <span>({dict.blog.englishLabel})</span>}

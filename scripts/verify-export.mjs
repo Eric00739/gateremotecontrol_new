@@ -557,6 +557,11 @@ for (const file of await readdir(outputDir, { recursive: true })) {
     }
   }
 }
+// The homepage hero video is attached client-side after load (HeroSection),
+// so its files never appear in exported HTML; check them explicitly.
+for (const assetPath of ['/videos/gateremote-hero.mp4', '/videos/gateremote-hero-mobile.mp4']) {
+  mediaPaths.add(assetPath);
+}
 for (const assetPath of mediaPaths) {
   try {
     const asset = await stat(path.join(outputDir, assetPath));
