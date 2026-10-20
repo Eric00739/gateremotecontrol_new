@@ -61,7 +61,7 @@ export default function BrandCompatibilitySection() {
           />
         </div>
 
-        <div className="lg:hidden space-y-3 mb-6">
+        <div className="lg:hidden space-y-3 mb-4">
           {filteredRows.map((row) => (
             <div key={`${row.brand}-${row.model}`} data-model-reference={`${row.brand} ${row.model}`} className="rounded-lg border border-[#D8E4F0] bg-white p-4 shadow-sm shadow-[#062748]/5">
               <div className="flex items-start justify-between gap-4">
@@ -111,7 +111,7 @@ export default function BrandCompatibilitySection() {
           )}
         </div>
 
-        <div className="hidden lg:block overflow-hidden rounded-lg border border-[#D8E4F0] bg-white shadow-sm shadow-[#062748]/5 mb-6">
+        <div className="hidden lg:block overflow-hidden rounded-lg border border-[#D8E4F0] bg-white shadow-sm shadow-[#062748]/5 mb-4">
           <div className="overflow-x-auto">
             <table className="w-full min-w-[760px] text-left">
               <thead className="bg-[#F8FAFC] text-[11px] uppercase tracking-[0.14em] text-[#64748B]" style={{ fontFamily: "var(--font-jetbrains-mono), monospace" }}>
@@ -159,6 +159,16 @@ export default function BrandCompatibilitySection() {
           )}
         </div>
 
+        {/* The table's caveat sits with the table; the directory link leads out of it. */}
+        <div className="mb-8 flex flex-col gap-1 sm:flex-row sm:items-center sm:justify-between sm:gap-6">
+          <p className="max-w-2xl text-xs leading-relaxed text-[#64748B]">
+            {dict.compatibilityTable.disclaimer}
+          </p>
+          <Link href={`/${locale}/compatibility`} className="inline-flex min-h-11 flex-shrink-0 items-center gap-1.5 self-start text-sm font-bold text-[#9A3F00] transition-colors hover:text-[#7C3200] sm:self-auto">
+            {dict.compatibilityTable.viewAll} <ArrowRight className="h-4 w-4" />
+          </Link>
+        </div>
+
         {filteredRows.length === 0 && (
           <div className="mb-6">
             <LeadModalTrigger
@@ -173,19 +183,6 @@ export default function BrandCompatibilitySection() {
 
         <div className="mb-6"><BrandReferences /></div>
 
-        <div className="flex items-start gap-3 bg-[#F8FAFC] border border-[#E2E8F0] rounded-lg px-5 py-4 max-w-3xl">
-          <div className="w-5 h-5 rounded-full bg-[#FF8A1F]/10 flex items-center justify-center flex-shrink-0 mt-0.5">
-            <span className="text-[#FF8A1F] text-[10px] font-bold">i</span>
-          </div>
-          <div className="space-y-3">
-            <p className="text-xs text-[#64748B] leading-relaxed">
-              {dict.compatibilityTable.disclaimer}
-            </p>
-            <Link href={`/${locale}/compatibility`} className="inline-flex items-center gap-1.5 text-xs font-bold text-[#9A3F00] transition-colors hover:text-[#7C3200]">
-              {dict.compatibilityTable.viewAll} <ArrowRight className="h-3.5 w-3.5" />
-            </Link>
-          </div>
-        </div>
       </div>
     </section>
   );

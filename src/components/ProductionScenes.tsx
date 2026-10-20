@@ -16,9 +16,15 @@ export default function ProductionScenes() {
           {dict.visuals.footageTitle}
         </h2>
         <p className="mt-3 max-w-2xl text-sm leading-relaxed text-[#475569]">{dict.visuals.footageSubtitle}</p>
-        <div className="mt-8 grid gap-6 md:grid-cols-3">
+        {/* Phones: a swipeable row (the next frame peeks in) instead of three full-width images. */}
+        <div
+          className="-mx-4 mt-8 flex snap-x snap-mandatory scroll-px-4 gap-4 overflow-x-auto px-4 pb-3 md:mx-0 md:grid md:grid-cols-3 md:gap-6 md:overflow-visible md:px-0 md:pb-0"
+          role="region"
+          aria-label={dict.visuals.footageTitle}
+          tabIndex={0}
+        >
           {scenes.map((visual) => (
-            <figure key={visual}>
+            <figure key={visual} className="w-[78%] flex-shrink-0 snap-start md:w-auto">
               <EditorialImage visual={visual} copy={dict.visuals} compact />
               <figcaption className="mt-3 text-sm leading-relaxed text-[#475569]">
                 {dict.visuals[editorialVisuals[visual].altKey]}

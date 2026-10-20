@@ -48,9 +48,9 @@ export default function BrandReferences({ compact = false }: { compact?: boolean
         {brandReferenceGroups.map((group) => (
           <div key={group.key}>
             <p className="mb-2 text-xs font-semibold text-[#475569]">{copy[group.key]}</p>
-            <div className="flex flex-wrap gap-2">
+            <div className="flex flex-wrap gap-1.5 sm:gap-2">
               {brandReferences.filter((brand) => brand.group === group.key).map((brand) => (
-                <LeadModalTrigger key={brand.name} prefillType="compatibility" inquiryContext={{ modelReference: brand.modelReference }} className="inline-flex min-h-11 items-center rounded-md border border-[#D8E4F0] bg-white px-3 py-2 text-sm font-semibold text-[#153A5C] transition-colors hover:border-[#9A3F00] hover:text-[#9A3F00] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#9A3F00]">
+                <LeadModalTrigger key={brand.name} prefillType="compatibility" inquiryContext={{ modelReference: brand.modelReference }} className="inline-flex min-h-11 items-center rounded-md border border-[#D8E4F0] bg-white px-2.5 py-2 text-[13px] font-semibold sm:px-3 sm:text-sm text-[#153A5C] transition-colors hover:border-[#9A3F00] hover:text-[#9A3F00] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#9A3F00]">
                   {brand.name}
                 </LeadModalTrigger>
               ))}

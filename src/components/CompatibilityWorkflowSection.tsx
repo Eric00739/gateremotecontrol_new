@@ -86,10 +86,11 @@ export default function CompatibilityWorkflowSection() {
             </LeadModalTrigger>
           </div>
 
-          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-3">
+          {/* Phones: one list with dividers instead of eight separate cards. */}
+          <div className="divide-y divide-[#E2E8F0] rounded-lg border border-[#E2E8F0] bg-white sm:grid sm:grid-cols-2 sm:gap-3 sm:divide-y-0 sm:border-0 sm:bg-transparent lg:grid-cols-4">
             {fields.map((item: { field: string; description: string }) => (
-              <div key={item.field} className="rounded-lg border border-[#E2E8F0] bg-white p-4">
-                <div className="text-[11px] font-bold uppercase tracking-[0.12em] text-[#9A3F00] mb-2" style={{ fontFamily: "var(--font-jetbrains-mono), monospace" }}>
+              <div key={item.field} className="px-4 py-3.5 sm:rounded-lg sm:border sm:border-[#E2E8F0] sm:bg-white sm:p-4">
+                <div className="text-[11px] font-bold uppercase tracking-[0.12em] text-[#9A3F00] mb-1.5 sm:mb-2" style={{ fontFamily: "var(--font-jetbrains-mono), monospace" }}>
                   {item.field}
                 </div>
                 <p className="text-sm leading-relaxed text-[#64748B]">

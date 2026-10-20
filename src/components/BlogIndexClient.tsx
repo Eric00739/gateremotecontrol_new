@@ -224,28 +224,28 @@ export default function BlogIndexClient() {
               </Link>
             )}
           </div>
-          <div className="grid gap-3 self-end sm:grid-cols-3 lg:grid-cols-1">
-            <div className="rounded-lg border border-[#D7E2EE] bg-white px-4 py-3 shadow-sm shadow-[#0F172A]/5">
-              <p className="text-[11px] font-semibold uppercase tracking-[0.16em] text-[#64748B]" style={{ fontFamily: 'var(--font-jetbrains-mono), monospace' }}>
+          <div className="grid grid-cols-3 gap-2 self-end sm:gap-3 lg:grid-cols-1">
+            <div className="min-w-0 rounded-lg border border-[#D7E2EE] bg-white px-3 py-2.5 shadow-sm sm:px-4 sm:py-3 shadow-[#0F172A]/5">
+              <p className="truncate text-[10px] font-semibold uppercase tracking-[0.12em] text-[#64748B] sm:text-[11px] sm:tracking-[0.16em]" style={{ fontFamily: 'var(--font-jetbrains-mono), monospace' }}>
                 Articles
               </p>
-              <p className="mt-1 text-2xl font-extrabold text-[#0F172A]" style={{ fontFamily: 'var(--font-outfit), sans-serif' }}>
+              <p className="mt-1 truncate text-xl font-extrabold text-[#0F172A] sm:text-2xl" style={{ fontFamily: 'var(--font-outfit), sans-serif' }}>
                 {blogPosts.length}
               </p>
             </div>
-            <div className="rounded-lg border border-[#D7E2EE] bg-white px-4 py-3 shadow-sm shadow-[#0F172A]/5">
-              <p className="text-[11px] font-semibold uppercase tracking-[0.16em] text-[#64748B]" style={{ fontFamily: 'var(--font-jetbrains-mono), monospace' }}>
+            <div className="min-w-0 rounded-lg border border-[#D7E2EE] bg-white px-3 py-2.5 shadow-sm sm:px-4 sm:py-3 shadow-[#0F172A]/5">
+              <p className="truncate text-[10px] font-semibold uppercase tracking-[0.12em] text-[#64748B] sm:text-[11px] sm:tracking-[0.16em]" style={{ fontFamily: 'var(--font-jetbrains-mono), monospace' }}>
                 Topics
               </p>
-              <p className="mt-1 text-2xl font-extrabold text-[#0F172A]" style={{ fontFamily: 'var(--font-outfit), sans-serif' }}>
+              <p className="mt-1 truncate text-xl font-extrabold text-[#0F172A] sm:text-2xl" style={{ fontFamily: 'var(--font-outfit), sans-serif' }}>
                 {activeCategories.length - 1}
               </p>
             </div>
-            <div className="rounded-lg border border-[#D7E2EE] bg-white px-4 py-3 shadow-sm shadow-[#0F172A]/5">
-              <p className="text-[11px] font-semibold uppercase tracking-[0.16em] text-[#64748B]" style={{ fontFamily: 'var(--font-jetbrains-mono), monospace' }}>
+            <div className="min-w-0 rounded-lg border border-[#D7E2EE] bg-white px-3 py-2.5 shadow-sm sm:px-4 sm:py-3 shadow-[#0F172A]/5">
+              <p className="truncate text-[10px] font-semibold uppercase tracking-[0.12em] text-[#64748B] sm:text-[11px] sm:tracking-[0.16em]" style={{ fontFamily: 'var(--font-jetbrains-mono), monospace' }}>
                 Current view
               </p>
-              <p className="mt-1 truncate text-sm font-bold text-[#0F172A]" style={{ fontFamily: 'var(--font-outfit), sans-serif' }}>
+              <p className="mt-1 truncate text-base font-bold leading-7 text-[#0F172A] sm:leading-8" style={{ fontFamily: 'var(--font-outfit), sans-serif' }}>
                 {activeCategoryLabel}
               </p>
             </div>

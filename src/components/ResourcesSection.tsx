@@ -32,7 +32,7 @@ export default function ResourcesSection() {
           </span>
         </div>
 
-        <div className="flex items-end justify-between mb-12">
+        <div className="mb-8 flex items-end justify-between lg:mb-12">
           <h2 className="text-3xl lg:text-4xl font-bold text-[#0F172A]" style={{ fontFamily: "var(--font-outfit), sans-serif" }}>
             {dict.resources.title}
           </h2>
@@ -41,18 +41,19 @@ export default function ResourcesSection() {
           </Link>
         </div>
 
-        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
+        {/* Phones: a swipeable row of guides; from sm up, the grid. */}
+        <div className="-mx-4 flex snap-x snap-mandatory scroll-px-4 gap-4 overflow-x-auto px-4 pb-3 sm:mx-0 sm:grid sm:grid-cols-2 sm:gap-5 sm:overflow-visible sm:px-0 sm:pb-0 lg:grid-cols-4">
           {displayPosts.map((post) => (
             <Link
               key={post.slug}
               href={`/${defaultLocale}/blog/${post.slug}`}
-              className="group block overflow-hidden rounded-lg border border-[#E2E8F0] bg-[#F8FAFC] transition-all hover:border-[#FF8A1F]/40 hover:shadow-sm"
+              className="group block w-[80%] flex-shrink-0 snap-start overflow-hidden rounded-lg border border-[#E2E8F0] bg-[#F8FAFC] transition-all hover:border-[#FF8A1F]/40 hover:shadow-sm sm:w-auto"
             >
               {post.image && (
                 <div className="relative">
                   <picture className="relative block aspect-[3/2] overflow-hidden">
-                    <source srcSet={post.imageSrcSet} sizes="(max-width: 639px) calc(100vw - 32px), (max-width: 1023px) 45vw, 280px" />
-                    <Image src={post.thumbnail || post.image} alt={post.imageAlt || post.title} fill loading="lazy" sizes="(max-width: 639px) calc(100vw - 32px), 280px" className="object-cover" />
+                    <source srcSet={post.imageSrcSet} sizes="(max-width: 639px) 80vw, (max-width: 1023px) 45vw, 280px" />
+                    <Image src={post.thumbnail || post.image} alt={post.imageAlt || post.title} fill loading="lazy" sizes="(max-width: 639px) 80vw, 280px" className="object-cover" />
                   </picture>
                   <ImageSourceLabel label={dict.generatedVisuals.illustrationLabel} small />
                 </div>
@@ -69,7 +70,10 @@ export default function ResourcesSection() {
             </Link>
           ))}
         </div>
-        <p className="mt-5 text-xs leading-relaxed text-[#64748B]">{dict.generatedVisuals.editorialNote}</p>
+        <Link href={`/${locale}/blog`} className="mt-4 inline-flex min-h-11 items-center gap-1.5 text-[12px] font-bold text-[#9A3F00] transition-colors hover:text-[#C2410C] sm:hidden" style={{ fontFamily: "var(--font-jetbrains-mono), monospace" }}>
+          {dict.resources.viewAll} <ArrowRight className="h-4 w-4" />
+        </Link>
+        <p className="mt-2 text-xs leading-relaxed text-[#64748B] sm:mt-5">{dict.generatedVisuals.editorialNote}</p>
       </div>
     </section>
   );

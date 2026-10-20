@@ -38,7 +38,7 @@ export default function ProductCategoriesSection() {
         </div>
 
         <p className="mb-6 text-xs leading-relaxed text-[#64748B]">{dict.generatedVisuals.productNote}</p>
-        <div className="grid grid-cols-2 gap-x-4 sm:gap-x-6 lg:grid-cols-3">
+        <div className="grid grid-cols-1 sm:grid-cols-2 sm:gap-x-6 lg:grid-cols-3">
           {categories.map((category, idx) => {
             const pKey = category.key;
             const pDict = dict.product[pKey];
@@ -48,16 +48,22 @@ export default function ProductCategoriesSection() {
             return (
               <article
                 key={pKey}
-                className="group mb-7 flex min-w-0 flex-col border-b border-[#D8E4F0] pb-7"
+                className="group mb-6 grid min-w-0 grid-cols-[112px_minmax(0,1fr)] items-center gap-x-4 border-b border-[#D8E4F0] pb-6 sm:mb-7 sm:flex sm:flex-col sm:items-stretch sm:pb-7"
               >
-                <GeneratedImage visual={category.visual} alt={dict.generatedVisuals[category.altKey]} copy={dict.generatedVisuals} compact caption={false} sizes="(max-width: 639px) calc((100vw - 48px) / 2), (max-width: 1023px) calc((100vw - 72px) / 2), (max-width: 1279px) calc((100vw - 112px) / 3), 389px" />
-                <span className="mt-5 block text-xs font-semibold uppercase tracking-[0.16em] text-[#9A3412]" style={{ fontFamily: "var(--font-jetbrains-mono), monospace" }}>
-                  0{idx + 1}
-                </span>
-                <h3 className="mt-3 text-base font-bold text-[#0F172A] sm:text-xl" style={{ fontFamily: "var(--font-outfit), sans-serif" }}>{pDict.title}</h3>
-                <p className="mt-3 mb-4 text-sm leading-relaxed text-[#475569]">{pDict.description}</p>
+                {/* Phones: thumbnail beside the title, copy at full width below.
+                    From sm up: the original stacked card. */}
+                <div className="min-w-0">
+                  <GeneratedImage visual={category.visual} alt={dict.generatedVisuals[category.altKey]} copy={dict.generatedVisuals} compact caption={false} sizes="(max-width: 639px) 112px, (max-width: 1023px) calc((100vw - 72px) / 2), (max-width: 1279px) calc((100vw - 112px) / 3), 389px" />
+                </div>
+                <div className="min-w-0 sm:mt-5">
+                  <span className="block text-xs font-semibold uppercase tracking-[0.16em] text-[#9A3412]" style={{ fontFamily: "var(--font-jetbrains-mono), monospace" }}>
+                    0{idx + 1}
+                  </span>
+                  <h3 className="mt-1.5 text-lg font-bold leading-snug text-[#0F172A] sm:mt-3 sm:text-xl" style={{ fontFamily: "var(--font-outfit), sans-serif" }}>{pDict.title}</h3>
+                </div>
+                <p className="col-span-2 mt-4 mb-3 text-sm leading-relaxed text-[#475569] sm:mt-3 sm:mb-4">{pDict.description}</p>
                 {pKey === 'accessories' ? (
-                  <div className="mt-auto flex flex-col gap-1">
+                  <div className="col-span-2 mt-auto flex flex-col">
                     {([
                       { type: 'oem', label: dict.products.automotiveCustomInquiry },
                       { type: 'compatibility', label: dict.products.automotiveReplacementInquiry },
@@ -66,10 +72,10 @@ export default function ProductCategoriesSection() {
                         key={action.type}
                         prefillType={action.type}
                         inquiryContext={{ productInterest: pDict.title }}
-                        className="inline-flex min-h-11 flex-wrap items-center gap-1.5 self-start text-left text-sm font-bold text-[#9A3412] transition-colors hover:text-[#C2410C] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#C2410C]"
+                        className="inline-flex min-h-11 items-center gap-1.5 self-start text-left text-sm font-bold text-[#9A3412] transition-colors hover:text-[#C2410C] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#C2410C]"
                       >
                         {action.label}
-                        <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+                        <ArrowRight className="h-4 w-4 flex-shrink-0 transition-transform group-hover:translate-x-1" />
                       </LeadModalTrigger>
                     ))}
                   </div>
@@ -77,10 +83,10 @@ export default function ProductCategoriesSection() {
                   <LeadModalTrigger
                     prefillType={isCustom ? 'oem' : isReplacement ? 'compatibility' : 'quote'}
                     inquiryContext={{ productInterest: pDict.title }}
-                    className="mt-auto inline-flex min-h-11 flex-wrap items-center gap-1.5 self-start text-left text-sm font-bold text-[#9A3412] transition-colors hover:text-[#C2410C] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#C2410C]"
+                    className="col-span-2 mt-auto inline-flex min-h-11 items-center gap-1.5 self-start text-left text-sm font-bold text-[#9A3412] transition-colors hover:text-[#C2410C] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#C2410C]"
                   >
                     {isCustom ? dict.products.customInquiry : isReplacement ? dict.products.replacementInquiry : dict.products.sendInquiry}
-                    <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+                    <ArrowRight className="h-4 w-4 flex-shrink-0 transition-transform group-hover:translate-x-1" />
                   </LeadModalTrigger>
                 )}
               </article>
