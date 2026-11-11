@@ -1,17 +1,33 @@
 import { mkdir, readFile, readdir, writeFile } from 'node:fs/promises';
 import path from 'node:path';
-import { outputDir, redirects, siteUrl, supportedLocales } from './legacy-redirects.mjs';
+import { escapeHtml, outputDir, redirects, supportedLocales, toAbsoluteUrl } from './legacy-redirects.mjs';
 
-function escapeHtml(value) {
-  return value
-    .replaceAll('&', '&amp;')
-    .replaceAll('"', '&quot;')
-    .replaceAll('<', '&lt;')
-    .replaceAll('>', '&gt;');
-}
+// Pages requests /en from en.html and /en/ from en/index.html. Those files
+// already coexist for the legacy stubs (/it/ and /fr/blog/ stay 200 without
+// pulling /it or /fr/blog onto a trailing slash). Emit the same stub for
+// every shipped page. Do not flip trailingSlash: that would change the
+// canonical URLs themselves.
+async function writeTrailingSlashRedirects() {
+  const exportedHtmlFiles = await htmlFiles(outputDir);
+  const exported = new Set(exportedHtmlFiles);
+  let count = 0;
 
-function absoluteDestination(destinationPath) {
-  return new URL(destinationPath, siteUrl).toString();
+  for (const filePath of exportedHtmlFiles) {
+    const relativePath = path.relative(outputDir, filePath);
+    if (relativePath === 'index.html' || relativePath === '404.html') continue;
+
+    const pagePath = `/${relativePath.slice(0, -'.html'.length).split(path.sep).join('/')}`;
+    const stubPath = path.join(outputDir, relativePath.slice(0, -'.html'.length), 'index.html');
+    if (exported.has(stubPath)) {
+      throw new Error(`Refusing to overwrite exported page with a trailing-slash redirect: ${path.relative(outputDir, stubPath)}`);
+    }
+
+    await mkdir(path.dirname(stubPath), { recursive: true });
+    await writeFile(stubPath, redirectHtml(`${pagePath}/`, toAbsoluteUrl(pagePath)), 'utf8');
+    count += 1;
+  }
+
+  return count;
 }
 
 function redirectHtml(sourcePath, destinationUrl) {
@@ -59,7 +75,7 @@ async function writeRedirects() {
   const outputTargets = new Map();
 
   for (const [sourcePath, destinationPath] of redirects) {
-    const destinationUrl = absoluteDestination(destinationPath);
+    const destinationUrl = toAbsoluteUrl(destinationPath);
 
     for (const outputPath of outputPathsForSource(sourcePath)) {
       outputTargets.set(outputPath, { sourcePath, destinationUrl });
@@ -72,6 +88,9 @@ async function writeRedirects() {
   }
 }
 
+const trailingSlashCount = await writeTrailingSlashRedirects();
+// Legacy sources win when they share an output path, including cases such as
+// /blog/ that must land on /en/blog rather than the unprefixed page.
 await writeRedirects();
 
 async function htmlFiles(directory) {
@@ -104,5 +123,6 @@ async function setStaticDocumentLanguages() {
 
 const localizedHtmlCount = await setStaticDocumentLanguages();
 
+console.log(`Generated ${trailingSlashCount} trailing-slash redirects to no-slash pages.`);
 console.log(`Generated ${redirects.length} static redirect entries for legacy Google Search Console URLs.`);
 console.log(`Set document language on ${localizedHtmlCount} exported HTML files.`);

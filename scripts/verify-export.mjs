@@ -3,7 +3,7 @@ import path from 'node:path';
 import vm from 'node:vm';
 import ts from 'typescript';
 import sharp from 'sharp';
-import { outputDir, redirects, siteUrl, supportedLocales } from './legacy-redirects.mjs';
+import { outputDir, redirects, redirectStubPointsAt, siteUrl, supportedLocales, toAbsoluteUrl } from './legacy-redirects.mjs';
 
 // Build-time assertions for the static export. These encode the invariants the
 // release checklist re-checks by hand: every sitemap URL must exist as an
@@ -20,7 +20,14 @@ function stubPathsForSource(sourcePath) {
   const normalized = sourcePath.replace(/^\/+/, '');
   if (normalized.endsWith('.html')) return [path.join(outputDir, normalized)];
   if (sourcePath.endsWith('/')) return [path.join(outputDir, normalized, 'index.html')];
-  return [path.join(outputDir, `${normalized}.html`)];
+  return [
+    path.join(outputDir, `${normalized}.html`),
+    path.join(outputDir, normalized, 'index.html'),
+  ];
+}
+
+function isRedirectStub(html) {
+  return typeof html === 'string' && /<meta\s+http-equiv="refresh"/i.test(html);
 }
 
 async function readTextIfExists(filePath) {
@@ -451,9 +458,13 @@ for (const post of articleData.getAllBlogPosts()) {
 
 // 4. Every legacy redirect has its stub and a real destination.
 for (const [sourcePath, destinationPath] of redirects) {
+  const destinationUrl = toAbsoluteUrl(destinationPath);
   for (const stubPath of stubPathsForSource(sourcePath)) {
-    if (!(await readTextIfExists(stubPath))) {
+    const stub = await readTextIfExists(stubPath);
+    if (!stub) {
       problems.push(`Redirect stub missing for ${sourcePath}: ${path.relative(outputDir, stubPath)}`);
+    } else if (!redirectStubPointsAt(stub, destinationUrl)) {
+      problems.push(`Legacy redirect stub points at the wrong URL: ${sourcePath} -> ${destinationPath}`);
     }
   }
 
@@ -648,10 +659,49 @@ if (generatedManifestText) {
   problems.push('Generated illustrations have no source manifest');
 }
 
+// 6. Every shipped page keeps its no-slash file and gains a trailing-slash stub.
+// Root stays a real page: do not redirect / to /en. 404.html is not a public URL.
+const rootHtml = await readTextIfExists(path.join(outputDir, 'index.html'));
+if (!rootHtml || isRedirectStub(rootHtml)) {
+  problems.push('Root / must stay a real page and must not redirect');
+}
+
+let trailingSlashPages = 0;
+const coveredPages = new Set();
+for (const file of await readdir(outputDir, { recursive: true })) {
+  if (!file.endsWith('.html')) continue;
+  const html = await readFile(path.join(outputDir, file), 'utf8');
+  if (isRedirectStub(html)) continue;
+  if (file === 'index.html' || file === '404.html') continue;
+
+  const urlPath = `/${file.slice(0, -'.html'.length).split(path.sep).join('/')}`;
+  const stub = await readTextIfExists(path.join(outputDir, urlPath.replace(/^\/+/, ''), 'index.html'));
+  const destinationUrl = `${siteUrl}${urlPath}`;
+  if (!redirectStubPointsAt(stub, destinationUrl)) {
+    problems.push(`Trailing-slash URL does not redirect to the no-slash page: ${urlPath}/`);
+    continue;
+  }
+  trailingSlashPages += 1;
+  coveredPages.add(urlPath);
+}
+
+for (const urlPath of ['/en', '/es', '/it', '/en/blog', '/en/compatibility', '/en/oem-odm', '/en/factory-quality', '/en/request-catalog']) {
+  if (!coveredPages.has(urlPath)) problems.push(`Trailing-slash redirect missing for ${urlPath}/`);
+}
+if (![...coveredPages].some((urlPath) => /^\/en\/compatibility\/[^/]+$/.test(urlPath))) {
+  problems.push('Trailing-slash redirect missing for an English compatibility brand page');
+}
+if (![...coveredPages].some((urlPath) => /^\/en\/blog\/[^/]+$/.test(urlPath))) {
+  problems.push('Trailing-slash redirect missing for an English blog post');
+}
+if (![...coveredPages].some((urlPath) => /^\/(?:es|it)\/blog\/[^/]+$/.test(urlPath))) {
+  problems.push('Trailing-slash redirect missing for a non-English blog post');
+}
+
 if (problems.length > 0) {
   console.error(`verify-export: ${problems.length} problem(s) found:`);
   for (const problem of problems) console.error(`  - ${problem}`);
   process.exit(1);
 }
 
-console.log(`verify-export: ${sitemapUrls.length} sitemap URLs, ${redirects.length} legacy redirects, ${mediaPaths.size} media assets, ${dictionaries.size} dictionaries and localized OEM pages, ${faqCount} FAQ entries, 12 distinct applications, ${referenceBrands.length} aftermarket brand references and ${brandPageCount} pages with consistent company branding — all checks passed.`);
+console.log(`verify-export: ${sitemapUrls.length} sitemap URLs, ${trailingSlashPages} trailing-slash redirects, ${redirects.length} legacy redirects, ${mediaPaths.size} media assets, ${dictionaries.size} dictionaries and localized OEM pages, ${faqCount} FAQ entries, 12 distinct applications, ${referenceBrands.length} aftermarket brand references and ${brandPageCount} pages with consistent company branding — all checks passed.`);
