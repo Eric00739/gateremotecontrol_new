@@ -1,9 +1,32 @@
-// Single source of truth for legacy Google Search Console redirect URLs.
-// Consumed by generate-static-redirects.mjs (writes the stubs) and
-// verify-export.mjs (asserts stubs and destinations exist in the export).
+// Single source of truth for legacy Google Search Console redirect URLs
+// and the static stub contract. Consumed by generate-static-redirects.mjs
+// (writes the stubs) and verify-export.mjs (asserts stubs and destinations).
 
 export const siteUrl = 'https://www.gateremotesource.com';
 export const outputDir = process.cwd() + '/out';
+
+export function escapeHtml(value) {
+  return value
+    .replaceAll('&', '&amp;')
+    .replaceAll('"', '&quot;')
+    .replaceAll('<', '&lt;')
+    .replaceAll('>', '&gt;');
+}
+
+export function toAbsoluteUrl(destinationPath) {
+  return new URL(destinationPath, siteUrl).toString();
+}
+
+// GitHub Pages serves these stubs with HTTP 200. The refresh plus
+// location.replace is the redirect, so the check has to look at the target
+// rather than a status code.
+export function redirectStubPointsAt(html, destinationUrl) {
+  const escaped = escapeHtml(destinationUrl);
+  return typeof html === 'string'
+    && html.includes(`http-equiv="refresh" content="0; url=${escaped}"`)
+    && html.includes(`rel="canonical" href="${escaped}"`)
+    && html.includes(`window.location.replace(${JSON.stringify(destinationUrl)})`);
+}
 
 export const supportedLocales = new Set(['en', 'it', 'pt', 'es', 'ru', 'fr']);
 
